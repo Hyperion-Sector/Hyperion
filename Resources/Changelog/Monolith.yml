@@ -21444,3 +21444,10 @@ Entries:
   id: 2364
   time: '2026-06-08T09:33:22.0000000+00:00'
   url: https://github.com/Monolith-Station/Monolith/pull/4080
+- author: MisterMecky
+  changes:
+    - type: Tweak
+      message: Engi-Vends now sell construction bags.
+  id: 2365
+  time: '2026-06-08T09:33:52.0000000+00:00'
+  url: https://github.com/Monolith-Station/Monolith/pull/4078
