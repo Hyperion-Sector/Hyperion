@@ -14,6 +14,9 @@
             "name": "vizierbase"
         },
         {
+            "name": "vgbase"
+        },
+        {
             "name": "id_asvaran"
         },
         {
@@ -36,6 +39,15 @@
         },
         {
             "name": "id_sergeant"
+        },
+        {
+            "name": "id_infanteer"
+        },
+        {
+            "name": "id_lieutenant"
+        },
+        {
+            "name": "id_commander"
         }
     ]
 }

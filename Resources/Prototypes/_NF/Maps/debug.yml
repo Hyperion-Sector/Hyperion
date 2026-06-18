@@ -61,5 +61,8 @@
             USSPSergeant: [ -1, -1]
             USSPRifleman: [ -1, -1]
             TsfEngineer: [ -1, -1 ]
+            VGInfanteer: [ -1, -1 ]
+            VGLieutenant: [ -1, -1 ]
+            VGCommander: [ -1, -1 ]
         - type: StationDeadDrop
           maxDeadDrops: 20 # Testing

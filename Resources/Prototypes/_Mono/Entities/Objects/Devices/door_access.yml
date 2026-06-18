@@ -45,3 +45,19 @@
   components:
   - type: AccessReader
     access: [["PDVCommand"]]
+
+- type: entity
+  parent: DoorElectronics
+  id: DoorElectronicsViper
+  suffix: Viper Group, Locked
+  components:
+  - type: AccessReader
+    access: [["Viper"]]
+
+- type: entity
+  parent: DoorElectronics
+  id: DoorElectronicsViperCommand
+  suffix: Viper Group Command, Locked
+  components:
+  - type: AccessReader
+    access: [["ViperCommand"]]
