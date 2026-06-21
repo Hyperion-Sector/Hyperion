@@ -21604,3 +21604,10 @@ Entries:
   id: 2381
   time: '2026-06-21T16:18:18.0000000+00:00'
   url: https://github.com/Monolith-Station/Monolith/pull/4114
+- author: Mapleflavoureds
+  changes:
+    - type: Add
+      message: RCD and RCDAmmo to engivend
+  id: 2382
+  time: '2026-06-21T16:22:43.0000000+00:00'
+  url: https://github.com/Monolith-Station/Monolith/pull/4086
