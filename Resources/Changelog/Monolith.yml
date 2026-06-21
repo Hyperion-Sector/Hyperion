@@ -21579,3 +21579,10 @@ Entries:
   id: 2378
   time: '2026-06-21T12:22:16.0000000+00:00'
   url: https://github.com/Monolith-Station/Monolith/pull/4116
+- author: GOLDMASK990
+  changes:
+    - type: Tweak
+      message: USSP Loadouts tweaked, modsuits swapped for plates, lore accurate
+  id: 2379
+  time: '2026-06-21T12:32:47.0000000+00:00'
+  url: https://github.com/Monolith-Station/Monolith/pull/4115
