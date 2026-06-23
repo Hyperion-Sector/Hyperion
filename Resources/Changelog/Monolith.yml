@@ -21723,3 +21723,12 @@ Entries:
   id: 2394
   time: '2026-06-23T22:03:01.0000000+00:00'
   url: https://github.com/Monolith-Station/Monolith/pull/4129
+- author: Mrrpip
+  changes:
+    - type: Tweak
+      message: >-
+        The osmium based parts in the Grizzly have been replaced with lighter
+        plastic parts. You don't need to wait to draw the gun. 
+  id: 2395
+  time: '2026-06-23T22:03:51.0000000+00:00'
+  url: https://github.com/Monolith-Station/Monolith/pull/4127
