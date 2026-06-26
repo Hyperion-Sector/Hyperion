@@ -1,7 +1,9 @@
-Welcome to Space Station 14! You have just woken up in the dangerous Colossus Sector on the fringe of "civilized" space. The sector is ripe with danger... and rewards, if you're able to fight for them. Make sure to have fun (not at the expense of others hopefully)!
+Welcome to Hyperion. You've woken up on the frontier of the Hyperion Sector, on the edge of civilized space.
 
-Please make sure you understand the server rules (F1) and if you have any questions, consult this guide, your colleagues in-sector or over radio or via discord. You can also ask admins for help (ahelp) by hitting the escape key > admin help and typing a message to any online admins. Especially do this if you witness someone breaking rules.
+Hyperion is an 18+, PvE-focused ship fork descended from Monolith. It's early and under active development. The long-term goal is a living sector economy: persistent ships you keep and modify, a materials-driven market that reacts to real supply and demand, and mining, cargo, science, and medical loops worth investing time into. The most profitable ground sits at the edges, held by hostile drones.
 
-Be aware that the Colossus sector is a very dangerous place. Expect your stuff to be stolen, destroyed, exploded, or otherwise lost - Always remember this. Your gun is your best friend.
+Read the server rules (F1). For questions, check this guide, ask in-sector or over radio, or open admin help (Escape > Admin Help). Use ahelp if you see someone breaking the rules.
 
-Instead of intents, we have combat mode. Check controls below for its keybind. You can't attack anybody with it off, so no more hitting yourself with your own crowbar.
+The sector is dangerous and persistent. Expect setbacks and plan around them.
+
+Instead of click intents we use combat mode (keybind in controls). You can't attack anyone with it off.
