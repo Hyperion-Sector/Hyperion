@@ -17,6 +17,12 @@ public sealed partial class CleanupHelperSystem : EntitySystem
     [Dependency] private SharedMindSystem _mind = default!;
     [Dependency] private SharedTransformSystem _transform = default!;
 
+    // Hyperion: minimum search radius. ShouldEntityCleanup scales the radius by entity
+    // value, so a price-0 entity produces radius 0, which the entity lookup rejects
+    // (DebugTools.Assert(range > 0)) and crashed the cleanup sweep. Floor it so worthless
+    // items still get a small proximity check instead of crashing or vanishing under players.
+    private const float MinSearchRange = 1f;
+
     private List<Entity<MapGridComponent>> _gridsFound = new();
 
     private EntityQuery<GhostComponent> _ghostQuery;
@@ -35,6 +41,7 @@ public sealed partial class CleanupHelperSystem : EntitySystem
     /// </summary>
     public bool HasNearbyPlayers(EntityCoordinates coord, float radius)
     {
+        radius = MathF.Max(radius, MinSearchRange); // Hyperion: never query a non-positive range, see MinSearchRange
         var minds = _lookup.GetEntitiesInRange<MindContainerComponent>(coord, radius);
 
         foreach (var (uid, comp) in minds)
