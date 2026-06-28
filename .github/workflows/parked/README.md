@@ -22,10 +22,16 @@ because Hyperion expects to want them once it self-hosts and/or grows a maintain
 
 ### Needs a hosting solution
 
+> **`publish.yml` is now LIVE** (left `parked/`, rewired to our own Robust.Cdn at
+> `cdn.hyperionsector.com`). It packages server (linux-x64) + client on every push to
+> `main` and POSTs to the CDN, which pings the watchdog → the live server updates at
+> round end. Needs repo secret `PUBLISH_TOKEN` (the CDN fork's UpdateToken). The old
+> Wizden-lineage multi-platform packaging lives in git history if we ever distribute
+> server binaries for other hosters.
+
 | File | Purpose | To reactivate |
 |------|---------|---------------|
-| `publish.yml` | Package + publish builds to the SS14 hub (live channel) + Discord changelog | Set `PUBLISH_TOKEN`, `GITHUB_REPOSITORY` var, our `--fork-id`, `CHANGELOG_DISCORD_WEBHOOK` |
-| `publish-testing.yml` | Same, to a testing channel | Set `PUBLISH_TOKEN`; pick our testing `--fork-id` |
+| `publish-testing.yml` | Same, to a testing channel | Set `PUBLISH_TOKEN`; pick our testing fork id |
 | `publish-changelog.yml` | Daily changelog digest -> Discord (currently an all-comments husk) | Uncomment, set `CHANGELOG_DISCORD_WEBHOOK` |
 | `benchmarks.yml` | Perf suite -> SQL, run on a dedicated box | Point host + key at our runner, change the `git clone` from `space-wizards/space-station-14` to `Hyperion-Sector/Hyperion`, set benchmark SQL secrets |
 
