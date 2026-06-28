@@ -8,7 +8,7 @@ If you want to host or create content for Hyperion, this is the repo you need. I
 
 ## Links
 
-[Discord](https://discord.gg/mxY4h2JuUw) | [Steam](https://store.steampowered.com/app/1255460/Space_Station_14/)
+<!-- Hyperion: Discord link parked until we have our own invite [Discord](https://discord.gg/mxY4h2JuUw) | -->[Steam](https://store.steampowered.com/app/1255460/Space_Station_14/)
 
 ## Contributing
 
