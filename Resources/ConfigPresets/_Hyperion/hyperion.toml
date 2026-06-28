@@ -1,0 +1,168 @@
+# Hyperion server config preset — the fork's baked-in identity.
+#
+# Layers the same way as the WizardsDen/ and _Mono/ presets in this directory:
+# the base config loads first, then this preset overrides it, then the per-instance
+# config.toml on the host (DB creds, watchdog token, public hostname) overrides that.
+#
+# This file is version-controlled and ships in every build, so it is the right home
+# for fork identity (name, MOTD, links, hub facets) — NOT for secrets or per-machine
+# values. Keep deploy-time and sensitive settings in the host instance config instead.
+#
+# HUBBING IS OFF below (hub.advertise = 0). Flip it to 1 only when you are ready to
+# appear in the public server browser. Fill in every REPLACE_ME before you do.
+
+[game]
+# The server name shown in the browser. Can also be overridden per-instance on the host.
+hostname = "[DEV] Hyperion Sector"
+# Shown in the server browser under the name. Multi-line needs triple quotes (""").
+# NOTE: this is the short browser blurb — long T&C text may truncate or read oddly
+# in the browser. Consider keeping desc short and moving the pitch to the MOTD below.
+desc = """
+Hyperion Astronautics looks forward to your contributions to the sector, contractor! Apply today! Service guarantees* salary!
+
+*Terms and conditions apply. This is not a guarantee. Hyperion Astronautics is not responsible for any injuries or deaths sustained while working in the sector. All applicants must be 18 years or older and have a valid spacefaring license."""
+soft_max_players = 100
+lobbyenabled = true
+lobbyduration = 30
+
+# ── Access & anti-raid ───────────────────────────────────────────────────────
+# Panic bunker gates fresh / low-playtime accounts. Off by default; arm it (or let
+# it auto-arm when no admins are online) if you get raided. These are the keys
+# Wizden ships; more panic_bunker.* knobs exist (e.g. an account-age threshold).
+panic_bunker.enabled = false
+panic_bunker.min_overall_minutes = 0
+panic_bunker.disable_with_admins = true
+panic_bunker.enable_without_admins = false
+panic_bunker.show_reason = true
+panic_bunker.custom_reason = ""
+# VPN / datacenter screening. Opt-in, and the IPIntel API requires a real contact email.
+ipintel_enabled = false
+ipintel_contact_email = "REPLACE_ME — required only if ipintel_enabled = true"
+
+[hub]
+# 0 = invisible (not listed). 1 = advertise on the public hub. Leave at 0 until ready.
+advertise = 0
+# Browser facets: language, roleplay level (rp:low|med|high), and region.
+# Region examples: na_e, na_w, na_c, eu_w, eu_e, sa, as_e, oc.
+tags = "lang:en, rp:med, region:na_e"
+# Which hub(s) to advertise to. The official hub is the default; add more comma-separated.
+hub_urls = "https://hub.spacestation14.com/"
+
+[chat]
+# Message shown to players on connect.
+motd = "Hyperion Astronautics looks forward to your contributions to the sector, contractor!"
+
+[infolinks]
+# Links the client surfaces in its info menu. github is pre-filled; set the rest.
+github  = "https://github.com/Hyperion-Sector/Hyperion"
+# discord = "REPLACE_ME — Discord invite URL."
+# website = "REPLACE_ME — or delete this line if there is no site yet."
+# wiki    = "REPLACE_ME — or delete this line if there is no wiki yet."
+# appeal  = "REPLACE_ME — ban appeal URL, often the Discord invite."
+
+[console]
+# Name attributed to host/local console actions (replaces the inherited GoobStation value).
+login_host_user = "Hyperion"
+
+# server.id and rules_file are NOT set here. They moved to baseline CCVar defaults in
+# Content.Shared/CCVar/CCVars.Server.cs (marked // Hyperion:), because they are fork-wide
+# identity that must apply even when this per-instance preset is not loaded. Likewise the
+# single game mode (game.defaultpreset = HyperionStandard) and preset-vote-off live as
+# baseline edits in CCVars.Game.cs / CCVars.Vote.cs. This file stays for per-instance
+# flavor only (hostname, MOTD, hub, player caps, admin).
+
+[auth]
+# 0 = optional, 1 = require an SS14 account to connect, 2 = disabled.
+# Public/hubbed servers should require auth.
+mode = 1
+
+[status]
+# Privacy policy players see; a public hub listing expects one. Fill in before hubbing.
+# privacy_policy_link = "REPLACE_ME — URL to your privacy policy"
+# privacy_policy_identifier = "hyperion"
+# privacy_policy_version = "REPLACE_ME — e.g. 2026-06-28"
+
+[admin]
+# Moderation quality-of-life. Discord relay channel IDs are identity-specific — add
+# admin.chat_discord_channel_id / ahelp_discord_channel_id here only once your own
+# bot/webhook exists. Do NOT inherit Monolith's channel IDs.
+deadmin_on_join = true          # admins join as players, opt into admin
+new_player_threshold = 600      # seconds of playtime before a connection counts as "known"
+see_own_notes = true            # players can read their own admin notes
+alert.min_players_sharing_connection = 2
+
+[ahelp]
+# Prefix admin names in ahelp so players can tell staff apart.
+admin_prefix = true
+
+[net]
+tickrate = 30                   # server simulation ticks/sec
+max_connections = 1000          # hard cap on simultaneous connections
+
+# ════════════════════════════════════════════════════════════════════════════════
+# CONTROL SURFACE MAP — every server-side section, commented for review.
+# ════════════════════════════════════════════════════════════════════════════════
+# ~489 server-flagged CVars exist across engine + content + fork layers. Everything
+# below is OFF (commented) — uncomment only what you want. Counts are indicative; the
+# AUTHORITATIVE, always-current list is the source:
+#   engine : RobustToolbox/Robust.Shared/CVars.cs
+#   content: Content.Shared/CCVar/*.cs   (and Content.Server/**)
+#   forks  : Content.Shared/_Mono, _NF, _Goob, ... CCVar files
+# To see every key in a section, search the source for:  CVarDef.Create("<section>
+#
+# NOT here on purpose — client-side per-player sections do nothing in a server preset:
+#   display, audio, ui, hud, accessibility, parallax, viewport, font, controls,
+#   ambience, light, midi, render, interface.
+#
+# ── Identity & listing ──  (the live config above already sets most of these)
+#   [game]      hostname, desc, soft_max_players, lobbyenabled/duration        (~60)
+#   [hub]       advertise, tags, hub_urls                                       (6)
+#   [infolinks] github, discord, website, wiki, forum, bug_report, appeal       (9)
+#   [status]    privacy_policy_link / identifier / version                      (7)
+#   [server]    rules_file, ...                                                 (7)
+#
+# ── Access, auth & moderation ──
+#   [auth]      mode (0 optional / 1 required / 2 disabled)                     (3)
+#   [admin]     deadmin_on_join, new_player_threshold, see_own_notes,
+#               show_pii_onban, server_ban_erase_player, admins_count_in_playercount,
+#               new_player_join_sound, alert.min_players_sharing_connection      (33)
+#   [ahelp]     admin_prefix, admin_prefix_webhook                              (4)
+#   [vote]      restart_required_ratio, cooldowns, enabled-votes                (16)
+#   [votekick]  enabled, thresholds, eligibility                               (16)
+#   [whitelist] whitelist gating (2)   [ban] ban behavior (1)
+#   game.panic_bunker.* , game.ipintel_*  — anti-raid (set above)
+#
+# ── Chat & comms ──
+#   [chat]  motd, max message lengths, rate limits                             (7)
+#   [ooc]   visibility, patron color, discord relay channel                    (3)
+#   [ic]    in-character chat range / name limits                              (6)
+#   [looc]  local-OOC visibility/range                                          (4)
+#
+# ── Networking & performance ──
+#   [net]     tickrate, max_connections, lidgren logging                       (16)
+#   [netres]  per-connection resource bandwidth limit                          (4)
+#   [metrics] prometheus endpoint + perf counters (15)   [physics] sim tuning (8)
+#
+# ── Gameplay & world ──  (balance decisions — your call)
+#   [shuttle]  auto_call_time, mass_limit, FTL/docking tuning                  (43)
+#   [atmos]    max_explosion_range, atmospherics sim                           (24)
+#   [explosion] (10)  [movement] mob_pushing (7)  [worldgen] enabled (2)
+#   [radiation] (4)  [ghost] (3)  [surgery] can_operate_on_self (1)
+#   [anomaly] [biomass] [firealarm] [silicon] [holidays] [procgen]  (1 each)
+#
+# ── Integrations & ops ──  (note: secrets/per-deploy → host config, NOT here)
+#   [discord]   webhook/relay wiring                                           (21)
+#   [database]  engine + connection  ── KEEP IN HOST instance config           (12)
+#   [watchdog]  key/token            ── KEEP IN HOST instance config           (3)
+#   [loki] log shipping (5)   [adminlogs] retention/sink (7)   [replay] recording (2)
+#   [acz] auto content-zip packaging (7)   [playtest] (10)   [transfer]/[mapping]/[toolshed]
+#
+# ── Fork layers (inherited down the Wizden→Frontier→Monolith chain) ──
+#   [mono]      mono.cleanup.space.* / .grid.* / .mob.* (the cleanup bug lives here),
+#               + other Monolith knobs                                         (16)
+#   [nf14]      Frontier economy/salvage/respawn (nf14.salvage, nf14.respawn)  (16)
+#   [frontier] (2)   plus ee.* / rmc.* further up the chain
+#   See Content.Shared/_Mono and the _NF CCVar files for these.
+#
+# Copy only what you want; never bulk-import another fork's identity values
+# (Discord channel IDs, host user, invite links all carry their identity, not yours).
