@@ -1,0 +1,27 @@
+# Hyperion: our own round preset. A gamePreset = the base round rule (NFAdventure, the
+# ship-fork sector mode) plus the event schedulers that drive what happens mid-round.
+#
+# This starts from the fork-agnostic NFAdventure/NFPirate baseline (station + bluespace +
+# salvage + smuggling events) ON PURPOSE. It deliberately does NOT pull in Monolith's
+# faction/threat schedulers (MonoMonolithicEventsScheduler, the STC shuttle spawners,
+# Portstrike, Chimera, Asakim) because those carry Monolith's TSF/PDV/USSP setting.
+# Hyperion's own threats (the hostile edge drones) get layered in here as our own
+# schedulers once the setting is designed.
+#
+# showInVote is false and the preset vote is disabled in config, so this just runs every
+# round as the single mode. Admins can still switch presets by command.
+- type: gamePreset
+  id: HyperionStandard
+  alias:
+    - standard
+    - hyperionstandard
+  name: hyperion-standard-title
+  description: hyperion-standard-description
+  showInVote: false
+  rules:
+  - NFAdventure
+  - BasicStationEventScheduler
+  - BluespaceEventScheduler
+  - BluespaceDungeonEventScheduler
+  - BluespaceSalvageEventScheduler
+  - SmugglingEventScheduler

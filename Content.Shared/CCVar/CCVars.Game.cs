@@ -24,7 +24,7 @@ public sealed partial class CCVars
     /// Automatically starts a gamemode vote when returning to the lobby.
     /// Requires auto voting to be enabled.
     public static readonly CVarDef<bool> PresetAutoVoteEnabled =
-        CVarDef.Create("vote.preset_autovote_enabled", true, CVar.SERVERONLY);
+        CVarDef.Create("vote.preset_autovote_enabled", false, CVar.SERVERONLY); // Hyperion: true<false (no auto preset vote at round start)
     // Mono End
 
     /// <summary>
@@ -49,7 +49,7 @@ public sealed partial class CCVars
     ///     Controls the default game preset.
     /// </summary>
     public static readonly CVarDef<string>
-        GameLobbyDefaultPreset = CVarDef.Create("game.defaultpreset", "nfpirate", CVar.ARCHIVE); // Frontier: secret<nfpirate
+        GameLobbyDefaultPreset = CVarDef.Create("game.defaultpreset", "HyperionStandard", CVar.ARCHIVE); // Hyperion: nfpirate<HyperionStandard
 
     /// <summary>
     ///     Controls if the game can force a different preset if the current preset's criteria are not met.
