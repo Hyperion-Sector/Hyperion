@@ -1,6 +1,7 @@
 using Content.Server.Cargo.Systems;
 using Content.Server.Power.Components;
 using Content.Shared._Mono.CCVar;
+using Content.Shared._NF.Shipyard.Components; // Hyperion: ShuttleDeedComponent marks owned ships
 using Content.Shared.Power.Components;
 using Content.Shared.Shuttles.Components;
 using Content.Server.Shuttles.Systems;
@@ -61,6 +62,7 @@ public sealed partial class GridCleanupSystem : BaseCleanupSystem<MapGridCompone
         if (HasComp<MapComponent>(uid) // if we're a planetmap ignore
             || HasComp<MapGridComponent>(parent) // do not delete anything on planetmaps either
             || _immuneQuery.HasComp(uid)
+            || HasComp<ShuttleDeedComponent>(uid) // Hyperion: never GC a deeded/owned ship, regardless of power/IFF/value
             || !state.IgnoreIFF && TryComp<IFFComponent>(uid, out var iff) && (iff.Flags & IFFFlags.HideLabel) == 0 // delete only if IFF off
             || _cleanup.HasNearbyPlayers(xform.Coordinates, state.DistanceOverride ?? _maxDistance * scale * scale) // square it
             || !state.IgnorePowered && HasPoweredAPC((uid, xform)) // don't delete if it has powered APCs
