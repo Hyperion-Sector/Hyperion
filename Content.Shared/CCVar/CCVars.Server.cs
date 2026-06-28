@@ -12,13 +12,13 @@ public sealed partial class CCVars
     ///     Change this to have the changelog and rules "last seen" date stored separately.
     /// </summary>
     public static readonly CVarDef<string> ServerId =
-        CVarDef.Create("server.id", "new_frontier", CVar.REPLICATED | CVar.SERVER); // Frontier: new_frontier
+        CVarDef.Create("server.id", "hyperion", CVar.REPLICATED | CVar.SERVER); // Hyperion: new_frontier<hyperion
 
     /// <summary>
     ///     Guide Entry Prototype ID to be displayed as the server rules.
     /// </summary>
     public static readonly CVarDef<string> RulesFile =
-        CVarDef.Create("server.rules_file", "MonolithRuleset", CVar.REPLICATED | CVar.SERVER); // Monolith
+        CVarDef.Create("server.rules_file", "HyperionRuleset", CVar.REPLICATED | CVar.SERVER); // Hyperion: MonolithRuleset<HyperionRuleset
 
     /// <summary>
     ///     Guide entry that is displayed by default when a guide is opened.
