@@ -6,7 +6,8 @@ credits-window-become-patron-button = Become a Patron
 credits-window-contributor-encouragement-label = Want to get on this list?
 credits-window-contribute-button = Contribute!
 # Frontier: "Space Station 14"<"Monolith"
-credits-window-contributors-section-title = Frontier Station Contributors
+# Hyperion: "Frontier Station"<"Hyperion"
+credits-window-contributors-section-title = Hyperion Contributors
 credits-window-codebases-section-title = Space Station 13 Codebases
 credits-window-original-remake-team-section-title = Original Space Station 13 Remake Team
 credits-window-special-thanks-section-title = Special Thanks

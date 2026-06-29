@@ -29,8 +29,11 @@ jobs:
       run: |
         git submodule update --init --recursive
 
-    - name: Pull engine updates
-      uses: space-wizards/submodule-dependency@v0.1.5
+    # Hyperion: removed the engine auto-bump (space-wizards/submodule-dependency).
+    # We run our own RobustToolbox fork pinned by SHA; engine bumps are deliberate
+    # (the no-submodule-update gate enforces that on PRs). CI builds the pinned engine.
+    # - name: Pull engine updates
+    #   uses: space-wizards/submodule-dependency@v0.1.5
 
     - name: Update Engine Submodules
       run: |

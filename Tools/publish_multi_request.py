@@ -3,7 +3,7 @@
 import argparse
 import requests
 import os
-import subprocess
+import re  # Hyperion: engine version parsed from Version.props (see get_engine_version)
 from typing import Iterable
 
 PUBLISH_TOKEN = os.environ["PUBLISH_TOKEN"]
@@ -15,8 +15,10 @@ RELEASE_DIR = "release"
 # CONFIGURATION PARAMETERS
 # Forks should change these to publish to their own infrastructure.
 #
-ROBUST_CDN_URL = "https://cdn.goobstation.com/"
-FORK_ID = "Monolith"
+# Hyperion: point at our own Robust.Cdn edge (was cdn.goobstation.com / "Monolith").
+# Overridable via env so a LAN publish can target the CDN directly (no edge round-trip).
+ROBUST_CDN_URL = os.environ.get("ROBUST_CDN_URL", "https://cdn.hyperionsector.com/")
+FORK_ID = os.environ.get("FORK_ID", "hyperion")
 
 def main():
     parser = argparse.ArgumentParser()
@@ -74,11 +76,15 @@ def get_files_to_publish() -> Iterable[str]:
         yield os.path.join(RELEASE_DIR, file)
 
 
+# Hyperion: read the engine version from Version.props instead of `git describe --tags`.
+# CI does a shallow submodule checkout with no tags, so git-describe fails; the props
+# file is the authoritative version anyway (Tools/version.py writes it).
 def get_engine_version() -> str:
-    proc = subprocess.run(["git", "describe","--tags", "--abbrev=0"], stdout=subprocess.PIPE, cwd="RobustToolbox", check=True, encoding="UTF-8")
-    tag = proc.stdout.strip()
-    assert tag.startswith("v")
-    return tag[1:] # Cut off v prefix.
+    props = os.path.join("RobustToolbox", "MSBuild", "Robust.Engine.Version.props")
+    with open(props, encoding="UTF-8") as f:
+        match = re.search(r"<Version>(.*?)</Version>", f.read())
+    assert match is not None, f"no <Version> in {props}"
+    return match.group(1).strip()
 
 
 if __name__ == '__main__':

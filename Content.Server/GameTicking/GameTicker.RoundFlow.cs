@@ -983,10 +983,10 @@ namespace Content.Server.GameTicking
             }
             else
             {
-                if (_playerManager.PlayerCount == 0)
-                    _roundStartCountdownHasNotStartedYetDueToNoPlayers = true;
-                else
-                    _roundStartTime = _gameTiming.CurTime + LobbyDuration;
+                // Hyperion: always run the lobby countdown, even with no players, so an empty server cycles
+                // rounds instead of stalling in pre-round forever (we run with game.auto_pause_empty = false).
+                // The lobby and role select still work; upstream latched until the first player joined.
+                _roundStartTime = _gameTiming.CurTime + LobbyDuration;
 
                 SendStatusToAll();
                 UpdateInfoText();

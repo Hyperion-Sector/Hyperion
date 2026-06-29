@@ -1,0 +1,58 @@
+name: Publish
+
+# Hyperion: continuous delivery to our own Robust.Cdn (cdn.hyperionsector.com).
+# On a push to main we package the server (linux-x64, what the watchdog pulls) and
+# the client, then POST them to the CDN. The CDN injects build.json, builds the
+# manifest, and pings the watchdog, which updates the live server at round end.
+#
+# Setup (one-time): add repo secret PUBLISH_TOKEN = the CDN fork's UpdateToken.
+# The CDN is reached over its public TLS vhost, so no home IP is exposed.
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+concurrency:
+  group: publish
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    # Don't run on downstream forks - only the canonical repo has the CDN token.
+    if: github.repository == 'Hyperion-Sector/Hyperion'
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4.2.2
+        with:
+          submodules: 'recursive'
+
+      - name: Setup .NET Core
+        uses: actions/setup-dotnet@v4.1.0
+        with:
+          dotnet-version: 10.0.x
+
+      - name: Install publish script deps
+        run: pip install requests
+
+      - name: Install dependencies
+        run: dotnet restore
+
+      - name: Build Packaging
+        run: dotnet build Content.Packaging --configuration Release --no-restore /m
+
+      # Server: only linux-x64 (the platform our watchdog runs). Add more --platform
+      # flags here if we ever distribute server binaries for other hosters.
+      - name: Package server
+        run: dotnet run --project Content.Packaging server --platform linux-x64
+
+      - name: Package client
+        run: dotnet run --project Content.Packaging client --no-wipe-release
+
+      - name: Publish to Robust.Cdn
+        run: Tools/publish_multi_request.py
+        env:
+          PUBLISH_TOKEN: ${{ secrets.PUBLISH_TOKEN }}
+          # ROBUST_CDN_URL / FORK_ID default to the Hyperion edge in the script.

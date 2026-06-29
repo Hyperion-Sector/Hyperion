@@ -1,0 +1,11 @@
+# Hyperion: our own server ruleset. Selected via server.rules_file = "HyperionRuleset"
+# (see Resources/ConfigPresets/_Hyperion/hyperion.toml). Single consolidated document,
+# like Wizden's StandardRuleset/MRPRuleset. If you later want per-rule deep-links the way
+# _Mono/Guidebook/rules.yml does it, split this into child guideEntries with a `children:`
+# list — but one scrollable rules page is fine and simpler for players to read.
+- type: guideEntry
+  id: HyperionRuleset
+  name: guide-entry-hyperion-rules
+  text: "/ServerInfo/_Hyperion/Guidebook/Rules/HyperionRuleset.xml"
+  priority: -2
+  ruleEntry: true
