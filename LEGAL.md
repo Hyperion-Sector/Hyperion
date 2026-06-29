@@ -4,13 +4,17 @@
 
 The Authors retain all copyright to their respective work here submitted.
 
-## Code license
+## Code and content license
 
-Content contributed to this repository after commit 2fca06eaba205ae6fe3aceb8ae2a0594f0effee0 is licensed under the GNU Affero General Public License version 3.0, unless otherwise stated. See `LICENSE-AGPLv3.txt`.
+The work as a whole is licensed under the GNU Affero General Public License version 3.0.
 
-Content contributed to this repository before commit 2fca06eaba205ae6fe3aceb8ae2a0594f0effee0 is licensed under the MIT license, unless otherwise stated. See `LICENSE-MIT.txt`.
+Original **code** contributed after Monolith commit 04d8ce483f638320d1b85a7aaacdf01442757363 (September 2, 2025) is, by default, licensed under the Mozilla Public License version 2.0 with Exhibit B removed, unless otherwise stated. See `LICENSES/MPL-2.0.txt`.
 
-[2fca06eaba205ae6fe3aceb8ae2a0594f0effee0](https://github.com/new-frontiers-14/frontier-station-14/commit/2fca06eaba205ae6fe3aceb8ae2a0594f0effee0) was pushed on July 1, 2024 at 16:04 UTC
+**Content** contributed after commit 2fca06eaba205ae6fe3aceb8ae2a0594f0effee0, along with any code contributed before the Monolith cutoff above, is licensed under the GNU Affero General Public License version 3.0, unless otherwise stated. See `LICENSES/AGPL-3.0-or-later.txt`.
+
+Anything contributed before commit 2fca06eaba205ae6fe3aceb8ae2a0594f0effee0 is licensed under the MIT license, unless otherwise stated. See `LICENSES/MIT.txt`.
+
+[2fca06eaba205ae6fe3aceb8ae2a0594f0effee0](https://github.com/new-frontiers-14/frontier-station-14/commit/2fca06eaba205ae6fe3aceb8ae2a0594f0effee0) was pushed on July 1, 2024 at 16:04 UTC.
 
 ## Warranty
 
