@@ -1,14 +1,14 @@
-<p align="center"> <img alt="Frontier Station 14" width="880" height="300" src="https://raw.githubusercontent.com/Monolith-Station/Monolith/89d435f0d2c54c4b0e6c3b1bf4493c9c908a6ac7/Resources/Textures/_Mono/Logo/logo.png?raw=true" /></p>
+<p align="center"> <img alt="Hyperion Astronautics" width="880" src=".github/hyperion-banner.png" /></p>
 
-Monolith is a fork of [Frontier Station 14](https://github.com/new-frontiers-14/frontier-station-14) that runs on the [Robust Toolbox](https://github.com/space-wizards/RobustToolbox) engine written in C#.
+Hyperion is a fork of [Monolith](https://github.com/Monolith-Station/Monolith) that runs on the [Robust Toolbox](https://github.com/space-wizards/RobustToolbox) engine written in C#.
 
-This is the primary repo for Monolith.
+This is the primary repo for Hyperion.
 
-If you want to host or create content for Monolith, this is the repo you need. It contains both RobustToolbox and the content pack for development of new content packs.
+If you want to host or create content for Hyperion, this is the repo you need. It contains both RobustToolbox and the content pack for development of new content packs.
 
 ## Links
 
-[Discord](https://discord.gg/mxY4h2JuUw) | [Steam](https://store.steampowered.com/app/1255460/Space_Station_14/)
+<!-- Hyperion: Discord link parked until we have our own invite [Discord](https://discord.gg/mxY4h2JuUw) | -->[Steam](https://store.steampowered.com/app/1255460/Space_Station_14/)
 
 ## Contributing
 
@@ -18,7 +18,7 @@ We are not currently accepting translations of the game on our main repository. 
 
 ## Building
 
-Refer to [the Space Wizards' guide](https://docs.spacestation14.com/en/general-development/setup/setting-up-a-development-environment.html) on setting up a development environment for general information, but keep in mind that Einstein Engines is not the same and many things may not apply.
+Refer to [the Space Wizards' guide](https://docs.spacestation14.com/en/general-development/setup/setting-up-a-development-environment.html) on setting up a development environment for general information, but keep in mind that Hyperion is not the same and many things may not apply.
 We provide some scripts shown below to make the job easier.
 
 ### Build dependencies
@@ -55,7 +55,7 @@ We provide some scripts shown below to make the job easier.
 
 See the REUSE headers for detailed licensing information for each file for the specific licenses contributions are made under. The work as a whole is licensed under GNU Affero General Public License version 3.0.
 
-By default, original code contributed to the Monolith codebase after 04d8ce483f638320d1b85a7aaacdf01442757363 is under Mozilla Public License version 2.0 with Exhibit B removed. See `LICENSE-MPL.txt`.
+By default, original code contributed to the Hyperion codebase after 04d8ce483f638320d1b85a7aaacdf01442757363 is under Mozilla Public License version 2.0 with Exhibit B removed. See `LICENSE-MPL.txt`.
 
 Content contributed to this repository after commit 2fca06eaba205ae6fe3aceb8ae2a0594f0effee0 is licensed under the GNU Affero General Public License version 3.0, unless otherwise stated. See `LICENSE-AGPLv3.txt`.
 
