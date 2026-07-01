@@ -16,6 +16,7 @@ namespace Content.Server.Atmos.Piping.Unary.Components
         /// By default, all air vents start enabled, whether linked to an alarm or not.
         /// </summary>
         [ViewVariables(VVAccess.ReadWrite)]
+        [DataField] // Hyperion: persist across ship save (untagged upstream)
         public bool Enabled { get; set; } = true;
 
         [ViewVariables]

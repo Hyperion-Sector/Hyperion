@@ -14,6 +14,7 @@ namespace Content.Server.Atmos.Piping.Binary.Components
         public bool Blocked { get; set; } = false;
 
         [ViewVariables(VVAccess.ReadWrite)]
+        [DataField] // Hyperion: persist across ship save (untagged upstream)
         public bool Overclocked { get; set; } = false;
 
         [ViewVariables(VVAccess.ReadWrite)]
