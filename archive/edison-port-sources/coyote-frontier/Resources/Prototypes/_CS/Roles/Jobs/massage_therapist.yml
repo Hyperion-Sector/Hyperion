@@ -1,0 +1,82 @@
+- type: job
+  id: MassageTherapist
+  name: job-name-massage-therapist
+  description: job-description-massage-therapist
+  playTimeTracker: JobMassageTherapist
+  startingGear: CSMassageTherapistGear
+  alwaysUseSpawner: false
+  icon: "JobIconBoxer"
+  supervisors: job-supervisors-massage-therapist
+  weight: 40
+  displayWeight: 3
+  canBeAntag: false
+  accessGroups:
+  - GeneralAccess
+  special:
+  - !type:GiveItemOnHolidaySpecial
+    holiday: FrontierBirthday
+    prototype: FrontierBirthdayGift
+  - !type:AddRpiAuraSpecial
+    aurasToAdd:
+    - rpiAuraMassageTherapist
+  - !type:RpiChatJudgementModifierSpecial
+    modsToAdd:
+    - rpiChatJudgementModifierMassageTherapist
+
+- type: playTimeTracker
+  id: JobMassageTherapist
+
+- type: entity
+  id: SpawnPointMassageTherapist
+  parent: SpawnPointPassenger
+  name: massage therapist spawn point
+  components:
+  - type: SpawnPoint
+    job_id: MassageTherapist
+    alt_jobs:
+    - Companion
+
+- type: startingGear
+  id: CSMassageTherapistGear
+  storage:
+    back:
+    - EncryptionKeyService
+    - ShipVoucherCoyoteMassageTherapist
+
+- type: roleLoadout
+  id: JobMassageTherapist
+  groups:
+  - ContractorHead
+  - ContractorNeck
+  - PilotJumpsuit
+  - ContractorGloves
+  - ContractorBackpack
+  - ContractorOuterClothing
+  - ContractorForcedOuterClothing
+  - ContractorShoes
+  - ContractorFace
+  - ContractorGlasses
+  - ContractorBelt
+  - ContractorEars
+  - ContractorEncryptionKey
+  - ContractorBoxSurvival
+  - ContractorPDA
+  - ContractorWallet
+  - ContractorCartridge
+  - ContractorImplanter
+  - ContractorBackpackItems
+  - ContractorHandItems
+  - ContractorInstruments
+  - NFSpeciesSpecific
+
+- type: chameleonOutfit
+  id: MassageTherapistChameleonOutfit
+  job: MassageTherapist
+  equipment:
+    head: ClothingHeadHatChef
+    eyes: ClothingEyesGlassesCheapSunglasses
+    mask: ClothingMaskItalianMoustache
+    neck: ClothingNeckScarfStripedBrown
+    outerClothing: ClothingOuterJacketChef
+    gloves: ClothingHandsGlovesColorWhite
+    shoes: ClothingShoesChef

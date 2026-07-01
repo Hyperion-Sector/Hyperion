@@ -1,0 +1,122 @@
+- type: marking
+  id: KemonoBunnyTail
+  bodyPart: Tail
+  markingCategory: Tail
+  speciesRestriction: [Vulpkanin, Rodentia, SlimePerson, Human, Harpy, IPC, Arachne, Felinid, Oni, Kitsune]
+  kindAllowance: [BasicHumanlike, BasicFurry, BasicRobot, VoxLike] # Coyote: Allow all markings
+  sprites:
+  - sprite: _CS/kemonomimi-tails.rsi
+    state: bunnytail
+
+- type: marking
+  id: KemonoBunnyTailAlt
+  bodyPart: Tail
+  markingCategory: Tail
+  speciesRestriction: [Vulpkanin, Rodentia, SlimePerson, Human, Harpy, IPC, Arachne, Felinid, Oni, Kitsune]
+  kindAllowance: [BasicHumanlike, BasicFurry, BasicRobot, VoxLike] # Coyote: Allow all markings
+  sprites:
+  - sprite: _CS/kemonomimi-tails.rsi
+    state: bunnytailalt
+
+- type: marking
+  id: KemonoDobleFurTail
+  bodyPart: Tail
+  markingCategory: Tail
+  speciesRestriction: [Vulpkanin, Rodentia, SlimePerson, Human, Harpy, IPC, Arachne, Felinid, Oni, Kitsune]
+  kindAllowance: [BasicHumanlike, BasicFurry, BasicRobot, VoxLike] # Coyote: Allow all markings
+  sprites:
+  - sprite: _CS/kemonomimi-tails.rsi
+    state: doblefurtailtone1
+  - sprite: _CS/kemonomimi-tails.rsi
+    state: doblefurtailtone2
+
+- type: marking
+  id: KemonoFluffyTail
+  bodyPart: Tail
+  markingCategory: Tail
+  speciesRestriction: [Vulpkanin, Rodentia, SlimePerson, Human, Harpy, IPC, Arachne, Felinid, Oni, Kitsune]
+  kindAllowance: [BasicHumanlike, BasicFurry, BasicRobot, VoxLike] # Coyote: Allow all markings
+  sprites:
+  - sprite: _CS/kemonomimi-tails.rsi
+    state: fluffytail
+
+- type: marking
+  id: KemonoFoxNineTails
+  bodyPart: Tail
+  markingCategory: Tail
+  speciesRestriction: [Vulpkanin, Rodentia, SlimePerson, Human, Harpy, IPC, Arachne, Felinid, Oni, Kitsune]
+  kindAllowance: [BasicHumanlike, BasicFurry, BasicRobot, VoxLike] # Coyote: Allow all markings
+  sprites:
+  - sprite: _CS/kemonomimi-tails.rsi
+    state: foxninetailstone1
+  - sprite: _CS/kemonomimi-tails.rsi
+    state: foxninetailstone2
+
+- type: marking
+  id: KemonoFoxThreeTails
+  bodyPart: Tail
+  markingCategory: Tail
+  speciesRestriction: [Vulpkanin, Rodentia, SlimePerson, Human, Harpy, IPC, Arachne, Felinid, Oni, Kitsune]
+  kindAllowance: [BasicHumanlike, BasicFurry, BasicRobot, VoxLike] # Coyote: Allow all markings
+  sprites:
+  - sprite: _CS/kemonomimi-tails.rsi
+    state: foxthreetailstone1
+  - sprite: _CS/kemonomimi-tails.rsi
+    state: foxthreetailstone2
+
+- type: marking
+  id: KemonoFoxTwoTails
+  bodyPart: Tail
+  markingCategory: Tail
+  speciesRestriction: [Vulpkanin, Rodentia, SlimePerson, Human, Harpy, IPC, Arachne, Felinid, Oni, Kitsune]
+  kindAllowance: [BasicHumanlike, BasicFurry, BasicRobot, VoxLike] # Coyote: Allow all markings
+  sprites:
+  - sprite: _CS/kemonomimi-tails.rsi
+    state: foxtwotailstone1
+  - sprite: _CS/kemonomimi-tails.rsi
+    state: foxtwotailstone2
+
+- type: marking
+  id: KemonoHorseTailCulty
+  bodyPart: Tail
+  markingCategory: Tail
+  speciesRestriction: [Vulpkanin, Rodentia, SlimePerson, Human, Harpy, IPC, Arachne, Felinid, Oni, Kitsune]
+  kindAllowance: [BasicHumanlike, BasicFurry, BasicRobot, VoxLike] # Coyote: Allow all markings
+  sprites:
+  - sprite: _CS/kemonomimi-tails.rsi
+    state: horsetailculty
+
+- type: marking
+  id: KemonoHorseTailLong
+  bodyPart: Tail
+  markingCategory: Tail
+  speciesRestriction: [Vulpkanin, Rodentia, SlimePerson, Human, Harpy, IPC, Arachne, Felinid, Oni, Kitsune]
+  kindAllowance: [BasicHumanlike, BasicFurry, BasicRobot, VoxLike] # Coyote: Allow all markings
+  sprites:
+  - sprite: _CS/kemonomimi-tails.rsi
+    state: horsetaillong
+
+- type: marking
+  id: KemonoSharkTail
+  bodyPart: Tail
+  markingCategory: Tail
+  speciesRestriction: [Vulpkanin, Rodentia, SlimePerson, Human, Harpy, IPC, Arachne, Felinid, Oni, Kitsune]
+  kindAllowance: [BasicHumanlike, BasicFurry, BasicRobot, VoxLike] # Coyote: Allow all markings
+  sprites:
+  - sprite: _CS/kemonomimi-tails.rsi
+    state: sharktail
+
+- type: marking
+  id: KemonoTasselTail
+  bodyPart: Tail
+  markingCategory: Tail
+  speciesRestriction: [Vulpkanin, Rodentia, SlimePerson, Human, Harpy, IPC, Arachne, Felinid, Oni, Kitsune]
+  kindAllowance: [BasicHumanlike, BasicFurry, BasicRobot, VoxLike] # Coyote: Allow all markings
+  sprites:
+  - sprite: _CS/kemonomimi-tails.rsi
+    state: tasseltailtone1
+  - sprite: _CS/kemonomimi-tails.rsi
+    state: tasseltailtone2
+
+
+

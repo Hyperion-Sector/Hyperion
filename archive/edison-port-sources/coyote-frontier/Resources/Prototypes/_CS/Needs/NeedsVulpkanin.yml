@@ -1,0 +1,76 @@
+#hunger
+- type: need
+  id: NeedHungerVulpkanin
+  needName: "Hunger"
+  needKind: "Hunger"
+  color: "Pink"
+  maxValue: 200
+  minValue: 0
+  minutesFromMaxToMin: 300 # 5 hours
+  startingMinutesWorthOfDecay: 100
+  secondsPerUpdate: 1
+  alertCategory: "Hunger"
+  # Extra Satisfied State
+  extraSatisfiedMinutesFromFull: 45
+  extraSatisfiedSpeedMult: 1.05
+  extraSatisfiedMultRPI: 1.25
+  extraSatisfiedAlert: null
+  extraSatisfiedIcon: HungerIconOverfed
+  # Satisfied State
+  satisfiedMinutesFromFull: 180 # 3 hours, minus 45 minutes of Extra Satisfied
+  satisfiedSpeedMult: 1.0
+  satisfiedMultRPI: 1.0
+  satisfiedAlert: null
+  satisfiedIcon: HungerIconOverfed
+  # Low State
+  lowMinutesFromFull: 270
+  lowSpeedMult: 0.85
+  lowMultRPI: 0.75
+  lowAlert: Peckish
+  lowIcon: HungerIconPeckish
+  # Critical State
+  criticalMinutesFromFull: 300 # 1.5 hours of starvation after Low
+  criticalSpeedMult: 0.75
+  criticalMultRPI: 0.50
+  criticalAlert: Starving
+  criticalIcon: HungerIconStarving
+#  criticalDebuffSlowdown: NeedSlowdownHunger
+
+#thirst
+- type: need
+  id: NeedThirstVulpkanin
+  needName: "Thirst"
+  needKind: "Thirst"
+  color: "Cyan"
+  maxValue: 200
+  minValue: 0
+  minutesFromMaxToMin: 300
+  startingMinutesWorthOfDecay: 100
+  secondsPerUpdate: 1
+  alertCategory: "Thirst"
+  # Extra Satisfied State
+  extraSatisfiedMinutesFromFull: 45
+  extraSatisfiedSpeedMult: 1.05
+  extraSatisfiedMultRPI: 1.25
+  extraSatisfiedAlert: null
+  extraSatisfiedIcon: ThirstIconOverhydrated
+  # Satisfied State
+  satisfiedMinutesFromFull: 180 # 3 hours, minus 45 minutes of Extra Satisfied
+  satisfiedSpeedMult: 1.0
+  satisfiedMultRPI: 1.0
+  satisfiedAlert: null
+  satisfiedIcon: ThirstIconOverhydrated
+  # Low State
+  lowMinutesFromFull: 270
+  lowSpeedMult: 0.85
+  lowMultRPI: 0.75
+  lowAlert: Thirsty
+  lowIcon: ThirstIconThirsty
+  # Critical State
+  criticalMinutesFromFull: 300 # 1.5 hours of starvation after Low
+  criticalSpeedMult: 0.75
+  criticalMultRPI: 0.50
+  criticalAlert: Parched
+  criticalIcon: ThirstIconParched
+#  criticalDebuffSlowdown: NeedSlowdownThirst
+

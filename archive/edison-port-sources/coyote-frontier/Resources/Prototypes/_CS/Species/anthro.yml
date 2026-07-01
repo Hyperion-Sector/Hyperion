@@ -1,0 +1,221 @@
+- type: species
+  id: Anthromorph
+  name: species-name-anthromorph
+  roundStart: true
+  prototype: MobAnthromorph
+  sprites: MobAnthromorphSprites
+  defaultSkinTone: "#747474"
+  markingLimits: MobAnthromorphMarkingLimits
+  dollPrototype: MobAnthromorphDummy
+  skinColoration: Hues
+  kind:
+  - BasicHumanlike
+  - BasicFurry
+
+- type: speciesBaseSprites
+  id: MobAnthromorphSprites
+  sprites:
+    Head: MobAnthromorphHead
+    HeadTop: MobHumanoidAnyMarking
+    HeadSide: MobHumanoidAnyMarking
+    Hair: MobHumanoidAnyMarking
+    FacialHair: MobHumanoidAnyMarking
+    Snout: MobHumanoidAnyMarking
+    Chest: MobAnthromorphTorso
+    Eyes: MobHumanoidEyes
+    LArm: MobAnthromorphLArm
+    RArm: MobAnthromorphRArm
+    LHand: MobAnthromorphLHand
+    RHand: MobAnthromorphRHand
+    Tail: MobHumanoidAnyMarking
+    LLeg: MobAnthromorphLLeg
+    RLeg: MobAnthromorphRLeg
+    LFoot: MobAnthromorphLFoot
+    RFoot: MobAnthromorphRFoot
+    LLegBehind: MobHumanoidAnyMarking
+    RLegBehind: MobHumanoidAnyMarking
+    LFootBehind: MobHumanoidAnyMarking
+    RFootBehind: MobHumanoidAnyMarking
+    TailBehind: MobHumanoidAnyMarking
+    TailOversuit: MobHumanoidAnyMarking
+    UndershirtUnderclothes: MobHumanoidAnyMarking
+    UndershirtOverclothes: MobHumanoidAnyMarking
+    UndergarmentTop: MobHumanoidAnyMarking
+    UndergarmentBottom: MobHumanoidAnyMarking
+    Genital: MobHumanoidAnyMarking
+    NeckFluff: MobHumanoidAnyMarking
+
+- type: markingPoints
+  id: MobAnthromorphMarkingLimits
+  points:
+    Special:
+      points: 999 # Coyote: Allow unlimited markings
+      required: false # Coyote
+    Hair:
+      points: 999 # Coyote: Allow unlimited markings
+      required: false # Coyote
+    FacialHair:
+      points: 999 # Coyote: Allow unlimited markings
+      required: false # Coyote
+    Head:
+      points: 999 # Coyote: Allow unlimited markings
+      required: false # Coyote
+    HeadTop:
+      points: 999 # Coyote: Allow unlimited markings
+      required: false # Coyote
+    HeadSide:
+      points: 999 # Coyote: Allow unlimited markings
+      required: false # Coyote
+    Snout:
+      points: 999 # Coyote: Allow unlimited markings
+      required: false # Coyote
+    Chest:
+      points: 999 # Coyote: Allow unlimited markings
+      required: false # Coyote
+    NeckFluff:
+      points: 999 # Coyote: Allow unlimited markings
+      required: false # Coyote
+    UndergarmentTop:
+      points: 999 # Coyote: Allow unlimited markings
+      required: false # Coyote
+    UndergarmentBottom:
+      points: 999 # Coyote: Allow unlimited markings
+      required: false # Coyote
+    Genital:
+      points: 999 # Coyote: Allow unlimited markings
+      required: false # Coyote
+    Arms:
+      points: 999 # Coyote: Allow unlimited markings
+      required: false # Coyote
+    Legs:
+      points: 999 # Coyote: Allow unlimited markings
+      required: false # Coyote
+    Tail:
+      points: 999 # Coyote: Allow unlimited markings
+      required: false # Coyote
+    TailExtras:
+      points: 999 # Coyote: Allow unlimited markings
+      required: false # Coyote
+    Overlay:
+      points: 999 # Coyote: Allow unlimited markings
+      required: false # Coyote
+    BaseChest:
+      points: 999 # Coyote: Allow unlimited markings
+      required: false # Coyote
+    BaseHead:
+      points: 999 # Coyote: Allow unlimited markings
+      required: false # Coyote
+    BaseLArm:
+      points: 999 # Coyote: Allow unlimited markings
+      required: false # Coyote
+    BaseLFoot:
+      points: 999 # Coyote: Allow unlimited markings
+      required: false # Coyote
+    BaseLHand:
+      points: 999 # Coyote: Allow unlimited markings
+      required: false # Coyote
+    BaseLLeg:
+      points: 999 # Coyote: Allow unlimited markings
+      required: false # Coyote
+    BaseRArm:
+      points: 999 # Coyote: Allow unlimited markings
+      required: false # Coyote
+    BaseRFoot:
+      points: 999 # Coyote: Allow unlimited markings
+      required: false # Coyote
+    BaseRHand:
+      points: 999 # Coyote: Allow unlimited markings
+      required: false # Coyote
+    BaseRLeg:
+      points: 999 # Coyote: Allow unlimited markings
+      required: false # Coyote
+    BaseArms:
+      points: 999 # Coyote: Allow unlimited markings
+      required: false # Coyote
+    BaseLegs:
+      points: 999 # Coyote: Allow unlimited markings
+      required: false # Coyote
+
+- type: humanoidBaseSprite
+  id: MobAnthromorphHead
+  baseSprite:
+    sprite: _CS/Mobs/Species/Anthromorph/parts.rsi
+    state: head_m
+
+- type: humanoidBaseSprite
+  id: MobAnthromorphHeadMale
+  baseSprite:
+    sprite: _CS/Mobs/Species/Anthromorph/parts.rsi
+    state: head_m
+
+- type: humanoidBaseSprite
+  id: MobAnthromorphHeadFemale
+  baseSprite:
+    sprite: _CS/Mobs/Species/Anthromorph/parts.rsi
+    state: head_f
+
+- type: humanoidBaseSprite
+  id: MobAnthromorphTorso
+  baseSprite:
+    sprite: _CS/Mobs/Species/Anthromorph/parts.rsi
+    state: torso_m
+
+- type: humanoidBaseSprite
+  id: MobAnthromorphTorsoMale
+  baseSprite:
+    sprite: _CS/Mobs/Species/Anthromorph/parts.rsi
+    state: torso_m
+
+- type: humanoidBaseSprite
+  id: MobAnthromorphTorsoFemale
+  baseSprite:
+    sprite: _CS/Mobs/Species/Anthromorph/parts.rsi
+    state: torso_f
+
+- type: humanoidBaseSprite
+  id: MobAnthromorphLLeg
+  baseSprite:
+    sprite: _CS/Mobs/Species/Anthromorph/parts.rsi
+    state: l_leg
+
+- type: humanoidBaseSprite
+  id: MobAnthromorphLHand
+  baseSprite:
+    sprite: _CS/Mobs/Species/Anthromorph/parts.rsi
+    state: l_hand
+
+- type: humanoidBaseSprite
+  id: MobAnthromorphLArm
+  baseSprite:
+    sprite: _CS/Mobs/Species/Anthromorph/parts.rsi
+    state: l_arm
+
+- type: humanoidBaseSprite
+  id: MobAnthromorphLFoot
+  baseSprite:
+    sprite: _CS/Mobs/Species/Anthromorph/parts.rsi
+    state: l_foot
+
+- type: humanoidBaseSprite
+  id: MobAnthromorphRLeg
+  baseSprite:
+    sprite: _CS/Mobs/Species/Anthromorph/parts.rsi
+    state: r_leg
+
+- type: humanoidBaseSprite
+  id: MobAnthromorphRHand
+  baseSprite:
+    sprite: _CS/Mobs/Species/Anthromorph/parts.rsi
+    state: r_hand
+
+- type: humanoidBaseSprite
+  id: MobAnthromorphRArm
+  baseSprite:
+    sprite: _CS/Mobs/Species/Anthromorph/parts.rsi
+    state: r_arm
+
+- type: humanoidBaseSprite
+  id: MobAnthromorphRFoot
+  baseSprite:
+    sprite: _CS/Mobs/Species/Anthromorph/parts.rsi
+    state: r_foot

@@ -1,0 +1,13 @@
+- type: loadoutGroup
+  id: SmugglerPDA
+  name: loadout-group-contractor-pda
+  hidden: true # No point in showing this, it gets auto-selected.
+  loadouts:
+  - SmugglerSmugglerPDA
+  # - NFPirateNFPiratePDA
+  # subgroups:
+  # - MercenaryPDA
+  # - PilotPDA
+  # - ContractorPDA
+  # fallbacks:
+  # - SmugglerSmugglerPDA

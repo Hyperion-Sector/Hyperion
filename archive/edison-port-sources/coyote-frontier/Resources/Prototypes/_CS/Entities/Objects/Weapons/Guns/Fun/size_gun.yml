@@ -1,0 +1,59 @@
+- type: entity
+  name: size manipulator
+  parent: BaseWeaponBattery
+  id: WeaponSizeManipulator
+  description: A specialized energy weapon that can grow or shrink targets. Produced by Parallax Genetech. Toggle modes by activating it in-hand.
+  components:
+  - type: Sprite
+    sprite: Objects/Weapons/Guns/Battery/taser.rsi  # Replace with custom sprite
+    layers:
+    - state: icon
+      map: ["enum.GunVisualLayers.Base"]
+  - type: Item
+    sprite: Objects/Weapons/Guns/Battery/taser.rsi
+    size: Normal
+  - type: Clothing
+    sprite: Objects/Weapons/Guns/Battery/taser.rsi
+    quickEquip: false
+    slots:
+    - Belt
+    - suitStorage
+  - type: Gun
+    fireRate: 2
+    selectedMode: SemiAuto
+    availableModes:
+    - SemiAuto
+    soundGunshot:
+      path: /Audio/Weapons/Guns/Gunshots/taser2.ogg
+  - type: ProjectileBatteryAmmoProvider
+    proto: BulletSizeManipulatorGrow  # Default to grow mode
+    fireCost: 100
+  - type: SizeManipulator
+    growPrototype: BulletSizeManipulatorGrow
+    shrinkPrototype: BulletSizeManipulatorShrink
+  - type: Battery
+    maxCharge: 1600
+    startingCharge: 1600
+  - type: Appearance
+  - type: StaticPrice
+    price: 500
+  - type: UseDelay
+    delay: 1.0
+  - type: UserInterface
+    interfaces:
+      enum.WiresUiKey.Key:
+        type: WiresBoundUserInterface
+  - type: WiresPanel
+  - type: Wires
+    boardName: wires-board-name-sizemanipulator
+    layoutId: SizeManipulator
+  - type: FireOnSignal
+  - type: DeviceLinkSink
+    ports:
+    - GrowTrigger
+    - ShrinkTrigger
+  - type: DeviceNetwork
+    deviceNetId: Wireless
+    receiveFrequencyId: BasicDevice
+  - type: WirelessNetworkConnection
+    range: 200

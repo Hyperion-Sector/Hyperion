@@ -1,0 +1,119 @@
+# Size Manipulator Projectiles
+
+# Impact Effects
+- type: entity
+  id: BulletImpactEffectGreen
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: TimedDespawn
+    lifetime: 0.2
+  - type: Sprite
+    drawdepth: Effects
+    layers:
+    - shader: unshaded
+      map: ["enum.EffectLayers.Unshaded"]
+      sprite: Objects/Weapons/Guns/Projectiles/projectiles_tg.rsi
+      state: impact_laser_greyscale
+      color: "#00ff00"
+  - type: EffectVisuals
+  - type: Tag
+    tags:
+    - HideContextMenu
+
+- type: entity
+  id: BulletImpactEffectRed
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: TimedDespawn
+    lifetime: 0.2
+  - type: Sprite
+    drawdepth: Effects
+    layers:
+    - shader: unshaded
+      map: ["enum.EffectLayers.Unshaded"]
+      sprite: Objects/Weapons/Guns/Projectiles/projectiles_tg.rsi
+      state: impact_laser_greyscale
+      color: "#ff0000"
+  - type: EffectVisuals
+  - type: Tag
+    tags:
+    - HideContextMenu
+
+# Projectiles
+- type: entity
+  id: BulletSizeManipulatorGrow
+  name: grow beam
+  parent: BaseBullet
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: FlyBySound
+    sound:
+      collection: EnergyMiss
+      params:
+        volume: 5
+  - type: Sprite
+    sprite: Objects/Weapons/Guns/Projectiles/projectiles_tg.rsi
+    color: "#00ff00"
+    layers:
+    - state: omnilaser
+      shader: unshaded
+  - type: Physics
+  - type: Fixtures
+    fixtures:
+      projectile:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.15,-0.3,0.15,0.3"
+        hard: false
+        mask:
+        - Impassable
+        - BulletImpassable
+  - type: Projectile
+    impactEffect: BulletImpactEffectGreen
+    damage:
+      types:
+        Heat: 0
+    soundHit:
+      path: /Audio/Effects/radpulse9.ogg
+    forceSound: true
+  - type: BulletSizeManipulator
+    mode: Grow
+
+- type: entity
+  id: BulletSizeManipulatorShrink
+  name: shrink beam
+  parent: BaseBullet
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: FlyBySound
+    sound:
+      collection: EnergyMiss
+      params:
+        volume: 5
+  - type: Sprite
+    sprite: Objects/Weapons/Guns/Projectiles/projectiles_tg.rsi
+    color: "#ff0000"
+    layers:
+    - state: omnilaser
+      shader: unshaded
+  - type: Physics
+  - type: Fixtures
+    fixtures:
+      projectile:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.15,-0.3,0.15,0.3"
+        hard: false
+        mask:
+        - Impassable
+        - BulletImpassable
+  - type: Projectile
+    impactEffect: BulletImpactEffectRed
+    damage:
+      types:
+        Heat: 0
+    soundHit:
+      path: /Audio/Effects/radpulse9.ogg
+    forceSound: true
+  - type: BulletSizeManipulator
+    mode: Shrink

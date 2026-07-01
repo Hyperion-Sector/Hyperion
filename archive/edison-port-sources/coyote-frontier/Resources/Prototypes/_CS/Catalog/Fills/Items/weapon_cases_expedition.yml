@@ -1,0 +1,82 @@
+#region Revolvers
+- type: entity
+  parent: WeaponCaseShort
+  id: WeaponCaseShortAnacondaExpedition
+  suffix: Dungeon, Anaconda
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: StorageFill
+    contents:
+    - id: CSWeaponPistolAnacondaExpedition
+      amount: 1
+
+#region rifles
+- type: entity
+  parent: WeaponCaseLong
+  id: WeaponCaseLongAkm
+  suffix: Dungeon, AKM
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: StorageFill
+    contents:
+    - id: CSWeaponAssaultRifleAKM
+      amount: 1
+    - id: NFMagazineRifle30
+      amount: 2
+
+#region smgs
+- type: entity
+  parent: WeaponCaseLong
+  id: WeaponCaseLongC19r
+  suffix: Dungeon, C19r
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: StorageFill
+    contents:
+    - id: CSWeaponSubMachineGunC19r
+      amount: 1
+    - id: NFMagazineSubMachineGun35
+      amount: 3
+
+## Coyote: .40 pistol
+- type: entity
+  parent:
+  - WeaponCaseShortAmmo
+  - StorageFillAmmoBoxLethal40
+  id: WeaponCaseShortAmmoBoxLethal40
+  categories: [ HideSpawnMenu ]
+
+- type: entity
+  parent:
+  - WeaponCaseShortAmmo
+  - StorageFillAmmoBoxRubber40
+  id: WeaponCaseShortAmmoBoxRubber40
+  categories: [ HideSpawnMenu ]
+
+- type: entity
+  parent:
+  - WeaponCaseShortAmmo
+  - StorageFillAmmoBoxPractice40
+  id: WeaponCaseShortAmmoBoxPractice40
+  categories: [ HideSpawnMenu ]
+
+- type: entity
+  parent:
+  - WeaponCaseShortAmmo
+  - StorageFillAmmoBoxIncendiary40
+  id: WeaponCaseShortAmmoBoxIncendiary40
+  categories: [ HideSpawnMenu ]
+
+- type: entity
+  parent:
+  - WeaponCaseShortAmmo
+  - StorageFillAmmoBoxUranium40
+  id: WeaponCaseShortAmmoBoxUranium40
+  categories: [ HideSpawnMenu ]
+
+- type: entity
+  parent:
+  - WeaponCaseShortAmmo
+  - StorageFillAmmoBoxEmp40
+  id: WeaponCaseShortAmmoBoxEmp40
+  categories: [ HideSpawnMenu ]

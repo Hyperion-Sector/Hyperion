@@ -1,0 +1,23 @@
+- type: entity
+  name: random chemistry vendingmachine
+  id: SpawnDungeonLootChemistryVend
+  parent: MarkerBasePlaceFree
+  suffix: "Dungeon, Medical"
+  components:
+  - type: Sprite
+    layers:
+    - state: red
+    - sprite: Structures/Machines/VendingMachines/chemvend.rsi
+      state: normal
+  - type: RandomSpawner
+    prototypes:
+    - VendingMachineBooze
+    - VendingMachineChemicals
+    - VendingMachineChemicals
+    - VendingMachineChemicals
+    - VendingMachineChemicals
+    chance: 1
+    offset: 0.0
+    rarePrototypes:
+    - VendingMachineChemicalsSyndicate
+    rareChance: 0.1

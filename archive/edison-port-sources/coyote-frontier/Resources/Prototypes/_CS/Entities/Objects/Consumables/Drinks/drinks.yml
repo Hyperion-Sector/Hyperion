@@ -1,0 +1,30 @@
+# Donk co cup
+- type: entity
+  parent: DrinkBase
+  id: DrinkDonkcoCup
+  name: Donk co cup
+  components:
+  - type: PhysicalComposition
+    materialComposition:
+      Cardboard: 25
+  - type: ExaminableSolution
+    solution: drink
+  - type: FitsInDispenser
+    solution: drink
+  - type: Tag
+    tags:
+    - DrinkGlass
+  - type: Sprite
+    sprite: _CS/Objects/Consumable/Drinks/donkcocup.rsi
+    state: icon
+  - type: Item
+    inhandVisuals:
+      left:
+      - state: inhand-left
+      right:
+      - state: inhand-right
+  - type: Appearance
+  - type: SolutionContainerManager
+    solutions:
+      drink:
+        maxVol: 30

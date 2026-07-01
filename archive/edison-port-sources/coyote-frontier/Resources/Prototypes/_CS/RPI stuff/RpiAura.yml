@@ -1,0 +1,99 @@
+- type: rpiAura
+  id: rpiAuraMassageTherapist
+  multiplier: 2.0
+  maxDistance: 10.0
+  minutesTillFullEffect: 30
+  minutesUntilDecayDelay: 20
+  minutesUntilDecayToZero: 60
+
+- type: rpiAura
+  id: rpiAuraMassageCompanion
+  multiplier: 2.0
+  maxDistance: 15.0
+  minutesTillFullEffect: 30
+  minutesUntilDecayDelay: 20
+  minutesUntilDecayToZero: 60
+
+- type: rpiAura
+  id: rpiAuraChaplain
+  multiplier: 2.0
+  maxDistance: 20.0
+  minutesTillFullEffect: 30
+  minutesUntilDecayDelay: 20
+  minutesUntilDecayToZero: 60
+
+- type: rpiAura
+  id: rpiAuraJournalist
+  multiplier: 2.0
+  maxDistance: 10.0
+  minutesTillFullEffect: 20
+  minutesUntilDecayDelay: 20
+  minutesUntilDecayToZero: 60
+
+- type: rpiAura
+  id: rpiAuraFoodService
+  multiplier: 2.0
+  maxDistance: 15.0
+  minutesTillFullEffect: 30
+  minutesUntilDecayDelay: 20
+  minutesUntilDecayToZero: 60
+
+- type: rpiAura
+  id: rpiAuraNurse
+  multiplier: 2.0
+  maxDistance: 15.0
+  minutesTillFullEffect: 30
+  minutesUntilDecayDelay: 20
+  minutesUntilDecayToZero: 60
+
+- type: rpiAura
+  id: rpiAuraTherapist
+  multiplier: 2.5
+  maxDistance: 10.0
+  minutesTillFullEffect: 40
+  minutesUntilDecayDelay: 20
+  minutesUntilDecayToZero: 80
+
+- type: rpiAura
+  id: rpiAuraDoC
+  multiplier: 2.5
+  maxDistance: 15.0
+  minutesTillFullEffect: 40
+  minutesUntilDecayDelay: 20
+  minutesUntilDecayToZero: 80
+
+- type: rpiAura
+  id: rpiAuraCurator
+  multiplier: 2.5
+  maxDistance: 17.0
+  minutesTillFullEffect: 60
+  minutesUntilDecayDelay: 20
+  minutesUntilDecayToZero: 120
+
+- type: rpiAura
+  id: rpiAuraCompanion
+  multiplier: 3.0
+  maxDistance: 17.0
+  minutesTillFullEffect: 60
+  minutesUntilDecayDelay: 20
+  minutesUntilDecayToZero: 60
+
+# station princess makes everyone horny faster
+# not horny, paid more, wtf
+- type: rpiAura
+  id: rpiAuraStationPrincess
+  multiplier: 3.0
+  maxDistance: 500.0
+  minutesTillFullEffect: 120
+  minutesUntilDecayDelay: 120
+  minutesUntilDecayToZero: 300
+
+# station Dutchess makes everyone horny faster
+# not horny, paid more, wtf
+- type: rpiAura
+  id: rpiAuraStationDutchess
+  multiplier: 2.0
+  maxDistance: 500.0
+  minutesTillFullEffect: 120
+  minutesUntilDecayDelay: 120
+  minutesUntilDecayToZero: 300

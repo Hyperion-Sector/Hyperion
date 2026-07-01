@@ -1,0 +1,1690 @@
+- type: loadout
+  id: CoyoteClothingUniformBase
+  price: 600
+#  effects:
+#  - !type:GroupLoadoutEffect
+#    proto: ContractorT1
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitAtmos
+
+- type: loadout
+  id: LoadoutCoolCoyoteClothesAcolyte
+  price: 600
+#  effects:
+#  - !type:GroupLoadoutEffect
+#    proto: ContractorT1
+  equipment:
+    jumpsuit: CoolCoyoteClothesAcolyte
+
+- type: loadout
+  id: LoadoutCoolCoyoteClothesAfrMerc
+  price: 600
+#  effects:
+#  - !type:GroupLoadoutEffect
+#    proto: ContractorT1
+  equipment:
+    jumpsuit: CoolCoyoteClothesAfrMerc
+
+- type: loadout
+  id: LoadoutCoolCoyoteClothesArtisan
+  price: 600
+#  effects:
+#  - !type:GroupLoadoutEffect
+#    proto: ContractorT1
+  equipment:
+    jumpsuit: CoolCoyoteClothesArtisan
+
+- type: loadout
+  id: LoadoutCoolCoyoteClothesAssyrian
+  price: 600
+#  effects:
+#  - !type:GroupLoadoutEffect
+#    proto: ContractorT1
+  equipment:
+    jumpsuit: CoolCoyoteClothesAssyrian
+
+- type: loadout
+  id: LoadoutCoolCoyoteClothesBLandschneckt
+  price: 600
+#  effects:
+#  - !type:GroupLoadoutEffect
+#    proto: ContractorT1
+  equipment:
+    jumpsuit: CoolCoyoteClothesBLandschneckt
+
+- type: loadout
+  id: LoadoutCoolCoyoteClothesBeggar
+  price: 600
+#  effects:
+#  - !type:GroupLoadoutEffect
+#    proto: ContractorT1
+  equipment:
+    jumpsuit: CoolCoyoteClothesBeggar
+
+- type: loadout
+  id: LoadoutCoolCoyoteClothesBlackTango
+  price: 600
+#  effects:
+#  - !type:GroupLoadoutEffect
+#    proto: ContractorT1
+  equipment:
+    jumpsuit: CoolCoyoteClothesBlackTango
+
+- type: loadout
+  id: LoadoutCoolCoyoteClothesBlackDress
+  price: 600
+#  effects:
+#  - !type:GroupLoadoutEffect
+#    proto: ContractorT1
+  equipment:
+    jumpsuit: CoolCoyoteClothesBlackDress
+
+- type: loadout
+  id: LoadoutCoolCoyoteClothesBlackNGold
+  price: 600
+#  effects:
+#  - !type:GroupLoadoutEffect
+#    proto: ContractorT1
+  equipment:
+    jumpsuit: CoolCoyoteClothesBlackNGold
+
+- type: loadout
+  id: LoadoutCoolCoyoteClothesBloodshot
+  price: 600
+#  effects:
+#  - !type:GroupLoadoutEffect
+#    proto: ContractorT1
+  equipment:
+    jumpsuit: CoolCoyoteClothesBloodshot
+
+- type: loadout
+  id: LoadoutCoolCoyoteClothesBlueKimono
+  price: 600
+#  effects:
+#  - !type:GroupLoadoutEffect
+#    proto: ContractorT1
+  equipment:
+    jumpsuit: CoolCoyoteClothesBlueKimono
+
+- type: loadout
+  id: LoadoutCoolCoyoteClothesBlueSari
+  price: 600
+#  effects:
+#  - !type:GroupLoadoutEffect
+#    proto: ContractorT1
+  equipment:
+    jumpsuit: CoolCoyoteClothesBlueSari
+
+- type: loadout
+  id: LoadoutCoolCoyoteClothesBlueSkirt
+  price: 600
+#  effects:
+#  - !type:GroupLoadoutEffect
+#    proto: ContractorT1
+  equipment:
+    jumpsuit: CoolCoyoteClothesBlueSkirt
+
+- type: loadout
+  id: LoadoutCoolCoyoteClothesBlueDress
+  price: 600
+#  effects:
+#  - !type:GroupLoadoutEffect
+#    proto: ContractorT1
+  equipment:
+    jumpsuit: CoolCoyoteClothesBlueDress
+
+- type: loadout
+  id: LoadoutCoolCoyoteClothesBlueRanger
+  price: 600
+#  effects:
+#  - !type:GroupLoadoutEffect
+#    proto: ContractorT1
+  equipment:
+    jumpsuit: CoolCoyoteClothesBlueRanger
+
+- type: loadout
+  id: LoadoutCoolCoyoteClothesBlueSun
+  price: 600
+#  effects:
+#  - !type:GroupLoadoutEffect
+#    proto: ContractorT1
+  equipment:
+    jumpsuit: CoolCoyoteClothesBlueSun
+
+- type: loadout
+  id: LoadoutCoolCoyoteClothesBowSun
+  price: 600
+#  effects:
+#  - !type:GroupLoadoutEffect
+#    proto: ContractorT1
+  equipment:
+    jumpsuit: CoolCoyoteClothesBowSun
+
+- type: loadout
+  id: LoadoutCoolCoyoteClothesBridalBlue
+  price: 600
+#  effects:
+#  - !type:GroupLoadoutEffect
+#    proto: ContractorT1
+  equipment:
+    jumpsuit: CoolCoyoteClothesBridalBlue
+
+- type: loadout
+  id: LoadoutCoolCoyoteClothesBridalOrange
+  price: 600
+#  effects:
+#  - !type:GroupLoadoutEffect
+#    proto: ContractorT1
+  equipment:
+    jumpsuit: CoolCoyoteClothesBridalOrange
+
+- type: loadout
+  id: LoadoutCoolCoyoteClothesBridalPurple
+  price: 600
+#  effects:
+#  - !type:GroupLoadoutEffect
+#    proto: ContractorT1
+  equipment:
+    jumpsuit: CoolCoyoteClothesBridalPurple
+
+- type: loadout
+  id: LoadoutCoolCoyoteClothesBridalRed
+  price: 600
+#  effects:
+#  - !type:GroupLoadoutEffect
+#    proto: ContractorT1
+  equipment:
+    jumpsuit: CoolCoyoteClothesBridalRed
+
+- type: loadout
+  id: LoadoutCoolCoyoteClothesBridalWhite
+  price: 600
+#  effects:
+#  - !type:GroupLoadoutEffect
+#    proto: ContractorT1
+  equipment:
+    jumpsuit: CoolCoyoteClothesBridalWhite
+
+- type: loadout
+  id: LoadoutCoolCoyoteClothesBrownPunkPants
+  price: 600
+#  effects:
+#  - !type:GroupLoadoutEffect
+#    proto: ContractorT1
+  equipment:
+    jumpsuit: CoolCoyoteClothesBrownPunkPants
+
+- type: loadout
+  id: LoadoutCoolCoyoteClothesBunnySuit
+  price: 600
+#  effects:
+#  - !type:GroupLoadoutEffect
+#    proto: ContractorT1
+  equipment:
+    jumpsuit: CoolCoyoteClothesBunnySuit
+
+- type: loadout
+  id: LoadoutCoolCoyoteClothesCartel
+  price: 600
+#  effects:
+#  - !type:GroupLoadoutEffect
+#    proto: ContractorT1
+  equipment:
+    jumpsuit: CoolCoyoteClothesCartel
+
+- type: loadout
+  id: LoadoutCoolCoyoteClothesChad
+  price: 600
+#  effects:
+#  - !type:GroupLoadoutEffect
+#    proto: ContractorT1
+  equipment:
+    jumpsuit: CoolCoyoteClothesChad
+
+- type: loadout
+  id: LoadoutCoolCoyoteClothesCheong
+  price: 600
+#  effects:
+#  - !type:GroupLoadoutEffect
+#    proto: ContractorT1
+  equipment:
+    jumpsuit: CoolCoyoteClothesCheong
+
+- type: loadout
+  id: LoadoutCoolCoyoteClothesCheongRed
+  price: 600
+#  effects:
+#  - !type:GroupLoadoutEffect
+#    proto: ContractorT1
+  equipment:
+    jumpsuit: CoolCoyoteClothesCheongRed
+
+- type: loadout
+  id: LoadoutCoolCoyoteClothesCheongWhite
+  price: 600
+#  effects:
+#  - !type:GroupLoadoutEffect
+#    proto: ContractorT1
+  equipment:
+    jumpsuit: CoolCoyoteClothesCheongWhite
+
+- type: loadout
+  id: LoadoutCoolCoyoteClothesCheongWhiteShort
+  price: 600
+#  effects:
+#  - !type:GroupLoadoutEffect
+#    proto: ContractorT1
+  equipment:
+    jumpsuit: CoolCoyoteClothesCheongWhiteShort
+
+- type: loadout
+  id: LoadoutCoolCoyoteClothesConquistador
+  price: 600
+#  effects:
+#  - !type:GroupLoadoutEffect
+#    proto: ContractorT1
+  equipment:
+    jumpsuit: CoolCoyoteClothesConquistador
+
+- type: loadout
+  id: LoadoutCoolCoyoteClothesCorset
+  price: 600
+#  effects:
+#  - !type:GroupLoadoutEffect
+#    proto: ContractorT1
+  equipment:
+    jumpsuit: CoolCoyoteClothesCorset
+
+- type: loadout
+  id: LoadoutCoolCoyoteClothesCorsetDress
+  price: 600
+#  effects:
+#  - !type:GroupLoadoutEffect
+#    proto: ContractorT1
+  equipment:
+    jumpsuit: CoolCoyoteClothesCorsetDress
+
+- type: loadout
+  id: LoadoutCoolCoyoteClothesCountess
+  price: 600
+#  effects:
+#  - !type:GroupLoadoutEffect
+#    proto: ContractorT1
+  equipment:
+    jumpsuit: CoolCoyoteClothesCountess
+
+- type: loadout
+  id: LoadoutCoolCoyoteClothesCrinoline
+  price: 600
+#  effects:
+#  - !type:GroupLoadoutEffect
+#    proto: ContractorT1
+  equipment:
+    jumpsuit: CoolCoyoteClothesCrinoline
+
+- type: loadout
+  id: LoadoutCoolCoyoteClothesCustomToga
+  price: 600
+#  effects:
+#  - !type:GroupLoadoutEffect
+#    proto: ContractorT1
+  equipment:
+    jumpsuit: CoolCoyoteClothesCustomToga
+
+- type: loadout
+  id: LoadoutCoolCoyoteClothesCyberHell
+  price: 600
+#  effects:
+#  - !type:GroupLoadoutEffect
+#    proto: ContractorT1
+  equipment:
+    jumpsuit: CoolCoyoteClothesCyberHell
+
+- type: loadout
+  id: LoadoutCoolCoyoteClothesDarkHanfu
+  price: 600
+#  effects:
+#  - !type:GroupLoadoutEffect
+#    proto: ContractorT1
+  equipment:
+    jumpsuit: CoolCoyoteClothesDarkHanfu
+
+- type: loadout
+  id: LoadoutCoolCoyoteClothesDivineRobe
+  price: 600
+#  effects:
+#  - !type:GroupLoadoutEffect
+#    proto: ContractorT1
+  equipment:
+    jumpsuit: CoolCoyoteClothesDivineRobe
+
+- type: loadout
+  id: LoadoutCoolCoyoteClothesDomina
+  price: 600
+#  effects:
+#  - !type:GroupLoadoutEffect
+#    proto: ContractorT1
+  equipment:
+    jumpsuit: CoolCoyoteClothesDomina
+
+- type: loadout
+  id: LoadoutCoolCoyoteClothesDougDimmadome
+  price: 600
+#  effects:
+#  - !type:GroupLoadoutEffect
+#    proto: ContractorT1
+  equipment:
+    jumpsuit: CoolCoyoteClothesDougDimmadome
+
+- type: loadout
+  id: LoadoutCoolCoyoteClothesDraculass
+  price: 600
+#  effects:
+#  - !type:GroupLoadoutEffect
+#    proto: ContractorT1
+  equipment:
+    jumpsuit: CoolCoyoteClothesDraculass
+
+- type: loadout
+  id: LoadoutCoolCoyoteClothesDress2
+  price: 600
+#  effects:
+#  - !type:GroupLoadoutEffect
+#    proto: ContractorT1
+  equipment:
+    jumpsuit: CoolCoyoteClothesDress2
+
+- type: loadout
+  id: LoadoutCoolCoyoteClothesDress3
+  price: 600
+#  effects:
+#  - !type:GroupLoadoutEffect
+#    proto: ContractorT1
+  equipment:
+    jumpsuit: CoolCoyoteClothesDress3
+
+- type: loadout
+  id: LoadoutCoolCoyoteClothesDressBlack
+  price: 600
+#  effects:
+#  - !type:GroupLoadoutEffect
+#    proto: ContractorT1
+  equipment:
+    jumpsuit: CoolCoyoteClothesDressBlack
+
+- type: loadout
+  id: LoadoutCoolCoyoteClothesDressSaloon
+  price: 600
+#  effects:
+#  - !type:GroupLoadoutEffect
+#    proto: ContractorT1
+  equipment:
+    jumpsuit: CoolCoyoteClothesDressSaloon
+
+- type: loadout
+  id: LoadoutCoolCoyoteClothesDress5
+  price: 600
+#  effects:
+#  - !type:GroupLoadoutEffect
+#    proto: ContractorT1
+  equipment:
+    jumpsuit: CoolCoyoteClothesDress5
+
+- type: loadout
+  id: LoadoutCoolCoyoteClothesDress6
+  price: 600
+#  effects:
+#  - !type:GroupLoadoutEffect
+#    proto: ContractorT1
+  equipment:
+    jumpsuit: CoolCoyoteClothesDress6
+
+- type: loadout
+  id: LoadoutCoolCoyoteClothesDutch
+  price: 600
+#  effects:
+#  - !type:GroupLoadoutEffect
+#    proto: ContractorT1
+  equipment:
+    jumpsuit: CoolCoyoteClothesDutch
+
+- type: loadout
+  id: LoadoutCoolCoyoteClothesExplorerStripper
+  price: 600
+#  effects:
+#  - !type:GroupLoadoutEffect
+#    proto: ContractorT1
+  equipment:
+    jumpsuit: CoolCoyoteClothesExplorerStripper
+
+- type: loadout
+  id: LoadoutCoolCoyoteClothesFlamenco
+  price: 600
+#  effects:
+#  - !type:GroupLoadoutEffect
+#    proto: ContractorT1
+  equipment:
+    jumpsuit: CoolCoyoteClothesFlamenco
+
+- type: loadout
+  id: LoadoutCoolCoyoteClothesFloofDress
+  price: 600
+#  effects:
+#  - !type:GroupLoadoutEffect
+#    proto: ContractorT1
+  equipment:
+    jumpsuit: CoolCoyoteClothesFloofDress
+
+- type: loadout
+  id: LoadoutCoolCoyoteClothesFlashyGreenDress
+  price: 600
+#  effects:
+#  - !type:GroupLoadoutEffect
+#    proto: ContractorT1
+  equipment:
+    jumpsuit: CoolCoyoteClothesFlashyGreenDress
+
+- type: loadout
+  id: LoadoutCoolCoyoteClothesFlowRed
+  price: 600
+#  effects:
+#  - !type:GroupLoadoutEffect
+#    proto: ContractorT1
+  equipment:
+    jumpsuit: CoolCoyoteClothesFlowRed
+
+- type: loadout
+  id: LoadoutCoolCoyoteClothesFlowerDress
+  price: 600
+#  effects:
+#  - !type:GroupLoadoutEffect
+#    proto: ContractorT1
+  equipment:
+    jumpsuit: CoolCoyoteClothesFlowerDress
+
+- type: loadout
+  id: LoadoutCoolCoyoteClothesFlowerKimono
+  price: 600
+#  effects:
+#  - !type:GroupLoadoutEffect
+#    proto: ContractorT1
+  equipment:
+    jumpsuit: CoolCoyoteClothesFlowerKimono
+
+- type: loadout
+  id: LoadoutCoolCoyoteClothesFormalRedDress
+  price: 600
+#  effects:
+#  - !type:GroupLoadoutEffect
+#    proto: ContractorT1
+  equipment:
+    jumpsuit: CoolCoyoteClothesFormalRedDress
+
+- type: loadout
+  id: LoadoutCoolCoyoteClothesFoxFlannel
+  price: 600
+#  effects:
+#  - !type:GroupLoadoutEffect
+#    proto: ContractorT1
+  equipment:
+    jumpsuit: CoolCoyoteClothesFoxFlannel
+
+- type: loadout
+  id: LoadoutCoolCoyoteClothesGoldDress
+  price: 600
+#  effects:
+#  - !type:GroupLoadoutEffect
+#    proto: ContractorT1
+  equipment:
+    jumpsuit: CoolCoyoteClothesGoldDress
+
+- type: loadout
+  id: LoadoutCoolCoyoteClothesGoldWrap
+  price: 600
+#  effects:
+#  - !type:GroupLoadoutEffect
+#    proto: ContractorT1
+  equipment:
+    jumpsuit: CoolCoyoteClothesGoldWrap
+
+- type: loadout
+  id: LoadoutCoolCoyoteClothesGothic
+  price: 600
+#  effects:
+#  - !type:GroupLoadoutEffect
+#    proto: ContractorT1
+  equipment:
+    jumpsuit: CoolCoyoteClothesGothic
+
+- type: loadout
+  id: LoadoutCoolCoyoteClothesGothic2
+  price: 600
+#  effects:
+#  - !type:GroupLoadoutEffect
+#    proto: ContractorT1
+  equipment:
+    jumpsuit: CoolCoyoteClothesGothic2
+
+- type: loadout
+  id: LoadoutCoolCoyoteClothesGreatShendyt
+  price: 600
+#  effects:
+#  - !type:GroupLoadoutEffect
+#    proto: ContractorT1
+  equipment:
+    jumpsuit: CoolCoyoteClothesGreatShendyt
+
+- type: loadout
+  id: LoadoutCoolCoyoteClothesGreekDress
+  price: 600
+#  effects:
+#  - !type:GroupLoadoutEffect
+#    proto: ContractorT1
+  equipment:
+    jumpsuit: CoolCoyoteClothesGreekDress
+
+- type: loadout
+  id: LoadoutCoolCoyoteClothesGreekTunic
+  price: 600
+#  effects:
+#  - !type:GroupLoadoutEffect
+#    proto: ContractorT1
+  equipment:
+    jumpsuit: CoolCoyoteClothesGreekTunic
+
+- type: loadout
+  id: LoadoutCoolCoyoteClothesDress7
+  price: 600
+#  effects:
+#  - !type:GroupLoadoutEffect
+#    proto: ContractorT1
+  equipment:
+    jumpsuit: CoolCoyoteClothesDress7
+
+- type: loadout
+  id: LoadoutCoolCoyoteClothesGreenHanfu
+  price: 600
+#  effects:
+#  - !type:GroupLoadoutEffect
+#    proto: ContractorT1
+  equipment:
+    jumpsuit: CoolCoyoteClothesGreenHanfu
+
+- type: loadout
+  id: LoadoutCoolCoyoteClothesGreenAsymmetric
+  price: 600
+#  effects:
+#  - !type:GroupLoadoutEffect
+#    proto: ContractorT1
+  equipment:
+    jumpsuit: CoolCoyoteClothesGreenAsymmetric
+
+- type: loadout
+  id: LoadoutCoolCoyoteClothesHalfSkirt
+  price: 600
+#  effects:
+#  - !type:GroupLoadoutEffect
+#    proto: ContractorT1
+  equipment:
+    jumpsuit: CoolCoyoteClothesHalfSkirt
+
+- type: loadout
+  id: LoadoutCoolCoyoteClothesHalfHuipil
+  price: 600
+#  effects:
+#  - !type:GroupLoadoutEffect
+#    proto: ContractorT1
+  equipment:
+    jumpsuit: CoolCoyoteClothesHalfHuipil
+
+- type: loadout
+  id: LoadoutCoolCoyoteClothesHaori
+  price: 600
+#  effects:
+#  - !type:GroupLoadoutEffect
+#    proto: ContractorT1
+  equipment:
+    jumpsuit: CoolCoyoteClothesHaori
+
+- type: loadout
+  id: LoadoutCoolCoyoteClothesHaoriSamurai
+  price: 600
+#  effects:
+#  - !type:GroupLoadoutEffect
+#    proto: ContractorT1
+  equipment:
+    jumpsuit: CoolCoyoteClothesHaoriSamurai
+
+- type: loadout
+  id: LoadoutCoolCoyoteClothesHuipil
+  price: 600
+#  effects:
+#  - !type:GroupLoadoutEffect
+#    proto: ContractorT1
+  equipment:
+    jumpsuit: CoolCoyoteClothesHuipil
+
+- type: loadout
+  id: LoadoutCoolCoyoteClothesHunter
+  price: 600
+#  effects:
+#  - !type:GroupLoadoutEffect
+#    proto: ContractorT1
+  equipment:
+    jumpsuit: CoolCoyoteClothesHunter
+
+- type: loadout
+  id: LoadoutCoolCoyoteClothesHunterBra
+  price: 600
+#  effects:
+#  - !type:GroupLoadoutEffect
+#    proto: ContractorT1
+  equipment:
+    jumpsuit: CoolCoyoteClothesHunterBra
+
+- type: loadout
+  id: LoadoutCoolCoyoteClothesIrisTribal
+  price: 600
+#  effects:
+#  - !type:GroupLoadoutEffect
+#    proto: ContractorT1
+  equipment:
+    jumpsuit: CoolCoyoteClothesIrisTribal
+
+- type: loadout
+  id: LoadoutCoolCoyoteClothesKeyholeSweater
+  price: 600
+#  effects:
+#  - !type:GroupLoadoutEffect
+#    proto: ContractorT1
+  equipment:
+    jumpsuit: CoolCoyoteClothesKeyholeSweater
+
+- type: loadout
+  id: LoadoutCoolCoyoteClothesKimonoBlue
+  price: 600
+#  effects:
+#  - !type:GroupLoadoutEffect
+#    proto: ContractorT1
+  equipment:
+    jumpsuit: CoolCoyoteClothesKimonoBlue
+
+- type: loadout
+  id: LoadoutCoolCoyoteClothesKimonoEarth
+  price: 600
+#  effects:
+#  - !type:GroupLoadoutEffect
+#    proto: ContractorT1
+  equipment:
+    jumpsuit: CoolCoyoteClothesKimonoEarth
+
+- type: loadout
+  id: LoadoutCoolCoyoteClothesKimonoGreen
+  price: 600
+#  effects:
+#  - !type:GroupLoadoutEffect
+#    proto: ContractorT1
+  equipment:
+    jumpsuit: CoolCoyoteClothesKimonoGreen
+
+- type: loadout
+  id: LoadoutCoolCoyoteClothesKimonoOrange
+  price: 600
+#  effects:
+#  - !type:GroupLoadoutEffect
+#    proto: ContractorT1
+  equipment:
+    jumpsuit: CoolCoyoteClothesKimonoOrange
+
+- type: loadout
+  id: LoadoutCoolCoyoteClothesKimonoPink
+  price: 600
+#  effects:
+#  - !type:GroupLoadoutEffect
+#    proto: ContractorT1
+  equipment:
+    jumpsuit: CoolCoyoteClothesKimonoPink
+
+- type: loadout
+  id: LoadoutCoolCoyoteClothesKimonoPurple
+  price: 600
+#  effects:
+#  - !type:GroupLoadoutEffect
+#    proto: ContractorT1
+  equipment:
+    jumpsuit: CoolCoyoteClothesKimonoPurple
+
+- type: loadout
+  id: LoadoutCoolCoyoteClothesKimonoRed
+  price: 600
+#  effects:
+#  - !type:GroupLoadoutEffect
+#    proto: ContractorT1
+  equipment:
+    jumpsuit: CoolCoyoteClothesKimonoRed
+
+- type: loadout
+  id: LoadoutCoolCoyoteClothesKimonoViolet
+  price: 600
+#  effects:
+#  - !type:GroupLoadoutEffect
+#    proto: ContractorT1
+  equipment:
+    jumpsuit: CoolCoyoteClothesKimonoViolet
+
+- type: loadout
+  id: LoadoutCoolCoyoteClothesKimonoYellow
+  price: 600
+#  effects:
+#  - !type:GroupLoadoutEffect
+#    proto: ContractorT1
+  equipment:
+    jumpsuit: CoolCoyoteClothesKimonoYellow
+
+- type: loadout
+  id: LoadoutCoolCoyoteClothesLandschneckt
+  price: 600
+#  effects:
+#  - !type:GroupLoadoutEffect
+#    proto: ContractorT1
+  equipment:
+    jumpsuit: CoolCoyoteClothesLandschneckt
+
+- type: loadout
+  id: LoadoutCoolCoyoteClothesLatexHalf
+  price: 600
+#  effects:
+#  - !type:GroupLoadoutEffect
+#    proto: ContractorT1
+  equipment:
+    jumpsuit: CoolCoyoteClothesLatexHalf
+
+- type: loadout
+  id: LoadoutCoolCoyoteClothesLeavesSkirt
+  price: 600
+#  effects:
+#  - !type:GroupLoadoutEffect
+#    proto: ContractorT1
+  equipment:
+    jumpsuit: CoolCoyoteClothesLeavesSkirt
+
+- type: loadout
+  id: LoadoutCoolCoyoteClothesLeavesSkirtLong
+  price: 600
+#  effects:
+#  - !type:GroupLoadoutEffect
+#    proto: ContractorT1
+  equipment:
+    jumpsuit: CoolCoyoteClothesLeavesSkirtLong
+
+- type: loadout
+  id: LoadoutCoolCoyoteClothesLeia
+  price: 600
+#  effects:
+#  - !type:GroupLoadoutEffect
+#    proto: ContractorT1
+  equipment:
+    jumpsuit: CoolCoyoteClothesLeia
+
+- type: loadout
+  id: LoadoutCoolCoyoteClothesLightHanfu
+  price: 600
+#  effects:
+#  - !type:GroupLoadoutEffect
+#    proto: ContractorT1
+  equipment:
+    jumpsuit: CoolCoyoteClothesLightHanfu
+
+- type: loadout
+  id: LoadoutCoolCoyoteClothesLittleBlackDress
+  price: 600
+#  effects:
+#  - !type:GroupLoadoutEffect
+#    proto: ContractorT1
+  equipment:
+    jumpsuit: CoolCoyoteClothesLittleBlackDress
+
+- type: loadout
+  id: LoadoutCoolCoyoteClothesLoincloth
+  price: 600
+#  effects:
+#  - !type:GroupLoadoutEffect
+#    proto: ContractorT1
+  equipment:
+    jumpsuit: CoolCoyoteClothesLoincloth
+
+- type: loadout
+  id: LoadoutCoolCoyoteClothesSexyMaid
+  price: 600
+#  effects:
+#  - !type:GroupLoadoutEffect
+#    proto: ContractorT1
+  equipment:
+    jumpsuit: CoolCoyoteClothesSexyMaid
+
+- type: loadout
+  id: LoadoutCoolCoyoteClothesMaurader
+  price: 600
+#  effects:
+#  - !type:GroupLoadoutEffect
+#    proto: ContractorT1
+  equipment:
+    jumpsuit: CoolCoyoteClothesMaurader
+
+- type: loadout
+  id: LoadoutCoolCoyoteClothesMarlowDuds
+  price: 600
+#  effects:
+#  - !type:GroupLoadoutEffect
+#    proto: ContractorT1
+  equipment:
+    jumpsuit: CoolCoyoteClothesMarlowDuds
+
+- type: loadout
+  id: LoadoutCoolCoyoteClothesMayanLoincloth
+  price: 600
+#  effects:
+#  - !type:GroupLoadoutEffect
+#    proto: ContractorT1
+  equipment:
+    jumpsuit: CoolCoyoteClothesMayanLoincloth
+
+- type: loadout
+  id: LoadoutCoolCoyoteClothesMikuBikini
+  price: 600
+#  effects:
+#  - !type:GroupLoadoutEffect
+#    proto: ContractorT1
+  equipment:
+    jumpsuit: CoolCoyoteClothesMikuBikini
+
+- type: loadout
+  id: LoadoutCoolCoyoteClothesOliveCargoPunk
+  price: 600
+#  effects:
+#  - !type:GroupLoadoutEffect
+#    proto: ContractorT1
+  equipment:
+    jumpsuit: CoolCoyoteClothesOliveCargoPunk
+
+- type: loadout
+  id: LoadoutCoolCoyoteClothesPentatop
+  price: 600
+#  effects:
+#  - !type:GroupLoadoutEffect
+#    proto: ContractorT1
+  equipment:
+    jumpsuit: CoolCoyoteClothesPentatop
+
+- type: loadout
+  id: LoadoutCoolCoyoteClothesPharaoh
+  price: 600
+#  effects:
+#  - !type:GroupLoadoutEffect
+#    proto: ContractorT1
+  equipment:
+    jumpsuit: CoolCoyoteClothesPharaoh
+
+- type: loadout
+  id: LoadoutCoolCoyoteClothesPinkDress
+  price: 600
+#  effects:
+#  - !type:GroupLoadoutEffect
+#    proto: ContractorT1
+  equipment:
+    jumpsuit: CoolCoyoteClothesPinkDress
+
+- type: loadout
+  id: LoadoutCoolCoyoteClothesPinkSun
+  price: 600
+#  effects:
+#  - !type:GroupLoadoutEffect
+#    proto: ContractorT1
+  equipment:
+    jumpsuit: CoolCoyoteClothesPinkSun
+
+- type: loadout
+  id: LoadoutCoolCoyoteClothesPinkTutu
+  price: 600
+#  effects:
+#  - !type:GroupLoadoutEffect
+#    proto: ContractorT1
+  equipment:
+    jumpsuit: CoolCoyoteClothesPinkTutu
+
+- type: loadout
+  id: LoadoutCoolCoyoteClothesPinkwshort
+  price: 600
+#  effects:
+#  - !type:GroupLoadoutEffect
+#    proto: ContractorT1
+  equipment:
+    jumpsuit: CoolCoyoteClothesPinkwshort
+
+- type: loadout
+  id: LoadoutCoolCoyoteClothesPolyPerformer
+  price: 600
+#  effects:
+#  - !type:GroupLoadoutEffect
+#    proto: ContractorT1
+  equipment:
+    jumpsuit: CoolCoyoteClothesPolyPerformer
+
+- type: loadout
+  id: LoadoutCoolCoyoteClothesPortugueseSailor1d
+  price: 600
+#  effects:
+#  - !type:GroupLoadoutEffect
+#    proto: ContractorT1
+  equipment:
+    jumpsuit: CoolCoyoteClothesPortugueseSailor1d
+
+- type: loadout
+  id: LoadoutCoolCoyoteClothesPromDress
+  price: 600
+#  effects:
+#  - !type:GroupLoadoutEffect
+#    proto: ContractorT1
+  equipment:
+    jumpsuit: CoolCoyoteClothesPromDress
+
+- type: loadout
+  id: LoadoutCoolCoyoteClothesPuffyDress
+  price: 600
+#  effects:
+#  - !type:GroupLoadoutEffect
+#    proto: ContractorT1
+  equipment:
+    jumpsuit: CoolCoyoteClothesPuffyDress
+
+- type: loadout
+  id: LoadoutCoolCoyoteClothesQipao
+  price: 600
+#  effects:
+#  - !type:GroupLoadoutEffect
+#    proto: ContractorT1
+  equipment:
+    jumpsuit: CoolCoyoteClothesQipao
+
+- type: loadout
+  id: LoadoutCoolCoyoteClothesQipaoNosleeve
+  price: 600
+#  effects:
+#  - !type:GroupLoadoutEffect
+#    proto: ContractorT1
+  equipment:
+    jumpsuit: CoolCoyoteClothesQipaoNosleeve
+
+- type: loadout
+  id: LoadoutCoolCoyoteClothesQipaoRed
+  price: 600
+#  effects:
+#  - !type:GroupLoadoutEffect
+#    proto: ContractorT1
+  equipment:
+    jumpsuit: CoolCoyoteClothesQipaoRed
+
+- type: loadout
+  id: LoadoutCoolCoyoteClothesQipaoRedNosleeve
+  price: 600
+#  effects:
+#  - !type:GroupLoadoutEffect
+#    proto: ContractorT1
+  equipment:
+    jumpsuit: CoolCoyoteClothesQipaoRedNosleeve
+
+- type: loadout
+  id: LoadoutCoolCoyoteClothesQipaoTealNosleeve
+  price: 600
+#  effects:
+#  - !type:GroupLoadoutEffect
+#    proto: ContractorT1
+  equipment:
+    jumpsuit: CoolCoyoteClothesQipaoTealNosleeve
+
+- type: loadout
+  id: LoadoutCoolCoyoteClothesQipaoWhite
+  price: 600
+#  effects:
+#  - !type:GroupLoadoutEffect
+#    proto: ContractorT1
+  equipment:
+    jumpsuit: CoolCoyoteClothesQipaoWhite
+
+- type: loadout
+  id: LoadoutCoolCoyoteClothesQipaoWhiteNosleeve
+  price: 600
+#  effects:
+#  - !type:GroupLoadoutEffect
+#    proto: ContractorT1
+  equipment:
+    jumpsuit: CoolCoyoteClothesQipaoWhiteNosleeve
+
+- type: loadout
+  id: LoadoutCoolCoyoteRedLandschneckt
+  price: 600
+#  effects:
+#  - !type:GroupLoadoutEffect
+#    proto: ContractorT1
+  equipment:
+    jumpsuit: CoolCoyoteRedLandschneckt
+
+- type: loadout
+  id: LoadoutCoolCoyoteClothesRadkini
+  price: 600
+#  effects:
+#  - !type:GroupLoadoutEffect
+#    proto: ContractorT1
+  equipment:
+    jumpsuit: CoolCoyoteClothesRadkini
+
+- type: loadout
+  id: LoadoutCoolCoyoteClothesRattyCyberpunk
+  price: 600
+#  effects:
+#  - !type:GroupLoadoutEffect
+#    proto: ContractorT1
+  equipment:
+    jumpsuit: CoolCoyoteClothesRattyCyberpunk
+
+- type: loadout
+  id: LoadoutCoolCoyoteClothesRattySkirtGreen
+  price: 600
+#  effects:
+#  - !type:GroupLoadoutEffect
+#    proto: ContractorT1
+  equipment:
+    jumpsuit: CoolCoyoteClothesRattySkirtGreen
+
+- type: loadout
+  id: LoadoutCoolCoyoteClothesRattySkirtPink
+  price: 600
+#  effects:
+#  - !type:GroupLoadoutEffect
+#    proto: ContractorT1
+  equipment:
+    jumpsuit: CoolCoyoteClothesRattySkirtPink
+
+- type: loadout
+  id: LoadoutCoolCoyoteClothesRattySkirtYellow
+  price: 600
+#  effects:
+#  - !type:GroupLoadoutEffect
+#    proto: ContractorT1
+  equipment:
+    jumpsuit: CoolCoyoteClothesRattySkirtYellow
+
+- type: loadout
+  id: LoadoutCoolCoyoteClothesRedEveningDress
+  price: 600
+#  effects:
+#  - !type:GroupLoadoutEffect
+#    proto: ContractorT1
+  equipment:
+    jumpsuit: CoolCoyoteClothesRedEveningDress
+
+- type: loadout
+  id: LoadoutCoolCoyoteClothesRedSari
+  price: 600
+#  effects:
+#  - !type:GroupLoadoutEffect
+#    proto: ContractorT1
+  equipment:
+    jumpsuit: CoolCoyoteClothesRedSari
+
+- type: loadout
+  id: LoadoutCoolCoyoteClothesRedWshort
+  price: 600
+#  effects:
+#  - !type:GroupLoadoutEffect
+#    proto: ContractorT1
+  equipment:
+    jumpsuit: CoolCoyoteClothesRedWshort
+
+- type: loadout
+  id: LoadoutCoolCoyoteClothesRevealingDress
+  price: 600
+#  effects:
+#  - !type:GroupLoadoutEffect
+#    proto: ContractorT1
+  equipment:
+    jumpsuit: CoolCoyoteClothesRevealingDress
+
+- type: loadout
+  id: LoadoutCoolCoyoteClothesRippedPunk
+  price: 600
+#  effects:
+#  - !type:GroupLoadoutEffect
+#    proto: ContractorT1
+  equipment:
+    jumpsuit: CoolCoyoteClothesRippedPunk
+
+- type: loadout
+  id: LoadoutCoolCoyoteClothesSecslutskirt
+  price: 600
+#  effects:
+#  - !type:GroupLoadoutEffect
+#    proto: ContractorT1
+  equipment:
+    jumpsuit: CoolCoyoteClothesSecslutskirt
+
+- type: loadout
+  id: LoadoutCoolCoyoteClothesSecslutskirtpink
+  price: 600
+#  effects:
+#  - !type:GroupLoadoutEffect
+#    proto: ContractorT1
+  equipment:
+    jumpsuit: CoolCoyoteClothesSecslutskirtpink
+
+- type: loadout
+  id: LoadoutCoolCoyoteClothesSecstripper
+  price: 600
+#  effects:
+#  - !type:GroupLoadoutEffect
+#    proto: ContractorT1
+  equipment:
+    jumpsuit: CoolCoyoteClothesSecstripper
+
+- type: loadout
+  id: LoadoutCoolCoyoteClothesSexyclown
+  price: 600
+#  effects:
+#  - !type:GroupLoadoutEffect
+#    proto: ContractorT1
+  equipment:
+    jumpsuit: CoolCoyoteClothesSexyclown
+
+- type: loadout
+  id: LoadoutCoolCoyoteClothesSexymime
+  price: 600
+#  effects:
+#  - !type:GroupLoadoutEffect
+#    proto: ContractorT1
+  equipment:
+    jumpsuit: CoolCoyoteClothesSexymime
+
+- type: loadout
+  id: LoadoutCoolCoyoteClothesSexynursesuit
+  price: 600
+#  effects:
+#  - !type:GroupLoadoutEffect
+#    proto: ContractorT1
+  equipment:
+    jumpsuit: CoolCoyoteClothesSexynursesuit
+
+- type: loadout
+  id: LoadoutCoolCoyoteClothesShamanblue
+  price: 600
+#  effects:
+#  - !type:GroupLoadoutEffect
+#    proto: ContractorT1
+  equipment:
+    jumpsuit: CoolCoyoteClothesShamanblue
+
+- type: loadout
+  id: LoadoutCoolCoyoteClothesSheerblue
+  price: 600
+#  effects:
+#  - !type:GroupLoadoutEffect
+#    proto: ContractorT1
+  equipment:
+    jumpsuit: CoolCoyoteClothesSheerblue
+
+- type: loadout
+  id: LoadoutCoolCoyoteClothesShortPink
+  price: 600
+#  effects:
+#  - !type:GroupLoadoutEffect
+#    proto: ContractorT1
+  equipment:
+    jumpsuit: CoolCoyoteClothesShortPink
+
+- type: loadout
+  id: LoadoutCoolCoyoteClothesShortsBlue
+  price: 600
+#  effects:
+#  - !type:GroupLoadoutEffect
+#    proto: ContractorT1
+  equipment:
+    jumpsuit: CoolCoyoteClothesShortsBlue
+
+- type: loadout
+  id: LoadoutCoolCoyoteClothesShortsRed
+  price: 600
+#  effects:
+#  - !type:GroupLoadoutEffect
+#    proto: ContractorT1
+  equipment:
+    jumpsuit: CoolCoyoteClothesShortsRed
+
+- type: loadout
+  id: LoadoutCoolCoyoteClothesSocietyDress
+  price: 600
+#  effects:
+#  - !type:GroupLoadoutEffect
+#    proto: ContractorT1
+  equipment:
+    jumpsuit: CoolCoyoteClothesSocietyDress
+
+- type: loadout
+  id: LoadoutCoolCoyoteClothesSunSkirt
+  price: 600
+#  effects:
+#  - !type:GroupLoadoutEffect
+#    proto: ContractorT1
+  equipment:
+    jumpsuit: CoolCoyoteClothesSunSkirt
+
+- type: loadout
+  id: LoadoutCoolCoyoteClothesSunSkirtGrey
+  price: 600
+#  effects:
+#  - !type:GroupLoadoutEffect
+#    proto: ContractorT1
+  equipment:
+    jumpsuit: CoolCoyoteClothesSunSkirtGrey
+
+- type: loadout
+  id: LoadoutCoolCoyoteClothesSundressBlue
+  price: 600
+#  effects:
+#  - !type:GroupLoadoutEffect
+#    proto: ContractorT1
+  equipment:
+    jumpsuit: CoolCoyoteClothesSundressBlue
+
+- type: loadout
+  id: LoadoutCoolCoyoteClothesSundressOrange
+  price: 600
+#  effects:
+#  - !type:GroupLoadoutEffect
+#    proto: ContractorT1
+  equipment:
+    jumpsuit: CoolCoyoteClothesSundressOrange
+
+- type: loadout
+  id: LoadoutCoolCoyoteClothesSundressPurple
+  price: 600
+#  effects:
+#  - !type:GroupLoadoutEffect
+#    proto: ContractorT1
+  equipment:
+    jumpsuit: CoolCoyoteClothesSundressPurple
+
+- type: loadout
+  id: LoadoutCoolCoyoteClothesSundressRed
+  price: 600
+#  effects:
+#  - !type:GroupLoadoutEffect
+#    proto: ContractorT1
+  equipment:
+    jumpsuit: CoolCoyoteClothesSundressRed
+
+- type: loadout
+  id: LoadoutCoolCoyoteClothesSundressYellow
+  price: 600
+#  effects:
+#  - !type:GroupLoadoutEffect
+#    proto: ContractorT1
+  equipment:
+    jumpsuit: CoolCoyoteClothesSundressYellow
+
+- type: loadout
+  id: LoadoutCoolCoyoteClothesSwimBlack
+  price: 600
+#  effects:
+#  - !type:GroupLoadoutEffect
+#    proto: ContractorT1
+  equipment:
+    jumpsuit: CoolCoyoteClothesSwimBlack
+
+- type: loadout
+  id: LoadoutCoolCoyoteClothesSwimBlue
+  price: 600
+#  effects:
+#  - !type:GroupLoadoutEffect
+#    proto: ContractorT1
+  equipment:
+    jumpsuit: CoolCoyoteClothesSwimBlue
+
+- type: loadout
+  id: LoadoutCoolCoyoteClothesSwimEarth
+  price: 600
+#  effects:
+#  - !type:GroupLoadoutEffect
+#    proto: ContractorT1
+  equipment:
+    jumpsuit: CoolCoyoteClothesSwimEarth
+
+- type: loadout
+  id: LoadoutCoolCoyoteClothesSwimGreen
+  price: 600
+#  effects:
+#  - !type:GroupLoadoutEffect
+#    proto: ContractorT1
+  equipment:
+    jumpsuit: CoolCoyoteClothesSwimGreen
+
+- type: loadout
+  id: LoadoutCoolCoyoteClothesSwimPurp
+  price: 600
+#  effects:
+#  - !type:GroupLoadoutEffect
+#    proto: ContractorT1
+  equipment:
+    jumpsuit: CoolCoyoteClothesSwimPurp
+
+- type: loadout
+  id: LoadoutCoolCoyoteClothesSwimRed
+  price: 600
+#  effects:
+#  - !type:GroupLoadoutEffect
+#    proto: ContractorT1
+  equipment:
+    jumpsuit: CoolCoyoteClothesSwimRed
+
+- type: loadout
+  id: LoadoutCoolCoyoteClothesSyclothing
+  price: 600
+#  effects:
+#  - !type:GroupLoadoutEffect
+#    proto: ContractorT1
+  equipment:
+    jumpsuit: CoolCoyoteClothesSyclothing
+
+- type: loadout
+  id: LoadoutCoolCoyoteClothesTacticoolHawaiianBlue
+  price: 600
+#  effects:
+#  - !type:GroupLoadoutEffect
+#    proto: ContractorT1
+  equipment:
+    jumpsuit: CoolCoyoteClothesTacticoolHawaiianBlue
+
+- type: loadout
+  id: LoadoutCoolCoyoteClothesTacticoolHawaiianOrange
+  price: 600
+#  effects:
+#  - !type:GroupLoadoutEffect
+#    proto: ContractorT1
+  equipment:
+    jumpsuit: CoolCoyoteClothesTacticoolHawaiianOrange
+
+- type: loadout
+  id: LoadoutCoolCoyoteClothesTacticoolHawaiianPurple
+  price: 600
+#  effects:
+#  - !type:GroupLoadoutEffect
+#    proto: ContractorT1
+  equipment:
+    jumpsuit: CoolCoyoteClothesTacticoolHawaiianPurple
+
+- type: loadout
+  id: LoadoutCoolCoyoteClothesTexas
+  price: 600
+#  effects:
+#  - !type:GroupLoadoutEffect
+#    proto: ContractorT1
+  equipment:
+    jumpsuit: CoolCoyoteClothesTexas
+
+- type: loadout
+  id: LoadoutCoolCoyoteClothesToga
+  price: 600
+#  effects:
+#  - !type:GroupLoadoutEffect
+#    proto: ContractorT1
+  equipment:
+    jumpsuit: CoolCoyoteClothesToga
+
+- type: loadout
+  id: LoadoutCoolCoyoteClothesToga2
+  price: 600
+#  effects:
+#  - !type:GroupLoadoutEffect
+#    proto: ContractorT1
+  equipment:
+    jumpsuit: CoolCoyoteClothesToga2
+
+- type: loadout
+  id: LoadoutCoolCoyoteClothesTradwifeBlue
+  price: 600
+#  effects:
+#  - !type:GroupLoadoutEffect
+#    proto: ContractorT1
+  equipment:
+    jumpsuit: CoolCoyoteClothesTradwifeBlue
+
+- type: loadout
+  id: LoadoutCoolCoyoteClothesTradwifeOrange
+  price: 600
+#  effects:
+#  - !type:GroupLoadoutEffect
+#    proto: ContractorT1
+  equipment:
+    jumpsuit: CoolCoyoteClothesTradwifeOrange
+
+- type: loadout
+  id: LoadoutCoolCoyoteClothesTradwifePurple
+  price: 600
+#  effects:
+#  - !type:GroupLoadoutEffect
+#    proto: ContractorT1
+  equipment:
+    jumpsuit: CoolCoyoteClothesTradwifePurple
+
+- type: loadout
+  id: LoadoutCoolCoyoteClothesTradwifeRed
+  price: 600
+#  effects:
+#  - !type:GroupLoadoutEffect
+#    proto: ContractorT1
+  equipment:
+    jumpsuit: CoolCoyoteClothesTradwifeRed
+
+- type: loadout
+  id: LoadoutCoolCoyoteClothesTradwifeYellow
+  price: 600
+#  effects:
+#  - !type:GroupLoadoutEffect
+#    proto: ContractorT1
+  equipment:
+    jumpsuit: CoolCoyoteClothesTradwifeYellow
+
+- type: loadout
+  id: LoadoutCoolCoyoteClothesTribalColorful
+  price: 600
+#  effects:
+#  - !type:GroupLoadoutEffect
+#    proto: ContractorT1
+  equipment:
+    jumpsuit: CoolCoyoteClothesTribalColorful
+
+- type: loadout
+  id: LoadoutCoolCoyoteClothesTribalColorfulTop
+  price: 600
+#  effects:
+#  - !type:GroupLoadoutEffect
+#    proto: ContractorT1
+  equipment:
+    jumpsuit: CoolCoyoteClothesTribalColorfulTop
+
+- type: loadout
+  id: LoadoutCoolCoyoteClothesUNIrish
+  price: 600
+#  effects:
+#  - !type:GroupLoadoutEffect
+#    proto: ContractorT1
+  equipment:
+    jumpsuit: CoolCoyoteClothesUNIrish
+
+- type: loadout
+  id: LoadoutCoolCoyoteClothesUNGreentrousersOG107
+  price: 600
+#  effects:
+#  - !type:GroupLoadoutEffect
+#    proto: ContractorT1
+  equipment:
+    jumpsuit: CoolCoyoteClothesUNGreentrousersOG107
+
+- type: loadout
+  id: LoadoutCoolCoyoteClothesVictorianDress
+  price: 600
+#  effects:
+#  - !type:GroupLoadoutEffect
+#    proto: ContractorT1
+  equipment:
+    jumpsuit: CoolCoyoteClothesVictorianDress
+
+- type: loadout
+  id: LoadoutCoolCoyoteClothesVictorianblackdress
+  price: 600
+#  effects:
+#  - !type:GroupLoadoutEffect
+#    proto: ContractorT1
+  equipment:
+    jumpsuit: CoolCoyoteClothesVictorianblackdress
+
+- type: loadout
+  id: LoadoutCoolCoyoteClothesVictorianblred
+  price: 600
+#  effects:
+#  - !type:GroupLoadoutEffect
+#    proto: ContractorT1
+  equipment:
+    jumpsuit: CoolCoyoteClothesVictorianblred
+
+- type: loadout
+  id: LoadoutCoolCoyoteClothesHappyVampire
+  price: 600
+#  effects:
+#  - !type:GroupLoadoutEffect
+#    proto: ContractorT1
+  equipment:
+    jumpsuit: CoolCoyoteClothesHappyVampire
+
+- type: loadout
+  id: LoadoutCoolCoyoteClothesVictorianlightfire
+  price: 600
+#  effects:
+#  - !type:GroupLoadoutEffect
+#    proto: ContractorT1
+  equipment:
+    jumpsuit: CoolCoyoteClothesVictorianlightfire
+
+- type: loadout
+  id: LoadoutCoolCoyoteClothesVictorianRedDress
+  price: 600
+#  effects:
+#  - !type:GroupLoadoutEffect
+#    proto: ContractorT1
+  equipment:
+    jumpsuit: CoolCoyoteClothesVictorianRedDress
+
+- type: loadout
+  id: LoadoutCoolCoyoteClothesVictorianRedVest
+  price: 600
+#  effects:
+#  - !type:GroupLoadoutEffect
+#    proto: ContractorT1
+  equipment:
+    jumpsuit: CoolCoyoteClothesVictorianRedVest
+
+- type: loadout
+  id: LoadoutCoolCoyoteClothesVictorianVest
+  price: 600
+#  effects:
+#  - !type:GroupLoadoutEffect
+#    proto: ContractorT1
+  equipment:
+    jumpsuit: CoolCoyoteClothesVictorianVest
+
+- type: loadout
+  id: LoadoutCoolCoyoteClothesWaistcoat
+  price: 600
+#  effects:
+#  - !type:GroupLoadoutEffect
+#    proto: ContractorT1
+  equipment:
+    jumpsuit: CoolCoyoteClothesWaistcoat
+
+- type: loadout
+  id: LoadoutCoolCoyoteClothesWestender
+  price: 600
+#  effects:
+#  - !type:GroupLoadoutEffect
+#    proto: ContractorT1
+  equipment:
+    jumpsuit: CoolCoyoteClothesWestender
+
+- type: loadout
+  id: LoadoutCoolCoyoteClothesWesternBustle
+  price: 600
+#  effects:
+#  - !type:GroupLoadoutEffect
+#    proto: ContractorT1
+  equipment:
+    jumpsuit: CoolCoyoteClothesWesternBustle
+
+- type: loadout
+  id: LoadoutCoolCoyoteClothesWhitebunnysuit
+  price: 600
+#  effects:
+#  - !type:GroupLoadoutEffect
+#    proto: ContractorT1
+  equipment:
+    jumpsuit: CoolCoyoteClothesWhitebunnysuit
+
+- type: loadout
+  id: LoadoutCoolCoyoteClothesWhitegown
+  price: 600
+#  effects:
+#  - !type:GroupLoadoutEffect
+#    proto: ContractorT1
+  equipment:
+    jumpsuit: CoolCoyoteClothesWhitegown
+
+- type: loadout
+  id: LoadoutCoolCoyoteClothesWhitesun
+  price: 600
+#  effects:
+#  - !type:GroupLoadoutEffect
+#    proto: ContractorT1
+  equipment:
+    jumpsuit: CoolCoyoteClothesWhitesun
+
+- type: loadout
+  id: LoadoutCoolCoyoteClothesYellowwshort
+  price: 600
+#  effects:
+#  - !type:GroupLoadoutEffect
+#    proto: ContractorT1
+  equipment:
+    jumpsuit: CoolCoyoteClothesYellowwshort
+
+- type: loadout
+  id: LoadoutCoolCoyoteClothesGearHarness
+  price: 600
+#  effects:
+#  - !type:GroupLoadoutEffect
+#    proto: ContractorT1
+  equipment:
+    jumpsuit: CoolCoyoteClothesGearHarness
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

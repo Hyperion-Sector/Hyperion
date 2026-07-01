@@ -1,0 +1,458 @@
+#T1
+- type: loadout
+  id: ContractorTrumpetInstrument
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: ContractorT1
+  price: 500
+  storage:
+    back:
+    - TrumpetInstrument
+
+- type: loadout
+  id: ContractorTromboneInstrument
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: ContractorT1
+  price: 500
+  storage:
+    back:
+    - TromboneInstrument
+
+- type: loadout
+  id: ContractorFrenchHornInstrument
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: ContractorT1
+  price: 500
+  storage:
+    back:
+    - FrenchHornInstrument
+
+- type: loadout
+  id: ContractorEuphoniumInstrument
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: ContractorT1
+  price: 500
+  storage:
+    back:
+    - EuphoniumInstrument
+
+- type: loadout
+  id: ContractorElectricGuitarInstrument
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: ContractorT1
+  price: 500
+  storage:
+    back:
+    - ElectricGuitarInstrument
+
+- type: loadout
+  id: ContractorBassGuitarInstrument
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: ContractorT1
+  price: 500
+  storage:
+    back:
+    - BassGuitarInstrument
+
+- type: loadout
+  id: ContractorRockGuitarInstrument
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: ContractorT1
+  price: 500
+  storage:
+    back:
+    - RockGuitarInstrument
+
+- type: loadout
+  id: ContractorBanjoInstrument
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: ContractorT1
+  price: 500
+  storage:
+    back:
+    - BanjoInstrument
+
+- type: loadout
+  id: ContractorViolinInstrument
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: ContractorT1
+  price: 500
+  storage:
+    back:
+    - ViolinInstrument
+
+- type: loadout
+  id: ContractorCelloInstrument
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: ContractorT1
+  price: 500
+  storage:
+    back:
+    - CelloInstrument
+
+- type: loadout
+  id: ContractorViolaInstrument
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: ContractorT1
+  price: 500
+  storage:
+    back:
+    - ViolaInstrument
+
+- type: loadout
+  id: ContractorRecorderInstrument
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: ContractorT1
+  price: 500
+  storage:
+    back:
+    - RecorderInstrument
+
+- type: loadout
+  id: ContractorBagpipeInstrument
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: ContractorT1
+  price: 500
+  storage:
+    back:
+    - BagpipeInstrument
+
+- type: loadout
+  id: ContractorClarinetInstrument
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: ContractorT1
+  price: 500
+  storage:
+    back:
+    - ClarinetInstrument
+
+- type: loadout
+  id: ContractorFluteInstrument
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: ContractorT1
+  price: 500
+  storage:
+    back:
+    - FluteInstrument
+
+- type: loadout
+  id: ContractorOcarinaInstrument
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: ContractorT1
+  price: 500
+  storage:
+    back:
+    - OcarinaInstrument
+
+- type: loadout
+  id: ContractorPanFluteInstrument
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: ContractorT1
+  price: 500
+  storage:
+    back:
+    - PanFluteInstrument
+
+- type: loadout
+  id: ContractorSynthesizerInstrument
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: ContractorT1
+  price: 500
+  storage:
+    back:
+    - SynthesizerInstrument
+
+- type: loadout
+  id: ContractorAccordionInstrument
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: ContractorT1
+  price: 500
+  storage:
+    back:
+    - AccordionInstrument
+
+- type: loadout
+  id: ContractorKalimbaInstrument
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: ContractorT1
+  price: 500
+  storage:
+    back:
+    - KalimbaInstrument
+
+- type: loadout
+  id: ContractorWoodblockInstrument
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: ContractorT1
+  price: 500
+  storage:
+    back:
+    - WoodblockInstrument
+
+- type: loadout
+  id: ContractorGlockenspielInstrument
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: ContractorT1
+  price: 500
+  storage:
+    back:
+    - GlockenspielInstrument
+
+- type: loadout
+  id: ContractorBikeHornInstrument
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: ContractorT1
+  price: 500
+  storage:
+    back:
+    - BikeHornInstrument
+
+- type: loadout
+  id: ContractorMusicBoxInstrument
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: ContractorT1
+  price: 500
+  storage:
+    back:
+    - MusicBoxInstrument
+
+- type: loadout
+  id: ContractorXylophoneInstrument
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: ContractorT1
+  price: 500
+  storage:
+    back:
+    - XylophoneInstrument
+
+- type: loadout
+  id: ContractorMicrophoneInstrument
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: ContractorT1
+  price: 500
+  storage:
+    back:
+    - MicrophoneInstrument
+
+- type: loadout
+  id: ContractorMusicalLungInstrument
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: ContractorT1
+  price: 500
+  storage:
+    back:
+    - MusicalLungInstrument
+
+- type: loadout
+  id: ContractorSeashellInstrument
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: ContractorT1
+  price: 500
+  storage:
+    back:
+    - SeashellInstrument
+
+- type: loadout
+  id: ContractorReverseCymbalsInstrument
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: ContractorT1
+  price: 500
+  storage:
+    back:
+    - ReverseCymbalsInstrument
+
+- type: loadout
+  id: ContractorCannedApplauseInstrument
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: ContractorT1
+  price: 500
+  storage:
+    back:
+    - CannedApplauseInstrument
+
+- type: loadout
+  id: ContractorHelicopterInstrument
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: ContractorT1
+  price: 500
+  storage:
+    back:
+    - HelicopterInstrument
+
+- type: loadout
+  id: ContractorBirdToyInstrument
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: ContractorT1
+  price: 500
+  storage:
+    back:
+    - BirdToyInstrument
+
+- type: loadout
+  id: ContractorGunpetInstrument
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: ContractorT1
+  price: 500
+  storage:
+    back:
+    - GunpetInstrument
+
+- type: loadout
+  id: ContractorRickenbacker4003Instrument
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: ContractorT1
+  price: 2000
+  storage:
+    back:
+    - Rickenbacker4003Instrument
+
+- type: loadout
+  id: ContractorRickenbacker4001Instrument
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: ContractorT1
+  price: 30000
+  storage:
+    back:
+    - Rickenbacker4001Instrument
+
+- type: loadout
+  id: ContractorTubaInstrumentFlatpack
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: ContractorT3
+  price: 1000
+  inhand:
+  - TubaInstrumentFlatpack
+
+- type: loadout
+  id: ContractorHarpInstrumentFlatpack
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: ContractorT3
+  price: 1000
+  inhand:
+  - HarpInstrumentFlatpack
+
+- type: loadout
+  id: ContractorContrabassInstrumentFlatpack
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: ContractorT3
+  price: 1000
+  inhand:
+  - ContrabassInstrumentFlatpack
+
+- type: loadout
+  id: ContractorVibraphoneInstrumentFlatpack
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: ContractorT3
+  price: 1000
+  inhand:
+  - VibraphoneInstrumentFlatpack
+
+- type: loadout
+  id: ContractorMarimbaInstrumentFlatpack
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: ContractorT3
+  price: 1000
+  inhand:
+  - MarimbaInstrumentFlatpack
+
+- type: loadout
+  id: ContractorTomDrumsInstrumentFlatpack
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: ContractorT3
+  price: 1000
+  inhand:
+  - TomDrumsInstrumentFlatpack
+
+- type: loadout
+  id: ContractorTimpaniInstrumentFlatpack
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: ContractorT3
+  price: 1000
+  inhand:
+  - TimpaniInstrumentFlatpack
+
+- type: loadout
+  id: ContractorTaikoInstrumentFlatpack
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: ContractorT3
+  price: 1000
+  inhand:
+  - TaikoInstrumentFlatpack
+
+- type: loadout
+  id: ContractorMinimoogInstrumentFlatpack
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: ContractorT3
+  price: 1000
+  inhand:
+  - MinimoogInstrumentFlatpack
+
+- type: loadout
+  id: ContractorChurchOrganInstrumentFlatpack
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: ContractorT3
+  price: 1000
+  inhand:
+  - ChurchOrganInstrumentFlatpack
+
+- type: loadout
+  id: ContractorPianoInstrumentFlatpack
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: ContractorT3
+  price: 1000
+  inhand:
+  - PianoInstrumentFlatpack
+
+- type: loadout
+  id: ContractorUprightPianoInstrumentFlatpack
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: ContractorT3
+  price: 1000
+  inhand:
+  - UprightPianoInstrumentFlatpack

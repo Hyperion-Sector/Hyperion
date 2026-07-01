@@ -1,0 +1,13 @@
+﻿- type: entity
+  id: CSdumbasscat
+  parent: Tippy
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    scale: 1,1
+    layers:
+    - sprite: _CS/Objects/Misc/awholefenny.rsi
+      state: down
+  - type: FootstepModifier
+    footstepSoundCollection:
+      collection: CatMeows

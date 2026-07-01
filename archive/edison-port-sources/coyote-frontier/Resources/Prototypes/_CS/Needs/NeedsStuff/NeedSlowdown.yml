@@ -1,0 +1,18 @@
+- type: NeedSlowdown
+  id: NeedSlowdownHunger
+  speedModifier: 0.90
+  minMinutesBetweenSlowdowns: 10
+  durationSeconds: 180
+  chancePercent: 1
+  startMessage: need-slowdown-hunger-start
+  endMessage: need-slowdown-hunger-end
+
+- type: NeedSlowdown
+  id: NeedSlowdownThirst
+  speedModifier: 0.90
+  minMinutesBetweenSlowdowns: 5
+  durationSeconds: 30
+  chancePercent: 2
+  startMessage: need-slowdown-thirst-start
+  endMessage: need-slowdown-thirst-end
+

@@ -1,0 +1,11 @@
+- type: latheRecipePack
+  id: CSFolderStatic
+  recipes:
+    - BoxFolderRed
+    - BoxFolderBlue
+    - BoxFolderYellow
+    - BoxFolderWhite
+    - BoxFolderGrey
+    - BoxFolderBlack
+    - BoxFolderGreen
+    - BoxFolderClipboard

@@ -1,0 +1,89 @@
+- type: job
+  id: FoodService
+  name: job-name-food-service
+  description: job-description-food-service
+  playTimeTracker: JobFoodService
+  startingGear: CSFoodServiceGear
+  alwaysUseSpawner: false
+  icon: "JobIconChef"
+  supervisors: job-supervisors-food-service
+  weight: 40
+  displayWeight: 3
+  access:
+  - Service
+  - Janitor
+  - Maintenance
+  - External
+  - Frontier
+  accessGroups:
+  - GeneralAccess
+  special:
+  - !type:AddImplantSpecial
+    implants: [ TrackingImplant ]
+  - !type:GiveItemOnHolidaySpecial
+    holiday: FrontierBirthday
+    prototype: FrontierBirthdayGift
+  - !type:AddRpiAuraSpecial
+    aurasToAdd:
+    - rpiAuraFoodService
+  - !type:AddRpiJobModifierSpecial
+    modifiersToAdd:
+    - rpiJobModifierFoodService
+
+- type: playTimeTracker
+  id: JobFoodService
+
+- type: entity
+  id: SpawnPointFoodService
+  parent: SpawnPointPassenger
+  name: food service
+  components:
+  - type: SpawnPoint
+    job_id: FoodService
+
+- type: startingGear
+  id: CSFoodServiceGear
+  equipment:
+    belt: ClothingBeltPlantFilled
+  storage:
+    back:
+    - EncryptionKeyService
+    - ShipVoucherCoyoteFoodService
+
+- type: roleLoadout
+  id: JobFoodService
+  groups:
+  - FoodServiceHead
+  - ContractorNeck
+  - FoodServiceJumpsuit
+  - ContractorGloves
+  - ContractorBackpack
+  - ContractorOuterClothing
+  - ContractorForcedOuterClothing
+  - ContractorShoes
+  - ContractorFace
+  - ContractorGlasses
+  - ContractorBelt
+  - ContractorEars
+  - ContractorEncryptionKey
+  - ContractorBoxSurvival
+  - ContractorPDA
+  - ContractorWallet
+  - ContractorCartridge
+  - ContractorImplanter
+  - ContractorBackpackItems
+  - ContractorHandItems
+  - ContractorInstruments
+  - NFSpeciesSpecific
+
+- type: chameleonOutfit
+  id: FoodServiceChameleonOutfit
+  job: FoodService
+  equipment:
+    head: ClothingHeadHatChef
+    eyes: ClothingEyesGlassesCheapSunglasses
+    mask: ClothingMaskItalianMoustache
+    neck: ClothingNeckScarfStripedBrown
+    outerClothing: ClothingOuterJacketChef
+    gloves: ClothingHandsGlovesColorWhite
+    shoes: ClothingShoesChef

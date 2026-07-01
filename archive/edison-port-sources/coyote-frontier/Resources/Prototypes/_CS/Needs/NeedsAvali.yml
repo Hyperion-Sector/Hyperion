@@ -1,0 +1,39 @@
+# Basically, Avali hunger is half the default
+
+#hunger
+- type: need
+  id: NeedHungerAvali
+  needName: "Hunger"
+  needKind: "Hunger"
+  color: "Pink"
+  maxValue: 150 # In starlight this is 50... should we also do 50?
+  minValue: 0
+  minutesFromMaxToMin: 150 # 2.5 hours
+  startingMinutesWorthOfDecay: 100
+  secondsPerUpdate: 1
+  alertCategory: "Hunger"
+  # Extra Satisfied State
+  extraSatisfiedMinutesFromFull: 22.5
+  extraSatisfiedSpeedMult: 1.05
+  extraSatisfiedMultRPI: 1.25
+  extraSatisfiedAlert: null
+  extraSatisfiedIcon: HungerIconOverfed
+  # Satisfied State
+  satisfiedMinutesFromFull: 90
+  satisfiedSpeedMult: 1.0
+  satisfiedMultRPI: 1.0
+  satisfiedAlert: null
+  satisfiedIcon: HungerIconOverfed
+  # Low State
+  lowMinutesFromFull: 120
+  lowSpeedMult: 0.85
+  lowMultRPI: 0.75
+  lowAlert: Peckish
+  lowIcon: HungerIconPeckish
+  # Critical State
+  criticalMinutesFromFull: 150
+  criticalSpeedMult: 0.75
+  criticalMultRPI: 0.50
+  criticalAlert: Starving
+  criticalIcon: HungerIconStarving
+#  criticalDebuffSlowdown: NeedSlowdownHunger

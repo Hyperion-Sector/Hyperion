@@ -1,0 +1,83 @@
+- type: job
+  id: Curator
+  name: job-name-curator
+  description: job-description-curator
+  playTimeTracker: JobCurator
+  startingGear: CSCuratorGear
+  alwaysUseSpawner: false
+  icon: "JobIconLibrarian"
+  supervisors: job-supervisors-curator
+  weight: 40
+  displayWeight: 3
+  accessGroups:
+  - GeneralAccess
+  special:
+  - !type:GiveItemOnHolidaySpecial
+    holiday: FrontierBirthday
+    prototype: FrontierBirthdayGift
+  - !type:AddRpiAuraSpecial
+    aurasToAdd:
+    - rpiAuraCurator
+  - !type:RpiChatJudgementModifierSpecial
+    modsToAdd:
+    - rpiChatJudgementModifierCurator
+
+- type: playTimeTracker
+  id: JobCurator
+
+- type: entity
+  id: SpawnPointCurator
+  parent: SpawnPointPassenger
+  name: curator spawn point
+  components:
+  - type: SpawnPoint
+    job_id: Curator
+
+- type: startingGear
+  id: CSCuratorGear
+  equipment:
+    pocket1: d20Dice
+    pocket2: HandLabeler
+  storage:
+    back:
+    - BookRandom
+    - EncryptionKeyService
+    - ShipVoucherCoyoteCurator
+
+- type: roleLoadout
+  id: JobCurator
+  groups:
+  - ContractorHead
+  - ContractorNeck
+  - PilotJumpsuit
+  - ContractorGloves
+  - ContractorBackpack
+  - ContractorOuterClothing
+  - ContractorForcedOuterClothing
+  - ContractorShoes
+  - ContractorFace
+  - ContractorGlasses
+  - ContractorBelt
+  - ContractorEars
+  - ContractorEncryptionKey
+  - ContractorBoxSurvival
+  - ContractorPDA
+  - ContractorWallet
+  - ContractorCartridge
+  - ContractorImplanter
+  - ContractorBackpackItems
+  - ContractorHandItems
+  - ContractorInstruments
+  - NFSpeciesSpecific
+
+- type: chameleonOutfit
+  id: CuratorChameleonOutfit
+  job: Curator
+  equipment:
+    head: ClothingHeadHatCanadaBeanie
+    eyes: ClothingEyesGlassesJamjar
+    mask: ClothingMaskGas
+    neck: ClothingNeckScarfStripedGreen
+    outerClothing: ClothingOuterWinterColorGreen
+    gloves: ClothingHandsGlovesColorBlack
+

@@ -1,0 +1,15 @@
+# This is in one giant hellfile to better enable adjusting position.
+
+
+- type: technology
+  id: CSSmartStorageRefrigeration
+  name: cs-research-technology-smart-storage-refrigeration
+  entityIcon: SmartFridge
+  discipline: NFService
+  tier: 1
+  cost: 7500
+  recipeUnlocks:
+  - SmartFridgeCircuitboard
+  technologyPrerequisites:
+  - NFAdvancedFoodService
+  position: 3,24

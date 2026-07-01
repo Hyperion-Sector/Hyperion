@@ -1,0 +1,12 @@
+- type: loadoutGroup
+  id: PirateEncryptionKey
+  name: loadout-group-pirate-encryption-key
+  minLimit: 0
+  maxLimit: 6
+  loadouts:
+  - ContractorEncryptionKeyCommon
+  - ContractorEncryptionKeyTraffic
+  - ContractorEncryptionKeyMedical
+  - ContractorEncryptionKeyCargo
+  - ContractorEncryptionKeyEngineering
+  - ContractorEncryptionKeyScience

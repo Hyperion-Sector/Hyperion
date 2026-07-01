@@ -1,0 +1,10 @@
+- type: entity
+  parent: SeedBase
+  name: packet of ambrosia vitalis seeds
+  description: "One of the most closely guarded secrets of Interdyne Pharmaceutics. Pray they do not know that you have laid your eyes upon it."
+  id: AmbrosiaVitalisSeeds
+  components:
+    - type: Seed
+      seedId: ambrosiaVitalis
+    - type: Sprite
+      sprite: _CS/Objects/Specific/Hydroponics/ambrosia_vitalis.rsi

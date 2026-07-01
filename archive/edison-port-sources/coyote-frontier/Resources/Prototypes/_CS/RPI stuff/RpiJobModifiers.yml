@@ -1,0 +1,52 @@
+- type: rpiJobModifier
+  id: rpiJobModifierFoodService
+  multiplier: 1.5
+
+- type: rpiJobModifier
+  id: rpiJobModifierStationPrincess
+  multiplier: 5.0
+
+- type: rpiJobModifier
+  id: rpiJobModifierStationDutchess
+  multiplier: 3.0
+
+- type: rpiJobModifier
+  id: rpiJobModifierStationTrafficController
+  multiplier: 2.0
+
+- type: rpiJobModifier
+  id: rpiJobModifierDirectorOfCare
+  multiplier: 2.0
+
+- type: rpiJobModifier
+  id: rpiJobModifierBailiff
+  multiplier: 2.0
+
+- type: rpiJobModifier
+  id: rpiJobModifierBrigMedic
+  multiplier: 2.0
+
+- type: rpiJobModifier
+  id: rpiJobModifierCadet
+  multiplier: 2.0
+
+- type: rpiJobModifier
+  id: rpiJobModifierDeputy
+  multiplier: 2.0
+
+- type: rpiJobModifier
+  id: rpiJobModifierSheriff
+  multiplier: 2.0
+
+- type: rpiJobModifier
+  id: rpiJobModifierPirate
+  multiplier: 3.0
+
+- type: rpiJobModifier
+  id: rpiJobModifierPirateCaptain
+  multiplier: 4.0
+
+- type: rpiJobModifier
+  id: rpiJobModifierPirateFirstMate
+  multiplier: 3.5
+

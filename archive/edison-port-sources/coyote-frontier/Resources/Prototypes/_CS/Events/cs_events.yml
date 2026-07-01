@@ -1,0 +1,15 @@
+- type: entity
+  id: CSSupermatterHallucination
+  parent: BaseGameRule
+  components:
+  - type: StationEvent
+    weight: 1
+    duration: 600
+    maxDuration: 900
+    reoccurrenceDelay: 30
+  - type: MassHallucinationsRule
+    minTimeBetweenIncidents: 0.1
+    maxTimeBetweenIncidents: 300
+    maxSoundDistance: 7
+    sounds:
+      collection: Paracusia

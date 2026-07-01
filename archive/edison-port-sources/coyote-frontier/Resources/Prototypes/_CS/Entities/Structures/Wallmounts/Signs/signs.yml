@@ -1,0 +1,37 @@
+# Coyote Signs
+
+- type: entity
+  parent: NFBaseSign
+  id: TSFSign
+  name: TSF Sign
+  components:
+  - type: Sprite
+    sprite: _CS/Structures/Wallmounts/signs.rsi
+    state: tsf_sign
+
+- type: entity
+  parent: NFBaseSign
+  id: Donkcosign
+  name: Donk co Sign
+  components:
+  - type: Sprite
+    sprite: _CS/Structures/Wallmounts/signs.rsi
+    state: donk_co_logo_small
+
+- type: entity
+  parent: NFBaseSign
+  id: Donkcologoleft
+  name: Donk co logo left
+  components:
+  - type: Sprite
+    sprite: _CS/Structures/Wallmounts/signs.rsi
+    state: donkcologo1
+
+- type: entity
+  parent: NFBaseSign
+  id: Donkcologoright
+  name: Donk co logo right
+  components:
+  - type: Sprite
+    sprite: _CS/Structures/Wallmounts/signs.rsi
+    state: donkcologo2

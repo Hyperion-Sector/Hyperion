@@ -1,0 +1,76 @@
+# Rat Needs
+- type: need
+  id: NeedHungerRatRavenous
+  needName: "Hunger"
+  needKind: "Hunger"
+  color: "Pink"
+  maxValue: 3000
+  minValue: 0
+  minutesFromMaxToMin: 60
+  startingMinutesWorthOfDecay: 40
+  secondsPerUpdate: 10
+  alertCategory: "Hunger"
+  # Extra Satisfied State
+  extraSatisfiedMinutesFromFull: 10
+  extraSatisfiedSpeedMult: 1.50
+  extraSatisfiedMultRPI: 1.25
+  extraSatisfiedAlert: null
+  extraSatisfiedIcon: HungerIconOverfed
+  # Satisfied State
+  satisfiedMinutesFromFull: 30 # 3 hours, minus 45 minutes of Extra Satisfied
+  satisfiedSpeedMult: 1.0
+  satisfiedMultRPI: 1.0
+  satisfiedAlert: null
+  satisfiedIcon: HungerIconOverfed
+  # Low State
+  lowMinutesFromFull: 45
+  lowSpeedMult: 1.0
+  lowMultRPI: 0.75
+  lowAlert: Peckish
+  lowIcon: HungerIconPeckish
+  # Critical State
+  criticalMinutesFromFull: 60 # 1.5 hours of starvation after Low
+  criticalSpeedMult: 1.0
+  criticalMultRPI: 0.50
+  criticalAlert: Starving
+  criticalIcon: HungerIconStarving
+#  criticalDebuffSlowdown: NeedSlowdownHunger
+
+#thirst
+- type: need
+  id: NeedThirstRatRavenous
+  needName: "Thirst"
+  needKind: "Thirst"
+  color: "Cyan"
+  maxValue: 3000
+  minValue: 0
+  minutesFromMaxToMin: 60
+  startingMinutesWorthOfDecay: 40
+  secondsPerUpdate: 10
+  alertCategory: "Thirst"
+  # Extra Satisfied State
+  extraSatisfiedMinutesFromFull: 10
+  extraSatisfiedSpeedMult: 1.50
+  extraSatisfiedMultRPI: 1.25
+  extraSatisfiedAlert: null
+  extraSatisfiedIcon: ThirstIconOverhydrated
+  # Satisfied State
+  satisfiedMinutesFromFull: 30
+  satisfiedSpeedMult: 1.0
+  satisfiedMultRPI: 1.0
+  satisfiedAlert: null
+  satisfiedIcon: ThirstIconOverhydrated
+  # Low State
+  lowMinutesFromFull: 45
+  lowSpeedMult: 1.0
+  lowMultRPI: 0.75
+  lowAlert: Thirsty
+  lowIcon: ThirstIconThirsty
+  # Critical State
+  criticalMinutesFromFull: 60
+  criticalSpeedMult: 1.0
+  criticalMultRPI: 0.50
+  criticalAlert: Parched
+  criticalIcon: ThirstIconParched
+#  criticalDebuffSlowdown: NeedSlowdownThirst
+

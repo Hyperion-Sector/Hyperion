@@ -1,0 +1,175 @@
+# Vulpkanin Tails
+- type: marking
+  id: DigiVulpTail
+  bodyPart: Tail
+  markingCategory: Tail
+  speciesRestriction: [Vulpkanin, Felinid]
+  kindAllowance: [BasicHumanlike, BasicFurry, BasicRobot, VoxLike] # Coyote: Allow all markings
+  waggingId: DigiVulpTailWag
+  hidden: true
+  sprites:
+  - sprite: _CS/Mobs/Customization/AltDigiMarkings/Vulpkanin/tail_markings.rsi
+    state: vulp
+  - sprite: _DV/Mobs/Customization/Vulpkanin/tail_markings.rsi
+    state: vulp-fade
+
+- type: marking
+  id: DigiVulpTailTip
+  bodyPart: Tail
+  markingCategory: Tail
+  speciesRestriction: [Vulpkanin, Felinid]
+  kindAllowance: [BasicHumanlike, BasicFurry, BasicRobot, VoxLike] # Coyote: Allow all markings
+  waggingId: DigiVulpTailWagTip
+  hidden: true
+  sprites:
+  - sprite: _CS/Mobs/Customization/AltDigiMarkings/Vulpkanin/tail_markings.rsi
+    state: vulp
+  - sprite: _DV/Mobs/Customization/Vulpkanin/tail_markings.rsi
+    state: vulp-tip
+
+- type: marking
+  id: DigiVulpTailWag
+  bodyPart: Tail
+  markingCategory: Tail
+  speciesRestriction: [Vulpkanin, Felinid]
+  kindAllowance: [BasicHumanlike, BasicFurry, BasicRobot, VoxLike] # Coyote: Allow all markings
+  staticId: DigiVulpTail
+  hidden: true
+  sprites:
+  - sprite: _CS/Mobs/Customization/AltDigiMarkings/Vulpkanin/tail_markings.rsi
+    state: vulp_wag
+  - sprite: _DV/Mobs/Customization/Vulpkanin/tail_markings.rsi
+    state: vulp_wag-tip #fade
+
+- type: marking
+  id: DigiVulpTailWagTip
+  bodyPart: Tail
+  markingCategory: Tail
+  speciesRestriction: [Vulpkanin, Felinid]
+  kindAllowance: [BasicHumanlike, BasicFurry, BasicRobot, VoxLike] # Coyote: Allow all markings
+  staticId: DigiVulpTailTip
+  hidden: true
+  sprites:
+  - sprite: _CS/Mobs/Customization/AltDigiMarkings/Vulpkanin/tail_markings.rsi
+    state: vulp_wag
+  - sprite: _DV/Mobs/Customization/Vulpkanin/tail_markings.rsi
+    state: vulp_wag-tip
+
+- type: marking
+  id: DigiVulpTailAlt
+  bodyPart: Tail
+  markingCategory: Tail
+  speciesRestriction: [Vulpkanin, Felinid]
+  kindAllowance: [BasicHumanlike, BasicFurry, BasicRobot, VoxLike] # Coyote: Allow all markings
+  hidden: true
+  sprites:
+  - sprite: _CS/Mobs/Customization/AltDigiMarkings/Vulpkanin/tail_markings.rsi
+    state: vulp_alt
+  - sprite: _DV/Mobs/Customization/Vulpkanin/tail_markings.rsi
+    state: vulp_alt-fade
+
+- type: marking
+  id: DigiVulpTailAltTip
+  bodyPart: Tail
+  markingCategory: Tail
+  speciesRestriction: [Vulpkanin, Felinid]
+  kindAllowance: [BasicHumanlike, BasicFurry, BasicRobot, VoxLike] # Coyote: Allow all markings
+  hidden: true
+  sprites:
+  - sprite: _CS/Mobs/Customization/AltDigiMarkings/Vulpkanin/tail_markings.rsi
+    state: vulp_alt
+  - sprite: _DV/Mobs/Customization/Vulpkanin/tail_markings.rsi
+    state: vulp_alt-tip
+
+- type: marking
+  id: DigiVulpTailLong
+  bodyPart: Tail
+  markingCategory: Tail
+  speciesRestriction: [Vulpkanin, Felinid]
+  kindAllowance: [BasicHumanlike, BasicFurry, BasicRobot, VoxLike] # Coyote: Allow all markings
+  hidden: true
+  sprites:
+  - sprite: _CS/Mobs/Customization/AltDigiMarkings/Vulpkanin/tail_markings.rsi
+    state: long
+  - sprite: _DV/Mobs/Customization/Vulpkanin/tail_markings.rsi
+    state: long-tip
+
+- type: marking
+  id: DigiVulpTailFox
+  bodyPart: Tail
+  markingCategory: Tail
+  speciesRestriction: [Vulpkanin, Felinid]
+  kindAllowance: [BasicHumanlike, BasicFurry, BasicRobot, VoxLike] # Coyote: Allow all markings
+  waggingId: DigiVulpTailFoxWag
+  hidden: true
+  sprites:
+  - sprite: _CS/Mobs/Customization/AltDigiMarkings/Vulpkanin/tail_markings.rsi
+    state: fox
+  - sprite: _CS/Mobs/Customization/AltDigiMarkings/Vulpkanin/tail_markings.rsi
+    state: fox-fade
+
+- type: marking
+  id: DigiVulpTailFoxTip
+  bodyPart: Tail
+  markingCategory: Tail
+  speciesRestriction: [Vulpkanin, Felinid]
+  kindAllowance: [BasicHumanlike, BasicFurry, BasicRobot, VoxLike] # Coyote: Allow all markings
+  waggingId: DigiVulpTailFoxWagTip
+  hidden: true
+  sprites:
+  - sprite: _CS/Mobs/Customization/AltDigiMarkings/Vulpkanin/tail_markings.rsi
+    state: fox
+  - sprite: _CS/Mobs/Customization/AltDigiMarkings/Vulpkanin/tail_markings.rsi
+    state: fox-tip
+
+- type: marking
+  id: DigiVulpTailFoxWag
+  bodyPart: Tail
+  markingCategory: Tail
+  speciesRestriction: [Vulpkanin, Felinid]
+  kindAllowance: [BasicHumanlike, BasicFurry, BasicRobot, VoxLike] # Coyote: Allow all markings
+  staticId: DigiVulpTailFox
+  hidden: true
+  sprites:
+  - sprite: _CS/Mobs/Customization/AltDigiMarkings/Vulpkanin/tail_markings.rsi
+    state: fox_wag
+  - sprite: _CS/Mobs/Customization/AltDigiMarkings/Vulpkanin/tail_markings.rsi
+    state: fox_wag-fade
+
+- type: marking
+  id: DigiVulpTailFoxWagTip
+  bodyPart: Tail
+  markingCategory: Tail
+  speciesRestriction: [Vulpkanin, Felinid]
+  kindAllowance: [BasicHumanlike, BasicFurry, BasicRobot, VoxLike] # Coyote: Allow all markings
+  staticId: VulpTailFoxTip
+  hidden: true
+  sprites:
+  - sprite: _CS/Mobs/Customization/AltDigiMarkings/Vulpkanin/tail_markings.rsi
+    state: fox_wag
+  - sprite: _CS/Mobs/Customization/AltDigiMarkings/Vulpkanin/tail_markings.rsi
+    state: fox_wag-tip
+
+- type: marking
+  id: DigiVulpTailFox3
+  bodyPart: Tail
+  markingCategory: Tail
+  speciesRestriction: [Vulpkanin, Felinid]
+  kindAllowance: [BasicHumanlike, BasicFurry, BasicRobot, VoxLike] # Coyote: Allow all markings
+  hidden: true
+  sprites:
+  - sprite: _CS/Mobs/Customization/AltDigiMarkings/Vulpkanin/tail_markings.rsi
+    state: fox3
+  - sprite: _DV/Mobs/Customization/Vulpkanin/tail_markings.rsi
+    state: fox3-tip
+
+- type: marking
+  id: DigiVulpTailOtie
+  bodyPart: Tail
+  markingCategory: Tail
+  speciesRestriction: [Vulpkanin, Felinid]
+  kindAllowance: [BasicHumanlike, BasicFurry, BasicRobot, VoxLike] # Coyote: Allow all markings
+  hidden: true
+  sprites:
+  - sprite: _CS/Mobs/Customization/AltDigiMarkings/Vulpkanin/tail_markings.rsi
+    state: otie

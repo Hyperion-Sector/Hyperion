@@ -1,0 +1,11 @@
+- type: construction
+  id: WallmountForceFieldGenerator
+  graph: WallmountForceFieldGenerator
+  startNode: start
+  targetNode: generator
+  category: construction-category-utilities
+  objectType: Structure
+  placementMode: SnapgridCenter
+  canBuildInImpassable: true
+  conditions:
+    - !type:WallmountCondition

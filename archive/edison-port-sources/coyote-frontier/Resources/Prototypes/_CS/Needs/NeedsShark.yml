@@ -1,0 +1,41 @@
+# Big bonuses from high hydration, big penalties from low hydration.
+# Requires a lot of water to stay hydrated, and will dehydrate quickly, though will take the same time
+# Extra RPI modifiers reflect the importance of hydration to aquatic animals, its good RP to drink a lot.
+#thirst
+- type: need
+  id: NeedThirstShark
+  needName: "Thirst"
+  needKind: "Thirst"
+  color: "Cyan"
+  maxValue: 1000
+  minValue: 0
+  minutesFromMaxToMin: 300
+  startingMinutesWorthOfDecay: 150
+  secondsPerUpdate: 1
+  alertCategory: "Thirst"
+  # Extra Satisfied State
+  extraSatisfiedMinutesFromFull: 20
+  extraSatisfiedSpeedMult: 1.10
+  extraSatisfiedMultRPI: 2.10
+  extraSatisfiedAlert: null
+  extraSatisfiedIcon: ThirstIconOverhydrated
+  # Satisfied State
+  satisfiedMinutesFromFull: 180 # 3 hours, minus 45 minutes of Extra Satisfied
+  satisfiedSpeedMult: 1.0
+  satisfiedMultRPI: 1.0
+  satisfiedAlert: null
+  satisfiedIcon: ThirstIconOverhydrated
+  # Low State
+  lowMinutesFromFull: 210
+  lowSpeedMult: 0.60
+  lowMultRPI: 0.50
+  lowAlert: Thirsty
+  lowIcon: ThirstIconThirsty
+  # Critical State
+  criticalMinutesFromFull: 300 # 1.5 hours of starvation after Low
+  criticalSpeedMult: 0.50
+  criticalMultRPI: 0.10
+  criticalAlert: Parched
+  criticalIcon: ThirstIconParched
+#  criticalDebuffSlowdown: NeedSlowdownThirst
+

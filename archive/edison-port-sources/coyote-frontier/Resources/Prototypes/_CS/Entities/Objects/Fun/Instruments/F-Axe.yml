@@ -1,0 +1,28 @@
+- type: entity
+  parent: SynthesizerInstrument
+  id: FAxeInstrument
+  name: F-Axe
+  suffix: Antag
+  description: A reinforced keytar set up using a synths electronics. Designed for easy carrying and violence on stage.
+  components:
+  - type: Sprite
+    sprite: _CS/Objects/Fun/Instruments/f_axe.rsi
+    state: icon
+  - type: Item
+    size: Normal
+    sprite: _CS/Objects/Fun/Instruments/f_axe.rsi
+  - type: MeleeWeapon
+    soundHit:
+      path: /Audio/_DV/Weapons/electricguitarhit.ogg
+    bluntStaminaDamageFactor: 4.5
+    attackRate: 1.25
+    range: 1.85
+    damage:
+      types:
+        Blunt: 19 # buffed most melee's damage by ~1.5x
+  - type: Wieldable
+  - type: IncreaseDamageOnWield
+    damage:
+      types:
+        Blunt: 19 # buffed most melee's damage by ~1.5x
+        Structural: 10 # Coyote: replace shock damage with structure damage

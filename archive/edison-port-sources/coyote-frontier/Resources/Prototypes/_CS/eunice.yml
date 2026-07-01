@@ -1,0 +1,46 @@
+- type: entity
+  id: Eunice
+  parent: [ SimpleMobBase ]
+  name: Eunice
+  description: A beloved skunk, never forgotten.
+  components:
+  - type: Godmode
+  - type: Sprite
+    drawdepth: Mobs
+    sprite: _CS/skunk.rsi
+    layers:
+    - map: ["enum.DamageStateVisualLayers.Base"]
+      state: skunk
+  - type: Carriable #DeltaV
+  - type: Physics
+  - type: Speech
+    speechVerb: Canine
+    speechSounds: Dog
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.35
+        density: 50
+        mask:
+        - MobMask
+        layer:
+        - MobLayer
+  - type: Inventory
+    speciesId: dog
+    templateId: pet
+  - type: InteractionPopup
+    interactSuccessString: petting-success-dog
+    interactFailureString: petting-failure-generic
+    interactSuccessSpawn: EffectHearts
+    interactSuccessSound:
+      path: /Audio/Animals/small_dog_bark_happy.ogg
+  - type: SentienceTarget
+    flavorKind: station-event-random-sentience-flavor-corgi
+  - type: Tag
+    tags:
+    - VimPilot
+  - type: LeashAnchor # Floofstation
+
+

@@ -1,0 +1,91 @@
+
+- type: entity
+  parent: BaseGenerator
+  id: GeneratorCoolRTG
+  name: B-RTG
+  description: A Bluespace Radioisotope Thermoelectric Generator for long term power.
+  suffix: 16kW
+  components:
+  - type: PowerSupplier
+    supplyRate: 16000
+  - type: Sprite
+    sprite: _CS/Structures/Power/Generation/coolrtg.rsi
+    state: rtg
+  - type: PowerMonitoringDevice
+    sprite: _CS/Structures/Power/Generation/coolrtg.rsi
+    state: rtg
+  - type: AmbientSound
+    range: 5
+    sound:
+      path: /Audio/Ambience/Objects/buzzing.ogg
+  - type: GuideHelp # Coyote
+    guides:
+    - RTG
+    - Power
+  - type: Destructible
+    thresholds:
+      - trigger:
+          !type:DamageTrigger
+          damage: 600
+        behaviors:
+          - !type:DoActsBehavior
+            acts: [ "Destruction" ]
+      - trigger:
+          !type:DamageTrigger
+          damage: 300
+        behaviors:
+          - !type:PlaySoundBehavior
+            sound:
+              collection: MetalBreak
+          - !type:SpawnEntitiesBehavior
+            spawn:
+              GeneratorCoolRTGDamaged:
+                min: 1
+                max: 1
+          - !type:DoActsBehavior
+            acts: [ "Destruction" ]
+
+- type: entity
+  parent: GeneratorRTG
+  id: GeneratorCoolRTGDamaged
+  name: damaged B-RTG
+  description: A Bluespace Radioisotope Thermoelectric Generator for long term power. This one has damaged shielding.
+  suffix: 12kW
+  components:
+  - type: PowerSupplier
+    supplyRate: 10000
+  - type: Sprite
+    sprite: _CS/Structures/Power/Generation/coolrtg.rsi
+    layers:
+      - state: rtg_damaged
+      - state: rtg_glow
+  - type: PowerMonitoringDevice
+    sprite: _CS/Structures/Power/Generation/coolrtg.rsi
+    state: rtg_damaged
+  - type: RadiationSource
+    intensity: 1
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 100
+      behaviors:
+        - !type:DoActsBehavior
+          acts: [ "Destruction" ]
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          SheetPlasteel1:
+            min: 2
+            max: 4
+          SheetUranium1:
+            min: 2
+            max: 6
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]

@@ -1,0 +1,69 @@
+- type: rpiChatJudgementModifier
+  id: rpiChatJudgementModifierJournalist
+  modifiers:
+    Speaking: 2.0
+    Whispering: 1.0
+    Emoting: 1.0
+    QuickEmoting: 1.0
+    Subtling: 1.0
+    Radio: 1.5
+
+- type: rpiChatJudgementModifier
+  id: rpiChatJudgementModifierMassageTherapist
+  modifiers:
+    Speaking: 1.5
+    Whispering: 2.0
+    Emoting: 2.0
+    QuickEmoting: 1.0
+    Subtling: 2.5
+    Radio: 1.0
+
+- type: rpiChatJudgementModifier
+  id: rpiChatJudgementModifierCompanion
+  modifiers:
+    Speaking: 2.0
+    Whispering: 2.0
+    Emoting: 2.0
+    QuickEmoting: 2.0
+    Subtling: 2.5
+    Radio: 1.5
+
+- type: rpiChatJudgementModifier
+  id: rpiChatJudgementModifierMassageChaplain
+  modifiers:
+    Speaking: 2.0
+    Whispering: 1.0
+    Emoting: 1.5
+    QuickEmoting: 1.0
+    Subtling: 1.0
+    Radio: 1.5
+
+- type: rpiChatJudgementModifier
+  id: rpiChatJudgementModifierNurse
+  modifiers:
+    Speaking: 1.5
+    Whispering: 1.0
+    Emoting: 1.5
+    QuickEmoting: 1.0
+    Subtling: 2.0
+    Radio: 1.5
+
+- type: rpiChatJudgementModifier
+  id: rpiChatJudgementModifierTherapist
+  modifiers:
+    Speaking: 3.0
+    Whispering: 1.0
+    Emoting: 1.0
+    QuickEmoting: 1.0
+    Subtling: 2.0
+    Radio: 1.5
+
+- type: rpiChatJudgementModifier
+  id: rpiChatJudgementModifierCurator
+  modifiers:
+    Speaking: 2.0
+    Whispering: 1.0
+    Emoting: 2.0
+    QuickEmoting: 1.0
+    Subtling: 2.0
+    Radio: 1.5

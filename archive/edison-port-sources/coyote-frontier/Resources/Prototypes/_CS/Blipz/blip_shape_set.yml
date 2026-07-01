@@ -1,0 +1,45 @@
+- type: blipShapeSet
+  id: BlipShapeCircle
+  name: Basic Circle
+  shape: Circle
+
+- type: blipShapeSet
+  id: BlipShapeSquare
+  name: Civilian Square
+  shape: Square
+
+- type: blipShapeSet
+  id: BlipShapeTriangle
+  name: Mean Triangle
+  shape: Triangle
+
+- type: blipShapeSet
+  id: BlipShapeDiamond
+  name: Working Diamond
+  shape: Diamond
+
+- type: blipShapeSet
+  id: BlipShapeHexagon
+  name: Mysterious Hexagon
+  shape: Hexagon
+
+- type: blipShapeSet
+  id: BlipShapeStar
+  name: Important Star
+  shape: Star
+
+- type: blipShapeSet
+  id: BlipShapeArrow
+  name: Blipz Arrow
+  shape: Arrow
+
+- type: blipShapeSet
+  id: BlipShapeHeart
+  name: Lovely Heart
+  shape: Heart
+
+- type: blipShapeSet
+  id: BlipShapeX
+  name: X Marks The Spot
+  shape: X
+

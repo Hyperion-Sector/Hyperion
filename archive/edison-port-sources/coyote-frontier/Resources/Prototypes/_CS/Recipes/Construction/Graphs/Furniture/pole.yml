@@ -1,0 +1,25 @@
+- type: constructionGraph
+  id: Pole
+  start: start
+  graph:
+    - node: start
+      actions:
+        - !type:DestroyEntity {}
+      edges:
+        - to: pole
+          steps:
+            - material: Steel
+              amount: 5
+              doAfter: 3
+
+    - node: pole
+      entity: Pole
+      edges:
+        - to: start
+          completed:
+            - !type:SpawnPrototype
+              prototype: SheetSteel1
+              amount: 5
+          steps:
+            - tool: Screwing
+              doAfter: 3

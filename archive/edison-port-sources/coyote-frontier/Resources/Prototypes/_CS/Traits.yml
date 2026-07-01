@@ -1,0 +1,36 @@
+- type: trait
+  id: TheobromineIntoleranceTrait
+  name: trait-theobromine-intolerance-name
+  description: trait-theobromine-intolerance-desc
+  category: Disabilities
+  cost: 1
+  components:
+  - type: TheobromineIntolerance
+
+- type: trait
+  id: AllicinIntoleranceTrait
+  name: trait-allicin-intolerance-name
+  description: trait-allicin-intolerance-desc
+  category: Disabilities
+  cost: 1
+  components:
+  - type: AllicinIntolerance
+
+- type: trait
+  id: FatFoxTrait
+  name: trait-fat-fox-name
+  description: trait-fat-fox-desc
+  category: Disabilities
+  cost: 1
+  hornyExamineProto: hornyOverweight
+  components:
+  - type: OverweightTrait
+
+- type: trait
+  id: CaptureBaitTrait
+  name: trait-capture-bait-name
+  description: trait-capture-bait-desc
+  category: RPI
+  cost: 1
+  components:
+  - type: CaptureBait

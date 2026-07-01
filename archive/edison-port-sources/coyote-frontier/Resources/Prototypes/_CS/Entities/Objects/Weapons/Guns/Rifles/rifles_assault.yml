@@ -1,0 +1,20 @@
+- type: entity
+  id: CSWeaponAssaultRifleAKM
+  parent: [ NFBaseWeaponRifleAssaultChamber30, NFBaseWeaponFrameRifleAssaultCybersun ]
+  name: AKM
+  description: An old AKM, or is it brand new? It's hard to tell these days.
+  components:
+  - type: Clothing
+    sprite: _CS/Objects/Weapons/Guns/Rifles/akm.rsi
+  - type: Sprite
+    sprite: _CS/Objects/Weapons/Guns/Rifles/akm.rsi
+  - type: MagazineVisuals
+    magState: mag
+    steps: 4
+    zeroVisible: true
+  - type: Gun
+    angleIncrease: 0.9
+    angleDecay: 3.6
+    fireRate: 3.2
+    soundGunshot:
+      path: /Audio/_Mono/Weapons/Guns/SmallArms/Gunshots/ak_fire.ogg

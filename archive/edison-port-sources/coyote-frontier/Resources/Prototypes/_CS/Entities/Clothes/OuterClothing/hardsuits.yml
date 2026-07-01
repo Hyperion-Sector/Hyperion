@@ -1,0 +1,52 @@
+# TSF tactical suit
+- type: entity
+  parent: ClothingOuterHardsuitNfsdBronze
+  id: ClothingOuterHardsuitTsfMarineBronze
+  name: TSF bronze tactical suit
+  description: A surplus marine hardsuit, issued for patrol duty. This bronze variant has cadet rank markings.
+  components:
+  - type: Sprite
+    sprite: _Mono/Clothing/OuterClothing/Hardsuits/m82c_bronze.rsi
+  - type: Clothing
+    sprite: _Mono/Clothing/OuterClothing/Hardsuits/m82c_bronze.rsi
+  - type: ToggleableClothing
+    clothingPrototype: ClothingHeadHelmetHardsuitTsfMarine
+
+- type: entity
+  parent: ClothingOuterHardsuitNfsdBronze
+  id: ClothingOuterHardsuitTsfMarineSilver
+  name: TSF silver tactical suit
+  description: A surplus marine hardsuit, issued for patrol duty. This silver variant has officer rank markings.
+  components:
+  - type: Sprite
+    sprite: _Mono/Clothing/OuterClothing/Hardsuits/m82c_silver.rsi
+  - type: Clothing
+    sprite: _Mono/Clothing/OuterClothing/Hardsuits/m82c_silver.rsi
+  - type: ToggleableClothing
+    clothingPrototype: ClothingHeadHelmetHardsuitTsfMarine
+
+- type: entity
+  parent: ClothingOuterHardsuitNfsdBronze
+  id: ClothingOuterHardsuitTsfMarineGold
+  name: TSF gold tactical suit
+  description: A surplus marine hardsuit, issued for patrol duty. This gold variant has supervisor rank markings.
+  components:
+  - type: Sprite
+    sprite: _Mono/Clothing/OuterClothing/Hardsuits/m82c_gold.rsi
+  - type: Clothing
+    sprite: _Mono/Clothing/OuterClothing/Hardsuits/m82c_gold.rsi
+  - type: ToggleableClothing
+    clothingPrototype: ClothingHeadHelmetHardsuitTsfMarine
+
+- type: entity
+  parent: ClothingOuterHardsuitNfsdBronze
+  id: ClothingOuterHardsuitTsfMarineMedic
+  name: TSF corpsman tactical suit
+  description: A surplus marine hardsuit, issued for patrol duty. This brighter variant has brigmedic rank markings.
+  components:
+  - type: Sprite
+    sprite: _Mono/Clothing/OuterClothing/Hardsuits/m82b.rsi
+  - type: Clothing
+    sprite: _Mono/Clothing/OuterClothing/Hardsuits/m82b.rsi
+  - type: ToggleableClothing
+    clothingPrototype: ClothingHeadHelmetHardsuitTsfMarine

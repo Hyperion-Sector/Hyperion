@@ -1,0 +1,35 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "made by Paxilmaniac (https://github.com/Paxilmaniac) for.. Nova Sector(?)",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "robofoam"
+    },
+    {
+      "name": "robofoam_super"
+    },
+    {
+      "name": "synth_patch"
+    },
+    {
+      "name": "default"
+    },
+    {
+      "name": "default0"
+    },
+    {
+      "name": "robor"
+    },
+    {
+      "name": "robor0"
+    },
+    {
+      "name": "sylash"
+    }
+  ]
+}

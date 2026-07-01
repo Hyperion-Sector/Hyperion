@@ -1,0 +1,20 @@
+#region .40 pistol
+- type: Tag
+  id: CSCartridgePistol40
+
+- type: Tag
+  id: CSMagazinePistol40
+
+- type: Tag
+  id: CSMagazineSubMachineGunPistol40
+#endregion
+
+#region IPC topicals
+- type: Tag
+  id: RepairPatch
+#endregion
+
+#region Force field generator
+- type: Tag
+  id: WallmountForceFieldGeneratorElectronics
+#endregion

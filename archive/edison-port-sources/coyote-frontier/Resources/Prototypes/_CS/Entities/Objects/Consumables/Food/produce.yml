@@ -1,0 +1,36 @@
+- type: entity
+  name: ambrosia vitalis
+  parent: FoodProduceBase
+  id: FoodAmbrosiaVitalis
+  description: Saying this is sought after is putting it lightly.
+  components:
+  - type: FlavorProfile
+    flavors:
+      - leafy
+      - medicine
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 20
+        reagents:
+        - ReagentId: Omnizine
+          Quantity: 3
+        - ReagentId: Nutriment
+          Quantity: 2
+  - type: Sprite
+    sprite: _CS/Objects/Specific/Hydroponics/ambrosia_vitalis.rsi
+  - type: Item
+    heldPrefix: produce
+  - type: Produce
+    seedId: ambrosiaVitalis
+  - type: Clothing
+    sprite: _CS/Objects/Specific/Hydroponics/ambrosia_vitalis.rsi
+    slots:
+    - HEAD
+  - type: Tag
+    tags:
+    - Ambrosia
+  - type: FoodSequenceElement
+    entries:
+      Taco: AmbrosiaVitalis
+      Burger: AmbrosiaVitalisBurger

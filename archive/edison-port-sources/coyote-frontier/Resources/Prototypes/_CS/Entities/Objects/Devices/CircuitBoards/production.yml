@@ -1,0 +1,58 @@
+- type: entity
+  id: DonkcoServiceTechFabCircuitboard
+  parent: ServiceTechFabCircuitboard
+  name: donk co service techfab machine board
+  description: A machine printed circuit board for a donk co service techfab
+  components:
+    - type: MachineBoard
+      prototype: DonkcoServiceTechFab
+
+- type: entity
+  id: DonkcoKitchenAssemblerMachineCircuitboard
+  parent: BaseMachineCircuitboard
+  name: Donk Pocket Assembler machine board
+  description: A machine printed circuit board for a Donk Pocket Assembler, suitable for a kitchen.
+  components:
+  - type: Sprite
+    state: service
+  - type: MachineBoard
+    prototype: DonkcoKitchenAssembler
+    requirements:
+      Capacitor: 1
+    stackRequirements:
+      Glass: 2
+      Cable: 2
+
+- type: entity
+  id: EdisonTechFabCircuitboard
+  parent: EngineeringTechFabCircuitboard
+  name: edison engineering techfab machine board
+  description: A machine printed circuit board for an edison engineering techfab
+  components:
+    - type: MachineBoard
+      prototype: EdisonTechFab
+
+- type: entity
+  id: WallmountForceFieldGeneratorMachineCircuitboard
+  parent: BaseMachineCircuitboard
+  name: field matrix core
+  description: A supercharged machine circuit board for a wallmount force field generator.
+  components:
+    - type: Tag
+      tags:
+      - WallmountForceFieldGeneratorElectronics
+    - type: Sprite
+      state: cpuboard_super
+    - type: MachineBoard
+      prototype: WallmountForceFieldGenerator
+      requirements:
+        Capacitor: 4
+        PowerCell: 4
+      stackRequirements:
+        Cable: 2
+    - type: PhysicalComposition
+      materialComposition:
+        Steel: 20
+        Glass: 10
+    - type: StaticPrice
+      price: 25000

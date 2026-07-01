@@ -1,0 +1,5 @@
+- type: latheRecipePack
+  id: CSMagazineStatic
+  recipes:
+  - CSMagazinePistol40Empty
+  - CSMagazineSubMachineGun40Empty

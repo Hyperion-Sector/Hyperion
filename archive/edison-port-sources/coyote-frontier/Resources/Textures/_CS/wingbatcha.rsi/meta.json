@@ -1,0 +1,43 @@
+{
+  "license": "CC-BY-SA-3.0",
+  "copyright": "coyote-bayou",
+  "version": 1,
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "m_insect_wings_dragon_alt_BEHIND_A",
+      "directions": 4
+    },
+    {
+      "name": "m_insect_wings_dragon_alt_FRONT_A",
+      "directions": 4
+    },
+    {
+      "name": "m_insect_wings_succubus_BEHIND_B",
+      "directions": 4
+    },
+    {
+      "name": "m_insect_wings_succubus_FRONT_B",
+      "directions": 4
+    },
+    {
+      "name": "m_insect_wings_dragon_alt_BEHIND_B",
+      "directions": 4
+    },
+    {
+      "name": "m_insect_wings_dragon_alt_FRONT_B",
+      "directions": 4
+    },
+    {
+      "name": "m_insect_wings_sepulchre_BEHIND_B",
+      "directions": 4
+    },
+    {
+      "name": "m_insect_wings_sepulchre_FRONT_B",
+      "directions": 4
+    }
+  ]
+}

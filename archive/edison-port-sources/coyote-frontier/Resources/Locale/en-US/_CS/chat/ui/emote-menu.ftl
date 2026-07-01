@@ -1,0 +1,15 @@
+emote-menu-category-sex      = Sex
+emote-menu-category-harpy    = Harpy
+emote-menu-category-goblin   = Goblin
+emote-menu-category-vulp     = Vulp
+emote-menu-category-rodentia = Rodentia
+emote-menu-category-diona    = Diona
+emote-menu-category-sheleg   = Sheleg
+emote-menu-category-male     = Male
+emote-menu-category-female   = Female
+emote-menu-category-avali    = Avali
+emote-menu-category-lizard   = Lizard
+emote-menu-category-vox      = Vox
+emote-menu-category-moth     = Moth
+emote-menu-category-borg     = Borg
+emote-menu-category-felinid = Felinid

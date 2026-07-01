@@ -1,0 +1,20 @@
+- type: loadout
+  id: FoodServiceClothingUniformJumpsuitChef
+  price: 0
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitChef
+
+- type: loadout
+  id: FoodServiceClothingUniformJumpskirtChef
+  price: 0
+  equipment:
+    jumpsuit: ClothingUniformJumpskirtChef
+
+- type: loadout
+  id: FoodServiceClothingHeadHatChef
+  hideEffects:
+  - !type:GroupLoadoutEffect
+    proto: NFHeadwearCapable
+  price: 0
+  equipment:
+    head: ClothingHeadHatChef

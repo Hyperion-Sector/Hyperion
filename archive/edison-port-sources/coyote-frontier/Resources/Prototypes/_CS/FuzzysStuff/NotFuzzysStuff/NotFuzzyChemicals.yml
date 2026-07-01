@@ -1,0 +1,33 @@
+- type: cargoProduct
+  id: ChemistryCrateP
+  name: chemical crate - P-Group
+  icon:
+    sprite: Structures/Storage/Crates/chemcrate_secure.rsi
+    state: icon
+  product: CrateChemistryP
+  cost: 50000
+  category: cargoproduct-category-name-science
+  group: market
+
+- type: cargoProduct
+  id: ChemistryCrateS
+  name: chemical crate - S-Group
+  icon:
+    sprite: Structures/Storage/Crates/chemcrate_secure.rsi
+    state: icon
+  product: CrateChemistryS
+  cost: 50000
+  category: cargoproduct-category-name-science
+  group: market
+
+- type: cargoProduct
+  id: ChemistryCrateD
+  name: chemical crate - D-Group
+  icon:
+    sprite: Structures/Storage/Crates/chemcrate_secure.rsi
+    state: icon
+  product: CrateChemistryD
+  cost: 50000
+  category: cargoproduct-category-name-science
+  group: market
+

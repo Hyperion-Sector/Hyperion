@@ -1,0 +1,175 @@
+# Coyote: - This file is licensed under AGPLv3
+# Copyright (c) 2024 Coyote Contributors
+# See AGPLv3.txt for details.
+
+#region Generic
+- type: entity
+  parent: BaseShipVoucher
+  id: BaseShipVoucherCoyoteGeneric
+  abstract: true
+  components:
+  - type: Sprite
+    layers:
+    - state: generic
+    - state: vouchervalet
+  - type: Item
+    heldPrefix: generic
+
+- type: entity
+  parent: BaseShipVoucherCoyoteGeneric
+  id: ShipVoucherCoyoteChaplain
+  name: chaplain ship voucher
+  description: Allows for one (1) free rental from a selection of shuttles.
+  components:
+  - type: ShipyardVoucher
+    destroyOnEmpty: true
+    consoleType: Sr
+    useAnywhere: true
+    vessels:
+    - Bookworm
+    - Checker
+    - Stellaris
+    - Nook
+    - Legman
+    - Oculus
+
+- type: entity
+  parent: BaseShipVoucherCoyoteGeneric
+  id: ShipVoucherCoyoteCurator
+  name: curator ship voucher
+  description: Allows for one (1) free rental from a selection of shuttles.
+  components:
+  - type: ShipyardVoucher
+    destroyOnEmpty: true
+    consoleType: Sr
+    useAnywhere: true
+    vessels:
+    - Bookworm
+    - Checker
+    - Investigator
+    - Nook
+    - Pulsar
+
+- type: entity
+  parent: BaseShipVoucherCoyoteGeneric
+  id: ShipVoucherCoyoteFoodService
+  name: food service ship voucher
+  description: Allows for one (1) free rental from a selection of shuttles.
+  components:
+  - type: ShipyardVoucher
+    destroyOnEmpty: true
+    consoleType: Sr
+    useAnywhere: true
+    vessels:
+    - Bocadillo
+    - Nugget
+    - Skipper
+    - Piecrust
+    - Nightlight
+    - Honker
+    - Garden
+
+- type: entity
+  parent: BaseShipVoucherCoyoteGeneric
+  id: ShipVoucherCoyoteJournalist
+  name: journalist ship voucher
+  description: Allows for one (1) free rental from a selection of shuttles.
+  components:
+  - type: ShipyardVoucher
+    destroyOnEmpty: true
+    consoleType: Sr
+    useAnywhere: true
+    vessels:
+    - Legman
+    - Oculus
+    - Stringer
+
+- type: entity
+  parent: BaseShipVoucherCoyoteGeneric
+  id: ShipVoucherCoyoteMassageTherapist
+  name: massage therapist ship voucher
+  description: Allows for one (1) free rental from a selection of shuttles.
+  components:
+  - type: ShipyardVoucher
+    destroyOnEmpty: true
+    consoleType: Sr
+    useAnywhere: true
+    vessels:
+    - Placebo
+    - Camper
+    - Nook
+
+- type: entity
+  parent: BaseShipVoucherCoyoteGeneric
+  id: ShipVoucherCoyoteCompanion
+  name: companion ship voucher
+  description: Allows for one (1) free rental from a selection of shuttles.
+  components:
+  - type: ShipyardVoucher
+    destroyOnEmpty: true
+    consoleType: Sr
+    useAnywhere: true
+    vessels:
+    - Placebo
+    - Camper
+    - Nook
+
+- type: entity
+  parent: BaseShipVoucherCoyoteGeneric
+  id: ShipVoucherCoyoteNurse
+  name: nurse ship voucher
+  description: Allows for one (1) free rental from a selection of shuttles.
+  components:
+  - type: ShipyardVoucher
+    destroyOnEmpty: true
+    consoleType: Sr
+    useAnywhere: true
+    vessels:
+    - Placebo
+    - Spirit
+    - Tyne
+
+#region Freelancer
+- type: entity
+  parent: BaseShipVoucher
+  id: BaseShipVoucherCoyoteFreelancer
+  abstract: true
+  components:
+  - type: Sprite
+    layers:
+    - state: freelancer
+    - state: vouchervalet
+  - type: Item
+    heldPrefix: freelancer
+
+- type: entity
+  parent: BaseShipVoucherCoyoteFreelancer
+  id: ShipVoucherCoyoteEscort
+  name: escort ship voucher
+  description: Allows for one (1) free rental from a selection of shuttles.
+  components:
+  - type: ShipyardVoucher
+    destroyOnEmpty: true
+    consoleType: Sr # It just works, if set to BlackMarket it offers all non BlackMarket Access shuttles for free.
+    useAnywhere: true
+    vessels:
+    - Glizzy
+    - Hitchhiker
+    - Peeper
+    - Speakeasy
+
+- type: entity
+  parent: BaseShipVoucherCoyoteGeneric
+  id: ShipVoucherCoyoteSecretary
+  name: secretary ship voucher
+  description: Allows for one (1) free rental from a selection of secretorial shuttles.
+  components:
+  - type: ShipyardVoucher
+    destroyOnEmpty: true
+    consoleType: Sr
+    useAnywhere: true
+    vessels:
+    - Baroness
+    - Duchess
+    - Chauffeur
+    - Harbormaster

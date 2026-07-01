@@ -1,0 +1,10 @@
+- type: entity
+  id: ClothingUniformJumpsuitDonkcoChef
+  name: Donk co Chef Uniform
+  parent: ClothingUniformBase
+  description: A Uniform for Donk co "Chef's"
+  components:
+  - type: Sprite
+    sprite: _CS/Clothes/Uniforms/Jumpsuit/donkcochefuniform.rsi
+  - type: Clothing
+    sprite: _CS/Clothes/Uniforms/Jumpsuit/donkcochefuniform.rsi

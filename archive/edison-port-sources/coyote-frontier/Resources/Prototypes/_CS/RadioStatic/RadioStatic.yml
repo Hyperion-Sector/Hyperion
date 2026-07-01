@@ -1,0 +1,78 @@
+- type: RadioStatic
+  id: RadioStaticDefault
+  secret: true
+  saySound:
+    path: /Audio/_CS/RadioStatic/Default/say.ogg
+
+- type: RadioStatic
+  id: RadioStaticGeneric
+  secret: true
+  saySound:
+    path: /Audio/_CS/RadioStatic/Generic/say.ogg
+
+- type: RadioStatic
+  id: RadioStaticTrafficHeadset
+  secret: true
+  saySound:
+    path: /Audio/_CS/RadioStatic/Traffic/say.ogg
+
+- type: RadioStatic
+  id: RadioStaticTrafficConsole
+  secret: true
+  saySound:
+    path: /Audio/_CS/RadioStatic/TrafficConsole/say.ogg
+
+- type: RadioStatic
+  id: RadioStaticMedical
+  secret: true
+  saySound:
+    path: /Audio/_CS/RadioStatic/Medical/say.ogg
+
+- type: RadioStatic
+  id: RadioStaticSecurity
+  secret: true
+  saySound:
+    path: /Audio/_CS/RadioStatic/Security/say.ogg
+
+- type: RadioStatic
+  id: RadioStaticScience
+  secret: true
+  saySound:
+    path: /Audio/_CS/RadioStatic/Science/say.ogg
+
+# Loud versions of the radio static sounds
+- type: RadioStatic
+  id: RadioStaticDefaultLoud
+  secret: false
+  saySound:
+    path: /Audio/_CS/RadioStatic/Default/say.ogg
+
+- type: RadioStatic
+  id: RadioStaticTrafficHeadsetLoud
+  secret: false
+  saySound:
+    path: /Audio/_CS/RadioStatic/Traffic/say.ogg
+
+- type: RadioStatic
+  id: RadioStaticTrafficConsoleLoud
+  secret: false
+  saySound:
+    path: /Audio/_CS/RadioStatic/TrafficConsole/say.ogg
+
+- type: RadioStatic
+  id: RadioStaticMedicalLoud
+  secret: false
+  saySound:
+    path: /Audio/_CS/RadioStatic/Medical/say.ogg
+
+- type: RadioStatic
+  id: RadioStaticSecurityLoud
+  secret: false
+  saySound:
+    path: /Audio/_CS/RadioStatic/Security/say.ogg
+
+- type: RadioStatic
+  id: RadioStaticScienceLoud
+  secret: false
+  saySound:
+    path: /Audio/_CS/RadioStatic/Science/say.ogg

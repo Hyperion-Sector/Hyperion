@@ -1,0 +1,152 @@
+- type: rpiTaxBracket
+  id: rpiTaxBracketDefault
+  cashThreshold: -1
+  judgementPointPayout: 40
+  deathPenalty: 0.10
+  deepFriedPenalty: 0.25
+  journalismDat:
+    baseNonJournalistFlatPayout: 1000
+    baseFlatPayout: 2500
+    charCountDivisor: 250
+    multPerDivisor: 1.15
+    maxPay: 15000
+    cooldownPenalty: 0.90
+    cooldownTimeMinutes: 20
+  actionMultipliers:
+    Mining: 2.0
+    Combat: 2.0
+    Salvage: 2.0
+    Cooking: 2.0
+    Bartending: 2.0
+    Medical: 2.0
+    Janitorial: 2.0
+    Engineering: 2.0
+    Atmos: 2.0
+    Pilot: 2.0
+    Librarian: 2.0
+    Chaplain: 2.0
+    Horny: 2.0
+    StationPrincess: 2.0
+
+- type: rpiTaxBracket
+  id: rpiTaxBracketBroke
+  cashThreshold: 50000
+  judgementPointPayout: 150
+  deathPenalty: 0.01
+  deepFriedPenalty: 0.10
+  journalismDat:
+    baseNonJournalistFlatPayout: 1500
+    baseFlatPayout: 4000
+    charCountDivisor: 75 # 1 point per 100 characters
+    multPerDivisor: 1.15
+    maxPay: 45000
+    cooldownPenalty: 0.90
+    cooldownTimeMinutes: 20
+  actionMultipliers:
+    Mining: 2.0
+    Combat: 2.0
+    Salvage: 2.0
+    Cooking: 2.0
+    Bartending: 2.0
+    Medical: 2.0
+    Janitorial: 2.0
+    Engineering: 2.0
+    Atmos: 2.0
+    Pilot: 2.0
+    Librarian: 2.0
+    Chaplain: 2.0
+    Horny: 2.0
+    StationPrincess: 2.0
+
+- type: rpiTaxBracket
+  id: rpiTaxBracketEstablished
+  cashThreshold: 250000
+  judgementPointPayout: 100
+  deathPenalty: 0.05
+  deepFriedPenalty: 0.15
+  journalismDat:
+    baseNonJournalistFlatPayout: 1200
+    baseFlatPayout: 3000
+    charCountDivisor: 150 # 1 point per 100 characters
+    multPerDivisor: 1.15
+    maxPay: 35000
+    cooldownPenalty: 0.90
+    cooldownTimeMinutes: 20
+  actionMultipliers:
+    Mining: 2.0
+    Combat: 2.0
+    Salvage: 2.0
+    Cooking: 2.0
+    Bartending: 2.0
+    Medical: 2.0
+    Janitorial: 2.0
+    Engineering: 2.0
+    Atmos: 2.0
+    Pilot: 2.0
+    Librarian: 2.0
+    Chaplain: 2.0
+    Horny: 2.0
+    StationPrincess: 2.0
+
+- type: rpiTaxBracket
+  id: rpiTaxBracketWealthy
+  cashThreshold: 500000
+  judgementPointPayout: 50
+  deathPenalty: 0.075
+  deepFriedPenalty: 0.2
+  journalismDat:
+    baseNonJournalistFlatPayout: 1000
+    baseFlatPayout: 2500
+    charCountDivisor: 250
+    multPerDivisor: 1.15
+    maxPay: 25000
+    cooldownPenalty: 0.90
+    cooldownTimeMinutes: 20
+  actionMultipliers:
+    Mining: 1.0
+    Combat: 1.0
+    Salvage: 1.0
+    Cooking: 1.0
+    Bartending: 1.0
+    Medical: 1.0
+    Janitorial: 1.0
+    Engineering: 1.0
+    Atmos: 1.0
+    Pilot: 1.0
+    Librarian: 1.0
+    Chaplain: 1.0
+    Horny: 1.0
+    StationPrincess: 1.0
+
+
+
+#Mining
+#Salvage
+#Cooking
+#Bartending
+#Medical
+#Janitorial
+#Engineering
+#Atmos
+#Pilot
+#Librarian
+#Chaplain
+#Horny
+#StationPrincess
+
+
+#private const int TaxBracket1 = 40000
+#private const int TaxBracket2 = 75000
+#private const int TaxBracket3 = 100000
+#    [ViewVariables(VVAccess.ReadWrite)]
+#    public int TaxBracket1Payout = 300;
+#    [ViewVariables(VVAccess.ReadWrite)]
+#    public int TaxBracket2Payout = 200;
+#    [ViewVariables(VVAccess.ReadWrite)]
+#    public int TaxBracket3Payout = 100;
+#    [ViewVariables(VVAccess.ReadWrite)]
+#    public int TaxBracketRestPayout = 80;
+#    [ViewVariables(VVAccess.ReadWrite)]
+#    public int TaxBracketPayoutOverride = -1; // -1 means no override, use the default payouts
+#    [ViewVariables(VVAccess.ReadWrite)]
+#    public string TaxZZZCurrentActiveBracket = "TaxBracket1"; // purely for debugging purposes, to see which bracket is active

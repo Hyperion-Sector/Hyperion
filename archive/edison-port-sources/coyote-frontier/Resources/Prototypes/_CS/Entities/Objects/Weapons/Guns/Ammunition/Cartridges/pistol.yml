@@ -1,0 +1,120 @@
+#region base
+- type: entity
+  id: CSBaseCartridgePistol40
+  name: cartridge (.40 pistol)
+  parent: BaseCartridgePistol
+  abstract: true
+  components:
+  - type: Tag
+    tags:
+      - Cartridge
+      - CSCartridgePistol40
+  - type: CartridgeAmmo
+    proto: CSBulletPistol40
+  - type: Sprite
+    layers:
+      - state: base
+        map: [ "enum.AmmoVisualLayers.Base" ]
+      - state: tip
+        map: [ "enum.AmmoVisualLayers.Tip" ]
+        color: "#666666"
+
+#region .40 pistol
+- type: entity
+  id: CSCartridgePistol40
+  name: cartridge (.40 pistol)
+  parent: CSBaseCartridgePistol40
+
+- type: entity
+  id: CSCartridgePistol40Overpressure
+  name: cartridge (.40 pistol, overpressure)
+  parent: CSBaseCartridgePistol40
+  components:
+  - type: CartridgeAmmo
+    proto: CSBulletPistol40Overpressure
+  - type: Sprite
+    layers:
+      - state: base
+        map: [ "enum.AmmoVisualLayers.Base" ]
+      - state: tip
+        map: [ "enum.AmmoVisualLayers.Tip" ]
+        color: "#ff8d00"
+
+- type: entity
+  id: CSCartridgePistol40Incendiary
+  name: cartridge (.40 pistol, incendiary)
+  parent: CSBaseCartridgePistol40
+  components:
+  - type: CartridgeAmmo
+    proto: CSBulletPistol40Incendiary
+  - type: Sprite
+    layers:
+      - state: base
+        map: [ "enum.AmmoVisualLayers.Base" ]
+      - state: tip
+        map: [ "enum.AmmoVisualLayers.Tip" ]
+        color: "#ff0000"
+
+- type: entity
+  id: CSCartridgePistol40Uranium
+  name: cartridge (.40 pistol, uranium)
+  parent: CSBaseCartridgePistol40
+  components:
+  - type: CartridgeAmmo
+    proto: CSBulletPistol40Uranium
+  - type: Sprite
+    layers:
+      - state: base
+        map: [ "enum.AmmoVisualLayers.Base" ]
+      - state: tip
+        map: [ "enum.AmmoVisualLayers.Tip" ]
+        color: "#00ff00"
+
+- type: entity
+  id: CSCartridgePistol40Practice
+  name: cartridge (.40 pistol, practice)
+  parent: CSBaseCartridgePistol40
+  components:
+  - type: CartridgeAmmo
+    proto: CSBulletPistol40Practice
+  - type: Sprite
+    layers:
+      - state: base
+        map: [ "enum.AmmoVisualLayers.Base" ]
+      - state: tip
+        map: [ "enum.AmmoVisualLayers.Tip" ]
+        color: "#dddddd"
+
+- type: entity
+  id: CSCartridgePistol40Emp
+  name: cartridge (.40 pistol, EMP)
+  parent: CSBaseCartridgePistol40
+  components:
+  - type: CartridgeAmmo
+    proto: CSBulletPistol40Emp
+  - type: EmpDescription
+    range: 0.3
+    energyConsumption: 2700000
+    disableDuration: 10
+  - type: Sprite
+    layers:
+      - state: base
+        map: [ "enum.AmmoVisualLayers.Base" ]
+      - state: tip
+        map: [ "enum.AmmoVisualLayers.Tip" ]
+        color: "#00ffff"
+
+- type: entity
+  id: CSCartridgePistol40Rubber
+  name: cartridge (.40 pistol, rubber)
+  parent: CSBaseCartridgePistol40
+  components:
+  - type: CartridgeAmmo
+    proto: CSBulletPistol40Rubber
+  - type: Sprite
+    layers:
+      - state: base
+        map: [ "enum.AmmoVisualLayers.Base" ]
+      - state: tip
+        map: [ "enum.AmmoVisualLayers.Tip" ]
+        color: "#00b0ff"

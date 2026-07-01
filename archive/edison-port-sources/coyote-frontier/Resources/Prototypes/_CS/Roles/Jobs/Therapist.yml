@@ -1,0 +1,81 @@
+- type: job
+  id: Therapist
+  name: job-name-therapist
+  description: job-description-therapist
+  playTimeTracker: JobTherapist
+  startingGear: CSTherapistGear
+  alwaysUseSpawner: false
+  icon: "JobIconPsychologist"
+  supervisors: job-supervisors-therapist
+  weight: 40
+  displayWeight: 3
+  canBeAntag: false
+  accessGroups:
+  - GeneralAccess
+  special:
+  - !type:AddImplantSpecial
+    implants: [ TrackingImplant ]
+  - !type:GiveItemOnHolidaySpecial
+    holiday: FrontierBirthday
+    prototype: FrontierBirthdayGift
+  - !type:AddRpiAuraSpecial
+    aurasToAdd:
+    - rpiAuraTherapist
+  - !type:RpiChatJudgementModifierSpecial
+    modsToAdd:
+    - rpiChatJudgementModifierTherapist
+
+- type: playTimeTracker
+  id: JobTherapist
+
+- type: entity
+  id: SpawnPointTherapist
+  parent: SpawnPointPassenger
+  name: therapist spawn point
+  components:
+  - type: SpawnPoint
+    job_id: Therapist
+
+- type: startingGear
+  id: CSTherapistGear
+  storage:
+    back:
+    - EncryptionKeyService
+    - ShipVoucherCoyoteMassageTherapist
+
+- type: roleLoadout
+  id: JobTherapist
+  groups:
+  - ContractorHead
+  - ContractorNeck
+  - PilotJumpsuit
+  - ContractorGloves
+  - ContractorBackpack
+  - ContractorOuterClothing
+  - ContractorForcedOuterClothing
+  - ContractorShoes
+  - ContractorFace
+  - ContractorGlasses
+  - ContractorBelt
+  - ContractorEars
+  - ContractorEncryptionKey
+  - ContractorBoxSurvival
+  - ContractorPDA
+  - ContractorWallet
+  - ContractorCartridge
+  - ContractorImplanter
+  - ContractorBackpackItems
+  - ContractorHandItems
+  - ContractorInstruments
+  - NFSpeciesSpecific
+
+- type: chameleonOutfit
+  id: TherapistChameleonOutfit
+  job: Therapist
+  equipment:
+    head: ClothingHeadNurseHat
+    eyes: ClothingEyesHudMedical
+    mask: ClothingMaskSterile
+    neck: ClothingNeckStethoscope
+    outerClothing: ClothingOuterCoatLab
+    gloves: ClothingHandsGlovesLatex

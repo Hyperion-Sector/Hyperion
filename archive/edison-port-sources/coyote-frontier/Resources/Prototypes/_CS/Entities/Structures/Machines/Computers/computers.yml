@@ -1,0 +1,22 @@
+- type: entity
+  id: CSComputerCargoOrdersEddison
+  parent: ComputerCargoOrders
+  name: plant manager's request computer
+  description: Used to purchase restricted engineering supplies.
+  components:
+  - type: Sprite
+    layers:
+    - map: ["computerLayerBody"]
+      state: computer
+    - map: ["computerLayerKeyboard"]
+      state: generic_keyboard
+    - map: ["computerLayerScreen"]
+      state: request-eng
+    - map: ["computerLayerKeys"]
+      state: generic_keys
+    - map: [ "enum.WiresVisualLayers.MaintenancePanel" ]
+      state: generic_panel_open
+  - type: NFCargoOrderConsole
+    allowedGroups: [ "edison" ]
+  - type: AccessReader
+    access: [["ChiefEngineer"]]

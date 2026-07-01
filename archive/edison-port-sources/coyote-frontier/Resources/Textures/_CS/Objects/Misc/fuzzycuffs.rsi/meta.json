@@ -1,0 +1,106 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "All current states by Archee",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "cuff-pink"
+    },
+	  {
+      "name": "body-overlay-pink-2",
+      "directions": 4
+    },
+	  {
+      "name": "body-overlay-pink-4",
+      "directions": 4
+    },
+    {
+      "name": "inhand-left-pink",
+      "directions": 4
+    },
+    {
+      "name": "inhand-right-pink",
+      "directions": 4
+    },
+    {
+      "name": "cuff-red"
+    },
+	  {
+      "name": "body-overlay-red-2",
+      "directions": 4
+    },
+	  {
+      "name": "body-overlay-red-4",
+      "directions": 4
+    },
+    {
+      "name": "inhand-left-red",
+      "directions": 4
+    },
+    {
+      "name": "inhand-right-red",
+      "directions": 4
+    },
+    {
+      "name": "cuff-black"
+    },
+	  {
+      "name": "body-overlay-black-2",
+      "directions": 4
+    },
+	  {
+      "name": "body-overlay-black-4",
+      "directions": 4
+    },
+    {
+      "name": "inhand-left-black",
+      "directions": 4
+    },
+    {
+      "name": "inhand-right-black",
+      "directions": 4
+    },
+    {
+      "name": "cuff-blue"
+    },
+	  {
+      "name": "body-overlay-blue-2",
+      "directions": 4
+    },
+	  {
+      "name": "body-overlay-blue-4",
+      "directions": 4
+    },
+    {
+      "name": "inhand-left-blue",
+      "directions": 4
+    },
+    {
+      "name": "inhand-right-blue",
+      "directions": 4
+    },
+    {
+      "name": "cuff-purple"
+    },
+	  {
+      "name": "body-overlay-purple-2",
+      "directions": 4
+    },
+	  {
+      "name": "body-overlay-purple-4",
+      "directions": 4
+    },
+    {
+      "name": "inhand-left-purple",
+      "directions": 4
+    },
+    {
+      "name": "inhand-right-purple",
+      "directions": 4
+    }
+  ]
+}

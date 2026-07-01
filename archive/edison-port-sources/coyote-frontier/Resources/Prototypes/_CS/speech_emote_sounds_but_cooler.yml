@@ -1,0 +1,202 @@
+- type: emoteSounds
+  id: SupplementalCoyoteEmoteStuff
+  params:
+    variation: 0.125
+  sounds:
+    ## Screams
+#    HarpyScream:
+#      collection: HarpyScreams
+    VulpScream:
+      collection: VulpkaninScreams
+    RodentiaScream:
+      collection: RodentiaScreams
+    GoblinScream:
+      collection: GoblinScreams
+    ShelegScream:
+      collection: ShelegScreams
+    MaleScream:
+      collection: MaleScreams
+    FemaleScream:
+      collection: FemaleScreams
+    FelinidScream:
+      collection: FelinidScreams
+    LizardScream:
+      path: /Audio/Voice/Reptilian/reptilian_scream.ogg
+    VoxScream:
+      path: /Audio/Voice/Vox/shriek1.ogg
+    DionaScream:
+      path: /Audio/Voice/Diona/diona_scream.ogg
+    MothScream:
+      path: /Audio/Voice/Moth/moth_scream.ogg
+    ## Laughs
+    MaleLaugh:
+      collection: MaleLaugh
+    FemaleLaugh:
+      collection: FemaleLaugh
+    LizardLaugh:
+      path: /Audio/Animals/lizard_happy.ogg
+    VoxLaugh:
+      path: /Audio/Voice/Vox/vox_laugh.ogg
+    DionaLaugh:
+      collection: DionaLaugh
+    MothLaugh:
+      path: /Audio/Voice/Moth/moth_laugh.ogg
+    SyndieborgLaugh:
+      path: /Audio/Voice/Silicon/syndieborg_laugh.ogg
+#    HarpyLaugh:
+#      collection: HarpyLaugh
+    GoblinLaugh:
+      collection: GoblinCackle
+    ShelegLaugh:
+      collection: ShelegLaugh
+    ## Hisses
+    FelinidHiss:
+      collection: FelinidHisses
+#    HarpyHiss:
+#      collection: HarpyHisses
+    GoblinHiss:
+      collection: GoblinHiss
+    ShelegHiss:
+      collection: ShelegHiss
+    ## Sighs
+    MaleSigh:
+      collection: MaleSigh
+    FemaleSigh:
+      collection: FemaleSigh
+    ShelegSigh:
+      collection: ShelegSigh
+    ## Crying
+    MaleCrying:
+      collection: MaleCry
+    FemaleCrying:
+      collection: FemaleCry
+#    HarpyCrying:
+#      collection: HarpyCry
+    GoblinCrying:
+      collection: GoblinCry
+    ShelegCrying:
+      collection: ShelegCry
+    ## gasping on it
+    MaleGasp:
+      collection: MaleGasp
+    FemaleGasp:
+      collection: FemaleGasp
+    GoblinGasp:
+      collection: GoblinGasp
+    ## fun stuff!
+    Belch:
+      collection: Belch
+    Whistle:
+      collection: Whistles
+    Weh:
+      collection: Weh
+    Hew:
+      collection: Hew
+    CatMeow:
+      collection: CatMeows
+    CatHisses:
+      collection: CatHisses
+    MonkeyScreeches:
+      collection: MonkeyScreeches
+    Squish:
+      collection: Squishes
+    Bubble: # Imp
+      collection: Bubbles # Imp
+    Pop: # Imp
+      collection: Pops # Imp
+    Hiss:
+      collection: FelinidHisses
+    Meow:
+      collection: FelinidMeows
+    Mew:
+      collection: FelinidMews
+    VulpGrowl:
+      collection: VulpkaninGrowls
+    FelinidGrowl:
+      path: /Audio/Nyanotrasen/Voice/Felinid/cat_growl1.ogg
+    Purr:
+      path: /Audio/Nyanotrasen/Voice/Felinid/cat_purr1.ogg
+#    HarpyRing:
+#      collection: HarpyRings
+#    HarpyHonk:
+#      collection: HarpyHonks
+#      params: # Frontier
+#        volume: -5 # Frontier
+#    HarpyPew:
+#      collection: HarpyPews
+#    HarpyBang:
+#      collection: HarpyBangs
+#      params: # Frontier
+#        volume: -5 # Frontier
+#    HarpyBeep:
+#      collection: HarpyBeeps
+#    HarpyRev:
+#      collection: HarpyRevs
+#      params: # Frontier
+#        volume: -5 # Frontier
+#    Click:
+#      collection: HarpyClicks
+    Chitter:
+      path: /Audio/Voice/Moth/moth_chitter.ogg
+    MothSqueak:
+      path: /Audio/Voice/Moth/moth_squeak.ogg
+    RodentiaSqueak:
+      path: /Audio/Animals/mouse_squeak.ogg
+    Squeak:
+      path: /Audio/Animals/mouse_squeak.ogg
+    AvaliCaw:
+      collection: HarpyCaws
+    Chirp:
+      path: /Audio/_DV/Voice/Harpy/chirp1.ogg
+    Snarl:
+      collection: VulpkaninSnarls
+    Bark:
+      collection: VulpkaninBarks
+    Whimper:
+      collection: VulpkaninWhimpers
+    Yip:
+      collection: VulpkaninYips
+    Whine:
+      collection: VulpkaninWhines
+    Howl:
+      collection: VulpkaninHowls
+    Awoo:
+      collection: VulpkaninHowls
+    Gnash: # Flooftier
+      collection: FeroxiGnashes # Flooftier
+    Yap: # Floof
+      collection: VulpkaninYaps
+    Gekker: # Floof
+      collection: VulpkaninGekkers
+    Honk:
+      collection: BikeHorn
+    RobotBeep:
+      collection: RobotBeeps
+    ReptilianHiss: # Imp
+      collection: ReptilianHiss # Imp
+    Beep: # normal
+      path: /Audio/_EE/Voice/IPC/beep_2000.ogg
+    Boop:
+      path: /Audio/_EE/Voice/IPC/beep_500.ogg
+    Buzz:
+      path: /Audio/Machines/buzz-sigh.ogg
+    Chime:
+      path: /Audio/Effects/Cargo/ping.ogg
+    Buzz-Two:
+      path: /Audio/Machines/buzz-two.ogg
+    Ping:
+      path: /Audio/Effects/beep1.ogg
+      params: # to prevent it from being definitively read by players as "OH SHIT A GRENADE"
+        variation: 0.125
+    Whirr:
+      collection: IPCWhirrs
+      params:
+        variation: 0
+
+
+
+
+
+
+
+

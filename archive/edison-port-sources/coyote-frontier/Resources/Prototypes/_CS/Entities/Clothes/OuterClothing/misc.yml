@@ -1,0 +1,10 @@
+- type: entity
+  parent: ClothingOuterStorageBase
+  id: ClothingOuterDonkcoApron
+  name: Donk co chef apron
+  description: An apron for catching all the grease from the deep fryer
+  components:
+  - type: Sprite
+    sprite: _CS/Clothes/OuterClothing/Misc/donkcochefapron.rsi
+  - type: Clothing
+    sprite: _CS/Clothes/OuterClothing/Misc/donkcochefapron.rsi

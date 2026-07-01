@@ -1,0 +1,3369 @@
+- type: entity
+  parent: ClothingUniformSkirtBase
+  id: CoolCoyoteClothes
+  name: Cool Coyote Jumpskirt
+  description: A cute jumpskirt that will be the template for ALL Coyote Bayou uniforms! at least in this file
+  abstract: true
+  components:
+  - type: Sprite
+    overrideDir: South
+    enableOverrideDir: true # we dont have item sprites, so, enjoy!
+    sprite: _CS/Clothes/cbuniforms.rsi
+    layers:
+    - state: acolyte_d # these need to be the same name
+  - type: Clothing
+    sprite: _CS/Clothes/cbuniforms.rsi
+    clothingVisuals:
+      jumpsuit:
+      - state: acolyte_d
+
+# TEMPLATE
+#- type: entity
+#  parent: CoolCoyoteClothes
+#  id:
+#  name:
+#  description: |
+#  components:
+#  - type: Sprite
+#    overrideDir: South
+#    enableOverrideDir: true
+#    sprite: _CS/Clothes/cbuniforms.rsi
+#    layers:
+#    - state:
+#  - type: Clothing
+#    sprite: _CS/Clothes/cbuniforms.rsi
+#    clothingVisuals:
+#      jumpsuit:
+#      - state:
+# END TEMPLATE
+
+- type: entity
+  parent: CoolCoyoteClothes
+  id: CoolCoyoteClothesAcolyte
+  name: acolyte garb
+  description: |
+  components:
+  - type: Sprite
+    overrideDir: South
+    enableOverrideDir: true
+    sprite: _CS/Clothes/cbuniforms.rsi
+    layers:
+    - state: acolyte_d
+  - type: Clothing
+    sprite: _CS/Clothes/cbuniforms.rsi
+    clothingVisuals:
+      jumpsuit:
+      - state: acolyte_d
+
+- type: entity
+  parent: CoolCoyoteClothes
+  id: CoolCoyoteClothesAfrMerc
+  name: khaki mercenary outfit
+  description: |
+  components:
+  - type: Sprite
+    overrideDir: South
+    enableOverrideDir: true
+    sprite: _CS/Clothes/cbuniforms.rsi
+    layers:
+    - state: afr_merc
+  - type: Clothing
+    sprite: _CS/Clothes/cbuniforms.rsi
+    clothingVisuals:
+      jumpsuit:
+      - state: afr_merc
+
+- type: entity
+  parent: CoolCoyoteClothes
+  id: CoolCoyoteClothesArtisan
+  name: artisan kimono
+  description: |
+  components:
+  - type: Sprite
+    overrideDir: South
+    enableOverrideDir: true
+    sprite: _CS/Clothes/cbuniforms.rsi
+    layers:
+    - state: artisan3
+  - type: Clothing
+    sprite: _CS/Clothes/cbuniforms.rsi
+    clothingVisuals:
+      jumpsuit:
+      - state: artisan3
+
+- type: entity
+  parent: CoolCoyoteClothes
+  id: CoolCoyoteClothesAssyrian
+  name: village tunic
+  description: |
+  components:
+  - type: Sprite
+    overrideDir: South
+    enableOverrideDir: true
+    sprite: _CS/Clothes/cbuniforms.rsi
+    layers:
+    - state: assyrian
+  - type: Clothing
+    sprite: _CS/Clothes/cbuniforms.rsi
+    clothingVisuals:
+      jumpsuit:
+      - state: assyrian
+
+- type: entity
+  parent: CoolCoyoteClothes
+  id: CoolCoyoteClothesBLandschneckt
+  name: royal tabard
+  description: |
+  components:
+  - type: Sprite
+    overrideDir: South
+    enableOverrideDir: true
+    sprite: _CS/Clothes/cbuniforms.rsi
+    layers:
+    - state: b_landschneckt
+  - type: Clothing
+    sprite: _CS/Clothes/cbuniforms.rsi
+    clothingVisuals:
+      jumpsuit:
+      - state: b_landschneckt
+
+- type: entity
+  parent: CoolCoyoteClothes
+  id: CoolCoyoteClothesBeggar
+  name: beggar rags
+  description: |
+  components:
+  - type: Sprite
+    overrideDir: South
+    enableOverrideDir: true
+    sprite: _CS/Clothes/cbuniforms.rsi
+    layers:
+    - state: beggar_clothing
+  - type: Clothing
+    sprite: _CS/Clothes/cbuniforms.rsi
+    clothingVisuals:
+      jumpsuit:
+      - state: beggar_clothing
+
+- type: entity
+  parent: CoolCoyoteClothes
+  id: CoolCoyoteClothesBlackTango
+  name: tango dress in black
+  description: |
+  components:
+  - type: Sprite
+    overrideDir: South
+    enableOverrideDir: true
+    sprite: _CS/Clothes/cbuniforms.rsi
+    layers:
+    - state: black_tango
+  - type: Clothing
+    sprite: _CS/Clothes/cbuniforms.rsi
+    clothingVisuals:
+      jumpsuit:
+      - state: black_tango
+
+- type: entity
+  parent: CoolCoyoteClothes
+  id: CoolCoyoteClothesBlackDress
+  name: sleek black nightgown
+  description: |
+  components:
+  - type: Sprite
+    overrideDir: South
+    enableOverrideDir: true
+    sprite: _CS/Clothes/cbuniforms.rsi
+    layers:
+    - state: blackdress
+  - type: Clothing
+    sprite: _CS/Clothes/cbuniforms.rsi
+    clothingVisuals:
+      jumpsuit:
+      - state: blackdress
+
+- type: entity
+  parent: CoolCoyoteClothes
+  id: CoolCoyoteClothesBlackNGold
+  name: black and gold dressrobe
+  description: |
+  components:
+  - type: Sprite
+    overrideDir: South
+    enableOverrideDir: true
+    sprite: _CS/Clothes/cbuniforms.rsi
+    layers:
+    - state: blackngold
+  - type: Clothing
+    sprite: _CS/Clothes/cbuniforms.rsi
+    clothingVisuals:
+      jumpsuit:
+      - state: blackngold
+
+- type: entity
+  parent: CoolCoyoteClothes
+  id: CoolCoyoteClothesBloodshot
+  name: bloodshot gunslinger suit
+  description: |
+  components:
+  - type: Sprite
+    overrideDir: South
+    enableOverrideDir: true
+    sprite: _CS/Clothes/cbuniforms.rsi
+    layers:
+    - state: bloodshot
+  - type: Clothing
+    sprite: _CS/Clothes/cbuniforms.rsi
+    clothingVisuals:
+      jumpsuit:
+      - state: bloodshot
+
+- type: entity
+  parent: CoolCoyoteClothes
+  id: CoolCoyoteClothesBlueKimono
+  name: kimono in blue
+  description: |
+  components:
+  - type: Sprite
+    overrideDir: South
+    enableOverrideDir: true
+    sprite: _CS/Clothes/cbuniforms.rsi
+    layers:
+    - state: blue_kimono
+  - type: Clothing
+    sprite: _CS/Clothes/cbuniforms.rsi
+    clothingVisuals:
+      jumpsuit:
+      - state: blue_kimono
+
+- type: entity
+  parent: CoolCoyoteClothes
+  id: CoolCoyoteClothesBlueSari
+  name: sari in blue
+  description: |
+  components:
+  - type: Sprite
+    overrideDir: South
+    enableOverrideDir: true
+    sprite: _CS/Clothes/cbuniforms.rsi
+    layers:
+    - state: blue_sari
+  - type: Clothing
+    sprite: _CS/Clothes/cbuniforms.rsi
+    clothingVisuals:
+      jumpsuit:
+      - state: blue_sari
+
+- type: entity
+  parent: CoolCoyoteClothes
+  id: CoolCoyoteClothesBlueSkirt
+  name: skirt in blue
+  description: |
+  components:
+  - type: Sprite
+    overrideDir: South
+    enableOverrideDir: true
+    sprite: _CS/Clothes/cbuniforms.rsi
+    layers:
+    - state: blue_skirt2
+  - type: Clothing
+    sprite: _CS/Clothes/cbuniforms.rsi
+    clothingVisuals:
+      jumpsuit:
+      - state: blue_skirt2
+
+- type: entity
+  parent: CoolCoyoteClothes
+  id: CoolCoyoteClothesBlueDress
+  name: flowing blue dress
+  description: |
+  components:
+  - type: Sprite
+    overrideDir: South
+    enableOverrideDir: true
+    sprite: _CS/Clothes/cbuniforms.rsi
+    layers:
+    - state: bluedress
+  - type: Clothing
+    sprite: _CS/Clothes/cbuniforms.rsi
+    clothingVisuals:
+      jumpsuit:
+      - state: bluedress
+
+- type: entity
+  parent: CoolCoyoteClothes
+  id: CoolCoyoteClothesBlueRanger
+  name: blue ranger uniform
+  description: |
+  components:
+  - type: Sprite
+    overrideDir: South
+    enableOverrideDir: true
+    sprite: _CS/Clothes/cbuniforms.rsi
+    layers:
+    - state: blueranger
+  - type: Clothing
+    sprite: _CS/Clothes/cbuniforms.rsi
+    clothingVisuals:
+      jumpsuit:
+      - state: blueranger
+
+- type: entity
+  parent: CoolCoyoteClothes
+  id: CoolCoyoteClothesBlueSun
+  name: blue sun maid dress
+  description: |
+  components:
+  - type: Sprite
+    overrideDir: South
+    enableOverrideDir: true
+    sprite: _CS/Clothes/cbuniforms.rsi
+    layers:
+    - state: bluesun
+  - type: Clothing
+    sprite: _CS/Clothes/cbuniforms.rsi
+    clothingVisuals:
+      jumpsuit:
+      - state: bluesun
+
+- type: entity
+  parent: CoolCoyoteClothes
+  id: CoolCoyoteClothesBowSun
+  name: sun dress with a bow
+  description: |
+  components:
+  - type: Sprite
+    overrideDir: South
+    enableOverrideDir: true
+    sprite: _CS/Clothes/cbuniforms.rsi
+    layers:
+    - state: bowsun
+  - type: Clothing
+    sprite: _CS/Clothes/cbuniforms.rsi
+    clothingVisuals:
+      jumpsuit:
+      - state: bowsun
+
+- type: entity
+  parent: CoolCoyoteClothes
+  id: CoolCoyoteClothesBridalBlue
+  name: bridal gown in blue
+  description: |
+  components:
+  - type: Sprite
+    overrideDir: South
+    enableOverrideDir: true
+    sprite: _CS/Clothes/cbuniforms.rsi
+    layers:
+    - state: bride_blue
+  - type: Clothing
+    sprite: _CS/Clothes/cbuniforms.rsi
+    clothingVisuals:
+      jumpsuit:
+      - state: bride_blue
+
+- type: entity
+  parent: CoolCoyoteClothes
+  id: CoolCoyoteClothesBridalOrange
+  name: bridal gown in orange
+  description: |
+  components:
+  - type: Sprite
+    overrideDir: South
+    enableOverrideDir: true
+    sprite: _CS/Clothes/cbuniforms.rsi
+    layers:
+    - state: bride_orange
+  - type: Clothing
+    sprite: _CS/Clothes/cbuniforms.rsi
+    clothingVisuals:
+      jumpsuit:
+      - state: bride_orange
+
+- type: entity
+  parent: CoolCoyoteClothes
+  id: CoolCoyoteClothesBridalPurple
+  name: bridal gown in purple
+  description: |
+  components:
+  - type: Sprite
+    overrideDir: South
+    enableOverrideDir: true
+    sprite: _CS/Clothes/cbuniforms.rsi
+    layers:
+    - state: bride_purple
+  - type: Clothing
+    sprite: _CS/Clothes/cbuniforms.rsi
+    clothingVisuals:
+      jumpsuit:
+      - state: bride_purple
+
+- type: entity
+  parent: CoolCoyoteClothes
+  id: CoolCoyoteClothesBridalRed
+  name: bridal gown in red
+  description: |
+  components:
+  - type: Sprite
+    overrideDir: South
+    enableOverrideDir: true
+    sprite: _CS/Clothes/cbuniforms.rsi
+    layers:
+    - state: bride_red
+  - type: Clothing
+    sprite: _CS/Clothes/cbuniforms.rsi
+    clothingVisuals:
+      jumpsuit:
+      - state: bride_red
+
+- type: entity
+  parent: CoolCoyoteClothes
+  id: CoolCoyoteClothesBridalWhite
+  name: bridal gown in white
+  description: |
+  components:
+  - type: Sprite
+    overrideDir: South
+    enableOverrideDir: true
+    sprite: _CS/Clothes/cbuniforms.rsi
+    layers:
+    - state: bride_white
+  - type: Clothing
+    sprite: _CS/Clothes/cbuniforms.rsi
+    clothingVisuals:
+      jumpsuit:
+      - state: bride_white
+
+- type: entity
+  parent: CoolCoyoteClothes
+  id: CoolCoyoteClothesBrownPunkPants
+  name: brown punk pants
+  description: |
+  components:
+  - type: Sprite
+    overrideDir: South
+    enableOverrideDir: true
+    sprite: _CS/Clothes/cbuniforms.rsi
+    layers:
+    - state: brownpunkpants
+  - type: Clothing
+    sprite: _CS/Clothes/cbuniforms.rsi
+    clothingVisuals:
+      jumpsuit:
+      - state: brownpunkpants
+
+- type: entity
+  parent: CoolCoyoteClothes
+  id: CoolCoyoteClothesBunnySuit
+  name: sexy bunny suit
+  description: |
+  components:
+  - type: Sprite
+    overrideDir: South
+    enableOverrideDir: true
+    sprite: _CS/Clothes/cbuniforms.rsi
+    layers:
+    - state: bunnysuit
+  - type: Clothing
+    sprite: _CS/Clothes/cbuniforms.rsi
+    clothingVisuals:
+      jumpsuit:
+      - state: bunnysuit
+
+- type: entity
+  parent: CoolCoyoteClothes
+  id: CoolCoyoteClothesCartel
+  name: tropical runner outfit
+  description: |
+  components:
+  - type: Sprite
+    overrideDir: South
+    enableOverrideDir: true
+    sprite: _CS/Clothes/cbuniforms.rsi
+    layers:
+    - state: cartel1
+  - type: Clothing
+    sprite: _CS/Clothes/cbuniforms.rsi
+    clothingVisuals:
+      jumpsuit:
+      - state: cartel1
+
+- type: entity
+  parent: CoolCoyoteClothes
+  id: CoolCoyoteClothesChad
+  name: chad
+  description: |
+  components:
+  - type: Sprite
+    overrideDir: South
+    enableOverrideDir: true
+    sprite: _CS/Clothes/cbuniforms.rsi
+    layers:
+    - state: chad
+  - type: Clothing
+    sprite: _CS/Clothes/cbuniforms.rsi
+    clothingVisuals:
+      jumpsuit:
+      - state: chad
+
+- type: entity
+  parent: CoolCoyoteClothes
+  id: CoolCoyoteClothesCheong
+  name: cheong sam
+  description: |
+  components:
+  - type: Sprite
+    overrideDir: South
+    enableOverrideDir: true
+    sprite: _CS/Clothes/cbuniforms.rsi
+    layers:
+    - state: cheong
+  - type: Clothing
+    sprite: _CS/Clothes/cbuniforms.rsi
+    clothingVisuals:
+      jumpsuit:
+      - state: cheong
+
+- type: entity
+  parent: CoolCoyoteClothes
+  id: CoolCoyoteClothesCheongRed
+  name: cheong sam in red
+  description: |
+  components:
+  - type: Sprite
+    overrideDir: South
+    enableOverrideDir: true
+    sprite: _CS/Clothes/cbuniforms.rsi
+    layers:
+    - state: cheongr
+  - type: Clothing
+    sprite: _CS/Clothes/cbuniforms.rsi
+    clothingVisuals:
+      jumpsuit:
+      - state: cheongr
+
+- type: entity
+  parent: CoolCoyoteClothes
+  id: CoolCoyoteClothesCheongWhite
+  name: cheong sam in white
+  description: |
+  components:
+  - type: Sprite
+    overrideDir: South
+    enableOverrideDir: true
+    sprite: _CS/Clothes/cbuniforms.rsi
+    layers:
+    - state: cheongsam_s
+  - type: Clothing
+    sprite: _CS/Clothes/cbuniforms.rsi
+    clothingVisuals:
+      jumpsuit:
+      - state: cheongsam_s
+
+- type: entity
+  parent: CoolCoyoteClothes
+  id: CoolCoyoteClothesCheongWhiteShort
+  name: cheong sam in white (short)
+  description: |
+  components:
+  - type: Sprite
+    overrideDir: South
+    enableOverrideDir: true
+    sprite: _CS/Clothes/cbuniforms.rsi
+    layers:
+    - state: cheongw
+  - type: Clothing
+    sprite: _CS/Clothes/cbuniforms.rsi
+    clothingVisuals:
+      jumpsuit:
+      - state: cheongw
+
+- type: entity
+  parent: CoolCoyoteClothes
+  id: CoolCoyoteClothesConquistador
+  name: conquistador standard
+  description: |
+  components:
+  - type: Sprite
+    overrideDir: South
+    enableOverrideDir: true
+    sprite: _CS/Clothes/cbuniforms.rsi
+    layers:
+    - state: conquistador
+  - type: Clothing
+    sprite: _CS/Clothes/cbuniforms.rsi
+    clothingVisuals:
+      jumpsuit:
+      - state: conquistador
+
+- type: entity
+  parent: CoolCoyoteClothes
+  id: CoolCoyoteClothesCorset
+  name: corset
+  description: |
+  components:
+  - type: Sprite
+    overrideDir: South
+    enableOverrideDir: true
+    sprite: _CS/Clothes/cbuniforms.rsi
+    layers:
+    - state: corset
+  - type: Clothing
+    sprite: _CS/Clothes/cbuniforms.rsi
+    clothingVisuals:
+      jumpsuit:
+      - state: corset
+
+- type: entity
+  parent: CoolCoyoteClothes
+  id: CoolCoyoteClothesCorsetDress
+  name: corset dress
+  description: |
+  components:
+  - type: Sprite
+    overrideDir: South
+    enableOverrideDir: true
+    sprite: _CS/Clothes/cbuniforms.rsi
+    layers:
+    - state: corsetdress
+  - type: Clothing
+    sprite: _CS/Clothes/cbuniforms.rsi
+    clothingVisuals:
+      jumpsuit:
+      - state: corsetdress
+
+- type: entity
+  parent: CoolCoyoteClothes
+  id: CoolCoyoteClothesCountess
+  name: countess gown
+  description: |
+  components:
+  - type: Sprite
+    overrideDir: South
+    enableOverrideDir: true
+    sprite: _CS/Clothes/cbuniforms.rsi
+    layers:
+    - state: countess
+  - type: Clothing
+    sprite: _CS/Clothes/cbuniforms.rsi
+    clothingVisuals:
+      jumpsuit:
+      - state: countess
+
+- type: entity
+  parent: CoolCoyoteClothes
+  id: CoolCoyoteClothesCrinoline
+  name: crinoline dress
+  description: |
+  components:
+  - type: Sprite
+    overrideDir: South
+    enableOverrideDir: true
+    sprite: _CS/Clothes/cbuniforms.rsi
+    layers:
+    - state: crinoline_dress
+  - type: Clothing
+    sprite: _CS/Clothes/cbuniforms.rsi
+    clothingVisuals:
+      jumpsuit:
+      - state: crinoline_dress
+
+- type: entity
+  parent: CoolCoyoteClothes
+  id: CoolCoyoteClothesCustomToga
+  name: custom toga
+  description: |
+  components:
+  - type: Sprite
+    overrideDir: South
+    enableOverrideDir: true
+    sprite: _CS/Clothes/cbuniforms.rsi
+    layers:
+    - state: customtoga
+  - type: Clothing
+    sprite: _CS/Clothes/cbuniforms.rsi
+    clothingVisuals:
+      jumpsuit:
+      - state: customtoga
+
+- type: entity
+  parent: CoolCoyoteClothes
+  id: CoolCoyoteClothesCyberHell
+  name: cyber hell
+  description: |
+  components:
+  - type: Sprite
+    overrideDir: South
+    enableOverrideDir: true
+    sprite: _CS/Clothes/cbuniforms.rsi
+    layers:
+    - state: cyberhell
+  - type: Clothing
+    sprite: _CS/Clothes/cbuniforms.rsi
+    clothingVisuals:
+      jumpsuit:
+      - state: cyberhell
+
+- type: entity
+  parent: CoolCoyoteClothes
+  id: CoolCoyoteClothesDarkHanfu
+  name: dark hanfu
+  description: |
+  components:
+  - type: Sprite
+    overrideDir: South
+    enableOverrideDir: true
+    sprite: _CS/Clothes/cbuniforms.rsi
+    layers:
+    - state: dark_hanfu
+  - type: Clothing
+    sprite: _CS/Clothes/cbuniforms.rsi
+    clothingVisuals:
+      jumpsuit:
+      - state: dark_hanfu
+
+- type: entity
+  parent: CoolCoyoteClothes
+  id: CoolCoyoteClothesDivineRobe
+  name: divine robe
+  description: |
+  components:
+  - type: Sprite
+    overrideDir: South
+    enableOverrideDir: true
+    sprite: _CS/Clothes/cbuniforms.rsi
+    layers:
+    - state: divine_robes
+  - type: Clothing
+    sprite: _CS/Clothes/cbuniforms.rsi
+    clothingVisuals:
+      jumpsuit:
+      - state: divine_robes
+
+- type: entity
+  parent: CoolCoyoteClothes
+  id: CoolCoyoteClothesDomina
+  name: domina latex
+  description: |
+  components:
+  - type: Sprite
+    overrideDir: South
+    enableOverrideDir: true
+    sprite: _CS/Clothes/cbuniforms.rsi
+    layers:
+    - state: domina
+  - type: Clothing
+    sprite: _CS/Clothes/cbuniforms.rsi
+    clothingVisuals:
+      jumpsuit:
+      - state: domina
+
+- type: entity
+  parent: CoolCoyoteClothes
+  id: CoolCoyoteClothesDougDimmadome
+  name: doug suit
+  description: |
+  components:
+  - type: Sprite
+    overrideDir: South
+    enableOverrideDir: true
+    sprite: _CS/Clothes/cbuniforms.rsi
+    layers:
+    - state: doug_dimmadome
+  - type: Clothing
+    sprite: _CS/Clothes/cbuniforms.rsi
+    clothingVisuals:
+      jumpsuit:
+      - state: doug_dimmadome
+
+- type: entity
+  parent: CoolCoyoteClothes
+  id: CoolCoyoteClothesDraculass
+  name: draculass slutskirt
+  description: |
+  components:
+  - type: Sprite
+    overrideDir: South
+    enableOverrideDir: true
+    sprite: _CS/Clothes/cbuniforms.rsi
+    layers:
+    - state: draculass
+  - type: Clothing
+    sprite: _CS/Clothes/cbuniforms.rsi
+    clothingVisuals:
+      jumpsuit:
+      - state: draculass
+
+- type: entity
+  parent: CoolCoyoteClothes
+  id: CoolCoyoteClothesDress2
+  name: dress 'two'
+  description: |
+  components:
+  - type: Sprite
+    overrideDir: South
+    enableOverrideDir: true
+    sprite: _CS/Clothes/cbuniforms.rsi
+    layers:
+    - state: dress2
+  - type: Clothing
+    sprite: _CS/Clothes/cbuniforms.rsi
+    clothingVisuals:
+      jumpsuit:
+      - state: dress2
+
+- type: entity
+  parent: CoolCoyoteClothes
+  id: CoolCoyoteClothesDress3
+  name: dress 'three'
+  description: |
+  components:
+  - type: Sprite
+    overrideDir: South
+    enableOverrideDir: true
+    sprite: _CS/Clothes/cbuniforms.rsi
+    layers:
+    - state: dress3
+  - type: Clothing
+    sprite: _CS/Clothes/cbuniforms.rsi
+    clothingVisuals:
+      jumpsuit:
+      - state: dress3
+
+- type: entity
+  parent: CoolCoyoteClothes
+  id: CoolCoyoteClothesDressBlack
+  name: dress in black
+  description: |
+  components:
+  - type: Sprite
+    overrideDir: South
+    enableOverrideDir: true
+    sprite: _CS/Clothes/cbuniforms.rsi
+    layers:
+    - state: dress_black
+  - type: Clothing
+    sprite: _CS/Clothes/cbuniforms.rsi
+    clothingVisuals:
+      jumpsuit:
+      - state: dress_black
+
+- type: entity
+  parent: CoolCoyoteClothes
+  id: CoolCoyoteClothesDressSaloon
+  name: short saloonkeeper dress
+  description: |
+  components:
+  - type: Sprite
+    overrideDir: South
+    enableOverrideDir: true
+    sprite: _CS/Clothes/cbuniforms.rsi
+    layers:
+    - state: dress_saloon_s
+  - type: Clothing
+    sprite: _CS/Clothes/cbuniforms.rsi
+    clothingVisuals:
+      jumpsuit:
+      - state: dress_saloon_s
+
+- type: entity
+  parent: CoolCoyoteClothes
+  id: CoolCoyoteClothesDress5
+  name: dress 'five'
+  description: |
+  components:
+  - type: Sprite
+    overrideDir: South
+    enableOverrideDir: true
+    sprite: _CS/Clothes/cbuniforms.rsi
+    layers:
+    - state: dressg
+  - type: Clothing
+    sprite: _CS/Clothes/cbuniforms.rsi
+    clothingVisuals:
+      jumpsuit:
+      - state: dressg
+
+- type: entity
+  parent: CoolCoyoteClothes
+  id: CoolCoyoteClothesDress6
+  name: dress 'six'
+  description: |
+  components:
+  - type: Sprite
+    overrideDir: South
+    enableOverrideDir: true
+    sprite: _CS/Clothes/cbuniforms.rsi
+    layers:
+    - state: dressr
+  - type: Clothing
+    sprite: _CS/Clothes/cbuniforms.rsi
+    clothingVisuals:
+      jumpsuit:
+      - state: dressr
+
+- type: entity
+  parent: CoolCoyoteClothes
+  id: CoolCoyoteClothesDutch
+  name: dutch vestsuit
+  description: |
+  components:
+  - type: Sprite
+    overrideDir: South
+    enableOverrideDir: true
+    sprite: _CS/Clothes/cbuniforms.rsi
+    layers:
+    - state: dutch
+  - type: Clothing
+    sprite: _CS/Clothes/cbuniforms.rsi
+    clothingVisuals:
+      jumpsuit:
+      - state: dutch
+
+- type: entity
+  parent: CoolCoyoteClothes
+  id: CoolCoyoteClothesExplorerStripper
+  name: explorer stripper
+  description: |
+  components:
+  - type: Sprite
+    overrideDir: South
+    enableOverrideDir: true
+    sprite: _CS/Clothes/cbuniforms.rsi
+    layers:
+    - state: explorerstripper
+  - type: Clothing
+    sprite: _CS/Clothes/cbuniforms.rsi
+    clothingVisuals:
+      jumpsuit:
+      - state: explorerstripper
+
+- type: entity
+  parent: CoolCoyoteClothes
+  id: CoolCoyoteClothesFlamenco
+  name: flamenco dress
+  description: |
+  components:
+  - type: Sprite
+    overrideDir: South
+    enableOverrideDir: true
+    sprite: _CS/Clothes/cbuniforms.rsi
+    layers:
+    - state: flamenco
+  - type: Clothing
+    sprite: _CS/Clothes/cbuniforms.rsi
+    clothingVisuals:
+      jumpsuit:
+      - state: flamenco
+
+- type: entity
+  parent: CoolCoyoteClothes
+  id: CoolCoyoteClothesFloofDress
+  name: floofy dress
+  description: |
+  components:
+  - type: Sprite
+    overrideDir: South
+    enableOverrideDir: true
+    sprite: _CS/Clothes/cbuniforms.rsi
+    layers:
+    - state: floofdress
+  - type: Clothing
+    sprite: _CS/Clothes/cbuniforms.rsi
+    clothingVisuals:
+      jumpsuit:
+      - state: floofdress
+
+- type: entity
+  parent: CoolCoyoteClothes
+  id: CoolCoyoteClothesFlashyGreenDress
+  name: horrible neon green dress
+  description: |
+  components:
+  - type: Sprite
+    overrideDir: South
+    enableOverrideDir: true
+    sprite: _CS/Clothes/cbuniforms.rsi
+    layers:
+    - state: flow_green
+  - type: Clothing
+    sprite: _CS/Clothes/cbuniforms.rsi
+    clothingVisuals:
+      jumpsuit:
+      - state: flow_green
+
+- type: entity
+  parent: CoolCoyoteClothes
+  id: CoolCoyoteClothesFlowRed
+  name: horrible neon red dress
+  description: |
+  components:
+  - type: Sprite
+    overrideDir: South
+    enableOverrideDir: true
+    sprite: _CS/Clothes/cbuniforms.rsi
+    layers:
+    - state: flow_red
+  - type: Clothing
+    sprite: _CS/Clothes/cbuniforms.rsi
+    clothingVisuals:
+      jumpsuit:
+      - state: flow_red
+
+- type: entity
+  parent: CoolCoyoteClothes
+  id: CoolCoyoteClothesFlowerDress
+  name: flower dress
+  description: |
+  components:
+  - type: Sprite
+    overrideDir: South
+    enableOverrideDir: true
+    sprite: _CS/Clothes/cbuniforms.rsi
+    layers:
+    - state: flower_dress
+  - type: Clothing
+    sprite: _CS/Clothes/cbuniforms.rsi
+    clothingVisuals:
+      jumpsuit:
+      - state: flower_dress
+
+- type: entity
+  parent: CoolCoyoteClothes
+  id: CoolCoyoteClothesFlowerKimono
+  name: flower kimono
+  description: |
+  components:
+  - type: Sprite
+    overrideDir: South
+    enableOverrideDir: true
+    sprite: _CS/Clothes/cbuniforms.rsi
+    layers:
+    - state: flower_kimono
+  - type: Clothing
+    sprite: _CS/Clothes/cbuniforms.rsi
+    clothingVisuals:
+      jumpsuit:
+      - state: flower_kimono
+
+- type: entity
+  parent: CoolCoyoteClothes
+  id: CoolCoyoteClothesFormalRedDress
+  name: blood red formal dress
+  description: |
+  components:
+  - type: Sprite
+    overrideDir: South
+    enableOverrideDir: true
+    sprite: _CS/Clothes/cbuniforms.rsi
+    layers:
+    - state: formalred
+  - type: Clothing
+    sprite: _CS/Clothes/cbuniforms.rsi
+    clothingVisuals:
+      jumpsuit:
+      - state: formalred
+
+- type: entity
+  parent: CoolCoyoteClothes
+  id: CoolCoyoteClothesFoxFlannel
+  name: fox flannel
+  description: |
+  components:
+  - type: Sprite
+    overrideDir: South
+    enableOverrideDir: true
+    sprite: _CS/Clothes/cbuniforms.rsi
+    layers:
+    - state: foxflannel
+  - type: Clothing
+    sprite: _CS/Clothes/cbuniforms.rsi
+    clothingVisuals:
+      jumpsuit:
+      - state: foxflannel
+
+- type: entity
+  parent: CoolCoyoteClothes
+  id: CoolCoyoteClothesGoldDress
+  name: golden dress
+  description: |
+  components:
+  - type: Sprite
+    overrideDir: South
+    enableOverrideDir: true
+    sprite: _CS/Clothes/cbuniforms.rsi
+    layers:
+    - state: golddress
+  - type: Clothing
+    sprite: _CS/Clothes/cbuniforms.rsi
+    clothingVisuals:
+      jumpsuit:
+      - state: golddress
+
+- type: entity
+  parent: CoolCoyoteClothes
+  id: CoolCoyoteClothesGoldWrap
+  name: golden wrap
+  description: |
+  components:
+  - type: Sprite
+    overrideDir: South
+    enableOverrideDir: true
+    sprite: _CS/Clothes/cbuniforms.rsi
+    layers:
+    - state: goldwrap
+  - type: Clothing
+    sprite: _CS/Clothes/cbuniforms.rsi
+    clothingVisuals:
+      jumpsuit:
+      - state: goldwrap
+
+- type: entity
+  parent: CoolCoyoteClothes
+  id: CoolCoyoteClothesGothic
+  name: gothic dress
+  description: |
+  components:
+  - type: Sprite
+    overrideDir: South
+    enableOverrideDir: true
+    sprite: _CS/Clothes/cbuniforms.rsi
+    layers:
+    - state: gothic
+  - type: Clothing
+    sprite: _CS/Clothes/cbuniforms.rsi
+    clothingVisuals:
+      jumpsuit:
+      - state: gothic
+
+- type: entity
+  parent: CoolCoyoteClothes
+  id: CoolCoyoteClothesGothic2
+  name: gothic dress 'two'
+  description: |
+  components:
+  - type: Sprite
+    overrideDir: South
+    enableOverrideDir: true
+    sprite: _CS/Clothes/cbuniforms.rsi
+    layers:
+    - state: gothic2
+  - type: Clothing
+    sprite: _CS/Clothes/cbuniforms.rsi
+    clothingVisuals:
+      jumpsuit:
+      - state: gothic2
+
+- type: entity
+  parent: CoolCoyoteClothes
+  id: CoolCoyoteClothesGreatShendyt
+  name: great shendyt
+  description: |
+  components:
+  - type: Sprite
+    overrideDir: South
+    enableOverrideDir: true
+    sprite: _CS/Clothes/cbuniforms.rsi
+    layers:
+    - state: greatshendyt
+  - type: Clothing
+    sprite: _CS/Clothes/cbuniforms.rsi
+    clothingVisuals:
+      jumpsuit:
+      - state: greatshendyt
+
+- type: entity
+  parent: CoolCoyoteClothes
+  id: CoolCoyoteClothesGreekDress
+  name: greek dress
+  description: |
+  components:
+  - type: Sprite
+    overrideDir: South
+    enableOverrideDir: true
+    sprite: _CS/Clothes/cbuniforms.rsi
+    layers:
+    - state: greek_dress
+  - type: Clothing
+    sprite: _CS/Clothes/cbuniforms.rsi
+    clothingVisuals:
+      jumpsuit:
+      - state: greek_dress
+
+- type: entity
+  parent: CoolCoyoteClothes
+  id: CoolCoyoteClothesGreekTunic
+  name: greek tunic
+  description: |
+  components:
+  - type: Sprite
+    overrideDir: South
+    enableOverrideDir: true
+    sprite: _CS/Clothes/cbuniforms.rsi
+    layers:
+    - state: greek_dress_d
+  - type: Clothing
+    sprite: _CS/Clothes/cbuniforms.rsi
+    clothingVisuals:
+      jumpsuit:
+      - state: greek_dress_d
+
+- type: entity
+  parent: CoolCoyoteClothes
+  id: CoolCoyoteClothesDress7
+  name: dress 'seven'
+  description: |
+  components:
+  - type: Sprite
+    overrideDir: South
+    enableOverrideDir: true
+    sprite: _CS/Clothes/cbuniforms.rsi
+    layers:
+    - state: green_dress
+  - type: Clothing
+    sprite: _CS/Clothes/cbuniforms.rsi
+    clothingVisuals:
+      jumpsuit:
+      - state: green_dress
+
+- type: entity
+  parent: CoolCoyoteClothes
+  id: CoolCoyoteClothesGreenHanfu
+  name: green hanfu
+  description: |
+  components:
+  - type: Sprite
+    overrideDir: South
+    enableOverrideDir: true
+    sprite: _CS/Clothes/cbuniforms.rsi
+    layers:
+    - state: green_hanfu
+  - type: Clothing
+    sprite: _CS/Clothes/cbuniforms.rsi
+    clothingVisuals:
+      jumpsuit:
+      - state: green_hanfu
+
+- type: entity
+  parent: CoolCoyoteClothes
+  id: CoolCoyoteClothesGreenAsymmetric
+  name: green asymmetric dress
+  description: |
+  components:
+  - type: Sprite
+    overrideDir: South
+    enableOverrideDir: true
+    sprite: _CS/Clothes/cbuniforms.rsi
+    layers:
+    - state: greenasym
+  - type: Clothing
+    sprite: _CS/Clothes/cbuniforms.rsi
+    clothingVisuals:
+      jumpsuit:
+      - state: greenasym
+
+- type: entity
+  parent: CoolCoyoteClothes
+  id: CoolCoyoteClothesHalfSkirt
+  name: blue half skirt
+  description: |
+  components:
+  - type: Sprite
+    overrideDir: South
+    enableOverrideDir: true
+    sprite: _CS/Clothes/cbuniforms.rsi
+    layers:
+    - state: half_skirt
+  - type: Clothing
+    sprite: _CS/Clothes/cbuniforms.rsi
+    clothingVisuals:
+      jumpsuit:
+      - state: half_skirt
+
+- type: entity
+  parent: CoolCoyoteClothes
+  id: CoolCoyoteClothesHalfHuipil
+  name: half huipil
+  description: |
+  components:
+  - type: Sprite
+    overrideDir: South
+    enableOverrideDir: true
+    sprite: _CS/Clothes/cbuniforms.rsi
+    layers:
+    - state: halfhuipil
+  - type: Clothing
+    sprite: _CS/Clothes/cbuniforms.rsi
+    clothingVisuals:
+      jumpsuit:
+      - state: halfhuipil
+
+- type: entity
+  parent: CoolCoyoteClothes
+  id: CoolCoyoteClothesHaori
+  name: haori
+  description: |
+  components:
+  - type: Sprite
+    overrideDir: South
+    enableOverrideDir: true
+    sprite: _CS/Clothes/cbuniforms.rsi
+    layers:
+    - state: haori
+  - type: Clothing
+    sprite: _CS/Clothes/cbuniforms.rsi
+    clothingVisuals:
+      jumpsuit:
+      - state: haori
+
+- type: entity
+  parent: CoolCoyoteClothes
+  id: CoolCoyoteClothesHaoriSamurai
+  name: samurai haori
+  description: |
+  components:
+  - type: Sprite
+    overrideDir: South
+    enableOverrideDir: true
+    sprite: _CS/Clothes/cbuniforms.rsi
+    layers:
+    - state: haori_samurai
+  - type: Clothing
+    sprite: _CS/Clothes/cbuniforms.rsi
+    clothingVisuals:
+      jumpsuit:
+      - state: haori_samurai
+
+- type: entity
+  parent: CoolCoyoteClothes
+  id: CoolCoyoteClothesHuipil
+  name: huipil
+  description: |
+  components:
+  - type: Sprite
+    overrideDir: South
+    enableOverrideDir: true
+    sprite: _CS/Clothes/cbuniforms.rsi
+    layers:
+    - state: huipil
+  - type: Clothing
+    sprite: _CS/Clothes/cbuniforms.rsi
+    clothingVisuals:
+      jumpsuit:
+      - state: huipil
+
+- type: entity
+  parent: CoolCoyoteClothes
+  id: CoolCoyoteClothesHunter
+  name: hunter leathers
+  description: |
+  components:
+  - type: Sprite
+    overrideDir: South
+    enableOverrideDir: true
+    sprite: _CS/Clothes/cbuniforms.rsi
+    layers:
+    - state: hunter
+  - type: Clothing
+    sprite: _CS/Clothes/cbuniforms.rsi
+    clothingVisuals:
+      jumpsuit:
+      - state: hunter
+
+- type: entity
+  parent: CoolCoyoteClothes
+  id: CoolCoyoteClothesHunterBra
+  name: hunter garb
+  description: |
+  components:
+  - type: Sprite
+    overrideDir: South
+    enableOverrideDir: true
+    sprite: _CS/Clothes/cbuniforms.rsi
+    layers:
+    - state: hunter_d
+  - type: Clothing
+    sprite: _CS/Clothes/cbuniforms.rsi
+    clothingVisuals:
+      jumpsuit:
+      - state: hunter_d
+
+- type: entity
+  parent: CoolCoyoteClothes
+  id: CoolCoyoteClothesIrisTribal
+  name: iris dress
+  description: |
+  components:
+  - type: Sprite
+    overrideDir: South
+    enableOverrideDir: true
+    sprite: _CS/Clothes/cbuniforms.rsi
+    layers:
+    - state: iris_tribal
+  - type: Clothing
+    sprite: _CS/Clothes/cbuniforms.rsi
+    clothingVisuals:
+      jumpsuit:
+      - state: iris_tribal
+
+- type: entity
+  parent: CoolCoyoteClothes
+  id: CoolCoyoteClothesKeyholeSweater
+  name: keyhole sweater
+  description: |
+  components:
+  - type: Sprite
+    overrideDir: South
+    enableOverrideDir: true
+    sprite: _CS/Clothes/cbuniforms.rsi
+    layers:
+    - state: keyholesweater
+  - type: Clothing
+    sprite: _CS/Clothes/cbuniforms.rsi
+    clothingVisuals:
+      jumpsuit:
+      - state: keyholesweater
+
+- type: entity
+  parent: CoolCoyoteClothes
+  id: CoolCoyoteClothesKimonoBlue
+  name: blue kimono
+  description: |
+  components:
+  - type: Sprite
+    overrideDir: South
+    enableOverrideDir: true
+    sprite: _CS/Clothes/cbuniforms.rsi
+    layers:
+    - state: kimono_blue
+  - type: Clothing
+    sprite: _CS/Clothes/cbuniforms.rsi
+    clothingVisuals:
+      jumpsuit:
+      - state: kimono_blue
+
+- type: entity
+  parent: CoolCoyoteClothes
+  id: CoolCoyoteClothesKimonoEarth
+  name: earth kimono
+  description: |
+  components:
+  - type: Sprite
+    overrideDir: South
+    enableOverrideDir: true
+    sprite: _CS/Clothes/cbuniforms.rsi
+    layers:
+    - state: kimono_earth
+  - type: Clothing
+    sprite: _CS/Clothes/cbuniforms.rsi
+    clothingVisuals:
+      jumpsuit:
+      - state: kimono_earth
+
+- type: entity
+  parent: CoolCoyoteClothes
+  id: CoolCoyoteClothesKimonoGreen
+  name: green kimono
+  description: |
+  components:
+  - type: Sprite
+    overrideDir: South
+    enableOverrideDir: true
+    sprite: _CS/Clothes/cbuniforms.rsi
+    layers:
+    - state: kimono_green
+  - type: Clothing
+    sprite: _CS/Clothes/cbuniforms.rsi
+    clothingVisuals:
+      jumpsuit:
+      - state: kimono_green
+
+- type: entity
+  parent: CoolCoyoteClothes
+  id: CoolCoyoteClothesKimonoOrange
+  name: orange kimono
+  description: |
+  components:
+  - type: Sprite
+    overrideDir: South
+    enableOverrideDir: true
+    sprite: _CS/Clothes/cbuniforms.rsi
+    layers:
+    - state: kimono_orange
+  - type: Clothing
+    sprite: _CS/Clothes/cbuniforms.rsi
+    clothingVisuals:
+      jumpsuit:
+      - state: kimono_orange
+
+- type: entity
+  parent: CoolCoyoteClothes
+  id: CoolCoyoteClothesKimonoPink
+  name: pink kimono
+  description: |
+  components:
+  - type: Sprite
+    overrideDir: South
+    enableOverrideDir: true
+    sprite: _CS/Clothes/cbuniforms.rsi
+    layers:
+    - state: kimono_pink
+  - type: Clothing
+    sprite: _CS/Clothes/cbuniforms.rsi
+    clothingVisuals:
+      jumpsuit:
+      - state: kimono_pink
+
+- type: entity
+  parent: CoolCoyoteClothes
+  id: CoolCoyoteClothesKimonoPurple
+  name: purple kimono
+  description: |
+  components:
+  - type: Sprite
+    overrideDir: South
+    enableOverrideDir: true
+    sprite: _CS/Clothes/cbuniforms.rsi
+    layers:
+    - state: kimono_purple
+  - type: Clothing
+    sprite: _CS/Clothes/cbuniforms.rsi
+    clothingVisuals:
+      jumpsuit:
+      - state: kimono_purple
+
+- type: entity
+  parent: CoolCoyoteClothes
+  id: CoolCoyoteClothesKimonoRed
+  name: red kimono
+  description: |
+  components:
+  - type: Sprite
+    overrideDir: South
+    enableOverrideDir: true
+    sprite: _CS/Clothes/cbuniforms.rsi
+    layers:
+    - state: kimono_red
+  - type: Clothing
+    sprite: _CS/Clothes/cbuniforms.rsi
+    clothingVisuals:
+      jumpsuit:
+      - state: kimono_red
+
+- type: entity
+  parent: CoolCoyoteClothes
+  id: CoolCoyoteClothesKimonoViolet
+  name: violet kimono
+  description: |
+  components:
+  - type: Sprite
+    overrideDir: South
+    enableOverrideDir: true
+    sprite: _CS/Clothes/cbuniforms.rsi
+    layers:
+    - state: kimono_violet
+  - type: Clothing
+    sprite: _CS/Clothes/cbuniforms.rsi
+    clothingVisuals:
+      jumpsuit:
+      - state: kimono_violet
+
+- type: entity
+  parent: CoolCoyoteClothes
+  id: CoolCoyoteClothesKimonoYellow
+  name: yellow kimono
+  description: |
+  components:
+  - type: Sprite
+    overrideDir: South
+    enableOverrideDir: true
+    sprite: _CS/Clothes/cbuniforms.rsi
+    layers:
+    - state: kimono_yellow
+  - type: Clothing
+    sprite: _CS/Clothes/cbuniforms.rsi
+    clothingVisuals:
+      jumpsuit:
+      - state: kimono_yellow
+
+- type: entity
+  parent: CoolCoyoteClothes
+  id: CoolCoyoteClothesLandschneckt
+  name: landschneckt
+  description: |
+  components:
+  - type: Sprite
+    overrideDir: South
+    enableOverrideDir: true
+    sprite: _CS/Clothes/cbuniforms.rsi
+    layers:
+    - state: landschneckt
+  - type: Clothing
+    sprite: _CS/Clothes/cbuniforms.rsi
+    clothingVisuals:
+      jumpsuit:
+      - state: landschneckt
+
+- type: entity
+  parent: CoolCoyoteClothes
+  id: CoolCoyoteClothesLatexHalf
+  name: latex singlet
+  description: |
+  components:
+  - type: Sprite
+    overrideDir: South
+    enableOverrideDir: true
+    sprite: _CS/Clothes/cbuniforms.rsi
+    layers:
+    - state: latex_half
+  - type: Clothing
+    sprite: _CS/Clothes/cbuniforms.rsi
+    clothingVisuals:
+      jumpsuit:
+      - state: latex_half
+
+- type: entity
+  parent: CoolCoyoteClothes
+  id: CoolCoyoteClothesLeavesSkirt
+  name: leaves mini skirt
+  description: |
+  components:
+  - type: Sprite
+    overrideDir: South
+    enableOverrideDir: true
+    sprite: _CS/Clothes/cbuniforms.rsi
+    layers:
+    - state: leaves_skirt
+  - type: Clothing
+    sprite: _CS/Clothes/cbuniforms.rsi
+    clothingVisuals:
+      jumpsuit:
+      - state: leaves_skirt
+
+- type: entity
+  parent: CoolCoyoteClothes
+  id: CoolCoyoteClothesLeavesSkirtLong
+  name: leaves skirt
+  description: |
+  components:
+  - type: Sprite
+    overrideDir: South
+    enableOverrideDir: true
+    sprite: _CS/Clothes/cbuniforms.rsi
+    layers:
+    - state: leaves_skirt_long
+  - type: Clothing
+    sprite: _CS/Clothes/cbuniforms.rsi
+    clothingVisuals:
+      jumpsuit:
+      - state: leaves_skirt_long
+
+- type: entity
+  parent: CoolCoyoteClothes
+  id: CoolCoyoteClothesLeia
+  name: leia
+  description: |
+  components:
+  - type: Sprite
+    overrideDir: South
+    enableOverrideDir: true
+    sprite: _CS/Clothes/cbuniforms.rsi
+    layers:
+    - state: leia
+  - type: Clothing
+    sprite: _CS/Clothes/cbuniforms.rsi
+    clothingVisuals:
+      jumpsuit:
+      - state: leia
+
+- type: entity
+  parent: CoolCoyoteClothes
+  id: CoolCoyoteClothesLightHanfu
+  name: hanfu in white
+  description: |
+  components:
+  - type: Sprite
+    overrideDir: South
+    enableOverrideDir: true
+    sprite: _CS/Clothes/cbuniforms.rsi
+    layers:
+    - state: light_hanfu
+  - type: Clothing
+    sprite: _CS/Clothes/cbuniforms.rsi
+    clothingVisuals:
+      jumpsuit:
+      - state: light_hanfu
+
+- type: entity
+  parent: CoolCoyoteClothes
+  id: CoolCoyoteClothesLittleBlackDress
+  name: little black dress
+  description: |
+  components:
+  - type: Sprite
+    overrideDir: South
+    enableOverrideDir: true
+    sprite: _CS/Clothes/cbuniforms.rsi
+    layers:
+    - state: littleblackdress_s
+  - type: Clothing
+    sprite: _CS/Clothes/cbuniforms.rsi
+    clothingVisuals:
+      jumpsuit:
+      - state: littleblackdress_s
+
+- type: entity
+  parent: CoolCoyoteClothes
+  id: CoolCoyoteClothesLoincloth
+  name: DEATHKILLARZ loincloth
+  description: |
+  components:
+  - type: Sprite
+    overrideDir: South
+    enableOverrideDir: true
+    sprite: _CS/Clothes/cbuniforms.rsi
+    layers:
+    - state: loincloth
+  - type: Clothing
+    sprite: _CS/Clothes/cbuniforms.rsi
+    clothingVisuals:
+      jumpsuit:
+      - state: loincloth
+
+- type: entity
+  parent: CoolCoyoteClothes
+  id: CoolCoyoteClothesSexyMaid
+  name: sexy maid
+  description: |
+  components:
+  - type: Sprite
+    overrideDir: South
+    enableOverrideDir: true
+    sprite: _CS/Clothes/cbuniforms.rsi
+    layers:
+    - state: maid_skyrat
+  - type: Clothing
+    sprite: _CS/Clothes/cbuniforms.rsi
+    clothingVisuals:
+      jumpsuit:
+      - state: maid_skyrat
+
+- type: entity
+  parent: CoolCoyoteClothes
+  id: CoolCoyoteClothesMaurader
+  name: maurader suit
+  description: |
+  components:
+  - type: Sprite
+    overrideDir: South
+    enableOverrideDir: true
+    sprite: _CS/Clothes/cbuniforms.rsi
+    layers:
+    - state: marauder
+  - type: Clothing
+    sprite: _CS/Clothes/cbuniforms.rsi
+    clothingVisuals:
+      jumpsuit:
+      - state: marauder
+
+- type: entity
+  parent: CoolCoyoteClothes
+  id: CoolCoyoteClothesMarlowDuds
+  name: marlow duds
+  description: |
+  components:
+  - type: Sprite
+    overrideDir: South
+    enableOverrideDir: true
+    sprite: _CS/Clothes/cbuniforms.rsi
+    layers:
+    - state: marlowduds
+  - type: Clothing
+    sprite: _CS/Clothes/cbuniforms.rsi
+    clothingVisuals:
+      jumpsuit:
+      - state: marlowduds
+
+- type: entity
+  parent: CoolCoyoteClothes
+  id: CoolCoyoteClothesMayanLoincloth
+  name: mayan loincloth
+  description: |
+  components:
+  - type: Sprite
+    overrideDir: South
+    enableOverrideDir: true
+    sprite: _CS/Clothes/cbuniforms.rsi
+    layers:
+    - state: mayan_loincloth
+  - type: Clothing
+    sprite: _CS/Clothes/cbuniforms.rsi
+    clothingVisuals:
+      jumpsuit:
+      - state: mayan_loincloth
+
+- type: entity
+  parent: CoolCoyoteClothes
+  id: CoolCoyoteClothesMikuBikini
+  name: miku bikini
+  description: |
+  components:
+  - type: Sprite
+    overrideDir: South
+    enableOverrideDir: true
+    sprite: _CS/Clothes/cbuniforms.rsi
+    layers:
+    - state: miku_bikini
+  - type: Clothing
+    sprite: _CS/Clothes/cbuniforms.rsi
+    clothingVisuals:
+      jumpsuit:
+      - state: miku_bikini
+
+- type: entity
+  parent: CoolCoyoteClothes
+  id: CoolCoyoteClothesOliveCargoPunk
+  name: olive cargopunk pants
+  description: |
+  components:
+  - type: Sprite
+    overrideDir: South
+    enableOverrideDir: true
+    sprite: _CS/Clothes/cbuniforms.rsi
+    layers:
+    - state: olivecargopunk
+  - type: Clothing
+    sprite: _CS/Clothes/cbuniforms.rsi
+    clothingVisuals:
+      jumpsuit:
+      - state: olivecargopunk
+
+- type: entity
+  parent: CoolCoyoteClothes
+  id: CoolCoyoteClothesPentatop
+  name: pentagram tube top
+  description: |
+  components:
+  - type: Sprite
+    overrideDir: South
+    enableOverrideDir: true
+    sprite: _CS/Clothes/cbuniforms.rsi
+    layers:
+    - state: pentatop
+  - type: Clothing
+    sprite: _CS/Clothes/cbuniforms.rsi
+    clothingVisuals:
+      jumpsuit:
+      - state: pentatop
+
+- type: entity
+  parent: CoolCoyoteClothes
+  id: CoolCoyoteClothesPharaoh
+  name: pharaoh trappings
+  description: |
+  components:
+  - type: Sprite
+    overrideDir: South
+    enableOverrideDir: true
+    sprite: _CS/Clothes/cbuniforms.rsi
+    layers:
+    - state: pharaoh
+  - type: Clothing
+    sprite: _CS/Clothes/cbuniforms.rsi
+    clothingVisuals:
+      jumpsuit:
+      - state: pharaoh
+
+- type: entity
+  parent: CoolCoyoteClothes
+  id: CoolCoyoteClothesPinkDress
+  name: dress 'nine'
+  description: |
+  components:
+  - type: Sprite
+    overrideDir: South
+    enableOverrideDir: true
+    sprite: _CS/Clothes/cbuniforms.rsi
+    layers:
+    - state: pink_dress
+  - type: Clothing
+    sprite: _CS/Clothes/cbuniforms.rsi
+    clothingVisuals:
+      jumpsuit:
+      - state: pink_dress
+
+- type: entity
+  parent: CoolCoyoteClothes
+  id: CoolCoyoteClothesPinkSun
+  name: pink sun dress
+  description: |
+  components:
+  - type: Sprite
+    overrideDir: South
+    enableOverrideDir: true
+    sprite: _CS/Clothes/cbuniforms.rsi
+    layers:
+    - state: pinksun
+  - type: Clothing
+    sprite: _CS/Clothes/cbuniforms.rsi
+    clothingVisuals:
+      jumpsuit:
+      - state: pinksun
+
+- type: entity
+  parent: CoolCoyoteClothes
+  id: CoolCoyoteClothesPinkTutu
+  name: pink tutu
+  description: |
+  components:
+  - type: Sprite
+    overrideDir: South
+    enableOverrideDir: true
+    sprite: _CS/Clothes/cbuniforms.rsi
+    layers:
+    - state: pinktutu_s
+  - type: Clothing
+    sprite: _CS/Clothes/cbuniforms.rsi
+    clothingVisuals:
+      jumpsuit:
+      - state: pinktutu_s
+
+- type: entity
+  parent: CoolCoyoteClothes
+  id: CoolCoyoteClothesPinkwshort
+  name: pink athletic shorts
+  description: |
+  components:
+  - type: Sprite
+    overrideDir: South
+    enableOverrideDir: true
+    sprite: _CS/Clothes/cbuniforms.rsi
+    layers:
+    - state: pinkwshort
+  - type: Clothing
+    sprite: _CS/Clothes/cbuniforms.rsi
+    clothingVisuals:
+      jumpsuit:
+      - state: pinkwshort
+
+- type: entity
+  parent: CoolCoyoteClothes
+  id: CoolCoyoteClothesPolyPerformer
+  name: polyester performer drapery
+  description: |
+  components:
+  - type: Sprite
+    overrideDir: South
+    enableOverrideDir: true
+    sprite: _CS/Clothes/cbuniforms.rsi
+    layers:
+    - state: poly_performer
+  - type: Clothing
+    sprite: _CS/Clothes/cbuniforms.rsi
+    clothingVisuals:
+      jumpsuit:
+      - state: poly_performer
+
+- type: entity
+  parent: CoolCoyoteClothes
+  id: CoolCoyoteClothesPortugueseSailor1d
+  name: portuguese sailor
+  description: |
+  components:
+  - type: Sprite
+    overrideDir: South
+    enableOverrideDir: true
+    sprite: _CS/Clothes/cbuniforms.rsi
+    layers:
+    - state: portuguese_sailor1_d
+  - type: Clothing
+    sprite: _CS/Clothes/cbuniforms.rsi
+    clothingVisuals:
+      jumpsuit:
+      - state: portuguese_sailor1_d
+
+- type: entity
+  parent: CoolCoyoteClothes
+  id: CoolCoyoteClothesPromDress
+  name: prom dress
+  description: |
+  components:
+  - type: Sprite
+    overrideDir: South
+    enableOverrideDir: true
+    sprite: _CS/Clothes/cbuniforms.rsi
+    layers:
+    - state: promdress
+  - type: Clothing
+    sprite: _CS/Clothes/cbuniforms.rsi
+    clothingVisuals:
+      jumpsuit:
+      - state: promdress
+
+- type: entity
+  parent: CoolCoyoteClothes
+  id: CoolCoyoteClothesPuffyDress
+  name: puffy dress
+  description: |
+  components:
+  - type: Sprite
+    overrideDir: South
+    enableOverrideDir: true
+    sprite: _CS/Clothes/cbuniforms.rsi
+    layers:
+    - state: puffydress
+  - type: Clothing
+    sprite: _CS/Clothes/cbuniforms.rsi
+    clothingVisuals:
+      jumpsuit:
+      - state: puffydress
+
+- type: entity
+  parent: CoolCoyoteClothes
+  id: CoolCoyoteClothesQipao
+  name: qipao
+  description: |
+  components:
+  - type: Sprite
+    overrideDir: South
+    enableOverrideDir: true
+    sprite: _CS/Clothes/cbuniforms.rsi
+    layers:
+    - state: qipao
+  - type: Clothing
+    sprite: _CS/Clothes/cbuniforms.rsi
+    clothingVisuals:
+      jumpsuit:
+      - state: qipao
+
+- type: entity
+  parent: CoolCoyoteClothes
+  id: CoolCoyoteClothesQipaoNosleeve
+  name: qipao sleeveless
+  description: |
+  components:
+  - type: Sprite
+    overrideDir: South
+    enableOverrideDir: true
+    sprite: _CS/Clothes/cbuniforms.rsi
+    layers:
+    - state: qipao_nosleeve
+  - type: Clothing
+    sprite: _CS/Clothes/cbuniforms.rsi
+    clothingVisuals:
+      jumpsuit:
+      - state: qipao_nosleeve
+
+- type: entity
+  parent: CoolCoyoteClothes
+  id: CoolCoyoteClothesQipaoRed
+  name: qipao in red
+  description: |
+  components:
+  - type: Sprite
+    overrideDir: South
+    enableOverrideDir: true
+    sprite: _CS/Clothes/cbuniforms.rsi
+    layers:
+    - state: qipao_red
+  - type: Clothing
+    sprite: _CS/Clothes/cbuniforms.rsi
+    clothingVisuals:
+      jumpsuit:
+      - state: qipao_red
+
+- type: entity
+  parent: CoolCoyoteClothes
+  id: CoolCoyoteClothesQipaoRedNosleeve
+  name: qipao sleeveless in red
+  description: |
+  components:
+  - type: Sprite
+    overrideDir: South
+    enableOverrideDir: true
+    sprite: _CS/Clothes/cbuniforms.rsi
+    layers:
+    - state: qipao_red_nosleeve
+  - type: Clothing
+    sprite: _CS/Clothes/cbuniforms.rsi
+    clothingVisuals:
+      jumpsuit:
+      - state: qipao_red_nosleeve
+
+- type: entity
+  parent: CoolCoyoteClothes
+  id: CoolCoyoteClothesQipaoTealNosleeve
+  name: qipao sleeveless in teal
+  description: |
+  components:
+  - type: Sprite
+    overrideDir: South
+    enableOverrideDir: true
+    sprite: _CS/Clothes/cbuniforms.rsi
+    layers:
+    - state: qipao_teal_nosleeve
+  - type: Clothing
+    sprite: _CS/Clothes/cbuniforms.rsi
+    clothingVisuals:
+      jumpsuit:
+      - state: qipao_teal_nosleeve
+
+- type: entity
+  parent: CoolCoyoteClothes
+  id: CoolCoyoteClothesQipaoWhite
+  name: qipao in white
+  description: |
+  components:
+  - type: Sprite
+    overrideDir: South
+    enableOverrideDir: true
+    sprite: _CS/Clothes/cbuniforms.rsi
+    layers:
+    - state: qipao_white
+  - type: Clothing
+    sprite: _CS/Clothes/cbuniforms.rsi
+    clothingVisuals:
+      jumpsuit:
+      - state: qipao_white
+
+- type: entity
+  parent: CoolCoyoteClothes
+  id: CoolCoyoteClothesQipaoWhiteNosleeve
+  name: qipao sleeveless in white
+  description: |
+  components:
+  - type: Sprite
+    overrideDir: South
+    enableOverrideDir: true
+    sprite: _CS/Clothes/cbuniforms.rsi
+    layers:
+    - state: qipao_white_nosleeve
+  - type: Clothing
+    sprite: _CS/Clothes/cbuniforms.rsi
+    clothingVisuals:
+      jumpsuit:
+      - state: qipao_white_nosleeve
+
+- type: entity
+  parent: CoolCoyoteClothes
+  id: CoolCoyoteRedLandschneckt
+  name: landschneckt in red
+  description: |
+  components:
+  - type: Sprite
+    overrideDir: South
+    enableOverrideDir: true
+    sprite: _CS/Clothes/cbuniforms.rsi
+    layers:
+    - state: r_landschneckt
+  - type: Clothing
+    sprite: _CS/Clothes/cbuniforms.rsi
+    clothingVisuals:
+      jumpsuit:
+      - state: r_landschneckt
+
+- type: entity
+  parent: CoolCoyoteClothes
+  id: CoolCoyoteClothesRadkini
+  name: radkini
+  description: |
+  components:
+  - type: Sprite
+    overrideDir: South
+    enableOverrideDir: true
+    sprite: _CS/Clothes/cbuniforms.rsi
+    layers:
+    - state: radkini
+  - type: Clothing
+    sprite: _CS/Clothes/cbuniforms.rsi
+    clothingVisuals:
+      jumpsuit:
+      - state: radkini
+
+- type: entity
+  parent: CoolCoyoteClothes
+  id: CoolCoyoteClothesRattyCyberpunk
+  name: ratty cyberpunk
+  description: |
+  components:
+  - type: Sprite
+    overrideDir: South
+    enableOverrideDir: true
+    sprite: _CS/Clothes/cbuniforms.rsi
+    layers:
+    - state: rattycyberpunk
+  - type: Clothing
+    sprite: _CS/Clothes/cbuniforms.rsi
+    clothingVisuals:
+      jumpsuit:
+      - state: rattycyberpunk
+
+- type: entity
+  parent: CoolCoyoteClothes
+  id: CoolCoyoteClothesRattySkirtGreen
+  name: ratty green skirt
+  description: |
+  components:
+  - type: Sprite
+    overrideDir: South
+    enableOverrideDir: true
+    sprite: _CS/Clothes/cbuniforms.rsi
+    layers:
+    - state: rattyskirtgreen
+  - type: Clothing
+    sprite: _CS/Clothes/cbuniforms.rsi
+    clothingVisuals:
+      jumpsuit:
+      - state: rattyskirtgreen
+
+- type: entity
+  parent: CoolCoyoteClothes
+  id: CoolCoyoteClothesRattySkirtPink
+  name: ratty pink skirt
+  description: |
+  components:
+  - type: Sprite
+    overrideDir: South
+    enableOverrideDir: true
+    sprite: _CS/Clothes/cbuniforms.rsi
+    layers:
+    - state: rattyskirtpink
+  - type: Clothing
+    sprite: _CS/Clothes/cbuniforms.rsi
+    clothingVisuals:
+      jumpsuit:
+      - state: rattyskirtpink
+
+- type: entity
+  parent: CoolCoyoteClothes
+  id: CoolCoyoteClothesRattySkirtYellow
+  name: ratty yellow skirt
+  description: |
+  components:
+  - type: Sprite
+    overrideDir: South
+    enableOverrideDir: true
+    sprite: _CS/Clothes/cbuniforms.rsi
+    layers:
+    - state: rattyskirtyellow
+  - type: Clothing
+    sprite: _CS/Clothes/cbuniforms.rsi
+    clothingVisuals:
+      jumpsuit:
+      - state: rattyskirtyellow
+
+- type: entity
+  parent: CoolCoyoteClothes
+  id: CoolCoyoteClothesRedEveningDress
+  name: red evening dress
+  description: |
+  components:
+  - type: Sprite
+    overrideDir: South
+    enableOverrideDir: true
+    sprite: _CS/Clothes/cbuniforms.rsi
+    layers:
+    - state: red_evening_gown
+  - type: Clothing
+    sprite: _CS/Clothes/cbuniforms.rsi
+    clothingVisuals:
+      jumpsuit:
+      - state: red_evening_gown
+
+- type: entity
+  parent: CoolCoyoteClothes
+  id: CoolCoyoteClothesRedSari
+  name: red sari
+  description: |
+  components:
+  - type: Sprite
+    overrideDir: South
+    enableOverrideDir: true
+    sprite: _CS/Clothes/cbuniforms.rsi
+    layers:
+    - state: red_sari
+  - type: Clothing
+    sprite: _CS/Clothes/cbuniforms.rsi
+    clothingVisuals:
+      jumpsuit:
+      - state: red_sari
+
+- type: entity
+  parent: CoolCoyoteClothes
+  id: CoolCoyoteClothesRedWshort
+  name: red athletic shorts
+  description: |
+  components:
+  - type: Sprite
+    overrideDir: South
+    enableOverrideDir: true
+    sprite: _CS/Clothes/cbuniforms.rsi
+    layers:
+    - state: redwshort
+  - type: Clothing
+    sprite: _CS/Clothes/cbuniforms.rsi
+    clothingVisuals:
+      jumpsuit:
+      - state: redwshort
+
+- type: entity
+  parent: CoolCoyoteClothes
+  id: CoolCoyoteClothesRevealingDress
+  name: revealing dress
+  description: |
+  components:
+  - type: Sprite
+    overrideDir: South
+    enableOverrideDir: true
+    sprite: _CS/Clothes/cbuniforms.rsi
+    layers:
+    - state: revealingdress
+  - type: Clothing
+    sprite: _CS/Clothes/cbuniforms.rsi
+    clothingVisuals:
+      jumpsuit:
+      - state: revealingdress
+
+- type: entity
+  parent: CoolCoyoteClothes
+  id: CoolCoyoteClothesRippedPunk
+  name: ripped punk fishnet pantskini
+  description: |
+  components:
+  - type: Sprite
+    overrideDir: South
+    enableOverrideDir: true
+    sprite: _CS/Clothes/cbuniforms.rsi
+    layers:
+    - state: rippedpunk
+  - type: Clothing
+    sprite: _CS/Clothes/cbuniforms.rsi
+    clothingVisuals:
+      jumpsuit:
+      - state: rippedpunk
+
+- type: entity
+  parent: CoolCoyoteClothes
+  id: CoolCoyoteClothesSecslutskirt
+  name: sexy redsec skirt
+  description: |
+  components:
+  - type: Sprite
+    overrideDir: South
+    enableOverrideDir: true
+    sprite: _CS/Clothes/cbuniforms.rsi
+    layers:
+    - state: secslutskirt
+  - type: Clothing
+    sprite: _CS/Clothes/cbuniforms.rsi
+    clothingVisuals:
+      jumpsuit:
+      - state: secslutskirt
+
+- type: entity
+  parent: CoolCoyoteClothes
+  id: CoolCoyoteClothesSecslutskirtpink
+  name: sexy mauvesec skirt
+  description: |
+  components:
+  - type: Sprite
+    overrideDir: South
+    enableOverrideDir: true
+    sprite: _CS/Clothes/cbuniforms.rsi
+    layers:
+    - state: secslutskirtpink
+  - type: Clothing
+    sprite: _CS/Clothes/cbuniforms.rsi
+    clothingVisuals:
+      jumpsuit:
+      - state: secslutskirtpink
+
+- type: entity
+  parent: CoolCoyoteClothes
+  id: CoolCoyoteClothesSecstripper
+  name: sexy security stripper
+  description: |
+  components:
+  - type: Sprite
+    overrideDir: South
+    enableOverrideDir: true
+    sprite: _CS/Clothes/cbuniforms.rsi
+    layers:
+    - state: secstripper
+  - type: Clothing
+    sprite: _CS/Clothes/cbuniforms.rsi
+    clothingVisuals:
+      jumpsuit:
+      - state: secstripper
+
+- type: entity
+  parent: CoolCoyoteClothes
+  id: CoolCoyoteClothesSexyclown
+  name: sexy clown outfit
+  description: |
+  components:
+  - type: Sprite
+    overrideDir: South
+    enableOverrideDir: true
+    sprite: _CS/Clothes/cbuniforms.rsi
+    layers:
+    - state: sexyclown
+  - type: Clothing
+    sprite: _CS/Clothes/cbuniforms.rsi
+    clothingVisuals:
+      jumpsuit:
+      - state: sexyclown
+
+- type: entity
+  parent: CoolCoyoteClothes
+  id: CoolCoyoteClothesSexymime
+  name: sexy mime outfit
+  description: |
+  components:
+  - type: Sprite
+    overrideDir: South
+    enableOverrideDir: true
+    sprite: _CS/Clothes/cbuniforms.rsi
+    layers:
+    - state: sexymime
+  - type: Clothing
+    sprite: _CS/Clothes/cbuniforms.rsi
+    clothingVisuals:
+      jumpsuit:
+      - state: sexymime
+
+- type: entity
+  parent: CoolCoyoteClothes
+  id: CoolCoyoteClothesSexynursesuit
+  name: sexy nurse outfit
+  description: |
+  components:
+  - type: Sprite
+    overrideDir: South
+    enableOverrideDir: true
+    sprite: _CS/Clothes/cbuniforms.rsi
+    layers:
+    - state: sexynursesuit
+  - type: Clothing
+    sprite: _CS/Clothes/cbuniforms.rsi
+    clothingVisuals:
+      jumpsuit:
+      - state: sexynursesuit
+
+- type: entity
+  parent: CoolCoyoteClothes
+  id: CoolCoyoteClothesShamanblue
+  name: shaman in blue
+  description: |
+  components:
+  - type: Sprite
+    overrideDir: South
+    enableOverrideDir: true
+    sprite: _CS/Clothes/cbuniforms.rsi
+    layers:
+    - state: shamanblue
+  - type: Clothing
+    sprite: _CS/Clothes/cbuniforms.rsi
+    clothingVisuals:
+      jumpsuit:
+      - state: shamanblue
+
+- type: entity
+  parent: CoolCoyoteClothes
+  id: CoolCoyoteClothesSheerblue
+  name: sheer blue dress
+  description: |
+  components:
+  - type: Sprite
+    overrideDir: South
+    enableOverrideDir: true
+    sprite: _CS/Clothes/cbuniforms.rsi
+    layers:
+    - state: sheerblue
+  - type: Clothing
+    sprite: _CS/Clothes/cbuniforms.rsi
+    clothingVisuals:
+      jumpsuit:
+      - state: sheerblue
+
+- type: entity
+  parent: CoolCoyoteClothes
+  id: CoolCoyoteClothesShortPink
+  name: short pink nightgown
+  description: |
+  components:
+  - type: Sprite
+    overrideDir: South
+    enableOverrideDir: true
+    sprite: _CS/Clothes/cbuniforms.rsi
+    layers:
+    - state: shortpink
+  - type: Clothing
+    sprite: _CS/Clothes/cbuniforms.rsi
+    clothingVisuals:
+      jumpsuit:
+      - state: shortpink
+
+- type: entity
+  parent: CoolCoyoteClothes
+  id: CoolCoyoteClothesShortsBlue
+  name: neon blue flashy shorts
+  description: |
+  components:
+  - type: Sprite
+    overrideDir: South
+    enableOverrideDir: true
+    sprite: _CS/Clothes/cbuniforms.rsi
+    layers:
+    - state: shorts_blue
+  - type: Clothing
+    sprite: _CS/Clothes/cbuniforms.rsi
+    clothingVisuals:
+      jumpsuit:
+      - state: shorts_blue
+
+- type: entity
+  parent: CoolCoyoteClothes
+  id: CoolCoyoteClothesShortsRed
+  name: blood red breeches
+  description: |
+  components:
+  - type: Sprite
+    overrideDir: South
+    enableOverrideDir: true
+    sprite: _CS/Clothes/cbuniforms.rsi
+    layers:
+    - state: shorts_red
+  - type: Clothing
+    sprite: _CS/Clothes/cbuniforms.rsi
+    clothingVisuals:
+      jumpsuit:
+      - state: shorts_red
+
+- type: entity
+  parent: CoolCoyoteClothes
+  id: CoolCoyoteClothesSocietyDress
+  name: society dress
+  description: |
+  components:
+  - type: Sprite
+    overrideDir: South
+    enableOverrideDir: true
+    sprite: _CS/Clothes/cbuniforms.rsi
+    layers:
+    - state: societydress
+  - type: Clothing
+    sprite: _CS/Clothes/cbuniforms.rsi
+    clothingVisuals:
+      jumpsuit:
+      - state: societydress
+
+- type: entity
+  parent: CoolCoyoteClothes
+  id: CoolCoyoteClothesSunSkirt
+  name: sun skirt in green
+  description: |
+  components:
+  - type: Sprite
+    overrideDir: South
+    enableOverrideDir: true
+    sprite: _CS/Clothes/cbuniforms.rsi
+    layers:
+    - state: sun_skirt
+  - type: Clothing
+    sprite: _CS/Clothes/cbuniforms.rsi
+    clothingVisuals:
+      jumpsuit:
+      - state: sun_skirt
+
+- type: entity
+  parent: CoolCoyoteClothes
+  id: CoolCoyoteClothesSunSkirtGrey
+  name: sun skirt in grey
+  description: |
+  components:
+  - type: Sprite
+    overrideDir: South
+    enableOverrideDir: true
+    sprite: _CS/Clothes/cbuniforms.rsi
+    layers:
+    - state: sun_skirt_grey
+  - type: Clothing
+    sprite: _CS/Clothes/cbuniforms.rsi
+    clothingVisuals:
+      jumpsuit:
+      - state: sun_skirt_grey
+
+- type: entity
+  parent: CoolCoyoteClothes
+  id: CoolCoyoteClothesSundressBlue
+  name: sundress in blue
+  description: |
+  components:
+  - type: Sprite
+    overrideDir: South
+    enableOverrideDir: true
+    sprite: _CS/Clothes/cbuniforms.rsi
+    layers:
+    - state: sundress_blue
+  - type: Clothing
+    sprite: _CS/Clothes/cbuniforms.rsi
+    clothingVisuals:
+      jumpsuit:
+      - state: sundress_blue
+
+- type: entity
+  parent: CoolCoyoteClothes
+  id: CoolCoyoteClothesSundressOrange
+  name: sundress in orange
+  description: |
+  components:
+  - type: Sprite
+    overrideDir: South
+    enableOverrideDir: true
+    sprite: _CS/Clothes/cbuniforms.rsi
+    layers:
+    - state: sundress_orange
+  - type: Clothing
+    sprite: _CS/Clothes/cbuniforms.rsi
+    clothingVisuals:
+      jumpsuit:
+      - state: sundress_orange
+
+- type: entity
+  parent: CoolCoyoteClothes
+  id: CoolCoyoteClothesSundressPurple
+  name: sundress in purple
+  description: |
+  components:
+  - type: Sprite
+    overrideDir: South
+    enableOverrideDir: true
+    sprite: _CS/Clothes/cbuniforms.rsi
+    layers:
+    - state: sundress_purple
+  - type: Clothing
+    sprite: _CS/Clothes/cbuniforms.rsi
+    clothingVisuals:
+      jumpsuit:
+      - state: sundress_purple
+
+- type: entity
+  parent: CoolCoyoteClothes
+  id: CoolCoyoteClothesSundressRed
+  name: sundress in red
+  description: |
+  components:
+  - type: Sprite
+    overrideDir: South
+    enableOverrideDir: true
+    sprite: _CS/Clothes/cbuniforms.rsi
+    layers:
+    - state: sundress_red
+  - type: Clothing
+    sprite: _CS/Clothes/cbuniforms.rsi
+    clothingVisuals:
+      jumpsuit:
+      - state: sundress_red
+
+- type: entity
+  parent: CoolCoyoteClothes
+  id: CoolCoyoteClothesSundressYellow
+  name: sundress in yellow
+  description: |
+  components:
+  - type: Sprite
+    overrideDir: South
+    enableOverrideDir: true
+    sprite: _CS/Clothes/cbuniforms.rsi
+    layers:
+    - state: sundress_yellow
+  - type: Clothing
+    sprite: _CS/Clothes/cbuniforms.rsi
+    clothingVisuals:
+      jumpsuit:
+      - state: sundress_yellow
+
+- type: entity
+  parent: CoolCoyoteClothes
+  id: CoolCoyoteClothesSwimBlack
+  name: one-piece swimsuit in black
+  description: |
+  components:
+  - type: Sprite
+    overrideDir: South
+    enableOverrideDir: true
+    sprite: _CS/Clothes/cbuniforms.rsi
+    layers:
+    - state: swim_black
+  - type: Clothing
+    sprite: _CS/Clothes/cbuniforms.rsi
+    clothingVisuals:
+      jumpsuit:
+      - state: swim_black
+
+- type: entity
+  parent: CoolCoyoteClothes
+  id: CoolCoyoteClothesSwimBlue
+  name: one-piece swimsuit in blue
+  description: |
+  components:
+  - type: Sprite
+    overrideDir: South
+    enableOverrideDir: true
+    sprite: _CS/Clothes/cbuniforms.rsi
+    layers:
+    - state: swim_blue
+  - type: Clothing
+    sprite: _CS/Clothes/cbuniforms.rsi
+    clothingVisuals:
+      jumpsuit:
+      - state: swim_blue
+
+- type: entity
+  parent: CoolCoyoteClothes
+  id: CoolCoyoteClothesSwimEarth
+  name: one-or-more-piece swimsuit in earth
+  description: |
+  components:
+  - type: Sprite
+    overrideDir: South
+    enableOverrideDir: true
+    sprite: _CS/Clothes/cbuniforms.rsi
+    layers:
+    - state: swim_earth
+  - type: Clothing
+    sprite: _CS/Clothes/cbuniforms.rsi
+    clothingVisuals:
+      jumpsuit:
+      - state: swim_earth
+
+- type: entity
+  parent: CoolCoyoteClothes
+  id: CoolCoyoteClothesSwimGreen
+  name: one-or-more-piece swimsuit in green
+  description: |
+  components:
+  - type: Sprite
+    overrideDir: South
+    enableOverrideDir: true
+    sprite: _CS/Clothes/cbuniforms.rsi
+    layers:
+    - state: swim_green
+  - type: Clothing
+    sprite: _CS/Clothes/cbuniforms.rsi
+    clothingVisuals:
+      jumpsuit:
+      - state: swim_green
+
+- type: entity
+  parent: CoolCoyoteClothes
+  id: CoolCoyoteClothesSwimPurp
+  name: one-or-more-piece swimsuit in purp
+  description: |
+  components:
+  - type: Sprite
+    overrideDir: South
+    enableOverrideDir: true
+    sprite: _CS/Clothes/cbuniforms.rsi
+    layers:
+    - state: swim_purp
+  - type: Clothing
+    sprite: _CS/Clothes/cbuniforms.rsi
+    clothingVisuals:
+      jumpsuit:
+      - state: swim_purp
+
+- type: entity
+  parent: CoolCoyoteClothes
+  id: CoolCoyoteClothesSwimRed
+  name: one-or-more-piece swimsuit in red
+  description: |
+  components:
+  - type: Sprite
+    overrideDir: South
+    enableOverrideDir: true
+    sprite: _CS/Clothes/cbuniforms.rsi
+    layers:
+    - state: swim_red
+  - type: Clothing
+    sprite: _CS/Clothes/cbuniforms.rsi
+    clothingVisuals:
+      jumpsuit:
+      - state: swim_red
+
+- type: entity
+  parent: CoolCoyoteClothes
+  id: CoolCoyoteClothesSyclothing
+  name: sy-bikini
+  description: |
+  components:
+  - type: Sprite
+    overrideDir: South
+    enableOverrideDir: true
+    sprite: _CS/Clothes/cbuniforms.rsi
+    layers:
+    - state: syclothing
+  - type: Clothing
+    sprite: _CS/Clothes/cbuniforms.rsi
+    clothingVisuals:
+      jumpsuit:
+      - state: syclothing
+
+- type: entity
+  parent: CoolCoyoteClothes
+  id: CoolCoyoteClothesTacticoolHawaiianBlue
+  name: tacticool hawaiian shirt in blue
+  description: |
+  components:
+  - type: Sprite
+    overrideDir: South
+    enableOverrideDir: true
+    sprite: _CS/Clothes/cbuniforms.rsi
+    layers:
+    - state: tacticool_hawaiian_blue
+  - type: Clothing
+    sprite: _CS/Clothes/cbuniforms.rsi
+    clothingVisuals:
+      jumpsuit:
+      - state: tacticool_hawaiian_blue
+
+- type: entity
+  parent: CoolCoyoteClothes
+  id: CoolCoyoteClothesTacticoolHawaiianOrange
+  name: tacticool hawaiian shirt in orange
+  description: |
+  components:
+  - type: Sprite
+    overrideDir: South
+    enableOverrideDir: true
+    sprite: _CS/Clothes/cbuniforms.rsi
+    layers:
+    - state: tacticool_hawaiian_orange
+  - type: Clothing
+    sprite: _CS/Clothes/cbuniforms.rsi
+    clothingVisuals:
+      jumpsuit:
+      - state: tacticool_hawaiian_orange
+
+- type: entity
+  parent: CoolCoyoteClothes
+  id: CoolCoyoteClothesTacticoolHawaiianPurple
+  name: tacticool hawaiian shirt in purple
+  description: |
+  components:
+  - type: Sprite
+    overrideDir: South
+    enableOverrideDir: true
+    sprite: _CS/Clothes/cbuniforms.rsi
+    layers:
+    - state: tacticool_hawaiian_purple
+  - type: Clothing
+    sprite: _CS/Clothes/cbuniforms.rsi
+    clothingVisuals:
+      jumpsuit:
+      - state: tacticool_hawaiian_purple
+
+- type: entity
+  parent: CoolCoyoteClothes
+  id: CoolCoyoteClothesTexas
+  name: texan scrobsuit
+  description: |
+  components:
+  - type: Sprite
+    overrideDir: South
+    enableOverrideDir: true
+    sprite: _CS/Clothes/cbuniforms.rsi
+    layers:
+    - state: texas
+  - type: Clothing
+    sprite: _CS/Clothes/cbuniforms.rsi
+    clothingVisuals:
+      jumpsuit:
+      - state: texas
+
+- type: entity
+  parent: CoolCoyoteClothes
+  id: CoolCoyoteClothesToga
+  name: toga
+  description: |
+  components:
+  - type: Sprite
+    overrideDir: South
+    enableOverrideDir: true
+    sprite: _CS/Clothes/cbuniforms.rsi
+    layers:
+    - state: toga
+  - type: Clothing
+    sprite: _CS/Clothes/cbuniforms.rsi
+    clothingVisuals:
+      jumpsuit:
+      - state: toga
+
+- type: entity
+  parent: CoolCoyoteClothes
+  id: CoolCoyoteClothesToga2
+  name: toga 'two'
+  description: |
+  components:
+  - type: Sprite
+    overrideDir: South
+    enableOverrideDir: true
+    sprite: _CS/Clothes/cbuniforms.rsi
+    layers:
+    - state: toga2
+  - type: Clothing
+    sprite: _CS/Clothes/cbuniforms.rsi
+    clothingVisuals:
+      jumpsuit:
+      - state: toga2
+
+- type: entity
+  parent: CoolCoyoteClothes
+  id: CoolCoyoteClothesTradwifeBlue
+  name: housewife in blue
+  description: |
+  components:
+  - type: Sprite
+    overrideDir: South
+    enableOverrideDir: true
+    sprite: _CS/Clothes/cbuniforms.rsi
+    layers:
+    - state: tradwife_blue
+  - type: Clothing
+    sprite: _CS/Clothes/cbuniforms.rsi
+    clothingVisuals:
+      jumpsuit:
+      - state: tradwife_blue
+
+- type: entity
+  parent: CoolCoyoteClothes
+  id: CoolCoyoteClothesTradwifeOrange
+  name: housewife in orange
+  description: |
+  components:
+  - type: Sprite
+    overrideDir: South
+    enableOverrideDir: true
+    sprite: _CS/Clothes/cbuniforms.rsi
+    layers:
+    - state: tradwife_orange
+  - type: Clothing
+    sprite: _CS/Clothes/cbuniforms.rsi
+    clothingVisuals:
+      jumpsuit:
+      - state: tradwife_orange
+
+- type: entity
+  parent: CoolCoyoteClothes
+  id: CoolCoyoteClothesTradwifePurple
+  name: housewife in purple
+  description: |
+  components:
+  - type: Sprite
+    overrideDir: South
+    enableOverrideDir: true
+    sprite: _CS/Clothes/cbuniforms.rsi
+    layers:
+    - state: tradwife_purple
+  - type: Clothing
+    sprite: _CS/Clothes/cbuniforms.rsi
+    clothingVisuals:
+      jumpsuit:
+      - state: tradwife_purple
+
+- type: entity
+  parent: CoolCoyoteClothes
+  id: CoolCoyoteClothesTradwifeRed
+  name: housewife in red
+  description: |
+  components:
+  - type: Sprite
+    overrideDir: South
+    enableOverrideDir: true
+    sprite: _CS/Clothes/cbuniforms.rsi
+    layers:
+    - state: tradwife_red
+  - type: Clothing
+    sprite: _CS/Clothes/cbuniforms.rsi
+    clothingVisuals:
+      jumpsuit:
+      - state: tradwife_red
+
+- type: entity
+  parent: CoolCoyoteClothes
+  id: CoolCoyoteClothesTradwifeYellow
+  name: housewife in yellow
+  description: |
+  components:
+  - type: Sprite
+    overrideDir: South
+    enableOverrideDir: true
+    sprite: _CS/Clothes/cbuniforms.rsi
+    layers:
+    - state: tradwife_yellow
+  - type: Clothing
+    sprite: _CS/Clothes/cbuniforms.rsi
+    clothingVisuals:
+      jumpsuit:
+      - state: tradwife_yellow
+
+- type: entity
+  parent: CoolCoyoteClothes
+  id: CoolCoyoteClothesTribalColorful
+  name: tribal colorful tribalwear
+  description: |
+  components:
+  - type: Sprite
+    overrideDir: South
+    enableOverrideDir: true
+    sprite: _CS/Clothes/cbuniforms.rsi
+    layers:
+    - state: tribal_colorful
+  - type: Clothing
+    sprite: _CS/Clothes/cbuniforms.rsi
+    clothingVisuals:
+      jumpsuit:
+      - state: tribal_colorful
+
+- type: entity
+  parent: CoolCoyoteClothes
+  id: CoolCoyoteClothesTribalColorfulTop
+  name: tribal colorful tribalwear top
+  description: |
+  components:
+  - type: Sprite
+    overrideDir: South
+    enableOverrideDir: true
+    sprite: _CS/Clothes/cbuniforms.rsi
+    layers:
+    - state: tribal_colorful_top
+  - type: Clothing
+    sprite: _CS/Clothes/cbuniforms.rsi
+    clothingVisuals:
+      jumpsuit:
+      - state: tribal_colorful_top
+
+- type: entity
+  parent: CoolCoyoteClothes
+  id: CoolCoyoteClothesUNIrish
+  name: drab uniform
+  description: |
+  components:
+  - type: Sprite
+    overrideDir: South
+    enableOverrideDir: true
+    sprite: _CS/Clothes/cbuniforms.rsi
+    layers:
+    - state: un_irish
+  - type: Clothing
+    sprite: _CS/Clothes/cbuniforms.rsi
+    clothingVisuals:
+      jumpsuit:
+      - state: un_irish
+
+- type: entity
+  parent: CoolCoyoteClothes
+  id: CoolCoyoteClothesUNGreentrousersOG107
+  name: drab green trousers
+  description: |
+  components:
+  - type: Sprite
+    overrideDir: South
+    enableOverrideDir: true
+    sprite: _CS/Clothes/cbuniforms.rsi
+    layers:
+    - state: us_greentrousers_og107
+  - type: Clothing
+    sprite: _CS/Clothes/cbuniforms.rsi
+    clothingVisuals:
+      jumpsuit:
+      - state: us_greentrousers_og107
+
+- type: entity
+  parent: CoolCoyoteClothes
+  id: CoolCoyoteClothesVictorianDress
+  name: victorian dress
+  description: |
+  components:
+  - type: Sprite
+    overrideDir: South
+    enableOverrideDir: true
+    sprite: _CS/Clothes/cbuniforms.rsi
+    layers:
+    - state: victorian_dress
+  - type: Clothing
+    sprite: _CS/Clothes/cbuniforms.rsi
+    clothingVisuals:
+      jumpsuit:
+      - state: victorian_dress
+
+- type: entity
+  parent: CoolCoyoteClothes
+  id: CoolCoyoteClothesVictorianblackdress
+  name: victorian black dress
+  description: |
+  components:
+  - type: Sprite
+    overrideDir: South
+    enableOverrideDir: true
+    sprite: _CS/Clothes/cbuniforms.rsi
+    layers:
+    - state: victorianblackdress
+  - type: Clothing
+    sprite: _CS/Clothes/cbuniforms.rsi
+    clothingVisuals:
+      jumpsuit:
+      - state: victorianblackdress
+
+- type: entity
+  parent: CoolCoyoteClothes
+  id: CoolCoyoteClothesVictorianblred
+  name: black and red victorian vestsuit
+  description: |
+  components:
+  - type: Sprite
+    overrideDir: South
+    enableOverrideDir: true
+    sprite: _CS/Clothes/cbuniforms.rsi
+    layers:
+    - state: victorianblred
+  - type: Clothing
+    sprite: _CS/Clothes/cbuniforms.rsi
+    clothingVisuals:
+      jumpsuit:
+      - state: victorianblred
+
+- type: entity
+  parent: CoolCoyoteClothes
+  id: CoolCoyoteClothesHappyVampire
+  name: happy vampire vestsuit
+  description: |
+  components:
+  - type: Sprite
+    overrideDir: South
+    enableOverrideDir: true
+    sprite: _CS/Clothes/cbuniforms.rsi
+    layers:
+    - state: gayvampire
+  - type: Clothing
+    sprite: _CS/Clothes/cbuniforms.rsi
+    clothingVisuals:
+      jumpsuit:
+      - state: gayvampire
+
+- type: entity
+  parent: CoolCoyoteClothes
+  id: CoolCoyoteClothesVictorianlightfire
+  name: light fire victorian vestsuit
+  description: |
+  components:
+  - type: Sprite
+    overrideDir: South
+    enableOverrideDir: true
+    sprite: _CS/Clothes/cbuniforms.rsi
+    layers:
+    - state: victorianlightfire
+  - type: Clothing
+    sprite: _CS/Clothes/cbuniforms.rsi
+    clothingVisuals:
+      jumpsuit:
+      - state: victorianlightfire
+
+- type: entity
+  parent: CoolCoyoteClothes
+  id: CoolCoyoteClothesVictorianRedDress
+  name: victorian red dress
+  description: |
+  components:
+  - type: Sprite
+    overrideDir: South
+    enableOverrideDir: true
+    sprite: _CS/Clothes/cbuniforms.rsi
+    layers:
+    - state: victorianreddress
+  - type: Clothing
+    sprite: _CS/Clothes/cbuniforms.rsi
+    clothingVisuals:
+      jumpsuit:
+      - state: victorianreddress
+
+- type: entity
+  parent: CoolCoyoteClothes
+  id: CoolCoyoteClothesVictorianRedVest
+  name: victorian red vestsuit
+  description: |
+  components:
+  - type: Sprite
+    overrideDir: South
+    enableOverrideDir: true
+    sprite: _CS/Clothes/cbuniforms.rsi
+    layers:
+    - state: victorianredvest
+  - type: Clothing
+    sprite: _CS/Clothes/cbuniforms.rsi
+    clothingVisuals:
+      jumpsuit:
+      - state: victorianredvest
+
+- type: entity
+  parent: CoolCoyoteClothes
+  id: CoolCoyoteClothesVictorianVest
+  name: victorian vestsuit
+  description: |
+  components:
+  - type: Sprite
+    overrideDir: South
+    enableOverrideDir: true
+    sprite: _CS/Clothes/cbuniforms.rsi
+    layers:
+    - state: victorianvest
+  - type: Clothing
+    sprite: _CS/Clothes/cbuniforms.rsi
+    clothingVisuals:
+      jumpsuit:
+      - state: victorianvest
+
+- type: entity
+  parent: CoolCoyoteClothes
+  id: CoolCoyoteClothesWaistcoat
+  name: waistcoat
+  description: |
+  components:
+  - type: Sprite
+    overrideDir: South
+    enableOverrideDir: true
+    sprite: _CS/Clothes/cbuniforms.rsi
+    layers:
+    - state: waistcoat
+  - type: Clothing
+    sprite: _CS/Clothes/cbuniforms.rsi
+    clothingVisuals:
+      jumpsuit:
+      - state: waistcoat
+
+- type: entity
+  parent: CoolCoyoteClothes
+  id: CoolCoyoteClothesWestender
+  name: westender slingsuit
+  description: |
+  components:
+  - type: Sprite
+    overrideDir: South
+    enableOverrideDir: true
+    sprite: _CS/Clothes/cbuniforms.rsi
+    layers:
+    - state: westender
+  - type: Clothing
+    sprite: _CS/Clothes/cbuniforms.rsi
+    clothingVisuals:
+      jumpsuit:
+      - state: westender
+
+- type: entity
+  parent: CoolCoyoteClothes
+  id: CoolCoyoteClothesWesternBustle
+  name: western bustle dress
+  description: |
+  components:
+  - type: Sprite
+    overrideDir: South
+    enableOverrideDir: true
+    sprite: _CS/Clothes/cbuniforms.rsi
+    layers:
+    - state: western_bustle
+  - type: Clothing
+    sprite: _CS/Clothes/cbuniforms.rsi
+    clothingVisuals:
+      jumpsuit:
+      - state: western_bustle
+
+- type: entity
+  parent: CoolCoyoteClothes
+  id: CoolCoyoteClothesWhitebunnysuit
+  name: white bunnysuit
+  description: |
+  components:
+  - type: Sprite
+    overrideDir: South
+    enableOverrideDir: true
+    sprite: _CS/Clothes/cbuniforms.rsi
+    layers:
+    - state: whitebunnysuit
+  - type: Clothing
+    sprite: _CS/Clothes/cbuniforms.rsi
+    clothingVisuals:
+      jumpsuit:
+      - state: whitebunnysuit
+
+- type: entity
+  parent: CoolCoyoteClothes
+  id: CoolCoyoteClothesWhitegown
+  name: white gown
+  description: |
+  components:
+  - type: Sprite
+    overrideDir: South
+    enableOverrideDir: true
+    sprite: _CS/Clothes/cbuniforms.rsi
+    layers:
+    - state: whitegown
+  - type: Clothing
+    sprite: _CS/Clothes/cbuniforms.rsi
+    clothingVisuals:
+      jumpsuit:
+      - state: whitegown
+
+- type: entity
+  parent: CoolCoyoteClothes
+  id: CoolCoyoteClothesWhitesun
+  name: white sun dress
+  description: |
+  components:
+  - type: Sprite
+    overrideDir: South
+    enableOverrideDir: true
+    sprite: _CS/Clothes/cbuniforms.rsi
+    layers:
+    - state: whitesun
+  - type: Clothing
+    sprite: _CS/Clothes/cbuniforms.rsi
+    clothingVisuals:
+      jumpsuit:
+      - state:
+
+- type: entity
+  parent: CoolCoyoteClothes
+  id: CoolCoyoteClothesYellowwshort
+  name: yellow athletic shorts
+  description: |
+  components:
+  - type: Sprite
+    overrideDir: South
+    enableOverrideDir: true
+    sprite: _CS/Clothes/cbuniforms.rsi
+    layers:
+    - state: yellowwshort
+  - type: Clothing
+    sprite: _CS/Clothes/cbuniforms.rsi
+    clothingVisuals:
+      jumpsuit:
+      - state: yellowwshort
+
+- type: entity
+  parent: CoolCoyoteClothes
+  id: CoolCoyoteClothesGearHarness
+  name: nudist gear harness
+  description: |
+  components:
+  - type: Sprite
+    overrideDir: South
+    enableOverrideDir: true
+    sprite: _CS/Clothes/cbuniforms.rsi
+    layers:
+    - state: bean
+  - type: Clothing
+    sprite: _CS/Clothes/cbuniforms.rsi
+    clothingVisuals:
+      jumpsuit:
+      - state: gearharness
+

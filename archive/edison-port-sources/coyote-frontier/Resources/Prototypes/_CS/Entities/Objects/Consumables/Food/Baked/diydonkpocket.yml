@@ -1,0 +1,753 @@
+# Flavours
+- type: entity
+  name: Banana Donk Pocket
+  parent: FoodDonkpocketBase
+  id: FoodDonkpocketBananaDIY
+  description: An artisan made banana flavoured donk pocket!
+  components:
+  - type: FlavorProfile
+    flavors:
+      - banana
+      - sweet-dough
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 10
+        - ReagentId: Omnizine
+          Quantity: 4
+  - type: Sprite
+    sprite: _CS/Objects/Consumable/Food/Baked/diydonkpocket.rsi
+    state: banana
+
+- type: entity
+  name: Banana Split Donk Pocket
+  parent: FoodDonkpocketBase
+  id: FoodDonkpocketBananaSplitDIY
+  description: An artisan made banana split flavoured donk pocket!
+  components:
+  - type: FlavorProfile
+    flavors:
+    - banana
+    - creamy
+    - sweet-dough
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 10
+        - ReagentId: Omnizine
+          Quantity: 4
+  - type: Sprite
+    sprite: _CS/Objects/Consumable/Food/Baked/diydonkpocket.rsi
+    state: banana_split
+
+- type: entity
+  name: Bbq Donk Pocket
+  parent: FoodDonkpocketBase
+  id: FoodDonkpocketBbqDIY
+  description: An artisan made bbq flavoured donk pocket!
+  components:
+  - type: FlavorProfile
+    flavors:
+    - savory
+    - bbq
+    - bread
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 10
+        - ReagentId: Omnizine
+          Quantity: 4
+  - type: Sprite
+    sprite: _CS/Objects/Consumable/Food/Baked/diydonkpocket.rsi
+    state: bbq
+
+- type: entity
+  name: Berry Donk Pocket
+  parent: FoodDonkpocketBase
+  id: FoodDonkpocketBerryDIY
+  description: An artisan made Berry flavoured donk pocket!
+  components:
+  - type: FlavorProfile
+    flavors:
+    - fruity
+    - sweet-dough
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 10
+        - ReagentId: Omnizine
+          Quantity: 4
+  - type: Sprite
+    sprite: _CS/Objects/Consumable/Food/Baked/diydonkpocket.rsi
+    state: berry
+
+- type: entity
+  name: Cherry Donk Pocket
+  parent: FoodDonkpocketBase
+  id: FoodDonkpocketCherryDIY
+  description: An artisan made Cherry flavoured donk pocket!
+  components:
+  - type: FlavorProfile
+    flavors:
+    - cherry
+    - sweet-dough
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 10
+        - ReagentId: Omnizine
+          Quantity: 4
+  - type: Sprite
+    sprite: _CS/Objects/Consumable/Food/Baked/diydonkpocket.rsi
+    state: cherry
+
+- type: entity
+  name: Chocolate Donk Pocket
+  parent: FoodDonkpocketBase
+  id: FoodDonkpocketChocolateDIY
+  description: An artisan made Chocolate flavoured donk pocket!
+  components:
+  - type: FlavorProfile
+    flavors:
+    - chocolate
+    - sweet-dough
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 10
+        - ReagentId: Omnizine
+          Quantity: 4
+  - type: Sprite
+    sprite: _CS/Objects/Consumable/Food/Baked/diydonkpocket.rsi
+    state: chocolate
+
+- type: entity
+  name: Dank Donk Pocket
+  parent: FoodDonkpocketBase
+  id: FoodDonkpocketDankDIY
+  description: An artisan made donk pocket for getting high!
+  components:
+  - type: FlavorProfile
+    flavors:
+    - mysterious
+    - sweet-dough
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 10
+        - ReagentId: Omnizine
+          Quantity: 4
+  - type: Sprite
+    sprite: _CS/Objects/Consumable/Food/Baked/diydonkpocket.rsi
+    state: dank
+
+- type: entity
+  name: Honey Donk Pocket
+  parent: FoodDonkpocketBase
+  id: FoodDonkpocketHoneyDIY
+  description: An artisan made Honey flavoured donk pocket!
+  components:
+  - type: FlavorProfile
+    flavors:
+    - honey
+    - sweet-dough
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 10
+        - ReagentId: Omnizine
+          Quantity: 4
+  - type: Sprite
+    sprite: _CS/Objects/Consumable/Food/Baked/diydonkpocket.rsi
+    state: honey
+
+- type: entity
+  name: Moth Donk Pocket
+  parent: FoodDonkpocketBase
+  id: FoodDonkpocketMothDIY
+  description: An artisan made cloth flavoured donk pocket!
+  components:
+  - type: FlavorProfile
+    flavors:
+    - cotton
+    - sweet-dough
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 10
+        - ReagentId: Fiber
+          Quantity: 5
+        - ReagentId: Omnizine
+          Quantity: 4
+  - type: Sprite
+    sprite: _CS/Objects/Consumable/Food/Baked/diydonkpocket.rsi
+    state: moth
+
+- type: entity
+  name: Orange Donk Pocket
+  parent: FoodDonkpocketBase
+  id: FoodDonkpocketOrangeDIY
+  description: An artisan made Orange flavoured donk pocket!
+  components:
+  - type: FlavorProfile
+    flavors:
+    - fruity
+    - sweet-dough
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 10
+        - ReagentId: Omnizine
+          Quantity: 4
+  - type: Sprite
+    sprite: _CS/Objects/Consumable/Food/Baked/diydonkpocket.rsi
+    state: orange
+
+- type: entity
+  name: Pizza Donk Pocket
+  parent: FoodDonkpocketBase
+  id: FoodDonkpocketPizzaDIY
+  description: An artisan made Pizza flavoured donk pocket!
+  components:
+  - type: FlavorProfile
+    flavors:
+    - tomato
+    - cheesy
+    - bread
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 10
+        - ReagentId: Omnizine
+          Quantity: 4
+  - type: Sprite
+    sprite: _CS/Objects/Consumable/Food/Baked/diydonkpocket.rsi
+    state: pizza
+
+- type: entity
+  name: Plain Donk Pocket
+  parent: FoodDonkpocketBase
+  id: FoodDonkpocketPlainDIY
+  description: An artisan made Donk Pocket!
+  components:
+  - type: FlavorProfile
+    flavors:
+    - meaty
+    - bread
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 10
+        - ReagentId: Omnizine
+          Quantity: 4
+  - type: Sprite
+    sprite: _CS/Objects/Consumable/Food/Baked/diydonkpocket.rsi
+    state: plain
+
+- type: entity
+  name: Spicy Donk Pocket
+  parent: FoodDonkpocketBase
+  id: FoodDonkpocketSpicyDIY
+  description: An artisan made Spicy Donk Pocket!
+  components:
+  - type: FlavorProfile
+    flavors:
+    - spicy
+    - meaty
+    - bread
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 10
+        - ReagentId: Omnizine
+          Quantity: 4
+  - type: Sprite
+    sprite: _CS/Objects/Consumable/Food/Baked/diydonkpocket.rsi
+    state: spicy
+
+- type: entity
+  name: Teriyaki Donk Pocket
+  parent: FoodDonkpocketBase
+  id: FoodDonkpocketTeriyakiDIY
+  description: An artisan made Teriyaki flavoured donk pocket!
+  components:
+  - type: FlavorProfile
+    flavors:
+    - sweet
+    - savory
+    - bread
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 10
+        - ReagentId: Omnizine
+          Quantity: 4
+  - type: Sprite
+    sprite: _CS/Objects/Consumable/Food/Baked/diydonkpocket.rsi
+    state: teriyaki
+
+- type: entity
+  name: Pirozhki Donk Pocket
+  parent: FoodDonkpocketBase
+  id: FoodDonkpocketPirozhkiDIY
+  description: A pirozhki donk pocket, it's filled with onions, meat, and potatoes!
+  components:
+  - type: FlavorProfile
+    flavors:
+    - meaty
+    - veggies
+    - bread
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 10
+        - ReagentId: Omnizine
+          Quantity: 4
+  - type: Sprite
+    sprite: _CS/Objects/Consumable/Food/Baked/diydonkpocket.rsi
+    state: plain
+
+- type: entity
+  name: Mushroom Donk Pocket
+  parent: FoodDonkpocketBase
+  id: FoodDonkpocketMushroomDIY
+  description: A donk pocket filled with meat and mushrooms!
+  components:
+  - type: FlavorProfile
+    flavors:
+    - mushroom
+    - meaty
+    - bread
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 10
+        - ReagentId: Omnizine
+          Quantity: 4
+  - type: Sprite
+    sprite: _CS/Objects/Consumable/Food/Baked/diydonkpocket.rsi
+    state: plain
+
+- type: entity
+  name: Cheddar Donk Pocket
+  parent: FoodDonkpocketBase
+  id: FoodDonkpocketCheddarDIY
+  description: A donk pocket filled with meat and cheese!
+  components:
+  - type: FlavorProfile
+    flavors:
+    - cheesy
+    - meaty
+    - bread
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 10
+        - ReagentId: Omnizine
+          Quantity: 4
+  - type: Sprite
+    sprite: _CS/Objects/Consumable/Food/Baked/diydonkpocket.rsi
+    state: banana
+
+- type: entity
+  name: Mozzarella Donk Pocket
+  parent: FoodDonkpocketBase
+  id: FoodDonkpocketMozzarellaDIY
+  description: A donk pocket filled with mozzarella and tomato sauce!
+  components:
+  - type: FlavorProfile
+    flavors:
+    - cheesy
+    - tomato
+    - bread
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 10
+        - ReagentId: Omnizine
+          Quantity: 4
+  - type: Sprite
+    sprite: _CS/Objects/Consumable/Food/Baked/diydonkpocket.rsi
+    state: plain
+
+# Prepped
+
+- type: entity
+  name: Prepped Banana Donk Pocket
+  parent: FoodDonkpocketBase
+  id: FoodDonkpocketPrepBananaDIY
+  description: A donk pocket prepped for baking
+  components:
+  - type: FlavorProfile
+    flavors:
+    - sweet-dough
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 5
+  - type: Sprite
+    sprite: _CS/Objects/Consumable/Food/Baked/diydonkpocket.rsi
+    state: prep
+
+- type: entity
+  name: Prepped Banana Split Donk Pocket
+  parent: FoodDonkpocketBase
+  id: FoodDonkpocketPrepBananaSplitDIY
+  description: A donk pocket prepped for baking
+  components:
+  - type: FlavorProfile
+    flavors:
+    - sweet-dough
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 5
+  - type: Sprite
+    sprite: _CS/Objects/Consumable/Food/Baked/diydonkpocket.rsi
+    state: prep
+
+- type: entity
+  name: Prepped Bbq Donk Pocket
+  parent: FoodDonkpocketBase
+  id: FoodDonkpocketPrepBbqDIY
+  description: A donk pocket prepped for baking
+  components:
+  - type: FlavorProfile
+    flavors:
+    - dough
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 5
+  - type: Sprite
+    sprite: _CS/Objects/Consumable/Food/Baked/diydonkpocket.rsi
+    state: prep
+
+- type: entity
+  name: Prepped Berry Donk Pocket
+  parent: FoodDonkpocketBase
+  id: FoodDonkpocketPrepBerryDIY
+  description: A donk pocket prepped for baking
+  components:
+  - type: FlavorProfile
+    flavors:
+    - sweet-dough
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 5
+  - type: Sprite
+    sprite: _CS/Objects/Consumable/Food/Baked/diydonkpocket.rsi
+    state: prep
+
+- type: entity
+  name: Prepped Cherry Donk Pocket
+  parent: FoodDonkpocketBase
+  id: FoodDonkpocketPrepCherryDIY
+  description: A donk pocket prepped for baking
+  components:
+  - type: FlavorProfile
+    flavors:
+    - sweet-dough
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 5
+  - type: Sprite
+    sprite: _CS/Objects/Consumable/Food/Baked/diydonkpocket.rsi
+    state: prep
+
+- type: entity
+  name: Prepped Chocolate Donk Pocket
+  parent: FoodDonkpocketBase
+  id: FoodDonkpocketPrepChocolateDIY
+  description: A donk pocket prepped for baking
+  components:
+  - type: FlavorProfile
+    flavors:
+    - sweet-dough
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 5
+  - type: Sprite
+    sprite: _CS/Objects/Consumable/Food/Baked/diydonkpocket.rsi
+    state: prep
+
+- type: entity
+  name: Prepped Dank Pocket
+  parent: FoodDonkpocketBase
+  id: FoodDonkpocketPrepDankDIY
+  description: A donk pocket prepped for baking
+  components:
+  - type: FlavorProfile
+    flavors:
+    - sweet-dough
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 5
+  - type: Sprite
+    sprite: _CS/Objects/Consumable/Food/Baked/diydonkpocket.rsi
+    state: prep
+
+- type: entity
+  name: Prepped Honey Donk Pocket
+  parent: FoodDonkpocketBase
+  id: FoodDonkpocketPrepHoneyDIY
+  description: A donk pocket prepped for baking
+  components:
+  - type: FlavorProfile
+    flavors:
+    - sweet-dough
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 5
+  - type: Sprite
+    sprite: _CS/Objects/Consumable/Food/Baked/diydonkpocket.rsi
+    state: prep
+
+- type: entity
+  name: Prepped Moth Pocket
+  parent: FoodDonkpocketBase
+  id: FoodDonkpocketPrepMothDIY
+  description: A donk pocket prepped for baking
+  components:
+  - type: FlavorProfile
+    flavors:
+    - sweet-dough
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 5
+        - ReagentId: Fiber
+          Quantity: 5
+  - type: Sprite
+    sprite: _CS/Objects/Consumable/Food/Baked/diydonkpocket.rsi
+    state: prep
+
+- type: entity
+  name: Prepped Orange Donk Pocket
+  parent: FoodDonkpocketBase
+  id: FoodDonkpocketPrepOrangeDIY
+  description: A donk pocket prepped for baking
+  components:
+  - type: FlavorProfile
+    flavors:
+    - sweet-dough
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 5
+  - type: Sprite
+    sprite: _CS/Objects/Consumable/Food/Baked/diydonkpocket.rsi
+    state: prep
+
+- type: entity
+  name: Prepped Pizza Donk Pocket
+  parent: FoodDonkpocketBase
+  id: FoodDonkpocketPrepPizzaDIY
+  description: A donk pocket prepped for baking
+  components:
+  - type: FlavorProfile
+    flavors:
+    - dough
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 5
+  - type: Sprite
+    sprite: _CS/Objects/Consumable/Food/Baked/diydonkpocket.rsi
+    state: prep
+
+- type: entity
+  name: Prepped Plain Donk Pocket
+  parent: FoodDonkpocketBase
+  id: FoodDonkpocketPrepPlainDIY
+  description: A donk pocket prepped for baking
+  components:
+  - type: FlavorProfile
+    flavors:
+    - dough
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 5
+  - type: Sprite
+    sprite: _CS/Objects/Consumable/Food/Baked/diydonkpocket.rsi
+    state: prep
+
+- type: entity
+  name: Prepped Spicy Donk Pocket
+  parent: FoodDonkpocketBase
+  id: FoodDonkpocketPrepSpicyDIY
+  description: A donk pocket prepped for baking
+  components:
+  - type: FlavorProfile
+    flavors:
+    - dough
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 5
+  - type: Sprite
+    sprite: _CS/Objects/Consumable/Food/Baked/diydonkpocket.rsi
+    state: prep
+
+- type: entity
+  name: Prepped Teriyaki Donk Pocket
+  parent: FoodDonkpocketBase
+  id: FoodDonkpocketPrepTeriyakiDIY
+  description: A donk pocket prepped for baking
+  components:
+  - type: FlavorProfile
+    flavors:
+    - dough
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 5
+  - type: Sprite
+    sprite: _CS/Objects/Consumable/Food/Baked/diydonkpocket.rsi
+    state: prep
+
+- type: entity
+  name: Prepped Pirozhki Donk Pocket
+  parent: FoodDonkpocketBase
+  id: FoodDonkpocketPrepPirozhkiDIY
+  description: A donk pocket prepped for baking
+  components:
+  - type: FlavorProfile
+    flavors:
+    - dough
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 5
+  - type: Sprite
+    sprite: _CS/Objects/Consumable/Food/Baked/diydonkpocket.rsi
+    state: prep
+
+- type: entity
+  name: Prepped Mushroom Donk Pocket
+  parent: FoodDonkpocketBase
+  id: FoodDonkpocketPrepMushroomDIY
+  description: A donk pocket prepped for baking
+  components:
+  - type: FlavorProfile
+    flavors:
+    - dough
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 5
+  - type: Sprite
+    sprite: _CS/Objects/Consumable/Food/Baked/diydonkpocket.rsi
+    state: prep
+
+- type: entity
+  name: Prepped Cheddar Donk Pocket
+  parent: FoodDonkpocketBase
+  id: FoodDonkpocketPrepCheddarDIY
+  description: A donk pocket prepped for baking
+  components:
+  - type: FlavorProfile
+    flavors:
+    - dough
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 5
+  - type: Sprite
+    sprite: _CS/Objects/Consumable/Food/Baked/diydonkpocket.rsi
+    state: prep
+
+- type: entity
+  name: Prepped Mozzarella Donk Pocket
+  parent: FoodDonkpocketBase
+  id: FoodDonkpocketPrepMozzarellaDIY
+  description: A donk pocket prepped for baking
+  components:
+  - type: FlavorProfile
+    flavors:
+    - dough
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 5
+  - type: Sprite
+    sprite: _CS/Objects/Consumable/Food/Baked/diydonkpocket.rsi
+    state: prep

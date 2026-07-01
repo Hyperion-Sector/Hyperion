@@ -1,0 +1,21 @@
+- type: entity
+  parent: ClothingNeckTieDet
+  id: ClothingNeckTieHorrible
+  name: horrific necktie
+  description: Adorned with a garish and disturbingly vivid pattern. It's your friend now.
+  components:
+    - type: Sprite
+      sprite: _CS/Clothes/Neck/Ties/horribletie.rsi
+    - type: Clothing
+      sprite: _CS/Clothes/Neck/Ties/horribletie.rsi
+    - type: GhostRole
+      allowSpeech: true
+      makeSentient: true
+      name: ghost-role-information-horribletie-name
+      description: ghost-role-information-horribletie-description
+      rules: ghost-role-information-horribletie-rules
+    - type: GhostTakeoverAvailable
+    - type: TypingIndicator
+    - type: Examiner
+    - type: NoRotateOnInteract
+    - type: NoRotateOnMove

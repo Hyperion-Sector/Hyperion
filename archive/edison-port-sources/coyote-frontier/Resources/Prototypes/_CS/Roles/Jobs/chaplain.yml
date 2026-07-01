@@ -1,0 +1,62 @@
+- type: job
+  id: Chaplain
+  name: job-name-chaplain
+  description: job-description-chaplain
+  playTimeTracker: JobChaplain
+  startingGear: ChaplainGear
+  alwaysUseSpawner: false
+  icon: "JobIconChaplain"
+  supervisors: job-supervisors-chaplain
+  weight: 40
+  displayWeight: 3
+  canBeAntag: false
+  accessGroups:
+  - GeneralAccess
+  special:
+  - !type:GiveItemOnHolidaySpecial
+    holiday: FrontierBirthday
+    prototype: FrontierBirthdayGift
+  - !type:AddRpiAuraSpecial
+    aurasToAdd:
+    - rpiAuraChaplain
+  - !type:RpiChatJudgementModifierSpecial
+    modsToAdd:
+    - rpiChatJudgementModifierMassageChaplain
+  - !type:AddComponentSpecial
+    components:
+    - type: BibleUser
+
+- type: startingGear
+  id: ChaplainGear
+  storage:
+    back:
+    - RubberStampChaplain
+    - EncryptionKeyService
+    - ShipVoucherCoyoteChaplain
+
+- type: roleLoadout
+  id: JobChaplain
+  groups:
+  - ContractorHead
+  - ContractorNeck
+  - CSChaplainJumpsuit
+  - ContractorGloves
+  - ContractorBackpack
+  - ContractorOuterClothing
+  - ChaplainBible
+  - ContractorForcedOuterClothing
+  - ContractorShoes
+  - ContractorFace
+  - ContractorGlasses
+  - ContractorBelt
+  - ContractorEars
+  - ContractorEncryptionKey
+  - ContractorBoxSurvival
+  - ContractorPDA
+  - ContractorWallet
+  - ContractorCartridge
+  - ContractorImplanter
+  - ContractorBackpackItems
+  - ContractorHandItems
+  - ContractorInstruments
+  - NFSpeciesSpecific

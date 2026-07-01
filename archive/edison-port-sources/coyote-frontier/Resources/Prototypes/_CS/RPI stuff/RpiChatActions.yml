@@ -1,0 +1,80 @@
+- type: rpiChatAction
+  id: rpiChatActionSpeaking
+  category: Speaking
+  lengthPerPoint: 75
+  multiplyByPeoplePresent: true
+  maxPeoplePresent: 7
+
+- type: rpiChatAction
+  id: rpiChatActionWhispering
+  category: Whispering
+  lengthPerPoint: 75
+  multiplyByPeoplePresent: true
+  maxPeoplePresent: 7
+
+- type: rpiChatAction
+  id: rpiChatActionEmoting
+  category: Emoting
+  lengthPerPoint: 50
+  multiplyByPeoplePresent: true
+  maxPeoplePresent: 7
+
+- type: rpiChatAction
+  id: rpiChatActionQuickEmoting
+  category: QuickEmoting
+  lengthPerPoint: -1
+  multiplyByPeoplePresent: false
+  maxPeoplePresent: 0
+
+- type: rpiChatAction
+  id: rpiChatActionSubtling
+  category: Subtling
+  lengthPerPoint: 100
+  multiplyByPeoplePresent: true
+  maxPeoplePresent: 7
+
+- type: rpiChatAction
+  id: rpiChatActionRadio
+  category: Radio
+  lengthPerPoint: 50
+  multiplyByPeoplePresent: false
+  maxPeoplePresent: 0
+
+# dont use this one
+- type: rpiChatAction
+  id: rpiChatActionEmotingOrQuickEmoting
+  category: EmotingOrQuickEmoting
+  lengthPerPoint: -1
+  multiplyByPeoplePresent: false
+  maxPeoplePresent: 0
+
+
+#Category
+#LengthPerPoint
+#MultiplyByPeoplePresent
+#MaxPeoplePresent
+
+#Speaking
+#Whispering
+#Emoting
+#QuickEmoting
+#Subtling
+#Radio
+#EmotingOrQuickEmoting
+#None
+
+#    private const float GoodlenSpeaking = 75;
+#    private const float GoodlenWhispering = 75;
+#    private const float GoodlenEmoting = 50;
+#    // private const float GoodlenQuickEmoting = 0;
+#    private const float GoodlenSubtling = 100;
+#    private const float GoodlenRadio = 50; // idk
+#
+#    private const bool ListenerMultSpeaking = true;
+#    private const bool ListenerMultWhispering = true;
+#    private const bool ListenerMultEmoting = true;
+#    private const bool ListenerMultQuickEmoting = false;
+#    private const bool ListenerMultSubtling = true;
+#    private const bool ListenerMultRadio = false; // idk
+#
+#    private const int MaxListenerMult = 5;

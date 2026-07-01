@@ -1,0 +1,57 @@
+- type: entity
+  id: SizeReverter
+  name: size normalizer
+  description: A device that automatically reverts nearby personnel to acceptable size thresholds. Must be anchored to function.
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Transform
+    anchored: false
+  - type: Sprite
+    sprite: Structures/Specific/Atmospherics/sensor.rsi
+    drawdepth: FloorObjects
+    layers:
+    - state: gsensor0
+      map: [ "enum.SizeReverterLayers.Base" ]
+  - type: Physics
+    bodyType: Static
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.25,-0.25,0.25,0.25"
+        density: 60
+        mask:
+        - ItemMask
+  - type: Anchorable
+  - type: Pullable
+  - type: SizeReverter
+    range: 3.0
+    maxAcceptableSize: 2.0
+    minAcceptableSize: 0.5
+    revertToLarge: 1.90  # 1.0 + (0.15 * 6) - aligns with size manipulator increments
+    revertToSmall: 0.70  # 1.0 - (0.15 * 2) - aligns with size manipulator increments
+    updateInterval: 0.5
+  - type: Item
+    size: Normal
+  - type: Damageable
+    damageContainer: Inorganic
+    damageModifierSet: Metallic
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 100
+      behaviors:
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+  - type: Clickable
+  - type: InteractionOutline
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.SizeReverterVisuals.Active:
+        enum.SizeReverterLayers.Base:
+          True: { state: gsensor1 }
+          False: { state: gsensor0 }

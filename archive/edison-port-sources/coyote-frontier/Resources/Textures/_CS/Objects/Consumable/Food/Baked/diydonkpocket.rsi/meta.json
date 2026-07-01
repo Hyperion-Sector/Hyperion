@@ -1,0 +1,56 @@
+{
+    "version": 1,
+    "license": "CC-BY-SA-3.0",
+    "copyright": "modified and added by Chokovit on GitHub",
+    "size": {
+        "x": 32,
+        "y": 32
+    },
+    "states": [
+        {
+            "name": "banana"
+        },
+        {
+            "name": "banana_split"
+        },
+        {
+            "name": "bbq"
+        },
+        {
+            "name": "berry"
+        },
+        {
+            "name": "cherry"
+        },
+        {
+            "name": "chocolate"
+        },
+        {
+            "name": "dank"
+        },
+        {
+            "name": "honey"
+        },
+        {
+            "name": "moth"
+        },
+        {
+            "name": "orange"
+        },
+        {
+            "name": "pizza"
+        },
+        {
+            "name": "plain"
+        },
+        {
+            "name": "prep"
+        },
+        {
+            "name": "spicy"
+        },
+        {
+            "name": "teriyaki"
+        }
+    ]
+}

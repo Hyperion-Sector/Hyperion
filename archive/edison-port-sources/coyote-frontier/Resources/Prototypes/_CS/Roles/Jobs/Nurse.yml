@@ -1,0 +1,81 @@
+- type: job
+  id: MedicalNurse
+  name: job-name-medical-nurse
+  description: job-description-medical-nurse
+  playTimeTracker: JobMedicalNurse
+  startingGear: MedicalNurseGear
+  alwaysUseSpawner: false
+  icon: "JobIconMedicalIntern"
+  supervisors: job-supervisors-medical-nurse
+  weight: 40
+  displayWeight: 3
+  canBeAntag: false
+  access:
+  - Medical
+  accessGroups:
+  - GeneralAccess
+  special:
+  - !type:GiveItemOnHolidaySpecial
+    holiday: FrontierBirthday
+    prototype: FrontierBirthdayGift
+  - !type:AddRpiAuraSpecial
+    aurasToAdd:
+    - rpiAuraNurse
+  - !type:RpiChatJudgementModifierSpecial
+    modsToAdd:
+    - rpiChatJudgementModifierNurse
+
+- type: playTimeTracker
+  id: JobMedicalNurse
+
+- type: entity
+  id: SpawnPointMedicalNurse
+  parent: SpawnPointPassenger
+  name: nurse spawn point
+  components:
+  - type: SpawnPoint
+    job_id: MedicalNurse
+
+- type: startingGear
+  id: MedicalNurseGear
+  storage:
+    back:
+    - EncryptionKeyMedical
+    - ShipVoucherCoyoteNurse
+
+- type: roleLoadout
+  id: JobMedicalNurse
+  groups:
+  - ContractorHead
+  - ContractorNeck
+  - PilotJumpsuit
+  - ContractorGloves
+  - ContractorBackpack
+  - ContractorOuterClothing
+  - ContractorForcedOuterClothing
+  - ContractorShoes
+  - ContractorFace
+  - ContractorGlasses
+  - NurseBelt
+  - ContractorEars
+  - ContractorEncryptionKey
+  - ContractorBoxSurvival
+  - ContractorPDA
+  - ContractorWallet
+  - ContractorCartridge
+  - ContractorImplanter
+  - ContractorBackpackItems
+  - NurseInHand # Coyote: ContractorHandItems < NurseInHand (Inherits ContractorHandItems)
+  - ContractorInstruments
+  - NFSpeciesSpecific
+
+- type: chameleonOutfit
+  id: MedicalNurseChameleonOutfit
+  job: MedicalNurse
+  equipment:
+    head: ClothingHeadNurseHat
+    eyes: ClothingEyesHudMedical
+    mask: ClothingMaskSterile
+    neck: ClothingNeckStethoscope
+    outerClothing: ClothingOuterCoatLab
+    gloves: ClothingHandsGlovesLatex

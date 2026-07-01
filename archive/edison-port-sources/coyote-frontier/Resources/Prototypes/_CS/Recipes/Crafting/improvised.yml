@@ -1,0 +1,7 @@
+- type: construction
+  id: repairpatch
+  graph: RepairPatch
+  startNode: start
+  targetNode: repairpatch
+  category: construction-category-tools
+  objectType: Item

@@ -1,0 +1,42 @@
+## Coyote: .40 pistol
+- type: entity
+  parent:
+  - CrateAmmoSecureMercenary
+  - StorageFillAmmoBoxLethal40
+  id: CrateAmmoBoxLethal40
+  categories: [ HideSpawnMenu ]
+
+- type: entity
+  parent:
+  - CrateAmmoSecureMercenary
+  - StorageFillAmmoBoxRubber40
+  id: CrateAmmoBoxRubber40
+  categories: [ HideSpawnMenu ]
+
+- type: entity
+  parent:
+  - CrateAmmoSecureMercenary
+  - StorageFillAmmoBoxPractice40
+  id: CrateAmmoBoxPractice40
+  categories: [ HideSpawnMenu ]
+
+- type: entity
+  parent:
+  - CrateAmmoSecureMercenary
+  - StorageFillAmmoBoxIncendiary40
+  id: CrateAmmoBoxIncendiary40
+  categories: [ HideSpawnMenu ]
+
+- type: entity
+  parent:
+  - CrateAmmoSecureMercenary
+  - StorageFillAmmoBoxUranium40
+  id: CrateAmmoBoxUranium40
+  categories: [ HideSpawnMenu ]
+
+- type: entity
+  parent:
+  - CrateAmmoSecureMercenary
+  - StorageFillAmmoBoxEmp40
+  id: CrateAmmoBoxEmp40
+  categories: [ HideSpawnMenu ]

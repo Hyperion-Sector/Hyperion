@@ -1,0 +1,23 @@
+- type: loadoutGroup
+  id: FoodServiceJumpsuit
+  name: loadout-group-contractor-jumpsuit
+  minLimit: 0 # Coyote
+  loadouts:
+  - FoodServiceClothingUniformJumpsuitChef
+  - FoodServiceClothingUniformJumpskirtChef
+  subgroups:
+  - PilotJumpsuit
+  - ContractorJumpsuit
+  - CoyoteJumpsuit
+  fallbacks:
+  - FoodServiceClothingUniformJumpsuitChef
+  - FoodServiceClothingUniformJumpskirtChef
+
+- type: loadoutGroup
+  id: FoodServiceHead
+  name: loadout-group-contractor-head
+  minLimit: 0
+  loadouts:
+  - FoodServiceClothingHeadHatChef
+  subgroups:
+  - ContractorHead

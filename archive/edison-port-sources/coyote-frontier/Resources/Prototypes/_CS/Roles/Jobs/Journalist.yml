@@ -1,0 +1,84 @@
+- type: job
+  id: Journalist
+  name: job-name-journalist
+  description: job-description-journalist
+  playTimeTracker: JobJournalist
+  startingGear: CSJournalistGear
+  alwaysUseSpawner: false
+  icon: "JobIconReporter"
+  supervisors: job-supervisors-journalist
+  weight: 40
+  displayWeight: 3
+  canBeAntag: false
+  accessGroups:
+  - GeneralAccess
+  special:
+  - !type:AddImplantSpecial
+    implants: [ TrackingImplant ]
+  - !type:GiveItemOnHolidaySpecial
+    holiday: FrontierBirthday
+    prototype: FrontierBirthdayGift
+  - !type:AddRpiAuraSpecial
+    aurasToAdd:
+    - rpiAuraJournalist
+  - !type:RpiChatJudgementModifierSpecial
+    modsToAdd:
+    - rpiChatJudgementModifierJournalist
+  - !type:AddComponentSpecial
+    components:
+    - type: PaywardActionNewsArticleCreation
+
+- type: playTimeTracker
+  id: JobJournalist
+
+- type: entity
+  id: SpawnPointJournalist
+  parent: SpawnPointPassenger
+  name: journalist spawn point
+  components:
+  - type: SpawnPoint
+    job_id: Journalist
+
+- type: startingGear
+  id: CSJournalistGear
+  storage:
+    back:
+    - EncryptionKeyService
+    - ShipVoucherCoyoteJournalist
+
+- type: roleLoadout
+  id: JobJournalist
+  groups:
+  - ContractorHead
+  - ContractorNeck
+  - PilotJumpsuit
+  - ContractorGloves
+  - ContractorBackpack
+  - ContractorOuterClothing
+  - ContractorForcedOuterClothing
+  - ContractorShoes
+  - ContractorFace
+  - ContractorGlasses
+  - ContractorBelt
+  - ContractorEars
+  - ContractorEncryptionKey
+  - ContractorBoxSurvival
+  - ContractorPDA
+  - ContractorWallet
+  - ContractorCartridge
+  - ContractorImplanter
+  - ContractorBackpackItems
+  - ContractorHandItems
+  - ContractorInstruments
+  - NFSpeciesSpecific
+
+- type: chameleonOutfit
+  id: JournalistChameleonOutfit
+  job: Journalist
+  equipment:
+    head: ClothingHeadHatFedoraGrey
+    eyes: ClothingEyesGlassesCheapSunglasses
+    mask: ClothingMaskBreath
+    outerClothing: ClothingOuterCoatTrench
+    neck: ClothingNeckTieRed
+    gloves: ClothingHandsGlovesFingerless

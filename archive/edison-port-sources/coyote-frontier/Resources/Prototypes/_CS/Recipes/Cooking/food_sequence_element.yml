@@ -1,0 +1,15 @@
+# AmbrosiaVitalis
+
+- type: foodSequenceElement
+  id: AmbrosiaVitalis
+  name: food-sequence-content-ambrosia
+  sprites:
+  - sprite: _CS/Objects/Specific/Hydroponics/ambrosia_vitalis.rsi
+    state: produce
+
+- type: foodSequenceElement
+  id: AmbrosiaVitalisBurger
+  name: food-sequence-burger-content-ambrosia
+  sprites:
+  - sprite: _CS/Objects/Specific/Hydroponics/ambrosia_vitalis.rsi
+    state: produce

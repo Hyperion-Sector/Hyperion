@@ -1,0 +1,15 @@
+- type: loadoutGroup
+  id: CSChaplainJumpsuit
+  name: loadout-group-contractor-jumpsuit
+  minLimit: 0 # Coyote
+  loadouts:
+  - PilotClothingUniformJumpsuitPilot
+  - PilotClothingUniformJumpsuitMilitaryPilot
+  - PilotClothingUniformJumpsuitMilitaryContractor
+  - PilotClothingUniformJumpsuitMilitaryContractorTac
+  subgroups:
+  - ContractorJumpsuit
+  - CoyoteJumpsuit
+  fallbacks:
+  - ChaplainJumpsuit
+  - ChaplainJumpskirt

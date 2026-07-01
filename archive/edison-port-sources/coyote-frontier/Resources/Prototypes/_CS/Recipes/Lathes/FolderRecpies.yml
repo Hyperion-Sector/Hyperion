@@ -1,0 +1,55 @@
+- type: latheRecipe # Coyote
+  id: BoxFolderRed
+  result: BoxFolderRed
+  completetime: 1
+  materials:
+    Steel: 20
+
+- type: latheRecipe # Coyote
+  id: BoxFolderBlue
+  result: BoxFolderBlue
+  completetime: 1
+  materials:
+    Steel: 20
+
+- type: latheRecipe # Coyote
+  id: BoxFolderYellow
+  result: BoxFolderYellow
+  completetime: 1
+  materials:
+    Steel: 20
+
+- type: latheRecipe # Coyote
+  id: BoxFolderWhite
+  result: BoxFolderWhite
+  completetime: 1
+  materials:
+    Steel: 20
+
+- type: latheRecipe # Coyote
+  id: BoxFolderGrey
+  result: BoxFolderGrey
+  completetime: 1
+  materials:
+    Steel: 20
+
+- type: latheRecipe # Coyote
+  id: BoxFolderBlack
+  result: BoxFolderBlack
+  completetime: 1
+  materials:
+    Steel: 20
+
+- type: latheRecipe # Coyote
+  id: BoxFolderGreen
+  result: BoxFolderGreen
+  completetime: 1
+  materials:
+    Steel: 20
+
+- type: latheRecipe # Coyote
+  id: BoxFolderClipboard
+  result: BoxFolderClipboard
+  completetime: 1
+  materials:
+    Steel: 20

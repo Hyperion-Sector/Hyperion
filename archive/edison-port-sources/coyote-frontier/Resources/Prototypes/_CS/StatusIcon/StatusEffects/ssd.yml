@@ -1,0 +1,9 @@
+- type: ssdIcon
+  id: AphroLacedSSDIcon
+  icon:
+    sprite: /Textures/_CS/Effects/aphrodisiac_laced_icon.rsi
+    state: default0
+  locationPreference: Left
+  priority: -1
+  layer: Mod # do not increment the position, draw "on top of" the previous icon
+  offset: 0 # overlap the chat bubble

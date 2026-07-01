@@ -1,0 +1,42 @@
+- type: rpiContinuousProxyAction
+  id: rpiContinuousProxyActionLikesPirates
+  minutesToMaxBonus: 60
+  maxMultiplier: 10.0
+  maxDistance: 10
+  optimalDistance: 5
+  optimalDistanceBonusMultiplier: 2.0
+  examineTextKey: capturebait
+  targetMustHaveTheseComponents:
+  - type: IsPirate
+  userMustNotHaveTheseComponents:
+  - type: IsPirate
+  maxTargets: 5
+
+- type: rpiContinuousProxyAction
+  id: rpiContinuousProxyActionLikesNonPiratesWhilePirate
+  minutesToMaxBonus: 60
+  maxMultiplier: 10.0
+  maxDistance: 10
+  optimalDistance: 5
+  optimalDistanceBonusMultiplier: 2.0
+  examineTextKey: bottomnapper
+  targetMustHaveTheseComponents:
+  - type: CaptureBait
+  userMustHaveTheseComponents:
+  - type: IsPirate
+  maxTargets: 5
+
+- type: rpiContinuousProxyAction
+  id: rpiContinuousProxyActionLikesShuttleConsoles
+  minutesToMaxBonus: 20
+  maxMultiplier: 3.0
+  maxDistance: 2.0
+  optimalDistance: 1.0
+  optimalDistanceBonusMultiplier: 1.0
+  examineTextKey: pilotbland
+  targetMustHaveTheseComponents:
+  - type: ShuttleConsole
+  userMustHaveTheseComponents:
+  - type: PaywardProximityShuttleConsole
+  isNonPlayerComponentQuery: true
+  maxTargets: 1 # Only count the first valid console

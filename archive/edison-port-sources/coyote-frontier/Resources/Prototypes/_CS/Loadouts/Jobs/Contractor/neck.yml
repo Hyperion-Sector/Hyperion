@@ -1,0 +1,18 @@
+# T1
+- type: loadout
+  id: ContractorClothingNeckMantle
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: ContractorT1
+  price: 1000
+  equipment:
+    neck: ClothingNeckMantle
+
+- type: loadout
+  id: ContractorClothingNeckTieGeoffroyblack12
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: ContractorT1
+  price: 1000
+  equipment:
+    neck: ClothingNeckTieGeoffroyblack12

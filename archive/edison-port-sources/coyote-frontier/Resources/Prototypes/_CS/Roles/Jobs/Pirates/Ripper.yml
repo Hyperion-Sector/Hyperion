@@ -1,0 +1,120 @@
+# The job itself
+# Freelancer + Medic + Crime
+- type: job
+  id: RipperDoc
+  name: job-name-ripperdoc
+  description: job-description-ripperdoc
+  playTimeTracker: JobRipperDoc
+  requirements:
+    - !type:OverallPlaytimeRequirement
+      time: 43200 # frontier: 24 hrs / 4 shifts | CS: 12 hours / 2 shifts
+    - !type:RoleTimeRequirement
+      role: JobPirate
+      time: 3600 # Coyote: 1 hour
+#    - !type:DepartmentTimeRequirement # Coyote: swaps the playtime requirement to literally just be an hour of the role itself.
+#      department: Security
+#      time: 10800 # 3 hrs
+  startingGear: RipperGear
+  alwaysUseSpawner: true
+  hideConsoleVisibility: true
+  canBeAntag: true
+  consoleAdjustable: false
+  icon: "JobIconMedicalIntern"
+  supervisors: job-supervisors-freebooters-union
+  weight: 40
+  displayWeight: 3
+  setPreference: true
+  newPlayerMessage: false
+  access:
+  - Pirate
+  - BlackMarket
+  accessGroups:
+  - GeneralAccess
+  special:
+  - !type:AddComponentSpecial
+    components:
+#    - type: AutoPirate
+    - type: SpecialSectorStationRecord # must be given on spawn
+      recordGeneration: FalseRecord
+    - type: DisableSuitSensors
+    - type: IsPirate
+  - !type:AddRpiJobModifierSpecial
+    modifiersToAdd:
+    - rpiJobModifierPirate
+  - !type:AddRpiAuraSpecial
+    aurasToAdd:
+    - rpiAuraNurse
+  - !type:RpiChatJudgementModifierSpecial
+    modsToAdd:
+    - rpiChatJudgementModifierNurse
+  - !type:AddImplantSpecial
+    implants: [ FreelanceTrackingImplant, EmpImplant ]
+  - !type:GiveItemOnHolidaySpecial # Even pirates get a piece of cake.
+    holiday: FrontierBirthday
+    prototype: FrontierBirthdayGift
+
+#play time tracker
+- type: playTimeTracker
+  id: JobRipperDoc
+
+- type: entity
+  id: SpawnPointRipper
+  parent: SpawnPointJobBase
+  name: ripper spawn point
+  suffix: Frontier
+  components:
+  - type: SpawnPoint
+    job_id: RipperDoc
+  - type: Sprite
+    sprite: Structures/Decoration/banner.rsi
+    state: banner-red
+
+- type: startingGear
+  id: RipperGear
+  equipment:
+    belt: ClothingBeltMedical
+    pocket1: BasePirateUplinkPirateCrew
+  storage:
+    back:
+    - EncryptionKeyFreelance
+    - EncryptionKeyMedical
+    - ComputerIFFFlatpack
+
+- type: chameleonOutfit
+  id: RipperDocChameleonOutfit
+  job: RipperDoc
+  equipment:
+    head: ClothingHeadNurseHat
+    eyes: ClothingEyesHudMedical
+    mask: ClothingMaskSterile
+    neck: ClothingNeckStethoscope
+    outerClothing: ClothingOuterCoatLab
+    gloves: ClothingHandsGlovesLatex
+
+- type: roleLoadout
+  id: JobRipperDoc
+  groups:
+  - PilotHead
+  #  - NFPirateNeck
+  - PilotNeck # Coyote: Pirate Loadout Expansion
+  - PilotJumpsuit
+  #  - NFPirateGloves
+  - MercenaryGloves # Coyote: Pirate Loadout Expansion
+  - PilotBackpack
+  - PilotForcedOuterClothing
+  - MercenaryOuterClothing # Coyote: Pirate Loadout Expansion
+  - MercenaryShoes
+  - PilotFace
+  - MercenaryGlasses # Coyote: Pirate Loadout Expansion
+  - MercenaryBelt # Coyote: Pirate Loadout Expansion
+  - PilotEars
+  - ContractorEncryptionKey
+  - ContractorBoxSurvival
+  - SmugglerPDA
+  - ContractorWallet
+  - ContractorCartridge
+  - ContractorBackpackItems
+  - ContractorHandItems
+  - ContractorInstruments
+  - NFSpeciesSpecific
+  canCustomizeName: true # pseudonym?

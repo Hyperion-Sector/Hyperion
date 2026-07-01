@@ -1,0 +1,29 @@
+- type: seed
+  id: ambrosiaVitalis
+  name: seeds-ambrosiavitalis-name
+  noun: seeds-noun-seeds
+  displayName: seeds-ambrosiavitalis-display-name
+  plantRsi: _CS/Objects/Specific/Hydroponics/ambrosia_vitalis.rsi
+  packetPrototype: AmbrosiaVitalisSeeds
+  productPrototypes:
+    - FoodAmbrosiaVitalis
+  harvestRepeat: Repeat
+  lifespan: 40
+  maturation: 10
+  production: 3
+  yield: 1
+  potency: 10
+  growthStages: 6
+  waterConsumption: 0.60
+  seedless: true # must be clipped
+  preventSwabbing: true # can't be swabbed
+  permanentlySeedless: true
+  chemicals:
+    Nutriment:
+      Min: 1
+      Max: 2
+      PotencyDivisor: 10
+    Omnizine:
+      Min: 1
+      Max: 3
+      PotencyDivisor: 35

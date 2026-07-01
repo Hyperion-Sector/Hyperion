@@ -1,0 +1,154 @@
+# Coyote Sector Flavours
+
+# Donkpocket
+
+# Warm gives +5 nutriment.
+# Warm ones contain a small amount of Omnizine.
+
+- type: entity
+  name: bbq-pocket
+  parent: FoodDonkpocketBase
+  id: FoodDonkpocketBbq
+  description: Add heat for the easiest backyard BBQ!
+  components:
+  - type: FlavorProfile
+    flavors:
+      - bread
+      - bbq
+      - cheap
+  - type: Sprite
+    sprite: _CS/Objects/Consumable/Food/Baked/donkpocket.rsi
+    state: bbq
+
+- type: entity
+  name: warm bbq-pocket
+  parent: FoodDonkpocket
+  id: FoodDonkpocketBbqWarm
+  description: Grilled and read for game day.
+  components:
+  - type: FlavorProfile
+    flavors:
+      - bread
+      - bbq
+      - cheap
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 10
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 8
+        - ReagentId: Omnizine
+          Quantity: 2
+
+- type: entity
+  name: chocolate-pocket
+  parent: FoodDonkpocketBase
+  id: FoodDonkpocketChocolate
+  description: It's filled with gooey chocolate, it's better warm.
+  components:
+  - type: FlavorProfile
+    flavors:
+      - chocolate
+      - cheap
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 5
+  - type: Sprite
+    sprite: _CS/Objects/Consumable/Food/Baked/donkpocket.rsi
+    state: chocolate
+
+- type: entity
+  name: warm chocolate-pocket
+  parent: FoodDonkpocketChocolate
+  id: FoodDonkpocketChocolateWarm
+  description: Deep fried and full of hot gooey Chocolate, yummy!
+  components:
+  - type: FlavorProfile
+    flavors:
+      - chocolate
+      - cheap
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 10
+        - ReagentId: Omnizine
+          Quantity: 4
+
+- type: entity
+  name: maple-pocket
+  parent: FoodDonkpocketBase
+  id: FoodDonkpocketMaple
+  description: Sticky and full of syrup. It's better warm.
+  components:
+  - type: FlavorProfile
+    flavors:
+      - sweet
+      - maple
+      - cheap
+  - type: Sprite
+    sprite: _CS/Objects/Consumable/Food/Baked/donkpocket.rsi
+    state: maple
+
+- type: entity
+  name: warm maple-pocket
+  parent: FoodDonkpocketMaple
+  id: FoodDonkpocketMapleWarm
+  description: A hot, sticky, maple syrup filled pastry
+  components:
+  - type: FlavorProfile
+    flavors:
+      - sweet
+      - maple
+      - cheap
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 10
+        - ReagentId: Omnizine
+          Quantity: 2
+  - type: Sprite
+    sprite: _CS/Objects/Consumable/Food/Baked/donkpocket.rsi
+    state: maple
+
+- type: entity
+  name: supermatter-pocket
+  parent: FoodDonkpocketBase
+  id: FoodDonkpocketSupermatter
+  description: It's subtly glowing a faint sickly yellow-green.
+  components:
+  - type: FlavorProfile
+    flavors:
+      - meaty
+      - sweet
+      - cheap
+  - type: Sprite
+    sprite: _CS/Objects/Consumable/Food/Baked/donkpocket.rsi
+    state: supermatter
+
+- type: entity
+  name: warm supermatter-pocket
+  parent: FoodDonkpocketSupermatter
+  id: FoodDonkpocketSupermatterWarm
+  description: It looks angry.
+  components:
+  - type: FlavorProfile
+    flavors:
+      - meaty
+      - sweet
+      - cheap
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 10
+        - ReagentId: Uranium
+          Quantity: 20

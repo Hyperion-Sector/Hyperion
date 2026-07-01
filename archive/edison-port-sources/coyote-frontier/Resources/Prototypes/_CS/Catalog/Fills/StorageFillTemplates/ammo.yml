@@ -1,0 +1,60 @@
+#region coyote .40 pistol ammo
+- type: entity # Lethal
+  abstract: true
+  id: StorageFillAmmoBoxLethal40
+  suffix: .40 pistol, Lethal, x4 boxes
+  components:
+  - type: StorageFill
+    contents:
+    - id: CSAmmunitionBoxPistol40
+      amount: 4
+
+- type: entity # Rubber
+  abstract: true
+  id: StorageFillAmmoBoxRubber40
+  suffix: .40 pistol, Rubber, x4 boxes
+  components:
+  - type: StorageFill
+    contents:
+    - id: CSAmmunitionBoxPistol40Rubber
+      amount: 4
+
+- type: entity # Practice
+  abstract: true
+  id: StorageFillAmmoBoxPractice40
+  suffix: .40 pistol, Practice, x4 boxes
+  components:
+  - type: StorageFill
+    contents:
+    - id: CSAmmunitionBoxPistol40Practice
+      amount: 4
+
+- type: entity # Incendiary
+  abstract: true
+  id: StorageFillAmmoBoxIncendiary40
+  suffix: .40 pistol, Incendiary, x4 boxes
+  components:
+  - type: StorageFill
+    contents:
+    - id: CSAmmunitionBoxPistol40Incendiary
+      amount: 4
+
+- type: entity # Uranium
+  abstract: true
+  id: StorageFillAmmoBoxUranium40
+  suffix: .40 pistol, Uranium, x4 boxes
+  components:
+  - type: StorageFill
+    contents:
+    - id: CSAmmunitionBoxPistol40Uranium
+      amount: 4
+
+- type: entity # EMP
+  abstract: true
+  id: StorageFillAmmoBoxEmp40
+  suffix: .40 pistol, EMP, x4 boxes
+  components:
+  - type: StorageFill
+    contents:
+    - id: CSAmmunitionBoxPistol40Emp
+      amount: 4

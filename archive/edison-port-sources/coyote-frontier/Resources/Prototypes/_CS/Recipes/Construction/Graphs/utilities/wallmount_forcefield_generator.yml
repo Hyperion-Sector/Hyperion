@@ -1,0 +1,138 @@
+- type: constructionGraph
+  id: WallmountForceFieldGenerator
+  start: start
+  graph:
+    - node: start
+      edges:
+      - to: frame
+        steps:
+        - material: Steel
+          amount: 10
+          doAfter: 2
+
+    - node: frame
+      entity: WallmountForceFieldGeneratorFrame
+      edges:
+      - to: start
+        steps:
+        - tool: Welding
+          doAfter: 4
+        completed:
+        - !type:GivePrototype
+          prototype: SheetSteel1
+          amount: 10
+        - !type:DeleteEntity {}
+      - to: parts
+        steps:
+        - material: Cable
+          amount: 10
+          doAfter: 1
+        - material: CableMV
+          amount: 10
+          doAfter: 1
+        - material: CableHV
+          amount: 10
+          doAfter: 1
+
+    - node: parts
+      entity: WallmountForceFieldGeneratorFrame
+      edges:
+      - to: generator
+        steps:
+        - tag: WallmountForceFieldGeneratorElectronics
+          store: machine_board
+          name: construction-graph-tag-field-matrix-core
+          icon:
+            sprite: "Objects/Misc/module.rsi"
+            state: "cpuboard_super"
+          doAfter: 1
+        - machinePart: Capacitor
+          store: machine_parts
+          name: construction-graph-tag-capacitor
+          icon:
+            sprite: "_NF/Objects/Misc/stock_parts.rsi"
+            state: "capacitor"
+          doAfter: 1
+        - machinePart: Capacitor
+          store: machine_parts
+          name: construction-graph-tag-capacitor
+          icon:
+            sprite: "_NF/Objects/Misc/stock_parts.rsi"
+            state: "capacitor"
+          doAfter: 1
+        - machinePart: Capacitor
+          store: machine_parts
+          name: construction-graph-tag-capacitor
+          icon:
+            sprite: "_NF/Objects/Misc/stock_parts.rsi"
+            state: "capacitor"
+          doAfter: 1
+        - machinePart: Capacitor
+          store: machine_parts
+          name: construction-graph-tag-capacitor
+          icon:
+            sprite: "_NF/Objects/Misc/stock_parts.rsi"
+            state: "capacitor"
+          doAfter: 1
+        - machinePart: PowerCell
+          store: machine_parts
+          name: construction-graph-tag-power-cell
+          icon:
+            sprite: "Objects/Power/power_cells.rsi"
+            state: "medium"
+          doAfter: 1
+        - machinePart: PowerCell
+          store: machine_parts
+          name: construction-graph-tag-power-cell
+          icon:
+            sprite: "Objects/Power/power_cells.rsi"
+            state: "medium"
+          doAfter: 1
+        - machinePart: PowerCell
+          store: machine_parts
+          name: construction-graph-tag-power-cell
+          icon:
+            sprite: "Objects/Power/power_cells.rsi"
+            state: "medium"
+          doAfter: 1
+        - machinePart: PowerCell
+          store: machine_parts
+          name: construction-graph-tag-power-cell
+          icon:
+            sprite: "Objects/Power/power_cells.rsi"
+            state: "medium"
+          doAfter: 1
+        - tool: Screwing
+          doAfter: 2
+      - to: frame
+        completed:
+        - !type:GivePrototype
+          prototype: CableApcStack1
+          amount: 10
+        - !type:GivePrototype
+          prototype: CableMVStack1
+          amount: 10
+        - !type:GivePrototype
+          prototype: CableHVStack1
+          amount: 10
+        steps:
+        - tool: Prying
+          doAfter: 1
+
+    - node: generator
+      entity: WallmountForceFieldGenerator
+      edges:
+      - to: parts
+        conditions:
+        - !type:WallmountForceFieldGeneratorDisabled {}
+        - !type:ContainerNotEmpty
+          container: machine_board
+        completed:
+        - !type:EmptyAllContainers
+          pickup: true
+          emptyAtUser: true
+        steps:
+        - tool: Screwing
+          doAfter: 2
+        - tool: Prying
+          doAfter: 1

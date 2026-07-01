@@ -1,0 +1,131 @@
+- type: listing
+  id: UplinkNfsdRCD
+  name:  uplink-nfsd-rcd-name
+  description: uplink-nfsd-rcd-desc
+  productEntity: NfsdRCD
+  icon: { sprite: _NF/Objects/Tools/rcd.rsi, state: icon }
+  cost:
+    FrontierUplinkCoin: 10
+  categories:
+  - UplinkSecurityUtility
+  conditions:
+  - !type:StoreWhitelistCondition
+    whitelist:
+      tags:
+      - SecurityUplink
+
+- type: listing
+  id: UplinkAdvancedRadar
+  name:  uplink-advanced-radar-name
+  description: uplink-advanced-radar-desc
+  productEntity: AdvancedRadarConsoleCircuitboard
+  icon: { sprite: _NF/Objects/Misc/module.rsi, state: cpu_nfsd }
+  cost:
+    FrontierUplinkCoin: 10
+  categories:
+  - UplinkSecurityUtility
+  conditions:
+    - !type:StoreWhitelistCondition
+      whitelist:
+        tags:
+          - SecurityUplink
+    - !type:BuyerJobCondition
+      whitelist:
+        - Sheriff
+        - Bailiff
+        - SeniorOfficer
+        - NFDetective
+
+#region hardsuits
+- type: listing
+  id: UplinkSecurityHardsuitTsfMarineBronze
+  name:  uplink-security-marine-bronze-name
+  description: uplink-security-marine-bronze-desc
+  productEntity: ClothingOuterHardsuitTsfMarineBronze
+  icon: { sprite: _Mono/Clothing/OuterClothing/Hardsuits/m82c_bronze.rsi, state: icon }
+  cost:
+    FrontierUplinkCoin: 2
+  categories:
+    - UplinkSecurityHardsuits
+  conditions:
+    - !type:StoreWhitelistCondition
+      whitelist:
+        tags:
+          - SecurityUplink
+
+- type: listing
+  id: UplinkSecurityHardsuitTsfMarineSilver
+  name:  uplink-security-marine-silver-name
+  description: uplink-security-marine-silver-desc
+  productEntity: ClothingOuterHardsuitTsfMarineSilver
+  icon: { sprite: _Mono/Clothing/OuterClothing/Hardsuits/m82c_silver.rsi, state: icon }
+  cost:
+    FrontierUplinkCoin: 2
+  categories:
+    - UplinkSecurityHardsuits
+  conditions:
+    - !type:StoreWhitelistCondition
+      whitelist:
+        tags:
+          - SecurityUplink
+
+- type: listing
+  id: UplinkSecurityHardsuitTsfMarineGold
+  name:  uplink-security-marine-gold-name
+  description: uplink-security-marine-gold-desc
+  productEntity: ClothingOuterHardsuitTsfMarineGold
+  icon: { sprite: _Mono/Clothing/OuterClothing/Hardsuits/m82c_gold.rsi, state: icon }
+  cost:
+    FrontierUplinkCoin: 2
+  categories:
+    - UplinkSecurityHardsuits
+  conditions:
+    - !type:StoreWhitelistCondition
+      whitelist:
+        tags:
+          - SecurityUplink
+    - !type:BuyerJobCondition
+      whitelist:
+        - Bailiff
+        - SeniorOfficer
+        - Sheriff
+
+- type: listing
+  id: UplinkSecurityHardsuitTsfMarineMedic
+  name:  uplink-security-marine-medic-name
+  description: uplink-security-marine-medic-desc
+  productEntity: ClothingOuterHardsuitTsfMarineMedic
+  icon: { sprite: _Mono/Clothing/OuterClothing/Hardsuits/m82b.rsi, state: icon }
+  cost:
+    FrontierUplinkCoin: 2
+  categories:
+    - UplinkSecurityHardsuits
+  conditions:
+    - !type:StoreWhitelistCondition
+      whitelist:
+        tags:
+          - SecurityUplink
+    - !type:BuyerJobCondition
+      whitelist:
+        - Brigmedic
+
+- type: listing # Coyote: making it possible to get more dusters via sheriff, bailiff, and sergeants
+  id: UplinkSecurityDusterMachineboard
+  name:  uplink-security-duster-machineboard-name
+  description: uplink-security-duster-machineboard-desc
+  productEntity: ShuttleGunDusterCircuitboard
+  icon: { sprite: Objects/Weapons/Guns/Shuttles/launcher.rsi, state: exp-2100g }
+  cost:
+    FrontierUplinkCoin: 15 # half the price of chorts because we want people to not jump to lethals immediately and duster lethal options are limited to Clake frags rarely
+  categories:
+    - UplinkSecurityWeapons
+  conditions:
+    - !type:StoreWhitelistCondition
+      whitelist:
+        tags:
+          - SecurityUplink
+    - !type:BuyerJobCondition
+      whitelist:
+        - Sheriff
+        - Bailiff
+        - SeniorOfficer

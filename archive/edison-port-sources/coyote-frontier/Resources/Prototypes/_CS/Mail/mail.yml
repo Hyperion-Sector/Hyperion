@@ -1,0 +1,23 @@
+- type: entity
+  categories: [ HideSpawnMenu ]
+  parent: BaseMailLarge
+  id: MailCSC19r
+  suffix: C19r
+  components:
+  - type: Mail
+    contents:
+    - id: CSWeaponSubMachineGunC19r
+    - id: NFMagazineSubMachineGun35
+      amount: 3
+
+- type: entity
+  categories: [ HideSpawnMenu ]
+  parent: BaseMailLarge
+  id: MailCSAK
+  suffix: AK
+  components:
+  - type: Mail
+    contents:
+    - id: CSWeaponAssaultRifleAKM
+    - id: NFMagazineRifle30
+      amount: 3

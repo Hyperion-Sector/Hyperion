@@ -1,0 +1,131 @@
+#region Bullets
+- type: entity
+  id: BulletFireBoltMaster
+  parent: BulletFireBolt
+  categories: [ HideSpawnMenu ]
+  name: fire bolt
+  components:
+  - type: Projectile
+    damage:
+      types:
+        Heat: 15
+
+- type: entity
+  id: BulletMagicBoltMaster
+  parent: BulletMagicBolt
+  categories: [ HideSpawnMenu ]
+  name: magic bolt
+  components:
+  - type: Projectile
+    damage:
+      types:
+        Blunt: 15
+        Piercing: 15
+
+- type: entity
+  id: BulletBloodCultDarkBoltMaster
+  parent: BulletBloodCultDarkBolt
+  categories: [ HideSpawnMenu ]
+  name: blood bolt
+  components:
+  - type: Projectile
+    damage:
+      types:
+        Bloodloss: 10
+        Slash: 20
+
+- type: entity
+  id: BulletBloodCultHandMaster
+  parent: BulletBloodCultHand
+  categories: [ HideSpawnMenu ]
+  name: blood hand
+  components:
+  - type: Projectile
+    damage:
+      types:
+        Asphyxiation: 4
+        Blunt: 20
+
+- type: entity
+  id: BulletIceGlobeMaster
+  parent: BulletIceGlobe
+  categories: [ HideSpawnMenu ]
+  name : ice globe
+  components:
+  - type: Projectile
+    damage:
+      types:
+        Cold: 25
+
+#region Hitscan
+- type: hitscan
+  id: BloodCultLaserMaster
+  damage:
+    types:
+      Slash: 25
+  muzzleFlash:
+    sprite: _NF/Effects/bloodcultbeams.rsi
+    state: red_lightning
+  travelFlash:
+    sprite: _NF/Effects/bloodcultbeams.rsi
+    state: red_lightning
+  impactFlash:
+    sprite: _NF/Effects/bloodcultbeams.rsi
+    state: red_lightning
+
+
+- type: hitscan
+  id: WizardHitscanLightningMaster
+  damage:
+    types:
+      Shock: 25
+  muzzleFlash:
+    sprite: _NF/Effects/wizardbeams.rsi
+    state: lightning-muzzle-01
+  travelFlash:
+    sprite: _NF/Effects/wizardbeams.rsi
+    state: lightning-beam-01
+  impactFlash:
+    sprite: _NF/Effects/wizardbeams.rsi
+    state: lightning-hit-01
+
+- type: hitscan
+  id: CausticBeamMaster
+  damage:
+    types:
+      Caustic: 20
+  muzzleFlash:
+    sprite: _NF/Effects/wizardbeams.rsi
+    state: green-beam-01
+  travelFlash:
+    sprite: _NF/Effects/wizardbeams.rsi
+    state: green-beam-01
+  impactFlash:
+    sprite: _NF/Effects/wizardbeams.rsi
+    state: green-beam-01
+
+#region Conjured
+- type: entity
+  name: brick
+  parent: BrickConjured
+  id: BrickConjuredMaster
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Projectile
+    deleteOnCollide: false
+    damage:
+      types:
+        Blunt: 25
+        Structural: 15
+  - type: StaminaDamageOnCollide
+    damage: 15
+
+- type: entity
+  categories: [ HideSpawnMenu ]
+  parent: WaterElementalConjuredStaff
+  id: WaterElementalConjuredStaffMaster
+  components:
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      175: Dead

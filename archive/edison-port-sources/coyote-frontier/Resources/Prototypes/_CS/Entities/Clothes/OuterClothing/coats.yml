@@ -1,0 +1,15 @@
+- type: entity
+  parent: [ BaseC1Contraband, ClothingOuterWinterHoS ]
+  id: CSClothingOuterWinterHoSFaded
+  name: faded head of security's armored winter coat
+  description: An old, well-worn and sturdy utilitarian winter coat designed to protect a head of security.
+  components:
+  - type: Armor # ClothingOuterArmorBulletproof stats
+    modifiers:
+      coefficients:
+        Blunt: 0.9
+        Slash: 0.9
+        Piercing: 0.4
+        Heat: 0.9
+  - type: ExplosionResistance
+    damageCoefficient: 0.80

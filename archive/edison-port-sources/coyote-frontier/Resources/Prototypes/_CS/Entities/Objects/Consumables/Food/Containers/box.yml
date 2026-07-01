@@ -1,0 +1,87 @@
+# New Flavours for Donkpocket Boxes
+
+- type: entity
+  parent: FoodBoxDonkpocket
+  id: FoodBoxDonkpocketBbq
+  name: box of bbq-flavoured donk-pockets
+  description: Makes backyard cookouts easy!
+  components:
+  - type: Sprite
+    sprite: _CS/Objects/Consumable/Food/Baked/donkpocket.rsi
+    state: bbq-box
+  - type: StorageFill
+    contents:
+    - id: FoodDonkpocketBbq
+      amount: 6
+
+- type: entity
+  parent: FoodBoxDonkpocket
+  id: FoodBoxDonkpocketChocolate
+  name: box of chocolate-flavoured donk-pockets
+  description: Deep-fried and filled with chocolate cream
+  components:
+  - type: Sprite
+    sprite: _CS/Objects/Consumable/Food/Baked/donkpocket.rsi
+    state: chocolate-box
+  - type: StorageFill
+    contents:
+    - id: FoodDonkpocketChocolate
+      amount: 6
+
+- type: entity
+  parent: FoodBoxDonkpocket
+  id: FoodBoxDonkpocketMaple
+  name: box of maple-flavoured donk-pockets
+  description: Celebrate Donk co's Canadian roots with these sweet and sticky maple pockets, eh!
+  components:
+  - type: Sprite
+    sprite: _CS/Objects/Consumable/Food/Baked/donkpocket.rsi
+    state: maple-box
+  - type: StorageFill
+    contents:
+    - id: FoodDonkpocketMaple
+      amount: 6
+
+- type: entity
+  parent: FoodBoxDonkpocket
+  id: FoodBoxDonkpocketSupermatter
+  name: box of limited edition supermatter-pockets
+  description: What was supposed to be "Suppermatter" led to a horrible misunderstanding and a class-action lawsuit.
+  components:
+  - type: Sprite
+    sprite: _CS/Objects/Consumable/Food/Baked/donkpocket.rsi
+    state: supermatter-box
+  - type: StorageFill
+    contents:
+    - id: FoodDonkpocketSupermatter
+      amount: 6
+
+# Printable to-go box
+
+- type: entity
+  parent: [ BoxCardboard, BaseBagOpenClose ]
+  id: FoodBoxDonkngo
+  name: Donk 'n Go box
+  description: A Donk 'n Go box for holding all manner of donk pocket flavours
+  components:
+  - type: Sprite
+    sprite: _CS/Objects/Consumable/Food/Baked/donkpocket.rsi
+    state: box
+    layers:
+    - state: box
+      map: ["closeLayer"]
+    - state: box-open
+      map: ["openLayer"]
+      visible: false
+  - type: Storage
+    grid:
+    - 0,0,5,0
+    whitelist:
+      tags:
+      - DonkPocket
+  - type: Item
+    sprite: _CS/Objects/Consumable/Food/Baked/donkpocket.rsi
+    size: Small
+    heldPrefix: box
+  - type: StorageFill
+

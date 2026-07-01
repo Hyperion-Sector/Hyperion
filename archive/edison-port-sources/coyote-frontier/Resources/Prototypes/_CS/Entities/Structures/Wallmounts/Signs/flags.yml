@@ -1,0 +1,9 @@
+- type: entity
+  parent: BaseFlag
+  id: DonkFlag
+  name: Donk co flag
+  description: A flag featuring Donk co's signature "D" Logo
+  components:
+  - type: Sprite
+    sprite: _CS/Structures/Wallmounts/flags.rsi
+    state: donkco_flag

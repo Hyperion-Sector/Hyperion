@@ -1,0 +1,10 @@
+- type: entity
+  parent: ClothingHeadBase
+  id: ClothingHeadHatDonkcoHat
+  name: Donk co Hat
+  description: Keeps the hair out of the deep fryer
+  components:
+  - type: Sprite
+    sprite: _CS/Clothes/Head/Hats/donkcohat.rsi
+  - type: Clothing
+    sprite: _CS/Clothes/Head/Hats/donkcohat.rsi

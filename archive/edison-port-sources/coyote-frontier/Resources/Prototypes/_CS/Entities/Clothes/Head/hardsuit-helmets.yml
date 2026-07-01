@@ -1,0 +1,10 @@
+# TSF tactical suit
+- type: entity
+  parent: ClothingHeadHelmetHardsuitNfsdBronze
+  id: ClothingHeadHelmetHardsuitTsfMarine
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _Mono/Clothing/Head/Hardsuits/m82.rsi
+  - type: Clothing
+    sprite: _Mono/Clothing/Head/Hardsuits/m82.rsi

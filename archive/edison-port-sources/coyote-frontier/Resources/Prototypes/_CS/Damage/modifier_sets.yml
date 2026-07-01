@@ -1,0 +1,21 @@
+- type: damageModifierSet
+  id: IPC
+  coefficients:
+    Blunt: 0.80
+    Slash: 0.80
+    Piercing: 0.80
+    Poison: 0
+    Asphyxiation: 0
+    Cold: 0
+    Radiation: 0.5
+    Heat: 1.5
+    Shock: 1.5
+
+- type: damageModifierSet
+  id: SyndicateAssaultBorgExpedition
+  coefficients:
+    Blunt: 0.80
+    Slash: 0.80
+    Piercing: 0.80
+    Heat: 1.25
+    Shock: 1.5

@@ -1,0 +1,108 @@
+- type: job
+  id: Smuggler
+  name: job-name-smuggler
+  description: job-description-smuggler
+  playTimeTracker: JobSmuggler
+  requirements:
+    - !type:OverallPlaytimeRequirement
+      time: 43200 # 12 hours / 2 shifts
+    - !type:RoleTimeRequirement
+      role: JobPirate # Coyote Changed from JobSmuggler, this way all freelancer roles require the Pirate Whitelist.
+      time: 3600 # 1 hour
+    #- !type:DepartmentTimeRequirement # Coyote: swaps the playtime requirement to literally just be an hour of the role itself.
+    #  department: Security
+    #  time: 10800 # 3 hrs
+  startingGear: SmugglerGear
+  alwaysUseSpawner: true
+  hideConsoleVisibility: true
+  canBeAntag: true
+  consoleAdjustable: false
+  icon: "JobIconPilot"
+  supervisors: job-supervisors-freebooters-union
+  weight: 20
+  displayWeight: 20
+  setPreference: true
+  newPlayerMessage: false
+  access:
+  - Pirate
+  - BlackMarket
+  accessGroups:
+  - GeneralAccess
+  special:
+  - !type:AddComponentSpecial
+    components:
+#    - type: AutoPirate
+    - type: SpecialSectorStationRecord # must be given on spawn
+      recordGeneration: FalseRecord
+    - type: DisableSuitSensors
+    - type: IsPirate
+  - !type:AddRpiJobModifierSpecial
+    modifiersToAdd:
+    - rpiJobModifierPirate
+  - !type:AddComponentSpecial
+    components:
+    - type: PaywardProximityShuttleConsole
+  - !type:AddImplantSpecial
+    implants: [ FreelanceTrackingImplant, StorageImplant ]
+  - !type:GiveItemOnHolidaySpecial
+    holiday: FrontierBirthday
+    prototype: FrontierBirthdayGift
+
+#play time tracker
+- type: playTimeTracker
+  id: JobSmuggler
+
+- type: entity
+  id: SpawnPointSmuggler
+  parent: SpawnPointJobBase
+  name: smuggler spawn point
+  suffix: Frontier
+  components:
+  - type: SpawnPoint
+    job_id: Smuggler
+  - type: Sprite
+    sprite: Structures/Decoration/banner.rsi
+    state: banner-red
+
+- type: startingGear
+  id: SmugglerGear
+  equipment:
+    belt: ClothingBeltUtility
+    pocket1: BasePirateUplinkPirateCrew
+  storage:
+    back:
+    - EncryptionKeyFreelance
+    - AppraisalTool
+    - ComputerIFFFlatpack
+
+- type: chameleonOutfit
+  id: SmugglerChameleonOutfit
+  job: Smuggler
+
+- type: roleLoadout
+  id: JobSmuggler
+  groups:
+  - PilotHead
+  #- NFPirateNeck
+  - PilotNeck # Coyote: Pirate Loadout Expansion
+  - PilotJumpsuit
+  #- NFPirateGloves
+  - MercenaryGloves # Coyote: Pirate Loadout Expansion
+  - PilotBackpack
+  - PilotForcedOuterClothing
+  - MercenaryOuterClothing # Coyote: Pirate Loadout Expansion
+  - MercenaryShoes
+  - PilotFace
+  - MercenaryGlasses # Coyote: Pirate Loadout Expansion
+  - MercenaryBelt # Coyote: Pirate Loadout Expansion
+  - PilotEars
+  - ContractorEncryptionKey
+  - ContractorBoxSurvival
+  - SmugglerPDA
+  - ContractorWallet
+  - ContractorCartridge
+  - ContractorBackpackItems
+  - ContractorHandItems
+  - ContractorInstruments
+  - NFSpeciesSpecific
+  canCustomizeName: true # Allows pseudonyms.

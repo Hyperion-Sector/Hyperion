@@ -1,0 +1,12 @@
+# T1
+- type: loadout
+  id: ContractorClothingOuterEpiChaplainMantle
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: ContractorT1
+  hideEffects:
+  - !type:GroupLoadoutEffect
+    proto: NFCoatCapable
+  price: 800
+  equipment:
+    outerClothing: ClothingOuterEpiChaplainMantle

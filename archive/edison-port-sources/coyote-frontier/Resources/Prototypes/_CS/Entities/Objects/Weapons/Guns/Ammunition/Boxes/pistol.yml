@@ -1,0 +1,141 @@
+#region base
+- type: entity
+  id: CSBaseAmmunitionBoxPistol40
+  parent: NFBaseAmmunitionBox
+  name: ammunition box (.40 pistol)
+  abstract: true
+  components:
+  - type: BallisticAmmoProvider
+    whitelist:
+      tags:
+        - CSCartridgePistol40
+    proto: CSCartridgePistol40
+    capacity: 80
+  - type: Sprite
+    sprite: _NF/Objects/Weapons/Guns/Ammunition/Boxes/pistol.rsi
+
+#region .40 pistol
+- type: entity
+  id: CSAmmunitionBoxPistol40
+  parent: CSBaseAmmunitionBoxPistol40
+  name: ammunition box (.40 pistol)
+  components:
+  - type: BallisticAmmoProvider
+    proto: CSCartridgePistol40
+  - type: Sprite
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+      color: "#633b9c"
+    - state: decal-calibre-40
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+
+- type: entity
+  id: CSAmmunitionBoxPistol40Overpressure
+  parent: CSBaseAmmunitionBoxPistol40
+  name: ammunition box (.40 pistol, overpressure)
+  components:
+  - type: BallisticAmmoProvider
+    proto: CSCartridgePistol40Overpressure
+  - type: Sprite
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+      color: "#633b9c"
+    - state: decal-01
+      color: "#ff8d00"
+    - state: decal-calibre-40
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+
+- type: entity
+  id: CSAmmunitionBoxPistol40Practice
+  parent: CSBaseAmmunitionBoxPistol40
+  name: ammunition box (.40 pistol, practice)
+  components:
+  - type: BallisticAmmoProvider
+    proto: CSCartridgePistol40Practice
+  - type: Sprite
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+      color: "#633b9c"
+    - state: decal-01
+    - state: decal-calibre-40
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+
+- type: entity
+  id: CSAmmunitionBoxPistol40Incendiary
+  parent: CSBaseAmmunitionBoxPistol40
+  name: ammunition box (.40 pistol, incendiary)
+  components:
+  - type: BallisticAmmoProvider
+    proto: CSCartridgePistol40Incendiary
+  - type: Sprite
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+      color: "#633b9c"
+    - state: decal-01
+      color: "#ff0000"
+    - state: decal-calibre-40
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+
+- type: entity
+  id: CSAmmunitionBoxPistol40Uranium
+  parent: CSBaseAmmunitionBoxPistol40
+  name: ammunition box (.40 pistol, uranium)
+  components:
+  - type: BallisticAmmoProvider
+    proto: CSCartridgePistol40Uranium
+  - type: Sprite
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+      color: "#633b9c"
+    - state: decal-01
+      color: "#00ff00"
+    - state: decal-calibre-40
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+
+# Frontier
+# .40 pistol
+- type: entity
+  id: CSAmmunitionBoxPistol40Rubber # MagazineBoxPistolRubber
+  parent: CSBaseAmmunitionBoxPistol40
+  name: ammunition box (.40 pistol, rubber)
+  components:
+  - type: BallisticAmmoProvider
+    proto: CSCartridgePistol40Rubber
+  - type: Sprite
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+      color: "#633b9c"
+    - state: decal-01
+      color: "#00b0ff"
+    - state: decal-calibre-40
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+
+- type: entity
+  id: CSAmmunitionBoxPistol40Emp # MagazineBoxPistolEmp
+  parent: CSBaseAmmunitionBoxPistol40
+  name: ammunition box (.40 pistol, EMP)
+  components:
+  - type: BallisticAmmoProvider
+    proto: CSCartridgePistol40Emp
+  - type: Sprite
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+      color: "#633b9c"
+    - state: decal-01
+      color: "#00ffff"
+    - state: decal-calibre-40
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]

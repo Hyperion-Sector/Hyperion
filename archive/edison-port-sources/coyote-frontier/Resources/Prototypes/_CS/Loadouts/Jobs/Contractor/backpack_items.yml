@@ -1,0 +1,34 @@
+- type: loadout
+  id: ContractorTennisball
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: ContractorT1
+  price: 300
+  storage:
+    back:
+    - TennisBall
+
+- type: loadout
+  id: ContractorAccessConfigurator
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: ContractorT2
+  price: 5000
+  storage:
+    back:
+    - AccessConfiguratorCivilian
+
+# Flasks:
+- type: loadout
+  id: ContractorDrinkFlaskBar
+  price: 530
+  storage:
+    back:
+    - DrinkFlaskBar
+
+- type: loadout
+  id: ContractorDrinkMREFlask
+  price: 730
+  storage:
+    back:
+    - DrinkMREFlask

@@ -1,0 +1,18 @@
+#- type: entity
+#  name: Donkpocket Box Spawner
+#  id: DonkpocketBoxSpawner
+#  parent: MarkerBase
+#  components:
+#    - type: Sprite
+#      layers:
+#        - state: red
+#        - sprite: _CS/Objects/Consumable/Food/Baked/donkpocket.rsi
+#          state: box
+#    - type: RandomSpawner
+#      prototypes:
+#        - FoodBoxDonkpocketBbq
+#        - FoodBoxDonkpocketChocolate
+#        - FoodBoxDonkpocketMaple
+#        - FoodBoxDonkpocketSupermatter
+#      chance: 0.5
+#      offset: 0.0

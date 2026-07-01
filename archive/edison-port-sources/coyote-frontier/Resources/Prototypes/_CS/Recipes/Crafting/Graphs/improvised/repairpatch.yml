@@ -1,0 +1,15 @@
+- type: constructionGraph
+  id: RepairPatch
+  start: start
+  graph:
+  - node: start
+    edges:
+    - to: repairpatch
+      steps:
+      - material: Steel
+        amount: 5
+      - material: Cable
+        amount: 5
+        doAfter: 5
+  - node: repairpatch
+    entity: RepairPatch1

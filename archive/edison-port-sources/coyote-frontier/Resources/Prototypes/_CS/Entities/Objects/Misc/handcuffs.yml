@@ -1,0 +1,110 @@
+#region Fuzzy Cuffs
+- type: entity
+  name: fuzzy handcuffs
+  description: Flimsy handcuffs designed for the bedroom, officers tend to keep these ones at home.
+  id: FuzzycuffsPink
+  parent: Handcuffs
+  components:
+  - type: Handcuff
+    breakoutTime: 3
+    cuffedRSI: _CS/Objects/Misc/fuzzycuffs.rsi
+    bodyIconState: body-overlay-pink
+  - type: Item
+    inhandVisuals:
+      left:
+        - state: inhand-left-pink
+      right:
+        - state: inhand-right-pink
+  - type: Sprite
+    sprite: _CS/Objects/Misc/fuzzycuffs.rsi
+    state: cuff-pink
+
+- type: entity
+  id: FuzzycuffsRed
+  parent: FuzzycuffsPink
+  components:
+  - type: Handcuff
+    bodyIconState: body-overlay-red
+  - type: Item
+    inhandVisuals:
+      left:
+        - state: inhand-left-red
+      right:
+        - state: inhand-right-red
+  - type: Sprite
+    state: cuff-red
+
+- type: entity
+  id: FuzzycuffsBlack
+  parent: FuzzycuffsPink
+  components:
+  - type: Handcuff
+    bodyIconState: body-overlay-black
+  - type: Item
+    inhandVisuals:
+      left:
+        - state: inhand-left-black
+      right:
+        - state: inhand-right-black
+  - type: Sprite
+    state: cuff-black
+
+- type: entity
+  id: FuzzycuffsBlue
+  parent: FuzzycuffsPink
+  components:
+  - type: Handcuff
+    bodyIconState: body-overlay-blue
+  - type: Item
+    inhandVisuals:
+      left:
+        - state: inhand-left-blue
+      right:
+        - state: inhand-right-blue
+  - type: Sprite
+    state: cuff-blue
+
+- type: entity
+  id: FuzzycuffsPurple
+  parent: FuzzycuffsPink
+  components:
+  - type: Handcuff
+    bodyIconState: body-overlay-purple
+  - type: Item
+    inhandVisuals:
+      left:
+        - state: inhand-left-purple
+      right:
+        - state: inhand-right-purple
+  - type: Sprite
+    state: cuff-purple
+
+#region Twist Ties
+- type: entity
+  name: twist ties
+  description: a weak multi-use plastic, you could restrain someone with this, very easy to break free from.
+  id: TwistTies
+  parent: Zipties
+  components:
+  - type: Handcuff
+    breakoutTime: 1
+    cuffTime: 5.5
+    stunBonus: 1.5
+    breakOnRemove: false
+
+#region Strtjckt Bodysuit
+- type: entity
+  parent: ClothingOuterStraightjacket
+  id: ClothingOuterStraightjacketBodysuit
+  name: straitjacket bodysuit
+  description: Used to restrain people with comfort and style.
+  components:
+  - type: Item
+    size: Normal
+  - type: Handcuff
+    cuffedRSI: _CS/Clothes/OuterClothing/Misc/straightjacket_bodysuit.rsi
+    endCuffSound:
+      path: /Audio/Items/zip.ogg
+  - type: Sprite
+    sprite: _CS/Clothes/OuterClothing/Misc/straightjacket_bodysuit.rsi
+    state: icon

@@ -1,0 +1,60 @@
+- type: entity
+  save: false
+  name: Urist McAnthromorph
+  parent: BaseMobSpeciesOrganic
+  id: BaseMobAnthromorph
+  abstract: true
+  components:
+  # misc stuff (mostly copy-pasted from humans)
+  - type: Needs
+    needs:
+    - NeedHungerDefault
+    - NeedThirstDefault
+  - type: Butcherable
+    butcheringType: Spike
+    spawned:
+    - id: FoodMeatHuman
+      amount: 5
+  - type: Carriable
+  - type: Speech
+    allowedEmotes: ['Belch']
+  - type: ShortWhitelist
+    scale: 0.8
+    density: 140
+    pseudoItem: true
+    cosmeticOnly: false
+  - type: TallWhitelist
+    scale: 1.2
+  # appearance related stuff
+  - type: Icon
+    sprite: _CS/Mobs/Species/Anthromorph/parts.rsi
+    state: full
+  - type: HumanoidAppearance
+    species: Anthromorph
+    hideLayersOnEquip:
+    - Hair
+    - Snout
+  - type: Fixtures
+    fixtures: # TODO: This needs a second fixture just for mob collisions.
+      fix1:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.35
+        density: 185
+        restitution: 0.0
+        mask:
+        - MobMask
+        layer:
+        - MobLayer
+
+
+- type: entity
+  save: false
+  name: Anthromorph Dummy
+  parent: MobHumanDummy
+  id: MobAnthromorphDummy
+  categories: [ HideSpawnMenu ]
+  description: A dummy anthromorph meant to be used in character setup.
+  components:
+  - type: HumanoidAppearance
+    species: Anthromorph

@@ -1,0 +1,9 @@
+- type: cargoProduct
+  id: SizeNormalizer
+  icon:
+    sprite: Structures/Specific/Atmospherics/sensor.rsi
+    state: gsensor0
+  product: SizeReverter
+  cost: 10000
+  category: cargoproduct-category-name-engineering
+  group: market

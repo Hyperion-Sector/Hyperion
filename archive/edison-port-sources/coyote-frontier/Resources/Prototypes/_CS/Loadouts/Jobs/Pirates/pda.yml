@@ -1,0 +1,5 @@
+- type: loadout
+  id: SmugglerSmugglerPDA
+  price: 0
+  equipment:
+    id: SmugglerPDA

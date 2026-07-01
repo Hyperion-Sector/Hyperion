@@ -1,0 +1,6 @@
+- type: entity
+  parent:
+  - BaseExpeditionWeaponTier4
+  - WeaponPistolAnaconda
+  categories: [ HideSpawnMenu ]
+  id: CSWeaponPistolAnacondaExpedition

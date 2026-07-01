@@ -1,0 +1,8 @@
+- type: loadout
+  id: CoyoteDetectiveClothingHorrificNecktie
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: ContractorT1
+  price: 10000
+  equipment:
+    neck: ClothingNeckTieHorrible

@@ -1,0 +1,75 @@
+- type: entity
+  id: DonkcoKitchenAssembler
+  parent: KitchenMicrowave
+  name: donk co. food-o-mat
+  description: Assembles and prepares donk pockets!...and other things, I guess.
+  components:
+  - type: Microwave
+    cookTimeMultiplier: 0.5
+    explosionChance: 0
+    lightningChance: 0
+    beginCookingSound: /Audio/Machines/machine_switch.ogg
+    foodDoneSound: /Audio/Machines/ding.ogg
+    loopingSound: /Audio/_NF/Machines/assembler.ogg
+    validRecipeTypes: Assembler
+    canHeat: false
+    canIrradiate: false
+    key: AssemblerKey
+  - type: GenericVisualizer #TODO: needs work
+    visuals:
+      enum.PowerDeviceVisuals.VisualState:
+        enum.MicrowaveVisualizerLayers.Base:
+          Idle: { state: "assembler" }
+          Broken: { state: "assembler" }
+          Cooking: { state: "assembler" }
+        enum.MicrowaveVisualizerLayers.BaseUnlit:
+          Idle: { state: "assembler-on-unlit" }
+          Broken: { state: "assembler-broken-unlit" }
+          Cooking: { state: "assembler-running-unlit" }
+        blinky:
+          Idle: { state: "assembler-invisible" }
+          Broken: { state: "assembler-invisible" }
+          Cooking: { state: "assembler-blinky-unlit" }
+        scan:
+          Idle: { state: "assembler-invisible" }
+          Broken: { state: "assembler-invisible" }
+          Cooking: { state: "assembler-scan-unlit" }
+      enum.PowerDeviceVisuals.Powered:
+        enum.MicrowaveVisualizerLayers.BaseUnlit:
+          True: { visible: true }
+          False: { visible: false }
+        blinky:
+          True: { visible: true }
+          False: { visible: false }
+        scan:
+          True: { visible: true }
+          False: { visible: false }
+  - type: Sprite
+    sprite: _CS/Structures/Machines/donkcoassembler.rsi
+    drawdepth: SmallObjects
+    snapCardinals: true
+    layers:
+    - state: assembler
+      map: ["enum.MicrowaveVisualizerLayers.Base"]
+    - state: assembler-on-unlit
+      shader: unshaded
+      map: ["enum.MicrowaveVisualizerLayers.BaseUnlit"]
+      visible: false
+    - state: assembler-invisible
+      shader: unshaded
+      map: ["blinky"]
+      visible: false
+    - state: assembler-invisible
+      shader: unshaded
+      map: ["scan"]
+      visible: false
+  - type: ApcPowerReceiver
+    powerLoad: 400
+  - type: Machine
+    board: DonkcoKitchenAssemblerMachineCircuitboard
+  - type: ActivatableUI
+    key: enum.MicrowaveUiKey.AssemblerKey
+  - type: UserInterface
+    interfaces:
+      enum.MicrowaveUiKey.AssemblerKey:
+        type: AssemblerBoundUserInterface

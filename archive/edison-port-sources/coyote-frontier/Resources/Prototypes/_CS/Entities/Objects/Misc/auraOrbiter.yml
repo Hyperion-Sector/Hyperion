@@ -1,0 +1,59 @@
+# Auras for orbiting people holding spells! A lot of this comes from the anomaly cores.
+
+- type: entity
+  id: AuraOrbiterBase
+  name: base magic aura
+  description: you shouldn't be seeing this
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: Structures/Specific/Anomalies/Cores/santa_core.rsi
+    noRot: true
+    layers:
+    - state: core
+    - state: pulse
+      map: ["decay"]
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.AnomalyCoreVisuals.Decaying:
+        decay:
+          True: { visible: true }
+          False: { visible: false }
+  - type: Physics
+    bodyType: Kinematic
+  - type: Fixtures
+    fixtures: {}
+
+- type: entity
+  id: AuraOrbiterPyro
+  parent: AuraOrbiterBase
+  name: pryo aura
+  description: A meancing fiery aura.
+  components:
+  - type: AmbientSound
+    volume: 1
+    range: 5
+    sound:
+      path: /Audio/Ambience/Objects/fireplace.ogg
+  - type: Sprite
+    sprite: Structures/Specific/Anomalies/Cores/pyro_core.rsi
+  - type: PointLight
+    radius: 1.5
+    energy: 1.5
+    color: "#E25822"
+    castShadows: false
+
+- type: entity
+  id: AuraOrbiterLightning
+  parent: AuraOrbiterBase
+  name: lightning aura
+  description: A stunning aura of pure lightning.
+  components:
+  - type: Sprite
+    sprite: Structures/Specific/Anomalies/Cores/electric_core.rsi
+  - type: PointLight
+    radius: 1.5
+    energy: 2.0
+    color: "#ffffaa"
+    castShadows: false

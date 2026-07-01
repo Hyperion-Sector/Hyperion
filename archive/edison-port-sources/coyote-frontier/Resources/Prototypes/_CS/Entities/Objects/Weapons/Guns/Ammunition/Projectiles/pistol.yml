@@ -1,0 +1,82 @@
+#region .40 pistol
+- type: entity
+  id: CSBulletPistol40
+  name: bullet (.40 pistol)
+  parent: NFBaseBullet
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Projectile
+    damage:
+      types:
+        Piercing: 29
+
+- type: entity
+  id: CSBulletPistol40Overpressure
+  name: bullet (.40 pistol, overpressure)
+  parent: NFBaseBulletOverpressure
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Projectile
+    damage:
+      types:
+        Piercing: 32
+
+- type: entity
+  id: CSBulletPistol40Incendiary
+  name: bullet (.40 pistol, incendiary)
+  parent: NFBaseBulletIncendiary
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Projectile
+    damage:
+      types:
+        Blunt: 18 # 0.6 * base total dmg
+        Heat: 11 # 0.4 * base total dmg
+
+- type: entity
+  id: CSBulletPistol40Uranium
+  parent: NFBaseBulletUranium
+  name: bullet (.40 pistol, uranium)
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Projectile
+    damage:
+      types:
+        Blunt: 24 # 0.6 * (1.4 * base total dmg)
+        Radiation: 16 # 0.4 * (1.4 * base total dmg)
+
+- type: entity
+  id: CSBulletPistol40Practice
+  name: bullet (.40 pistol, practice)
+  parent: NFBaseBulletPractice
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Projectile
+    damage:
+      types:
+        Blunt: 0
+
+- type: entity
+  id: CSBulletPistol40Emp
+  name: bullet (.40 pistol, EMP)
+  parent: NFBaseBulletEmp
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Projectile
+    damage:
+      types:
+        Shock: 14.5
+        Blunt: 14.5
+
+- type: entity
+  id: CSBulletPistol40Rubber
+  name: bullet (.40 pistol, rubber)
+  parent: NFBaseBulletRubber
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Projectile
+    damage:
+      types:
+        Blunt: 0
+  - type: StaminaDamageOnCollide
+    damage: 24
