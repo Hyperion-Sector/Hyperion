@@ -7,6 +7,7 @@ using System.Runtime.CompilerServices;
 using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
+using Content.Server._Hyperion.ShipStorage; // Hyperion
 using Content.Server._Mono.Company;
 using Content.Server.Administration.Logs;
 using Content.Shared._Mono.Company;
@@ -1906,6 +1907,136 @@ INSERT INTO player_round (players_id, rounds_id) VALUES ({players[player]}, {id}
         }
 
         #endregion
+
+        // Hyperion-Start
+        #region ShipStorage
+
+        public async Task<int> SaveShipRevision(ShipStorageRecord index, byte[] blob, int keepRevisions, CancellationToken cancel = default)
+        {
+            await using var db = await GetDb(cancel);
+
+            var ship = await db.DbContext.ShipStorage
+                .SingleOrDefaultAsync(s => s.ShipGuid == index.ShipGuid, cancel);
+
+            var now = DateTime.UtcNow;
+            int revision;
+            if (ship == null)
+            {
+                revision = 1;
+                ship = new ShipStorage
+                {
+                    ShipGuid = index.ShipGuid,
+                    CreatedAt = now,
+                };
+                db.DbContext.ShipStorage.Add(ship);
+            }
+            else
+            {
+                revision = ship.CurrentRevision + 1;
+            }
+
+            ship.OwnerUserId = index.OwnerUserId;
+            ship.ShipName = index.ShipName;
+            ship.VesselProto = index.VesselProto;
+            ship.ProtoFingerprint = index.ProtoFingerprint;
+            ship.EngineFormatVer = index.EngineFormatVer;
+            ship.Checksum = index.Checksum;
+            ship.SizeBytes = blob.Length;
+            ship.SizeClass = index.SizeClass;
+            ship.CurrentRevision = revision;
+            ship.UpdatedAt = now;
+
+            db.DbContext.ShipStorageBlob.Add(new ShipStorageBlob
+            {
+                ShipGuid = index.ShipGuid,
+                Revision = revision,
+                Blob = blob,
+                CreatedAt = now,
+            });
+
+            // Immutable revisions: GC everything beyond keep-last-N in the same transaction.
+            var cutoff = revision - keepRevisions;
+            if (cutoff > 0)
+            {
+                var stale = await db.DbContext.ShipStorageBlob
+                    .Where(b => b.ShipGuid == index.ShipGuid && b.Revision <= cutoff)
+                    .ToListAsync(cancel);
+                db.DbContext.ShipStorageBlob.RemoveRange(stale);
+            }
+
+            // One SaveChanges = one transaction: index upsert, blob insert and GC land atomically.
+            await db.DbContext.SaveChangesAsync(cancel);
+            return revision;
+        }
+
+        public async Task<ShipStorageRecord?> GetShipIndex(Guid shipGuid, CancellationToken cancel = default)
+        {
+            await using var db = await GetDb(cancel);
+
+            var ship = await db.DbContext.ShipStorage
+                .SingleOrDefaultAsync(s => s.ShipGuid == shipGuid, cancel);
+
+            return ship == null ? null : MakeShipRecord(ship);
+        }
+
+        public async Task<byte[]?> GetShipBlob(Guid shipGuid, int revision, CancellationToken cancel = default)
+        {
+            await using var db = await GetDb(cancel);
+
+            return await db.DbContext.ShipStorageBlob
+                .Where(b => b.ShipGuid == shipGuid && b.Revision == revision)
+                .Select(b => b.Blob)
+                .SingleOrDefaultAsync(cancel);
+        }
+
+        public async Task<List<ShipStorageRecord>> GetShipsByOwner(Guid ownerUserId, CancellationToken cancel = default)
+        {
+            await using var db = await GetDb(cancel);
+
+            var ships = await db.DbContext.ShipStorage
+                .Where(s => s.OwnerUserId == ownerUserId)
+                .ToListAsync(cancel);
+
+            return ships.Select(MakeShipRecord).ToList();
+        }
+
+        public async Task<bool> DeleteShip(Guid shipGuid, CancellationToken cancel = default)
+        {
+            await using var db = await GetDb(cancel);
+
+            var ship = await db.DbContext.ShipStorage
+                .SingleOrDefaultAsync(s => s.ShipGuid == shipGuid, cancel);
+
+            if (ship == null)
+                return false;
+
+            // Blob revisions cascade-delete with the index row.
+            db.DbContext.ShipStorage.Remove(ship);
+            await db.DbContext.SaveChangesAsync(cancel);
+            return true;
+        }
+
+        private ShipStorageRecord MakeShipRecord(ShipStorage ship)
+        {
+            return new ShipStorageRecord
+            {
+                ShipGuid = ship.ShipGuid,
+                OwnerUserId = ship.OwnerUserId,
+                ShipName = ship.ShipName,
+                VesselProto = ship.VesselProto,
+                ProtoFingerprint = ship.ProtoFingerprint,
+                EngineFormatVer = ship.EngineFormatVer,
+                Checksum = ship.Checksum,
+                SizeBytes = ship.SizeBytes,
+                SizeClass = ship.SizeClass,
+                CurrentRevision = ship.CurrentRevision,
+                CreatedAt = NormalizeDatabaseTime(ship.CreatedAt),
+                UpdatedAt = NormalizeDatabaseTime(ship.UpdatedAt),
+            };
+        }
+
+        #endregion
+        // Hyperion-End
 
         public abstract Task SendNotification(DatabaseNotification notification);
 
