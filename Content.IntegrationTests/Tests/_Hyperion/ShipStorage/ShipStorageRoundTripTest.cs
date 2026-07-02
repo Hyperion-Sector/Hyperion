@@ -75,10 +75,13 @@ namespace Content.IntegrationTests.Tests._Hyperion.ShipStorage
             // Store the grid. serialize -> commit -> despawn: the returned task completes when
             // the blob is filed; the grid deletion is the last step (QueueDel, resolves next tick).
             Guid? shipId = null;
-            Task<Guid?> storeTask = null!;
+            Task<(ShipStorageResult Result, Guid? ShipId)> storeTask = null!;
             await server.WaitPost(() => storeTask = shipStorage.TryStoreShip(gridUid, ownerId));
-            shipId = await storeTask;
+            var storeResult = await storeTask;
+            shipId = storeResult.ShipId;
 
+            Assert.That(storeResult.Result, Is.EqualTo(ShipStorageResult.Success),
+                "TryStoreShip should succeed for a mindless grid.");
             Assert.That(shipId, Is.Not.Null, "TryStoreShip returned null: a gate refused the store.");
 
             // QueueDel is deferred; assert the live grid is gone only after a tick settles.
