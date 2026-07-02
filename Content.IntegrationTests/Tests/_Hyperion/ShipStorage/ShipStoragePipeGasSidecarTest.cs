@@ -1,6 +1,7 @@
 // SPDX-FileCopyrightText: 2026 Hyperion Sector
 // SPDX-License-Identifier: MPL-2.0
 
+#nullable enable
 using System;
 using System.Collections.Generic;
 using System.Numerics;
