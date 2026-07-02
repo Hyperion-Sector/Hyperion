@@ -23,6 +23,7 @@ using Robust.Shared.EntitySerialization.Systems;
 using Robust.Shared.Utility;
 using Content.Shared.Doors.Components;
 using Robust.Shared.Map.Components;
+using System.IO; // Hyperion
 
 namespace Content.Server._NF.Shipyard.Systems;
 
@@ -180,6 +181,55 @@ public sealed partial class ShipyardSystem : SharedShipyardSystem
 
         shuttleGrid = grid.Value.Owner;
         return true;
+    }
+
+    // Hyperion: in-memory counterpart of TryAddShuttle for ship-storage retrieve.
+    // Stages the deserialized grid on the shared ShipyardMap (same offset allocator,
+    // same pause semantics and round-restart cleanup) so a retrieved ship presents
+    // exactly like a purchased one. TryLoadGrid deletes its own partial state on
+    // failure, so a false return leaves the shipyard map clean.
+    public bool TryAddGridFromReader(TextReader reader, string source, [NotNullWhen(true)] out EntityUid? shuttleGrid)
+    {
+        shuttleGrid = null;
+        SetupShipyardIfNeeded();
+        if (ShipyardMap == null)
+            return false;
+
+        if (!_mapLoader.TryLoadGrid(ShipyardMap.Value, reader, source, out var grid,
+                offset: new Vector2(500f + _shuttleIndex, 1f)))
+        {
+            _sawmill.Error($"Unable to load ship-storage grid from {source}");
+            return false;
+        }
+
+        _shuttleIndex += grid.Value.Comp.LocalAABB.Width + ShuttleSpawnBuffer;
+        shuttleGrid = grid.Value.Owner;
+        return true;
+    }
+
+    // Hyperion: ship-storage identity stamp. Deed writes are Access-gated to the
+    // shipyard system family, so ShipStorageSystem routes its grid-deed mutations
+    // through here. Ensures the grid-side deed exists, self-binds ShuttleUid, and
+    // stamps the persistent ShipId (before serialize, so it lands in the blob).
+    public void EnsureShipStorageDeed(EntityUid gridUid, Guid shipId)
+    {
+        var deed = EnsureComp<ShuttleDeedComponent>(gridUid);
+        deed.ShuttleUid ??= gridUid;
+        deed.ShipId = shipId;
+        Dirty(gridUid, deed);
+    }
+
+    // Hyperion: retrieve-side deed rebind. The blob's deed carries a stale ShuttleUid
+    // and a DeedHolder pointing at an ID card that was deleted at its round's end;
+    // rebind to the fresh grid and clear the holder (the drydock console re-mints the
+    // card-side deed in a later cycle). EnsureComp covers pre-ShipId blobs.
+    public void RebindDeedForRetrieve(EntityUid gridUid, Guid shipId)
+    {
+        var deed = EnsureComp<ShuttleDeedComponent>(gridUid);
+        deed.ShuttleUid = gridUid;
+        deed.DeedHolder = null;
+        deed.ShipId = shipId;
+        Dirty(gridUid, deed);
     }
 
     /// <summary>

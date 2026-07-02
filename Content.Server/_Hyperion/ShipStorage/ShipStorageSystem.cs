@@ -7,12 +7,14 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using Content.Server._NF.Shipyard.Systems;
+using Content.Server._NF.Station.Components;
 using Content.Server.Database;
 using Content.Server.NodeContainer.Nodes;
 using Content.Server.Nuke;
 using Content.Shared._Hyperion.CCVar;
 using Content.Shared._Hyperion.ShipSize;
 using Content.Shared._Mono.ShipRepair.Components;
+using Content.Shared._NF.Shipyard.Components;
 using Content.Shared.Damage;
 using Content.Shared.Explosion.Components;
 using Content.Shared.FixedPoint;
@@ -21,6 +23,7 @@ using Content.Shared.NodeContainer;
 using Content.Shared.Nuke;
 using Content.Shared.GameTicking;
 using Content.Shared.Singularity.Components;
+using Content.Shared.Station.Components;
 using Robust.Shared.Configuration;
 using Robust.Shared.EntitySerialization;
 using Robust.Shared.EntitySerialization.Systems;
@@ -44,14 +47,15 @@ namespace Content.Server._Hyperion.ShipStorage;
 /// the RFC. The organics gate (no mind-bearing mob aboard) is live as of Cycle 2a;
 /// the hazard gate (armed nuke / active countdown / singularity aboard) is live as
 /// of Cycle 2b; the save-time round-trip validation backstop, the active-ship
-/// registry, and the store strip-list are all live as of Cycle 3.
+/// registry, and the store strip-list are all live as of Cycle 3; the grid-side
+/// deed identity stamp (cross-round resolve, see <see cref="ResolveOrMintShipId"/>)
+/// is live as of Cycle 4.
 /// </summary>
-public sealed class ShipStorageSystem : EntitySystem
+public sealed partial class ShipStorageSystem : EntitySystem
 {
     [Dependency] private readonly IConfigurationManager _cfg = default!;
     [Dependency] private readonly IServerDbManager _db = default!;
     [Dependency] private readonly MapLoaderSystem _mapLoader = default!;
-    [Dependency] private readonly SharedMapSystem _map = default!;
     [Dependency] private readonly ShipSizeSystem _shipSize = default!;
     [Dependency] private readonly ShipyardSystem _shipyard = default!;
     [Dependency] private readonly DamageableSystem _damageable = default!;
@@ -66,6 +70,13 @@ public sealed class ShipStorageSystem : EntitySystem
     /// (the production default) means "diff the round-trip for real".
     /// </summary>
     internal Func<EntityUid, bool>? ValidationMismatchOverride;
+
+    /// <summary>
+    /// Test seam: wipes the round-scoped active-ship registry, simulating a round
+    /// boundary so cross-round identity paths (the deed leg) can be exercised without
+    /// raising a full RoundRestartCleanupEvent through every subscriber in the server.
+    /// </summary>
+    internal void ClearActiveShipRegistry() => _activeShips.Clear();
 
     /// <summary>
     /// Active-ship registry (RFC "Anti-abuse", LOCKED): round-scoped <c>ShipId -&gt;
@@ -176,6 +187,11 @@ public sealed class ShipStorageSystem : EntitySystem
                 return id;
         }
 
+        // Deed leg (Cycle 4): a grid that wasn't retrieved this round (registry miss)
+        // may still carry its identity from a prior round on the grid-side deed.
+        if (TryComp<ShuttleDeedComponent>(gridUid, out var deed) && deed.ShipId is { } deedShipId)
+            return deedShipId;
+
         return Guid.NewGuid();
     }
 
@@ -195,8 +211,9 @@ public sealed class ShipStorageSystem : EntitySystem
     /// MINTS a fresh <see cref="Guid"/>. Without this, every store-after-retrieve
     /// forks a brand-new, independently-retrievable duplicate row while the
     /// original stays fully retrievable — unbounded duplication on the happy path.
-    /// The active-ship registry is the resolver this cycle; a deed-carried ShipId
-    /// is a later cycle's mechanism.
+    /// The active-ship registry resolves same-round re-stores; a grid whose registry
+    /// entry is gone (a later round) falls back to the grid-side deed's ShipId
+    /// (Cycle 4, see <see cref="ResolveOrMintShipId"/>) before minting fresh.
     /// Returns a <see cref="ShipStorageResult"/> plus the ship's persistent id on
     /// success (null on refusal). A refused store leaves the grid fully untouched.
     /// </summary>
@@ -221,6 +238,13 @@ public sealed class ShipStorageSystem : EntitySystem
             return (ShipStorageResult.HazardAboard, null);
 
         var shipId = ResolveOrMintShipId(gridUid);
+
+        // Stamp identity onto the grid-side deed BEFORE serialize so it rides the blob
+        // (and before the sidecars, so live and scratch agree in the validation diff).
+        // A later abort leaves the stamp in place — harmless: the id is simply reserved
+        // early, and the next successful store resolves it via the deed leg.
+        _shipyard.EnsureShipStorageDeed(gridUid, shipId);
+
         var shipName = Comp<MetaDataComponent>(gridUid).EntityName;
         var sizeClass = _shipSize.GetSizeClass((gridUid, Comp<MapGridComponent>(gridUid)));
 
@@ -300,14 +324,23 @@ public sealed class ShipStorageSystem : EntitySystem
 
             var (fingerprint, formatVer) = ReadDriftMetadata(yaml);
 
+            // Vessel prototype capture (spec section 1): the grid alone doesn't know its
+            // vessel, but its station's latejoin info does. Empty for stationless grids
+            // and pre-Cycle-4 blobs; retrieve tolerates empty (no station recreate).
+            var vesselProto = string.Empty;
+            if (TryComp<StationMemberComponent>(gridUid, out var stationMember)
+                && TryComp<ExtraShuttleInformationComponent>(stationMember.Station, out var vesselInfo)
+                && vesselInfo.Vessel is { } vessel)
+            {
+                vesselProto = vessel.Id;
+            }
+
             var record = new ShipStorageRecord
             {
                 ShipGuid = shipId,
                 OwnerUserId = ownerUserId,
                 ShipName = shipName,
-                // TODO(hyperion): VesselProto comes with deed integration (the grid alone
-                // doesn't know its vessel prototype); filled in the console/deed cycle.
-                VesselProto = string.Empty,
+                VesselProto = vesselProto,
                 ProtoFingerprint = fingerprint,
                 EngineFormatVer = formatVer,
                 Checksum = checksum,
@@ -652,152 +685,6 @@ public sealed class ShipStorageSystem : EntitySystem
         }
 
         return false;
-    }
-
-    /// <summary>
-    /// Retrieves the ship identified by <paramref name="shipId"/> for
-    /// <paramref name="ownerUserId"/>. Verifies the blob checksum and falls back
-    /// to earlier revisions on mismatch (logged); decompresses in memory and loads
-    /// the grid onto a fresh map. Returns the new grid, or null if the ship is
-    /// unknown, owned by someone else, or no revision passes verification.
-    /// </summary>
-    public async Task<EntityUid?> TryRetrieveShip(Guid shipId, Guid ownerUserId)
-    {
-        // Active-ship registry gate (RFC "Anti-abuse", LOCKED): refuse if this ShipId
-        // already has a live grid registered this round, OR if a retrieve of it is
-        // already in flight (the reservation set just below). Checked first, before
-        // any DB work, so a refusal here is cheap.
-        if (_activeShips.TryGetValue(shipId, out var liveGrid))
-        {
-            // EntityUid.Invalid is the in-flight reservation sentinel written below —
-            // it must refuse here too, so it's checked BEFORE Exists(), not folded
-            // into it: Exists(Invalid) is false, so treating it like an ordinary
-            // dead-grid entry would (wrongly) read it as stale and let a second,
-            // concurrently-racing retrieve through.
-            if (liveGrid == EntityUid.Invalid)
-                return null;
-
-            // Belt-and-suspenders: a stale entry that somehow survived its grid's
-            // deletion (OnEntityTerminating is expected to have already cleared it).
-            if (Exists(liveGrid))
-                return null;
-        }
-
-        // Reserve the ShipId SYNCHRONOUSLY here, in the same block as the gate check
-        // above and strictly before the first await — this closes the concurrent
-        // double-retrieve TOCTOU (red-team fix #2). Two TryRetrieveShip calls issued
-        // back-to-back (double-click, two racing sessions) before either resumes past
-        // its first await previously could BOTH pass the gate, since neither had
-        // registered yet; the second call's gate check above now finds this sentinel
-        // and refuses. Every exit below MUST release the reservation on failure (see
-        // the finally block) or a bad owner / missing row / checksum exhaustion /
-        // load failure would leave this ShipId permanently blocked for the rest of
-        // the round; a success overwrites the sentinel with the real grid uid before
-        // returning, and the finally block leaves that alone.
-        _activeShips[shipId] = EntityUid.Invalid;
-
-        try
-        {
-            var index = await _db.GetShipIndex(shipId);
-            if (index == null || index.OwnerUserId != ownerUserId)
-                return null;
-
-            var keepRevisions = _cfg.GetCVar(HyperionCVars.ShipStorageKeepRevisions);
-            var oldest = Math.Max(1, index.CurrentRevision - keepRevisions + 1);
-
-            for (var revision = index.CurrentRevision; revision >= oldest; revision--)
-            {
-                var stored = await _db.GetShipBlob(shipId, revision);
-                if (stored == null)
-                    continue;
-
-                byte[] yamlBytes;
-                try
-                {
-                    yamlBytes = DecompressZstd(stored.Blob);
-                }
-                catch (Exception e)
-                {
-                    Log.Error($"Ship {shipId} revision {revision} failed to decompress, trying previous revision: {e.Message}");
-                    continue;
-                }
-
-                if (!SHA256.HashData(yamlBytes).AsSpan().SequenceEqual(stored.Checksum))
-                {
-                    Log.Error($"Ship {shipId} revision {revision} failed checksum verification, trying previous revision.");
-                    continue;
-                }
-
-                if (revision != index.CurrentRevision)
-                    Log.Warning($"Ship {shipId} retrieved from fallback revision {revision} (current {index.CurrentRevision} corrupt).");
-
-                // TODO(hyperion): a later cycle presents the grid docked via the
-                // shipyard-map FTL pattern (see ShipyardSystem.TryAddShuttle) instead of
-                // a bare new map per retrieve.
-                var mapUid = _map.CreateMap(out var mapId);
-
-                using var reader = new StreamReader(new MemoryStream(yamlBytes), Encoding.UTF8);
-                if (_mapLoader.TryLoadGrid(mapId, reader, $"ship_storage/{shipId}", out var grid))
-                {
-                    // Rehydration pass (RFC retrieve flow): sidecar-carried state that the
-                    // map serializer can't reach on its own gets reapplied here, once the
-                    // grid has fully materialized. Damage is the first resident; later
-                    // cycles add device-network re-registration, SmartFridge index rebuild,
-                    // etc. to this same seam.
-                    RehydrateDamage(grid.Value.Owner);
-
-                    // Overwrite the in-flight reservation with the real grid uid: this
-                    // ship is now "flying" and a sequential (or concurrent, now that the
-                    // reservation held the gate) retrieve of the same ShipId must refuse
-                    // until it's released (stored again or its grid deleted).
-                    _activeShips[shipId] = grid.Value.Owner;
-                    return grid.Value.Owner;
-                }
-
-                Del(mapUid);
-                Log.Error($"Ship {shipId} revision {revision} passed checksum but failed to load.");
-                return null;
-            }
-
-            Log.Error($"Ship {shipId}: no stored revision passed verification; retrieve refused.");
-            return null;
-        }
-        finally
-        {
-            // Release the reservation on every failure exit above — it's still the
-            // Invalid sentinel there, never overwritten. A success already replaced
-            // it with the real grid uid, so this is a no-op on that path (the
-            // TryGetValue guard below skips the Remove rather than clobbering a
-            // just-registered live ship's entry).
-            if (_activeShips.TryGetValue(shipId, out var current) && current == EntityUid.Invalid)
-                _activeShips.Remove(shipId);
-        }
-    }
-
-    /// <summary>
-    /// Applies every <see cref="DamageSidecarComponent"/> on <paramref name="gridUid"/>
-    /// back onto its holder's <see cref="DamageableComponent"/> via
-    /// <see cref="DamageableSystem.SetDamage"/>, then removes the sidecar
-    /// (consume-once, naturally idempotent). Deliberately run from this explicit
-    /// post-load pass rather than a component-startup hook: applying at
-    /// ComponentStartup would fire <c>DamageChangedEvent</c> into
-    /// <c>DestructibleSystem</c> while the grid is still settling, risking a
-    /// threshold trip (Destruction/ChangeConstructionNode) against not-yet-final
-    /// state. Running after <c>TryLoadGrid</c> returns lets thresholds evaluate
-    /// against fully-materialized state instead.
-    /// </summary>
-    private void RehydrateDamage(EntityUid gridUid)
-    {
-        var query = AllEntityQuery<DamageSidecarComponent, DamageableComponent, TransformComponent>();
-        while (query.MoveNext(out var uid, out var sidecar, out var damageable, out var xform))
-        {
-            if (xform.GridUid != gridUid)
-                continue;
-
-            var damage = new DamageSpecifier { DamageDict = new Dictionary<string, FixedPoint2>(sidecar.DamageDict) };
-            _damageable.SetDamage(uid, damageable, damage);
-            RemComp<DamageSidecarComponent>(uid);
-        }
     }
 
     /// <summary>
