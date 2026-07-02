@@ -89,6 +89,12 @@ namespace Content.IntegrationTests.Tests._Hyperion.ShipStorage
                 Assert.That(ownership.OwnerUserId.UserId, Is.EqualTo(ownerId));
                 Assert.That(ownership.LastStatusChangeTime, Is.GreaterThanOrEqualTo(preRetrieve),
                     "Retrieve must refresh the round-scoped ownership timestamp.");
+                // Guards the monotonic check against passing vacuously: on a cold pool,
+                // preRetrieve can be BELOW the seeded staleTime, so an un-refreshed field
+                // would still satisfy >= preRetrieve. Proving the value moved off the
+                // seeded sentinel pins that the refresh actually wrote the field.
+                Assert.That(ownership.LastStatusChangeTime, Is.Not.EqualTo(staleTime),
+                    "The stored timestamp must be overwritten, not carried through from the blob.");
                 Assert.That(ownership.IsOwnerOnline, Is.False,
                     "A synthetic owner has no session; online state must be re-derived, not trusted from the blob.");
             });
