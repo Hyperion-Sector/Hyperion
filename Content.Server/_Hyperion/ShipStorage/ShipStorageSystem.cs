@@ -7,6 +7,7 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using Content.Server._NF.Shipyard.Systems;
+using Content.Server._NF.Station.Components;
 using Content.Server.Database;
 using Content.Server.NodeContainer.Nodes;
 using Content.Server.Nuke;
@@ -22,6 +23,7 @@ using Content.Shared.NodeContainer;
 using Content.Shared.Nuke;
 using Content.Shared.GameTicking;
 using Content.Shared.Singularity.Components;
+using Content.Shared.Station.Components;
 using Robust.Shared.Configuration;
 using Robust.Shared.EntitySerialization;
 using Robust.Shared.EntitySerialization.Systems;
@@ -322,14 +324,23 @@ public sealed partial class ShipStorageSystem : EntitySystem
 
             var (fingerprint, formatVer) = ReadDriftMetadata(yaml);
 
+            // Vessel prototype capture (spec section 1): the grid alone doesn't know its
+            // vessel, but its station's latejoin info does. Empty for stationless grids
+            // and pre-Cycle-4 blobs; retrieve tolerates empty (no station recreate).
+            var vesselProto = string.Empty;
+            if (TryComp<StationMemberComponent>(gridUid, out var stationMember)
+                && TryComp<ExtraShuttleInformationComponent>(stationMember.Station, out var vesselInfo)
+                && vesselInfo.Vessel is { } vessel)
+            {
+                vesselProto = vessel.Id;
+            }
+
             var record = new ShipStorageRecord
             {
                 ShipGuid = shipId,
                 OwnerUserId = ownerUserId,
                 ShipName = shipName,
-                // TODO(hyperion): VesselProto comes with deed integration (the grid alone
-                // doesn't know its vessel prototype); filled in the console/deed cycle.
-                VesselProto = string.Empty,
+                VesselProto = vesselProto,
                 ProtoFingerprint = fingerprint,
                 EngineFormatVer = formatVer,
                 Checksum = checksum,
