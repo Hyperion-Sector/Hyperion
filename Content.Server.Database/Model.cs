@@ -50,6 +50,10 @@ namespace Content.Server.Database
         public DbSet<BanTemplate> BanTemplate { get; set; } = null!;
         public DbSet<IPIntelCache> IPIntelCache { get; set; } = null!;
         public DbSet<CompanyMember> CompanyMembers { get; set; } = null!;
+        // Hyperion-Start: ship storage
+        public DbSet<ShipStorage> ShipStorage { get; set; } = null!;
+        public DbSet<ShipStorageBlob> ShipStorageBlob { get; set; } = null!;
+        // Hyperion-End
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -303,6 +307,20 @@ namespace Content.Server.Database
                 .HasForeignKey(w => w.PlayerUserId)
                 .HasPrincipalKey(p => p.UserId)
                 .OnDelete(DeleteBehavior.Cascade);
+
+            // Hyperion-Start: ship storage
+            modelBuilder.Entity<ShipStorage>()
+                .HasIndex(s => s.OwnerUserId);
+
+            modelBuilder.Entity<ShipStorage>()
+                .HasIndex(s => s.ProtoFingerprint);
+
+            modelBuilder.Entity<ShipStorageBlob>()
+                .HasOne(b => b.Ship)
+                .WithMany(s => s.Revisions)
+                .HasForeignKey(b => b.ShipGuid)
+                .OnDelete(DeleteBehavior.Cascade);
+            // Hyperion-End
 
             ModelBan.OnModelCreating(modelBuilder);
         }
@@ -1084,4 +1102,66 @@ namespace Content.Server.Database
         public string CompanyId { get; set; } = default!;
     }
     // Mono-End
+
+    // Hyperion-Start: ship storage (persisted player ships; hot index + cold blob revisions)
+    [Table("ship_storage")]
+    public class ShipStorage
+    {
+        [Key]
+        public Guid ShipGuid { get; set; }
+
+        [Required]
+        public Guid OwnerUserId { get; set; }
+
+        [Required]
+        public string ShipName { get; set; } = default!;
+
+        [Required]
+        public string VesselProto { get; set; } = default!;
+
+        [Required]
+        public string ProtoFingerprint { get; set; } = default!;
+
+        public int EngineFormatVer { get; set; }
+
+        [Required]
+        public byte[] Checksum { get; set; } = default!;
+
+        public int SizeBytes { get; set; }
+
+        public int SizeClass { get; set; }
+
+        public int CurrentRevision { get; set; }
+
+        public DateTime CreatedAt { get; set; }
+
+        public DateTime UpdatedAt { get; set; }
+
+        public List<ShipStorageBlob> Revisions { get; set; } = null!;
+    }
+
+    [Table("ship_storage_blob")]
+    [PrimaryKey(nameof(ShipGuid), nameof(Revision))]
+    public class ShipStorageBlob
+    {
+        [Required, ForeignKey("Ship")]
+        public Guid ShipGuid { get; set; }
+        public ShipStorage Ship { get; set; } = default!;
+
+        public int Revision { get; set; }
+
+        [Required]
+        public byte[] Blob { get; set; } = default!;
+
+        /// <summary>
+        /// SHA-256 of the UNCOMPRESSED yaml for THIS revision. Per-revision so the
+        /// checksum-mismatch fallback can verify older revisions, and compression
+        /// changes never invalidate stored hashes.
+        /// </summary>
+        [Required]
+        public byte[] Checksum { get; set; } = default!;
+
+        public DateTime CreatedAt { get; set; }
+    }
+    // Hyperion-End
 }

@@ -1369,6 +1369,101 @@ namespace Content.Server.Database.Migrations.Postgres
                     b.ToTable("server_ban_hit", (string)null);
                 });
 
+            modelBuilder.Entity("Content.Server.Database.ShipStorage", b =>
+                {
+                    b.Property<Guid>("ShipGuid")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid")
+                        .HasColumnName("ship_guid");
+
+                    b.Property<byte[]>("Checksum")
+                        .IsRequired()
+                        .HasColumnType("bytea")
+                        .HasColumnName("checksum");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("created_at");
+
+                    b.Property<int>("CurrentRevision")
+                        .HasColumnType("integer")
+                        .HasColumnName("current_revision");
+
+                    b.Property<int>("EngineFormatVer")
+                        .HasColumnType("integer")
+                        .HasColumnName("engine_format_ver");
+
+                    b.Property<Guid>("OwnerUserId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("owner_user_id");
+
+                    b.Property<string>("ProtoFingerprint")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("proto_fingerprint");
+
+                    b.Property<string>("ShipName")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("ship_name");
+
+                    b.Property<int>("SizeBytes")
+                        .HasColumnType("integer")
+                        .HasColumnName("size_bytes");
+
+                    b.Property<int>("SizeClass")
+                        .HasColumnType("integer")
+                        .HasColumnName("size_class");
+
+                    b.Property<DateTime>("UpdatedAt")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("updated_at");
+
+                    b.Property<string>("VesselProto")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("vessel_proto");
+
+                    b.HasKey("ShipGuid")
+                        .HasName("PK_ship_storage");
+
+                    b.HasIndex("OwnerUserId");
+
+                    b.HasIndex("ProtoFingerprint");
+
+                    b.ToTable("ship_storage", (string)null);
+                });
+
+            modelBuilder.Entity("Content.Server.Database.ShipStorageBlob", b =>
+                {
+                    b.Property<Guid>("ShipGuid")
+                        .HasColumnType("uuid")
+                        .HasColumnName("ship_guid");
+
+                    b.Property<int>("Revision")
+                        .HasColumnType("integer")
+                        .HasColumnName("revision");
+
+                    b.Property<byte[]>("Blob")
+                        .IsRequired()
+                        .HasColumnType("bytea")
+                        .HasColumnName("blob");
+
+                    b.Property<byte[]>("Checksum")
+                        .IsRequired()
+                        .HasColumnType("bytea")
+                        .HasColumnName("checksum");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("created_at");
+
+                    b.HasKey("ShipGuid", "Revision")
+                        .HasName("PK_ship_storage_blob");
+
+                    b.ToTable("ship_storage_blob", (string)null);
+                });
+
             modelBuilder.Entity("Content.Server.Database.Trait", b =>
                 {
                     b.Property<int>("Id")
@@ -2017,6 +2112,18 @@ namespace Content.Server.Database.Migrations.Postgres
                     b.Navigation("Connection");
                 });
 
+            modelBuilder.Entity("Content.Server.Database.ShipStorageBlob", b =>
+                {
+                    b.HasOne("Content.Server.Database.ShipStorage", "Ship")
+                        .WithMany("Revisions")
+                        .HasForeignKey("ShipGuid")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("FK_ship_storage_blob_ship_storage_ship_guid");
+
+                    b.Navigation("Ship");
+                });
+
             modelBuilder.Entity("Content.Server.Database.Trait", b =>
                 {
                     b.HasOne("Content.Server.Database.Profile", "Profile")
@@ -2170,6 +2277,11 @@ namespace Content.Server.Database.Migrations.Postgres
                     b.Navigation("ConnectionLogs");
 
                     b.Navigation("Rounds");
+                });
+
+            modelBuilder.Entity("Content.Server.Database.ShipStorage", b =>
+                {
+                    b.Navigation("Revisions");
                 });
 #pragma warning restore 612, 618
         }

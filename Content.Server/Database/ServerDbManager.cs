@@ -4,6 +4,7 @@ using System.Net;
 using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
+using Content.Server._Hyperion.ShipStorage; // Hyperion
 using Content.Server.Administration.Logs;
 using Content.Shared.Administration.Logs;
 using Content.Shared.CCVar;
@@ -325,6 +326,24 @@ namespace Content.Server.Database
         Task<bool> RemoveCompanyMember(Guid player, ProtoId<CompanyPrototype> company);
 
         #endregion
+
+        // Hyperion-Start
+        #region ShipStorage
+
+        /// <summary>
+        /// Upserts the hot index row and inserts a new blob revision atomically,
+        /// garbage-collecting revisions older than <paramref name="keepRevisions"/>.
+        /// Returns the new revision number.
+        /// </summary>
+        Task<int> SaveShipRevision(ShipStorageRecord index, byte[] blob, int keepRevisions, CancellationToken cancel = default);
+
+        Task<ShipStorageRecord?> GetShipIndex(Guid shipGuid, CancellationToken cancel = default);
+        Task<ShipBlobRecord?> GetShipBlob(Guid shipGuid, int revision, CancellationToken cancel = default);
+        Task<List<ShipStorageRecord>> GetShipsByOwner(Guid ownerUserId, CancellationToken cancel = default);
+        Task<bool> DeleteShip(Guid shipGuid, CancellationToken cancel = default);
+
+        #endregion
+        // Hyperion-End
 
         #region DB Notifications
 
@@ -1060,6 +1079,38 @@ namespace Content.Server.Database
             return RunDbCommand(() => _db.RemoveCompanyMember(player, company));
         }
         // Mono-End
+
+        // Hyperion-Start
+        public Task<int> SaveShipRevision(ShipStorageRecord index, byte[] blob, int keepRevisions, CancellationToken cancel = default)
+        {
+            DbWriteOpsMetric.Inc();
+            return RunDbCommand(() => _db.SaveShipRevision(index, blob, keepRevisions, cancel));
+        }
+
+        public Task<ShipStorageRecord?> GetShipIndex(Guid shipGuid, CancellationToken cancel = default)
+        {
+            DbReadOpsMetric.Inc();
+            return RunDbCommand(() => _db.GetShipIndex(shipGuid, cancel));
+        }
+
+        public Task<ShipBlobRecord?> GetShipBlob(Guid shipGuid, int revision, CancellationToken cancel = default)
+        {
+            DbReadOpsMetric.Inc();
+            return RunDbCommand(() => _db.GetShipBlob(shipGuid, revision, cancel));
+        }
+
+        public Task<List<ShipStorageRecord>> GetShipsByOwner(Guid ownerUserId, CancellationToken cancel = default)
+        {
+            DbReadOpsMetric.Inc();
+            return RunDbCommand(() => _db.GetShipsByOwner(ownerUserId, cancel));
+        }
+
+        public Task<bool> DeleteShip(Guid shipGuid, CancellationToken cancel = default)
+        {
+            DbWriteOpsMetric.Inc();
+            return RunDbCommand(() => _db.DeleteShip(shipGuid, cancel));
+        }
+        // Hyperion-End
 
         public void SubscribeToNotifications(Action<DatabaseNotification> handler)
         {
