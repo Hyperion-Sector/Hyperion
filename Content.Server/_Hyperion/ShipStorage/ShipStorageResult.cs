@@ -21,4 +21,12 @@ public enum ShipStorageResult : byte
 
     /// <summary>An aboard hazard (armed nuke, active countdown, singularity) blocks the store.</summary>
     HazardAboard,
+
+    /// <summary>
+    /// The save-time round-trip validation backstop found the freshly serialized blob
+    /// disagrees with the live grid on persistent state. The store is aborted before any
+    /// blob revision is filed and the live grid is left intact, so a serializer regression
+    /// can never silently drop or half-commit a ship.
+    /// </summary>
+    ValidationFailed,
 }
