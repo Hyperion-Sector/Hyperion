@@ -67382,7 +67382,7 @@ entities:
       rot: -1.5707963267948966 rad
       pos: -37.5,-43.5
       parent: 1
-- proto: HeliumCanister
+- proto: StorageCanister # Hyperion: substitute, Frontier helium gas absent
   entities:
   - uid: 10407
     components:
@@ -69658,7 +69658,7 @@ entities:
       rot: 1.5707963267948966 rad
       pos: 11.5,36.5
       parent: 1
-- proto: MonoCatwalk
+- proto: SteelMonoCatwalk # Hyperion: rename drift, Coyote MonoCatwalk -> Hyperion SteelMonoCatwalk
   entities:
   - uid: 10854
     components:
@@ -89636,7 +89636,7 @@ entities:
       rot: 3.141592653589793 rad
       pos: -19.5,25.5
       parent: 1
-- proto: WarningHelium
+- proto: WarningN2 # Hyperion: substitute, Frontier helium warning sign absent
   entities:
   - uid: 13833
     components:
