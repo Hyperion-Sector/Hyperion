@@ -125,7 +125,7 @@ namespace Content.IntegrationTests.Tests._Hyperion.ShipStorage
                     "The retrieved grid should exist in the sim.");
                 Assert.That(entManager.TryGetComponent<ShipRepairDataComponent>(retrievedGrid!.Value, out var repair), Is.True,
                     "Retrieve regenerates the repair baseline (Cycle 4) after the strip removes the stale one.");
-                Assert.That(repair.ChunkSize, Is.Not.EqualTo(SentinelChunkSize),
+                Assert.That(repair!.ChunkSize, Is.Not.EqualTo(SentinelChunkSize),
                     "The regenerated baseline must not be the stale pre-store sentinel value.");
             });
 

@@ -1,6 +1,8 @@
 // SPDX-FileCopyrightText: 2026 Hyperion Sector
 // SPDX-License-Identifier: MPL-2.0
 
+#nullable enable
+
 using System;
 using System.Threading.Tasks;
 using Content.Server._Hyperion.ShipStorage;
@@ -75,7 +77,7 @@ namespace Content.IntegrationTests.Tests._Hyperion.ShipStorage
 
                 Assert.That(entManager.TryGetComponent<ShuttleDeedComponent>(newGrid, out var deed), Is.True,
                     "The grid-side deed must survive the blob.");
-                Assert.That(deed.ShuttleUid, Is.EqualTo(newGrid), "Deed must rebind to the new grid uid.");
+                Assert.That(deed!.ShuttleUid, Is.EqualTo(newGrid), "Deed must rebind to the new grid uid.");
                 Assert.That(deed.DeedHolder, Is.Null, "The old card deed-holder died with its round.");
                 Assert.That(deed.ShipId, Is.EqualTo(shipId), "Deed keeps the persistent ShipId.");
 

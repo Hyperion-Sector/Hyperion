@@ -1,6 +1,8 @@
 // SPDX-FileCopyrightText: 2026 Hyperion Sector
 // SPDX-License-Identifier: MPL-2.0
 
+#nullable enable
+
 using System;
 using System.Threading.Tasks;
 using Content.Server._Hyperion.ShipStorage;
@@ -92,7 +94,7 @@ namespace Content.IntegrationTests.Tests._Hyperion.ShipStorage
 
                 Assert.That(entManager.TryGetComponent<StationMemberComponent>(newGrid, out var member), Is.True,
                     "A station-configured vessel must be a station member again after retrieve.");
-                var newStation = member.Station;
+                var newStation = member!.Station;
                 Assert.That(entManager.EntityExists(newStation), Is.True);
                 Assert.That(newStation, Is.Not.EqualTo(oldShipStation),
                     "The station is recreated, not resurrected.");
@@ -100,8 +102,8 @@ namespace Content.IntegrationTests.Tests._Hyperion.ShipStorage
                     "The recreated station carries the ship's name, not the proto generator's.");
 
                 Assert.That(entManager.TryGetComponent<ExtraShuttleInformationComponent>(newStation, out var info), Is.True);
-                Assert.That(info.Vessel, Is.Not.Null);
-                Assert.That(info.Vessel.Value.Id, Is.EqualTo(ShipStorageTestHelpers.VesselWithStation));
+                Assert.That(info!.Vessel, Is.Not.Null);
+                Assert.That(info.Vessel!.Value.Id, Is.EqualTo(ShipStorageTestHelpers.VesselWithStation));
 
                 Assert.That(records.TryGetRecord(entManager.GetNetEntity(newGrid), out _), Is.True,
                     "The retrieved ship must be re-listed in the sector shuttle records.");

@@ -148,38 +148,63 @@ public sealed partial class ShipStorageSystem
                         continue;
                     }
 
-                    // Rehydration pass (RFC retrieve flow): sidecar-carried state that
-                    // the map serializer can't reach gets reapplied once the grid has
-                    // fully materialized. Damage, then the repair baseline, then the
-                    // ownership touch-up, then deed/lock rebind, station recreate and
-                    // records — in this order, all before the dock presentation.
-                    RehydrateDamage(grid.Value);
+                    // The station was validated before the DB awaits; those awaits are
+                    // the one window where it (or its largest grid) can die. Everything
+                    // from here to the dock is synchronous, so this single re-check is
+                    // sufficient: refuse and scrap the freshly loaded grid rather than
+                    // strand an active-registered ship on the shared staging map.
+                    if (!Exists(targetGrid))
+                    {
+                        Del(grid.Value);
+                        Log.Warning($"Ship {shipId}: requesting station's dock target died mid-retrieve; retrieve refused.");
+                        return null;
+                    }
 
-                    // Repair baseline: derived state, stripped at store (Cycle 3);
-                    // regenerate against the loaded grid — retrieve fires neither
-                    // MapInit nor ShipBought, and ShipRepair is ShipBought's only
-                    // subscriber (RFC retrieve flow).
-                    _shipRepair.GenerateRepairData(grid.Value);
+                    try
+                    {
+                        // Rehydration pass (RFC retrieve flow): sidecar-carried state that
+                        // the map serializer can't reach gets reapplied once the grid has
+                        // fully materialized. Damage, then the repair baseline, then the
+                        // ownership touch-up, then deed/lock rebind, station recreate and
+                        // records — in this order, all before the dock presentation.
+                        RehydrateDamage(grid.Value);
 
-                    RefreshShipOwnership(grid.Value);
+                        // Repair baseline: derived state, stripped at store (Cycle 3);
+                        // regenerate against the loaded grid — retrieve fires neither
+                        // MapInit nor ShipBought, and ShipRepair is ShipBought's only
+                        // subscriber (RFC retrieve flow).
+                        _shipRepair.GenerateRepairData(grid.Value);
 
-                    // Identity rebind (spec section 3, steps 2-3): deed first, then the
-                    // uid-string locks that key off it.
-                    _shipyard.RebindDeedForRetrieve(grid.Value, shipId);
-                    _consoleLock.RestampShuttleId(grid.Value, grid.Value.ToString());
+                        RefreshShipOwnership(grid.Value);
 
-                    RecreateStation(grid.Value, index);
-                    AddShuttleRecord(grid.Value);
+                        // Identity rebind (spec section 3, steps 2-3): deed first, then the
+                        // uid-string locks that key off it.
+                        _shipyard.RebindDeedForRetrieve(grid.Value, shipId);
+                        _consoleLock.RestampShuttleId(grid.Value, grid.Value.ToString());
 
-                    // Present at the requesting station: instant dock when a config
-                    // exists, proximity placement otherwise (both inside TryFTLDock).
-                    if (!_shuttle.TryFTLDock(grid.Value, shuttle, targetGrid))
-                        Log.Warning($"Ship {shipId}: no docking config at {ToPrettyString(stationUid)}; presented via proximity fallback.");
+                        RecreateStation(grid.Value, index);
+                        AddShuttleRecord(grid.Value);
 
-                    // Overwrite the in-flight reservation with the real grid uid (ship
-                    // is now "flying"; sequential re-retrieve must refuse).
-                    _activeShips[shipId] = grid.Value;
-                    return grid.Value;
+                        // Present at the requesting station: the station-death window is
+                        // closed by the re-check above, so a false here is genuinely the
+                        // no-docking-config proximity fallback (both cases inside TryFTLDock).
+                        if (!_shuttle.TryFTLDock(grid.Value, shuttle, targetGrid))
+                            Log.Warning($"Ship {shipId}: no docking config at {ToPrettyString(stationUid)}; presented via proximity fallback.");
+
+                        // Overwrite the in-flight reservation with the real grid uid (ship
+                        // is now "flying"; sequential re-retrieve must refuse).
+                        _activeShips[shipId] = grid.Value;
+                        return grid.Value;
+                    }
+                    catch
+                    {
+                        // A throw mid-pipeline would otherwise orphan a live grid on the
+                        // shared staging map while the finally releases the reservation —
+                        // exactly the dupe window the registry exists to close. Scrap the
+                        // grid, then let the failure propagate loudly.
+                        Del(grid.Value);
+                        throw;
+                    }
                 }
 
                 Log.Error($"Ship {shipId} revision {revision} passed checksum but failed to load.");

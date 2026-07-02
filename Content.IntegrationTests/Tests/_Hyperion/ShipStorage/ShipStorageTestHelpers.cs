@@ -1,6 +1,8 @@
 // SPDX-FileCopyrightText: 2026 Hyperion Sector
 // SPDX-License-Identifier: MPL-2.0
 
+#nullable enable
+
 using Content.Server.Shuttles.Components;
 using Content.Server.Station.Systems;
 using Content.Shared.Maps;
