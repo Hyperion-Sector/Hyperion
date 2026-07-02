@@ -207,6 +207,18 @@ public sealed partial class ShipyardSystem : SharedShipyardSystem
         return true;
     }
 
+    // Hyperion: ship-storage identity stamp. Deed writes are Access-gated to the
+    // shipyard system family, so ShipStorageSystem routes its grid-deed mutations
+    // through here. Ensures the grid-side deed exists, self-binds ShuttleUid, and
+    // stamps the persistent ShipId (before serialize, so it lands in the blob).
+    public void EnsureShipStorageDeed(EntityUid gridUid, Guid shipId)
+    {
+        var deed = EnsureComp<ShuttleDeedComponent>(gridUid);
+        deed.ShuttleUid ??= gridUid;
+        deed.ShipId = shipId;
+        Dirty(gridUid, deed);
+    }
+
     /// <summary>
     /// Checks a shuttle to make sure that it is docked to the given station, and that there are no lifeforms aboard. Then it teleports tagged items on top of the console, appraises the grid, outputs to the server log, and deletes the grid
     /// </summary>

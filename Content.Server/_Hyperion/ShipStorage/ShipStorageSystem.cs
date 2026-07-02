@@ -13,6 +13,7 @@ using Content.Server.Nuke;
 using Content.Shared._Hyperion.CCVar;
 using Content.Shared._Hyperion.ShipSize;
 using Content.Shared._Mono.ShipRepair.Components;
+using Content.Shared._NF.Shipyard.Components;
 using Content.Shared.Damage;
 using Content.Shared.Explosion.Components;
 using Content.Shared.FixedPoint;
@@ -44,7 +45,9 @@ namespace Content.Server._Hyperion.ShipStorage;
 /// the RFC. The organics gate (no mind-bearing mob aboard) is live as of Cycle 2a;
 /// the hazard gate (armed nuke / active countdown / singularity aboard) is live as
 /// of Cycle 2b; the save-time round-trip validation backstop, the active-ship
-/// registry, and the store strip-list are all live as of Cycle 3.
+/// registry, and the store strip-list are all live as of Cycle 3; the grid-side
+/// deed identity stamp (cross-round resolve, see <see cref="ResolveOrMintShipId"/>)
+/// is live as of Cycle 4.
 /// </summary>
 public sealed partial class ShipStorageSystem : EntitySystem
 {
@@ -65,6 +68,13 @@ public sealed partial class ShipStorageSystem : EntitySystem
     /// (the production default) means "diff the round-trip for real".
     /// </summary>
     internal Func<EntityUid, bool>? ValidationMismatchOverride;
+
+    /// <summary>
+    /// Test seam: wipes the round-scoped active-ship registry, simulating a round
+    /// boundary so cross-round identity paths (the deed leg) can be exercised without
+    /// raising a full RoundRestartCleanupEvent through every subscriber in the server.
+    /// </summary>
+    internal void ClearActiveShipRegistry() => _activeShips.Clear();
 
     /// <summary>
     /// Active-ship registry (RFC "Anti-abuse", LOCKED): round-scoped <c>ShipId -&gt;
@@ -175,6 +185,11 @@ public sealed partial class ShipStorageSystem : EntitySystem
                 return id;
         }
 
+        // Deed leg (Cycle 4): a grid that wasn't retrieved this round (registry miss)
+        // may still carry its identity from a prior round on the grid-side deed.
+        if (TryComp<ShuttleDeedComponent>(gridUid, out var deed) && deed.ShipId is { } deedShipId)
+            return deedShipId;
+
         return Guid.NewGuid();
     }
 
@@ -194,8 +209,9 @@ public sealed partial class ShipStorageSystem : EntitySystem
     /// MINTS a fresh <see cref="Guid"/>. Without this, every store-after-retrieve
     /// forks a brand-new, independently-retrievable duplicate row while the
     /// original stays fully retrievable — unbounded duplication on the happy path.
-    /// The active-ship registry is the resolver this cycle; a deed-carried ShipId
-    /// is a later cycle's mechanism.
+    /// The active-ship registry resolves same-round re-stores; a grid whose registry
+    /// entry is gone (a later round) falls back to the grid-side deed's ShipId
+    /// (Cycle 4, see <see cref="ResolveOrMintShipId"/>) before minting fresh.
     /// Returns a <see cref="ShipStorageResult"/> plus the ship's persistent id on
     /// success (null on refusal). A refused store leaves the grid fully untouched.
     /// </summary>
@@ -220,6 +236,13 @@ public sealed partial class ShipStorageSystem : EntitySystem
             return (ShipStorageResult.HazardAboard, null);
 
         var shipId = ResolveOrMintShipId(gridUid);
+
+        // Stamp identity onto the grid-side deed BEFORE serialize so it rides the blob
+        // (and before the sidecars, so live and scratch agree in the validation diff).
+        // A later abort leaves the stamp in place — harmless: the id is simply reserved
+        // early, and the next successful store resolves it via the deed leg.
+        _shipyard.EnsureShipStorageDeed(gridUid, shipId);
+
         var shipName = Comp<MetaDataComponent>(gridUid).EntityName;
         var sizeClass = _shipSize.GetSizeClass((gridUid, Comp<MapGridComponent>(gridUid)));
 
