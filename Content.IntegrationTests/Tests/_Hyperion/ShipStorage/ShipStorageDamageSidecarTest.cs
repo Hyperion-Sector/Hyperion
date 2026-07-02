@@ -5,6 +5,7 @@ using System;
 using System.Numerics;
 using System.Threading.Tasks;
 using Content.Server._Hyperion.ShipStorage;
+using Content.Server.Shuttles.Components;
 using Content.Shared.CCVar;
 using Content.Shared.Damage;
 using Content.Shared.Damage.Prototypes;
@@ -77,6 +78,10 @@ namespace Content.IntegrationTests.Tests._Hyperion.ShipStorage
 
                 entManager.RunMapInit(grid.Owner, entManager.GetComponent<MetaDataComponent>(grid.Owner));
 
+                // Retrieve treats a blob without ShuttleComponent as a load failure; every
+                // storable test grid carries one, like every real ship does.
+                entManager.EnsureComponent<ShuttleComponent>(grid.Owner);
+
                 wallUid = entManager.SpawnEntity(WallProto, new EntityCoordinates(grid.Owner, Vector2.Zero));
 
                 var bluntType = protoManager.Index<DamageTypePrototype>(DamageType);
@@ -89,6 +94,10 @@ namespace Content.IntegrationTests.Tests._Hyperion.ShipStorage
                 Assert.That(storedTotal, Is.EqualTo(FixedPoint2.New(DealtDamage)),
                     "Pre-store wall damage did not land at the dealt amount.");
             });
+
+            EntityUid station = default;
+            await server.WaitPost(() =>
+                station = ShipStorageTestHelpers.CreateRequestingStation(entManager, mapManager, mapSystem, protoManager, out _));
 
             // Store the ship.
             Task<(ShipStorageResult Result, Guid? ShipId)> storeTask = null!;
@@ -106,7 +115,7 @@ namespace Content.IntegrationTests.Tests._Hyperion.ShipStorage
             // Retrieve and let the reloaded grid settle.
             EntityUid? retrievedGrid = null;
             Task<EntityUid?> retrieveTask = null!;
-            await server.WaitPost(() => retrieveTask = shipStorage.TryRetrieveShip(storeResult.ShipId!.Value, ownerId));
+            await server.WaitPost(() => retrieveTask = shipStorage.TryRetrieveShip(storeResult.ShipId!.Value, ownerId, station));
             retrievedGrid = await retrieveTask;
 
             server.RunTicks(2);

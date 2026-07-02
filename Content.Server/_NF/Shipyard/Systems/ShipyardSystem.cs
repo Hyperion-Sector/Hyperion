@@ -23,6 +23,7 @@ using Robust.Shared.EntitySerialization.Systems;
 using Robust.Shared.Utility;
 using Content.Shared.Doors.Components;
 using Robust.Shared.Map.Components;
+using System.IO; // Hyperion
 
 namespace Content.Server._NF.Shipyard.Systems;
 
@@ -178,6 +179,30 @@ public sealed partial class ShipyardSystem : SharedShipyardSystem
 
         _shuttleIndex += grid.Value.Comp.LocalAABB.Width + ShuttleSpawnBuffer;
 
+        shuttleGrid = grid.Value.Owner;
+        return true;
+    }
+
+    // Hyperion: in-memory counterpart of TryAddShuttle for ship-storage retrieve.
+    // Stages the deserialized grid on the shared ShipyardMap (same offset allocator,
+    // same pause semantics and round-restart cleanup) so a retrieved ship presents
+    // exactly like a purchased one. TryLoadGrid deletes its own partial state on
+    // failure, so a false return leaves the shipyard map clean.
+    public bool TryAddGridFromReader(TextReader reader, string source, [NotNullWhen(true)] out EntityUid? shuttleGrid)
+    {
+        shuttleGrid = null;
+        SetupShipyardIfNeeded();
+        if (ShipyardMap == null)
+            return false;
+
+        if (!_mapLoader.TryLoadGrid(ShipyardMap.Value, reader, source, out var grid,
+                offset: new Vector2(500f + _shuttleIndex, 1f)))
+        {
+            _sawmill.Error($"Unable to load ship-storage grid from {source}");
+            return false;
+        }
+
+        _shuttleIndex += grid.Value.Comp.LocalAABB.Width + ShuttleSpawnBuffer;
         shuttleGrid = grid.Value.Owner;
         return true;
     }

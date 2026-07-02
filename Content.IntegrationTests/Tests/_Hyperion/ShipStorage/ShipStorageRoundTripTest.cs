@@ -5,6 +5,7 @@ using System;
 using System.Numerics;
 using System.Threading.Tasks;
 using Content.Server._Hyperion.ShipStorage;
+using Content.Server.Shuttles.Components;
 using Content.Server.Stack;
 using Content.Shared.CCVar;
 using Content.Shared.Stacks;
@@ -12,6 +13,7 @@ using Robust.Shared.Configuration;
 using Robust.Shared.GameObjects;
 using Robust.Shared.Map;
 using Robust.Shared.Maths;
+using Robust.Shared.Prototypes;
 
 namespace Content.IntegrationTests.Tests._Hyperion.ShipStorage
 {
@@ -37,6 +39,7 @@ namespace Content.IntegrationTests.Tests._Hyperion.ShipStorage
             var server = pair.Server;
             var entManager = server.ResolveDependency<IEntityManager>();
             var mapManager = server.ResolveDependency<IMapManager>();
+            var protoMan = server.ResolveDependency<IPrototypeManager>();
             var mapSystem = entManager.System<SharedMapSystem>();
             var stackSystem = entManager.System<StackSystem>();
             var shipStorage = entManager.System<ShipStorageSystem>();
@@ -65,12 +68,20 @@ namespace Content.IntegrationTests.Tests._Hyperion.ShipStorage
 
                 entManager.RunMapInit(grid.Owner, entManager.GetComponent<MetaDataComponent>(grid.Owner));
 
+                // Retrieve treats a blob without ShuttleComponent as a load failure; every
+                // storable test grid carries one, like every real ship does.
+                entManager.EnsureComponent<ShuttleComponent>(grid.Owner);
+
                 stackUid = entManager.SpawnEntity(StackProto, new EntityCoordinates(grid.Owner, Vector2.Zero));
                 stackSystem.SetCount(stackUid, SentinelCount);
 
                 Assert.That(entManager.GetComponent<StackComponent>(stackUid).Count, Is.EqualTo(SentinelCount),
                     "Sentinel count did not stick on the pre-store stack.");
             });
+
+            EntityUid station = default;
+            await server.WaitPost(() =>
+                station = ShipStorageTestHelpers.CreateRequestingStation(entManager, mapManager, mapSystem, protoMan, out _));
 
             // Store the grid. serialize -> commit -> despawn: the returned task completes when
             // the blob is filed; the grid deletion is the last step (QueueDel, resolves next tick).
@@ -95,7 +106,7 @@ namespace Content.IntegrationTests.Tests._Hyperion.ShipStorage
             // Retrieve the ship for the same owner and let the deserialized grid settle.
             EntityUid? retrievedGrid = null;
             Task<EntityUid?> retrieveTask = null!;
-            await server.WaitPost(() => retrieveTask = shipStorage.TryRetrieveShip(shipId!.Value, ownerId));
+            await server.WaitPost(() => retrieveTask = shipStorage.TryRetrieveShip(shipId!.Value, ownerId, station));
             retrievedGrid = await retrieveTask;
 
             server.RunTicks(2);

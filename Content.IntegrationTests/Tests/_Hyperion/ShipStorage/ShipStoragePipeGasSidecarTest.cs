@@ -8,6 +8,7 @@ using System.Numerics;
 using System.Threading.Tasks;
 using Content.Server._Hyperion.ShipStorage;
 using Content.Server.NodeContainer.Nodes;
+using Content.Server.Shuttles.Components;
 using Content.Shared.Atmos;
 using Content.Shared.CCVar;
 using Content.Shared.NodeContainer;
@@ -15,6 +16,7 @@ using Robust.Shared.Configuration;
 using Robust.Shared.GameObjects;
 using Robust.Shared.Map;
 using Robust.Shared.Maths;
+using Robust.Shared.Prototypes;
 
 namespace Content.IntegrationTests.Tests._Hyperion.ShipStorage
 {
@@ -53,6 +55,7 @@ namespace Content.IntegrationTests.Tests._Hyperion.ShipStorage
             var server = pair.Server;
             var entManager = server.ResolveDependency<IEntityManager>();
             var mapManager = server.ResolveDependency<IMapManager>();
+            var protoMan = server.ResolveDependency<IPrototypeManager>();
             var mapSystem = entManager.System<SharedMapSystem>();
             var shipStorage = entManager.System<ShipStorageSystem>();
 
@@ -76,9 +79,17 @@ namespace Content.IntegrationTests.Tests._Hyperion.ShipStorage
 
                 entManager.RunMapInit(grid.Owner, entManager.GetComponent<MetaDataComponent>(grid.Owner));
 
+                // Retrieve treats a blob without ShuttleComponent as a load failure; every
+                // storable test grid carries one, like every real ship does.
+                entManager.EnsureComponent<ShuttleComponent>(grid.Owner);
+
                 for (var y = 0; y < PipeCount; y++)
                     entManager.SpawnEntity(PipeProto, new EntityCoordinates(grid.Owner, new Vector2(0, y)));
             });
+
+            EntityUid station = default;
+            await server.WaitPost(() =>
+                station = ShipStorageTestHelpers.CreateRequestingStation(entManager, mapManager, mapSystem, protoMan, out _));
 
             // Let the node graph flood and the PipeNet coalesce.
             server.RunTicks(5);
@@ -120,7 +131,7 @@ namespace Content.IntegrationTests.Tests._Hyperion.ShipStorage
             // Retrieve and let the nets rebuild on the reloaded grid.
             EntityUid? retrievedGrid = null;
             Task<EntityUid?> retrieveTask = null!;
-            await server.WaitPost(() => retrieveTask = shipStorage.TryRetrieveShip(storeResult.ShipId!.Value, ownerId));
+            await server.WaitPost(() => retrieveTask = shipStorage.TryRetrieveShip(storeResult.ShipId!.Value, ownerId, station));
             retrievedGrid = await retrieveTask;
 
             server.RunTicks(5);

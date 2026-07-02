@@ -7,6 +7,7 @@ using System;
 using System.Numerics;
 using System.Threading.Tasks;
 using Content.Server._Hyperion.ShipStorage;
+using Content.Server.Shuttles.Components;
 using Content.Shared._Mono.ShipRepair.Components;
 using Content.Shared.CCVar;
 using Robust.Shared.Configuration;
@@ -14,6 +15,7 @@ using Robust.Shared.GameObjects;
 using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
 using Robust.Shared.Maths;
+using Robust.Shared.Prototypes;
 
 namespace Content.IntegrationTests.Tests._Hyperion.ShipStorage
 {
@@ -54,6 +56,7 @@ namespace Content.IntegrationTests.Tests._Hyperion.ShipStorage
             var server = pair.Server;
             var entManager = server.ResolveDependency<IEntityManager>();
             var mapManager = server.ResolveDependency<IMapManager>();
+            var protoMan = server.ResolveDependency<IPrototypeManager>();
             var mapSystem = entManager.System<SharedMapSystem>();
             var shipStorage = entManager.System<ShipStorageSystem>();
 
@@ -75,6 +78,10 @@ namespace Content.IntegrationTests.Tests._Hyperion.ShipStorage
                     Is.EqualTo(SentinelChunkSize),
                     "Sentinel chunk size did not stick on the pre-store grid.");
             });
+
+            EntityUid station = default;
+            await server.WaitPost(() =>
+                station = ShipStorageTestHelpers.CreateRequestingStation(entManager, mapManager, mapSystem, protoMan, out _));
 
             server.RunTicks(1);
             await server.WaitIdleAsync();
@@ -98,7 +105,7 @@ namespace Content.IntegrationTests.Tests._Hyperion.ShipStorage
             // ---- Retrieve and let the deserialized grid settle. ----
             EntityUid? retrievedGrid = null;
             Task<EntityUid?> retrieveTask = null!;
-            await server.WaitPost(() => retrieveTask = shipStorage.TryRetrieveShip(storeResult.ShipId!.Value, ownerId));
+            await server.WaitPost(() => retrieveTask = shipStorage.TryRetrieveShip(storeResult.ShipId!.Value, ownerId, station));
             retrievedGrid = await retrieveTask;
 
             server.RunTicks(2);
@@ -170,6 +177,10 @@ namespace Content.IntegrationTests.Tests._Hyperion.ShipStorage
 
             mapSystem.SetTile(grid.Owner, grid.Comp, Vector2i.Zero, new Tile(1));
             entManager.RunMapInit(grid.Owner, entManager.GetComponent<MetaDataComponent>(grid.Owner));
+
+            // Retrieve treats a blob without ShuttleComponent as a load failure; every
+            // storable test grid carries one, like every real ship does.
+            entManager.EnsureComponent<ShuttleComponent>(grid.Owner);
 
             entManager.SpawnEntity(StackProto, new EntityCoordinates(grid.Owner, Vector2.Zero));
 
