@@ -1153,6 +1153,14 @@ namespace Content.Server.Database
         [Required]
         public byte[] Blob { get; set; } = default!;
 
+        /// <summary>
+        /// SHA-256 of the UNCOMPRESSED yaml for THIS revision. Per-revision so the
+        /// checksum-mismatch fallback can verify older revisions, and compression
+        /// changes never invalidate stored hashes.
+        /// </summary>
+        [Required]
+        public byte[] Checksum { get; set; } = default!;
+
         public DateTime CreatedAt { get; set; }
     }
     // Hyperion-End

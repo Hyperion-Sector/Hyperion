@@ -338,7 +338,7 @@ namespace Content.Server.Database
         Task<int> SaveShipRevision(ShipStorageRecord index, byte[] blob, int keepRevisions, CancellationToken cancel = default);
 
         Task<ShipStorageRecord?> GetShipIndex(Guid shipGuid, CancellationToken cancel = default);
-        Task<byte[]?> GetShipBlob(Guid shipGuid, int revision, CancellationToken cancel = default);
+        Task<ShipBlobRecord?> GetShipBlob(Guid shipGuid, int revision, CancellationToken cancel = default);
         Task<List<ShipStorageRecord>> GetShipsByOwner(Guid ownerUserId, CancellationToken cancel = default);
         Task<bool> DeleteShip(Guid shipGuid, CancellationToken cancel = default);
 
@@ -1093,7 +1093,7 @@ namespace Content.Server.Database
             return RunDbCommand(() => _db.GetShipIndex(shipGuid, cancel));
         }
 
-        public Task<byte[]?> GetShipBlob(Guid shipGuid, int revision, CancellationToken cancel = default)
+        public Task<ShipBlobRecord?> GetShipBlob(Guid shipGuid, int revision, CancellationToken cancel = default)
         {
             DbReadOpsMetric.Inc();
             return RunDbCommand(() => _db.GetShipBlob(shipGuid, revision, cancel));

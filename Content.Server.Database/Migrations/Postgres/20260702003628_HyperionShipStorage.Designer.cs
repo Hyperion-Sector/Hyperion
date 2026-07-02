@@ -15,7 +15,7 @@ using NpgsqlTypes;
 namespace Content.Server.Database.Migrations.Postgres
 {
     [DbContext(typeof(PostgresServerDbContext))]
-    [Migration("20260701235934_HyperionShipStorage")]
+    [Migration("20260702003628_HyperionShipStorage")]
     partial class HyperionShipStorage
     {
         /// <inheritdoc />
@@ -1451,6 +1451,11 @@ namespace Content.Server.Database.Migrations.Postgres
                         .IsRequired()
                         .HasColumnType("bytea")
                         .HasColumnName("blob");
+
+                    b.Property<byte[]>("Checksum")
+                        .IsRequired()
+                        .HasColumnType("bytea")
+                        .HasColumnName("checksum");
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("timestamp with time zone")

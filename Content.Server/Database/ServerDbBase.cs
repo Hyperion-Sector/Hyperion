@@ -1951,6 +1951,7 @@ INSERT INTO player_round (players_id, rounds_id) VALUES ({players[player]}, {id}
                 ShipGuid = index.ShipGuid,
                 Revision = revision,
                 Blob = blob,
+                Checksum = index.Checksum,
                 CreatedAt = now,
             });
 
@@ -1979,13 +1980,13 @@ INSERT INTO player_round (players_id, rounds_id) VALUES ({players[player]}, {id}
             return ship == null ? null : MakeShipRecord(ship);
         }
 
-        public async Task<byte[]?> GetShipBlob(Guid shipGuid, int revision, CancellationToken cancel = default)
+        public async Task<ShipBlobRecord?> GetShipBlob(Guid shipGuid, int revision, CancellationToken cancel = default)
         {
             await using var db = await GetDb(cancel);
 
             return await db.DbContext.ShipStorageBlob
                 .Where(b => b.ShipGuid == shipGuid && b.Revision == revision)
-                .Select(b => b.Blob)
+                .Select(b => new ShipBlobRecord { Revision = b.Revision, Blob = b.Blob, Checksum = b.Checksum })
                 .SingleOrDefaultAsync(cancel);
         }
 

@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace Content.Server.Database.Migrations.Postgres
+namespace Content.Server.Database.Migrations.Sqlite
 {
     /// <inheritdoc />
     public partial class HyperionShipStorage : Migration
@@ -15,18 +15,18 @@ namespace Content.Server.Database.Migrations.Postgres
                 name: "ship_storage",
                 columns: table => new
                 {
-                    ship_guid = table.Column<Guid>(type: "uuid", nullable: false),
-                    owner_user_id = table.Column<Guid>(type: "uuid", nullable: false),
-                    ship_name = table.Column<string>(type: "text", nullable: false),
-                    vessel_proto = table.Column<string>(type: "text", nullable: false),
-                    proto_fingerprint = table.Column<string>(type: "text", nullable: false),
-                    engine_format_ver = table.Column<int>(type: "integer", nullable: false),
-                    checksum = table.Column<byte[]>(type: "bytea", nullable: false),
-                    size_bytes = table.Column<int>(type: "integer", nullable: false),
-                    size_class = table.Column<int>(type: "integer", nullable: false),
-                    current_revision = table.Column<int>(type: "integer", nullable: false),
-                    created_at = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    updated_at = table.Column<DateTime>(type: "timestamp with time zone", nullable: false)
+                    ship_guid = table.Column<Guid>(type: "TEXT", nullable: false),
+                    owner_user_id = table.Column<Guid>(type: "TEXT", nullable: false),
+                    ship_name = table.Column<string>(type: "TEXT", nullable: false),
+                    vessel_proto = table.Column<string>(type: "TEXT", nullable: false),
+                    proto_fingerprint = table.Column<string>(type: "TEXT", nullable: false),
+                    engine_format_ver = table.Column<int>(type: "INTEGER", nullable: false),
+                    checksum = table.Column<byte[]>(type: "BLOB", nullable: false),
+                    size_bytes = table.Column<int>(type: "INTEGER", nullable: false),
+                    size_class = table.Column<int>(type: "INTEGER", nullable: false),
+                    current_revision = table.Column<int>(type: "INTEGER", nullable: false),
+                    created_at = table.Column<DateTime>(type: "TEXT", nullable: false),
+                    updated_at = table.Column<DateTime>(type: "TEXT", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -37,10 +37,11 @@ namespace Content.Server.Database.Migrations.Postgres
                 name: "ship_storage_blob",
                 columns: table => new
                 {
-                    ship_guid = table.Column<Guid>(type: "uuid", nullable: false),
-                    revision = table.Column<int>(type: "integer", nullable: false),
-                    blob = table.Column<byte[]>(type: "bytea", nullable: false),
-                    created_at = table.Column<DateTime>(type: "timestamp with time zone", nullable: false)
+                    ship_guid = table.Column<Guid>(type: "TEXT", nullable: false),
+                    revision = table.Column<int>(type: "INTEGER", nullable: false),
+                    blob = table.Column<byte[]>(type: "BLOB", nullable: false),
+                    checksum = table.Column<byte[]>(type: "BLOB", nullable: false),
+                    created_at = table.Column<DateTime>(type: "TEXT", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -52,10 +53,6 @@ namespace Content.Server.Database.Migrations.Postgres
                         principalColumn: "ship_guid",
                         onDelete: ReferentialAction.Cascade);
                 });
-
-            // Blobs are pre-gzipped by the game server; EXTERNAL stores them out-of-line
-            // without TOAST recompressing already-compressed data.
-            migrationBuilder.Sql("ALTER TABLE ship_storage_blob ALTER COLUMN blob SET STORAGE EXTERNAL;");
 
             migrationBuilder.CreateIndex(
                 name: "IX_ship_storage_owner_user_id",

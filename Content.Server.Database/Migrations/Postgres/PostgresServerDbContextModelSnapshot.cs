@@ -1449,6 +1449,11 @@ namespace Content.Server.Database.Migrations.Postgres
                         .HasColumnType("bytea")
                         .HasColumnName("blob");
 
+                    b.Property<byte[]>("Checksum")
+                        .IsRequired()
+                        .HasColumnType("bytea")
+                        .HasColumnName("checksum");
+
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("timestamp with time zone")
                         .HasColumnName("created_at");

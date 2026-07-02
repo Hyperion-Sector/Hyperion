@@ -1375,6 +1375,11 @@ namespace Content.Server.Database.Migrations.Sqlite
                         .HasColumnType("BLOB")
                         .HasColumnName("blob");
 
+                    b.Property<byte[]>("Checksum")
+                        .IsRequired()
+                        .HasColumnType("BLOB")
+                        .HasColumnName("checksum");
+
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("TEXT")
                         .HasColumnName("created_at");

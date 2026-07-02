@@ -22,3 +22,14 @@ public sealed record ShipStorageRecord
     public DateTime CreatedAt { get; init; }
     public DateTime UpdatedAt { get; init; }
 }
+
+/// <summary>
+/// One cold blob revision: the compressed yaml plus the SHA-256 of the
+/// UNCOMPRESSED yaml, so retrieve can verify integrity per revision.
+/// </summary>
+public sealed record ShipBlobRecord
+{
+    public required int Revision { get; init; }
+    public required byte[] Blob { get; init; }
+    public required byte[] Checksum { get; init; }
+}

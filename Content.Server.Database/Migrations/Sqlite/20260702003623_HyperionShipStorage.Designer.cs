@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Content.Server.Database.Migrations.Sqlite
 {
     [DbContext(typeof(SqliteServerDbContext))]
-    [Migration("20260701235928_HyperionShipStorage")]
+    [Migration("20260702003623_HyperionShipStorage")]
     partial class HyperionShipStorage
     {
         /// <inheritdoc />
@@ -1377,6 +1377,11 @@ namespace Content.Server.Database.Migrations.Sqlite
                         .IsRequired()
                         .HasColumnType("BLOB")
                         .HasColumnName("blob");
+
+                    b.Property<byte[]>("Checksum")
+                        .IsRequired()
+                        .HasColumnType("BLOB")
+                        .HasColumnName("checksum");
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("TEXT")
