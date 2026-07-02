@@ -72,7 +72,12 @@ namespace Content.IntegrationTests.Tests._Hyperion.ShipStorage
                 // storable test grid carries one, like every real ship does.
                 entManager.EnsureComponent<ShuttleComponent>(grid.Owner);
 
-                stackUid = entManager.SpawnEntity(StackProto, new EntityCoordinates(grid.Owner, Vector2.Zero));
+                // Spawn at the TILE CENTER, not Vector2.Zero: (0,0) is the exact corner of
+                // the grid's single tile, and when retrieve FTL-moves the grid the traversal
+                // system re-evaluates the unanchored stack's position — at the boundary,
+                // float rounding can resolve to an empty neighbor tile and eject the stack
+                // to the map (observed flake: stack re-parented to the map post-dock).
+                stackUid = entManager.SpawnEntity(StackProto, new EntityCoordinates(grid.Owner, new Vector2(0.5f, 0.5f)));
                 stackSystem.SetCount(stackUid, SentinelCount);
 
                 Assert.That(entManager.GetComponent<StackComponent>(stackUid).Count, Is.EqualTo(SentinelCount),

@@ -188,7 +188,9 @@ namespace Content.IntegrationTests.Tests._Hyperion.ShipStorage
             // storable test grid carries one, like every real ship does.
             entManager.EnsureComponent<ShuttleComponent>(grid.Owner);
 
-            entManager.SpawnEntity(StackProto, new EntityCoordinates(grid.Owner, Vector2.Zero));
+            // Tile center, not the (0,0) corner: a boundary spawn can get ejected to the
+            // map by grid traversal when retrieve FTL-moves the grid (see RoundTripTest).
+            entManager.SpawnEntity(StackProto, new EntityCoordinates(grid.Owner, new Vector2(0.5f, 0.5f)));
 
             return grid.Owner;
         }

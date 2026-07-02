@@ -61,8 +61,16 @@ namespace Content.IntegrationTests.Tests._Hyperion.ShipStorage
             server.RunTicks(1);
             await server.WaitIdleAsync();
 
+            // Self-referential timestamp baseline: captured right before the retrieve so
+            // the refresh assertion holds regardless of how much simulated time the pool
+            // has accumulated (an absolute threshold races a cold pool's clock).
+            var preRetrieve = TimeSpan.Zero;
             Task<EntityUid?> retrieveTask = null!;
-            await server.WaitPost(() => retrieveTask = shipStorage.TryRetrieveShip(shipId!.Value, ownerId, station));
+            await server.WaitPost(() =>
+            {
+                preRetrieve = timing.CurTime;
+                retrieveTask = shipStorage.TryRetrieveShip(shipId!.Value, ownerId, station);
+            });
             var retrieved = await retrieveTask;
 
             server.RunTicks(2);
@@ -79,7 +87,7 @@ namespace Content.IntegrationTests.Tests._Hyperion.ShipStorage
                 Assert.That(entManager.TryGetComponent<ShipOwnershipComponent>(retrieved.Value, out var ownership),
                     Is.True, "Ownership should ride the blob.");
                 Assert.That(ownership.OwnerUserId.UserId, Is.EqualTo(ownerId));
-                Assert.That(ownership.LastStatusChangeTime, Is.GreaterThan(staleTime),
+                Assert.That(ownership.LastStatusChangeTime, Is.GreaterThanOrEqualTo(preRetrieve),
                     "Retrieve must refresh the round-scoped ownership timestamp.");
                 Assert.That(ownership.IsOwnerOnline, Is.False,
                     "A synthetic owner has no session; online state must be re-derived, not trusted from the blob.");
