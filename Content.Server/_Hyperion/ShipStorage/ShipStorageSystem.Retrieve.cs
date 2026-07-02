@@ -5,17 +5,23 @@ using System.IO;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
+using Content.Server._NF.SectorServices;
+using Content.Server._NF.ShuttleRecords;
+using Content.Server._NF.Station.Components;
 using Content.Server.Shuttles.Components;
 using Content.Server.Shuttles.Systems;
 using Content.Server.Station.Systems;
 using Content.Shared._Hyperion.CCVar;
 using Content.Shared._Mono.ShipRepair;
 using Content.Shared._NF.Shipyard.Components;
+using Content.Shared._NF.ShuttleRecords;
 using Content.Shared.Damage;
 using Content.Shared.FixedPoint;
+using Content.Shared.Maps;
 using Content.Shared.Station.Components;
 using Robust.Server.Player;
 using Robust.Shared.GameObjects;
+using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 
 namespace Content.Server._Hyperion.ShipStorage;
@@ -33,6 +39,9 @@ public sealed partial class ShipStorageSystem
     [Dependency] private readonly IPlayerManager _player = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly ShuttleConsoleLockSystem _consoleLock = default!;
+    [Dependency] private readonly IPrototypeManager _protoMan = default!;
+    [Dependency] private readonly ShuttleRecordsSystem _shuttleRecords = default!;
+    [Dependency] private readonly SectorServiceSystem _sectorService = default!;
 
     /// <summary>
     /// Retrieves the ship identified by <paramref name="shipId"/> for
@@ -142,8 +151,8 @@ public sealed partial class ShipStorageSystem
                     // Rehydration pass (RFC retrieve flow): sidecar-carried state that
                     // the map serializer can't reach gets reapplied once the grid has
                     // fully materialized. Damage, then the repair baseline, then the
-                    // ownership touch-up; later cycle-4 tasks add deed/lock rebind,
-                    // station recreate and records to this same seam, in this order.
+                    // ownership touch-up, then deed/lock rebind, station recreate and
+                    // records — in this order, all before the dock presentation.
                     RehydrateDamage(grid.Value);
 
                     // Repair baseline: derived state, stripped at store (Cycle 3);
@@ -158,6 +167,9 @@ public sealed partial class ShipStorageSystem
                     // uid-string locks that key off it.
                     _shipyard.RebindDeedForRetrieve(grid.Value, shipId);
                     _consoleLock.RestampShuttleId(grid.Value, grid.Value.ToString());
+
+                    RecreateStation(grid.Value, index);
+                    AddShuttleRecord(grid.Value);
 
                     // Present at the requesting station: instant dock when a config
                     // exists, proximity placement otherwise (both inside TryFTLDock).
@@ -229,5 +241,55 @@ public sealed partial class ShipStorageSystem
         ownership.IsOwnerOnline = _player.TryGetSessionById(ownership.OwnerUserId, out _);
         ownership.LastStatusChangeTime = _timing.CurTime;
         Dirty(gridUid, ownership);
+    }
+
+    /// <summary>
+    /// A ship is its own station only when its vessel has a matching GameMapPrototype
+    /// (RFC station model: persist the ship, RECREATE the round-scoped station).
+    /// Preserves the ship's (possibly player-renamed) name over the proto's name
+    /// generator by passing it to InitializeNewStation directly. A blob with no vessel
+    /// proto retrieves stationless; its serialized StationMember (whose Station uid
+    /// dangled to Invalid on load) is removed rather than left lying to consumers.
+    /// </summary>
+    private void RecreateStation(EntityUid gridUid, ShipStorageRecord index)
+    {
+        if (string.IsNullOrEmpty(index.VesselProto)
+            || !_protoMan.TryIndex<GameMapPrototype>(index.VesselProto, out var stationProto)
+            || !stationProto.Stations.TryGetValue(index.VesselProto, out var stationConfig))
+        {
+            Log.Info($"Ship {index.ShipGuid}: no station recreate (vessel proto '{index.VesselProto}').");
+            RemComp<StationMemberComponent>(gridUid);
+            return;
+        }
+
+        var station = _station.InitializeNewStation(stationConfig, new[] { gridUid }, Name(gridUid));
+        var vesselInfo = EnsureComp<ExtraShuttleInformationComponent>(station);
+        vesselInfo.Vessel = index.VesselProto;
+    }
+
+    /// <summary>
+    /// Re-lists the ship in the sector shuttle records: the store is keyed by
+    /// NetEntity, which was reassigned on load, and the old record died with its
+    /// round — this is an add, not an edit (RFC retrieve flow). PurchasePrice 0:
+    /// a retrieve is not a transaction, the record is a registry listing.
+    /// </summary>
+    private void AddShuttleRecord(EntityUid gridUid)
+    {
+        if (!TryComp<ShuttleDeedComponent>(gridUid, out var deed))
+            return;
+
+        // The records store rides the sector-services entity; a round with no sector
+        // host (bare integration pairs, exotic setups) has nowhere to file — skip
+        // rather than let AddRecord throw on the Invalid uid and kill the retrieve.
+        if (!Exists(_sectorService.GetServiceEntity()))
+            return;
+
+        _shuttleRecords.AddRecord(new ShuttleRecord(
+            name: deed.ShuttleName ?? string.Empty,
+            suffix: deed.ShuttleNameSuffix ?? string.Empty,
+            ownerName: deed.ShuttleOwner ?? string.Empty,
+            entityUid: GetNetEntity(gridUid),
+            purchasedWithVoucher: deed.PurchasedWithVoucher,
+            purchasePrice: 0));
     }
 }
