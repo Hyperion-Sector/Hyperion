@@ -38,10 +38,18 @@ namespace Content.Server.DeviceNetwork.Systems
         /// </summary>
         private Queue<DeviceNetworkPacketEvent> _nextQueue = null!;
 
+        // Hyperion: re-register on post-mapinit load (ship persistence)
+        // Entities whose DeviceNetworkComponent started up this tick but whose lifestage wasn't yet
+        // MapInitialized at that moment (so we couldn't tell "fresh pre-init spawn" from "post-init grid
+        // load" - see OnNetworkStartup for why). Drained on the next Update(), by which point a synchronous
+        // load (MapLoaderSystem.TryLoadGrid/TryLoadMap) has already finished flipping the lifestage byte for
+        // any entity that was serialized as post-init.
+        private readonly List<EntityUid> _pendingPostInitCheck = new();
 
         public override void Initialize()
         {
             SubscribeLocalEvent<DeviceNetworkComponent, MapInitEvent>(OnMapInit);
+            SubscribeLocalEvent<DeviceNetworkComponent, ComponentStartup>(OnNetworkStartup); // Hyperion: re-register on post-mapinit load (ship persistence)
             SubscribeLocalEvent<DeviceNetworkComponent, ComponentShutdown>(OnNetworkShutdown);
             SubscribeLocalEvent<DeviceNetworkComponent, ExaminedEvent>(OnExamine);
 
@@ -51,6 +59,8 @@ namespace Content.Server.DeviceNetwork.Systems
 
         public override void Update(float frameTime)
         {
+            // Hyperion: re-register on post-mapinit load (ship persistence)
+            ProcessPendingPostInitChecks();
 
             while (_activeQueue.TryDequeue(out var packet))
             {
@@ -58,6 +68,56 @@ namespace Content.Server.DeviceNetwork.Systems
             }
 
             SwapQueues();
+        }
+
+        // Hyperion: re-register on post-mapinit load (ship persistence)
+        /// <summary>
+        /// A grid/map load (<see cref="Robust.Shared.EntitySerialization.Systems.MapLoaderSystem"/>) runs
+        /// entirely synchronously: it fires <see cref="ComponentStartup"/> for every loaded component
+        /// BEFORE it flips a loaded entity's lifestage to <see cref="EntityLifeStage.MapInitialized"/>, and it
+        /// never raises <see cref="MapInitEvent"/> for entities that were already post-init when saved (that's
+        /// the whole point: MapInitEvent is only for genuinely-new maps/entities). That means devices loaded
+        /// from a saved ship never get a MapInit call and never re-join their network - every air alarm,
+        /// sensor, mail chute, etc. loads dead.
+        ///
+        /// We can't just check the lifestage here and connect immediately, because at the moment this fires
+        /// (mid-load, or mid fresh-spawn) the lifestage hasn't been updated yet either way - so the check
+        /// would never distinguish the two cases. Instead we queue the entity and re-check next tick: by then,
+        /// a synchronous load has already finished, so an entity that was serialized post-init will report
+        /// MapInitialized, while a genuine fresh spawn (about to go through OnMapInit normally) will not yet.
+        /// </summary>
+        private void OnNetworkStartup(EntityUid uid, DeviceNetworkComponent device, ComponentStartup args)
+        {
+            _pendingPostInitCheck.Add(uid);
+        }
+
+        // Hyperion: re-register on post-mapinit load (ship persistence)
+        private void ProcessPendingPostInitChecks()
+        {
+            if (_pendingPostInitCheck.Count == 0)
+                return;
+
+            foreach (var uid in _pendingPostInitCheck)
+            {
+                if (Deleted(uid) || !TryComp<DeviceNetworkComponent>(uid, out var device))
+                    continue;
+
+                var meta = MetaData(uid);
+
+                // Not (yet) map-initialized: either a normal pre-init spawn that will get OnMapInit shortly, or
+                // an entity that's still mid-load on a map that isn't post-init. Nothing to do.
+                if (meta.EntityLifeStage < EntityLifeStage.MapInitialized)
+                    continue;
+
+                // Belt-and-suspenders idempotency: if MapInit already ran (or we already re-registered this
+                // entity), don't double-add it to the network.
+                if (!device.AutoConnect || IsDeviceConnected(uid, device))
+                    continue;
+
+                ConnectDevice(uid, device);
+            }
+
+            _pendingPostInitCheck.Clear();
         }
 
         public override bool QueuePacket(EntityUid uid, string? address, NetworkPayload data, uint? frequency = null, int? network = null, DeviceNetworkComponent? device = null)

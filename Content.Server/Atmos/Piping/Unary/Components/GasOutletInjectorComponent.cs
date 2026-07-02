@@ -11,12 +11,14 @@ namespace Content.Server.Atmos.Piping.Unary.Components
     {
 
         [ViewVariables(VVAccess.ReadWrite)]
+        [DataField] // Hyperion: persist across ship save (untagged upstream)
         public bool Enabled { get; set; } = true;
 
         /// <summary>
         ///     Target volume to transfer. If <see cref="WideNet"/> is enabled, actual transfer rate will be much higher.
         /// </summary>
         [ViewVariables(VVAccess.ReadWrite)]
+        [DataField] // Hyperion: persist across ship save (untagged upstream)
         public float TransferRate
         {
             get => _transferRate;
