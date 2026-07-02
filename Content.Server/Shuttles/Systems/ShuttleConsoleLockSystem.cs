@@ -1008,4 +1008,27 @@ public sealed partial class ShuttleConsoleLockSystem : SharedShuttleConsoleLockS
             : Loc.GetString("shuttle-console-ship-access-disabled");
         Popup.PopupEntity(message, consoleUid, user);
     }
+
+    // Hyperion: ship-storage retrieve re-stamp. Locks store the deed's ShuttleUid as a
+    // raw string, which rots when a stored grid re-materializes with a fresh uid —
+    // without this every console on a retrieved ship is locked against any future
+    // deed. Rewrites the grid-level lock and every console lock on the grid.
+    public void RestampShuttleId(EntityUid gridUid, string shuttleId)
+    {
+        if (TryComp<ShipGridLockComponent>(gridUid, out var gridLock))
+        {
+            gridLock.ShuttleId = shuttleId;
+            Dirty(gridUid, gridLock);
+        }
+
+        var query = AllEntityQuery<ShuttleConsoleLockComponent, TransformComponent>();
+        while (query.MoveNext(out var uid, out var lockComp, out var xform))
+        {
+            if (xform.GridUid != gridUid)
+                continue;
+
+            lockComp.ShuttleId = shuttleId;
+            Dirty(uid, lockComp);
+        }
+    }
 }

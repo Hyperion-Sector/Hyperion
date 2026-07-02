@@ -219,6 +219,19 @@ public sealed partial class ShipyardSystem : SharedShipyardSystem
         Dirty(gridUid, deed);
     }
 
+    // Hyperion: retrieve-side deed rebind. The blob's deed carries a stale ShuttleUid
+    // and a DeedHolder pointing at an ID card that was deleted at its round's end;
+    // rebind to the fresh grid and clear the holder (the drydock console re-mints the
+    // card-side deed in a later cycle). EnsureComp covers pre-ShipId blobs.
+    public void RebindDeedForRetrieve(EntityUid gridUid, Guid shipId)
+    {
+        var deed = EnsureComp<ShuttleDeedComponent>(gridUid);
+        deed.ShuttleUid = gridUid;
+        deed.DeedHolder = null;
+        deed.ShipId = shipId;
+        Dirty(gridUid, deed);
+    }
+
     /// <summary>
     /// Checks a shuttle to make sure that it is docked to the given station, and that there are no lifeforms aboard. Then it teleports tagged items on top of the console, appraises the grid, outputs to the server log, and deletes the grid
     /// </summary>

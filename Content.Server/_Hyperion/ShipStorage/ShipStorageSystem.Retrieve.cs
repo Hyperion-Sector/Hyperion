@@ -32,6 +32,7 @@ public sealed partial class ShipStorageSystem
     [Dependency] private readonly SharedShipRepairSystem _shipRepair = default!;
     [Dependency] private readonly IPlayerManager _player = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private readonly ShuttleConsoleLockSystem _consoleLock = default!;
 
     /// <summary>
     /// Retrieves the ship identified by <paramref name="shipId"/> for
@@ -152,6 +153,11 @@ public sealed partial class ShipStorageSystem
                     _shipRepair.GenerateRepairData(grid.Value);
 
                     RefreshShipOwnership(grid.Value);
+
+                    // Identity rebind (spec section 3, steps 2-3): deed first, then the
+                    // uid-string locks that key off it.
+                    _shipyard.RebindDeedForRetrieve(grid.Value, shipId);
+                    _consoleLock.RestampShuttleId(grid.Value, grid.Value.ToString());
 
                     // Present at the requesting station: instant dock when a config
                     // exists, proximity placement otherwise (both inside TryFTLDock).
