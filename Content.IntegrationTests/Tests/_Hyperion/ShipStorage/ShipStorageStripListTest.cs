@@ -29,9 +29,11 @@ namespace Content.IntegrationTests.Tests._Hyperion.ShipStorage
     /// a strip it would round-trip straight back onto the reloaded grid.
     ///
     /// <para>Round-trip half — a grid carrying <see cref="ShipRepairDataComponent"/> is
-    /// stored and retrieved; the retrieved grid must NOT carry the component. (Scope is
-    /// strictly the STRIP — regenerating repair data against the loaded grid is a later
-    /// rehydration cycle, so the retrieved grid legitimately has no repair data at all.)</para>
+    /// stored and retrieved; the retrieved grid must NOT carry the stale pre-store copy
+    /// (the sentinel chunk size). Since Cycle 4, retrieve regenerates a fresh repair
+    /// baseline against the loaded grid immediately after the strip removes the stale
+    /// one (see <c>ShipStorageSystem.Retrieve.cs</c>), so the component is present again,
+    /// just not the stale copy.</para>
     ///
     /// <para>Abort-restore half — the component is re-attached to the retrieved grid, a
     /// validation abort is forced via the <see cref="ShipStorageSystem.ValidationMismatchOverride"/>
@@ -111,16 +113,20 @@ namespace Content.IntegrationTests.Tests._Hyperion.ShipStorage
             server.RunTicks(2);
             await server.WaitIdleAsync();
 
-            // Round-trip half: this is the assertion that fails today. With no strip-list the
-            // [DataField] component serializes into the blob and comes back on the reloaded grid.
+            // Round-trip half: with no strip-list the [DataField] component would serialize
+            // into the blob and come back on the reloaded grid still carrying the stale
+            // sentinel. The strip-list must prevent that; Cycle 4's retrieve-side rehydration
+            // then regenerates a fresh baseline against the loaded grid, so the component is
+            // present again but must not be the stale pre-store copy.
             await server.WaitAssertion(() =>
             {
                 Assert.That(retrievedGrid, Is.Not.Null, "TryRetrieveShip returned no grid.");
                 Assert.That(entManager.EntityExists(retrievedGrid!.Value), Is.True,
                     "The retrieved grid should exist in the sim.");
-                Assert.That(entManager.HasComponent<ShipRepairDataComponent>(retrievedGrid!.Value), Is.False,
-                    "The strip-list must remove ShipRepairDataComponent before serialize, so the "
-                    + "retrieved grid must not carry a stale copy.");
+                Assert.That(entManager.TryGetComponent<ShipRepairDataComponent>(retrievedGrid!.Value, out var repair), Is.True,
+                    "Retrieve regenerates the repair baseline (Cycle 4) after the strip removes the stale one.");
+                Assert.That(repair.ChunkSize, Is.Not.EqualTo(SentinelChunkSize),
+                    "The regenerated baseline must not be the stale pre-store sentinel value.");
             });
 
             // ---- Abort-restore half: a stripped component must be restored on abort. ----

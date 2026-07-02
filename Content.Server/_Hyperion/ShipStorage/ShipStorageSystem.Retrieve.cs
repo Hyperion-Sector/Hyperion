@@ -9,10 +9,14 @@ using Content.Server.Shuttles.Components;
 using Content.Server.Shuttles.Systems;
 using Content.Server.Station.Systems;
 using Content.Shared._Hyperion.CCVar;
+using Content.Shared._Mono.ShipRepair;
+using Content.Shared._NF.Shipyard.Components;
 using Content.Shared.Damage;
 using Content.Shared.FixedPoint;
 using Content.Shared.Station.Components;
+using Robust.Server.Player;
 using Robust.Shared.GameObjects;
+using Robust.Shared.Timing;
 
 namespace Content.Server._Hyperion.ShipStorage;
 
@@ -25,6 +29,9 @@ public sealed partial class ShipStorageSystem
 {
     [Dependency] private readonly ShuttleSystem _shuttle = default!;
     [Dependency] private readonly StationSystem _station = default!;
+    [Dependency] private readonly SharedShipRepairSystem _shipRepair = default!;
+    [Dependency] private readonly IPlayerManager _player = default!;
+    [Dependency] private readonly IGameTiming _timing = default!;
 
     /// <summary>
     /// Retrieves the ship identified by <paramref name="shipId"/> for
@@ -133,10 +140,18 @@ public sealed partial class ShipStorageSystem
 
                     // Rehydration pass (RFC retrieve flow): sidecar-carried state that
                     // the map serializer can't reach gets reapplied once the grid has
-                    // fully materialized. Damage is the first resident; later cycle-4
-                    // tasks add repair baseline, ownership, deed/lock rebind, station
-                    // recreate and records to this same seam, in this order.
+                    // fully materialized. Damage, then the repair baseline, then the
+                    // ownership touch-up; later cycle-4 tasks add deed/lock rebind,
+                    // station recreate and records to this same seam, in this order.
                     RehydrateDamage(grid.Value);
+
+                    // Repair baseline: derived state, stripped at store (Cycle 3);
+                    // regenerate against the loaded grid — retrieve fires neither
+                    // MapInit nor ShipBought, and ShipRepair is ShipBought's only
+                    // subscriber (RFC retrieve flow).
+                    _shipRepair.GenerateRepairData(grid.Value);
+
+                    RefreshShipOwnership(grid.Value);
 
                     // Present at the requesting station: instant dock when a config
                     // exists, proximity placement otherwise (both inside TryFTLDock).
@@ -192,5 +207,21 @@ public sealed partial class ShipStorageSystem
             _damageable.SetDamage(uid, damageable, damage);
             RemComp<DamageSidecarComponent>(uid);
         }
+    }
+
+    /// <summary>
+    /// ShipOwnershipComponent rides the blob (all [DataField]s), but
+    /// LastStatusChangeTime is round-scoped absolute time — a previous round's clock
+    /// would feed the offline-deletion timer garbage. Refresh it and re-derive online
+    /// state from the live session list rather than trusting the stored flag.
+    /// </summary>
+    private void RefreshShipOwnership(EntityUid gridUid)
+    {
+        if (!TryComp<ShipOwnershipComponent>(gridUid, out var ownership))
+            return;
+
+        ownership.IsOwnerOnline = _player.TryGetSessionById(ownership.OwnerUserId, out _);
+        ownership.LastStatusChangeTime = _timing.CurTime;
+        Dirty(gridUid, ownership);
     }
 }
