@@ -7,12 +7,14 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Content.Server._Hyperion.ShipStorage;
+using Content.Server.Shuttles.Components;
 using Content.Shared.CCVar;
 using Robust.Shared.Configuration;
 using Robust.Shared.GameObjects;
 using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
 using Robust.Shared.Maths;
+using Robust.Shared.Prototypes;
 
 namespace Content.IntegrationTests.Tests._Hyperion.ShipStorage
 {
@@ -44,6 +46,7 @@ namespace Content.IntegrationTests.Tests._Hyperion.ShipStorage
             var server = pair.Server;
             var entManager = server.ResolveDependency<IEntityManager>();
             var mapManager = server.ResolveDependency<IMapManager>();
+            var protoMan = server.ResolveDependency<IPrototypeManager>();
             var mapSystem = entManager.System<SharedMapSystem>();
             var shipStorage = entManager.System<ShipStorageSystem>();
 
@@ -57,6 +60,10 @@ namespace Content.IntegrationTests.Tests._Hyperion.ShipStorage
 
             EntityUid gridUid = default;
             await server.WaitPost(() => gridUid = BuildSmallGrid(entManager, mapManager, mapSystem));
+
+            EntityUid station = default;
+            await server.WaitPost(() =>
+                station = ShipStorageTestHelpers.CreateRequestingStation(entManager, mapManager, mapSystem, protoMan, out _));
 
             server.RunTicks(1);
             await server.WaitIdleAsync();
@@ -77,7 +84,7 @@ namespace Content.IntegrationTests.Tests._Hyperion.ShipStorage
             // ---- First retrieve: grid A materializes and the ship id registers. ----
 
             Task<EntityUid?> firstTask = null!;
-            await server.WaitPost(() => firstTask = shipStorage.TryRetrieveShip(shipId, ownerId));
+            await server.WaitPost(() => firstTask = shipStorage.TryRetrieveShip(shipId, ownerId, station));
             var firstGrid = await firstTask;
 
             server.RunTicks(2);
@@ -93,7 +100,7 @@ namespace Content.IntegrationTests.Tests._Hyperion.ShipStorage
             // ---- Second (sequential) retrieve of the SAME still-flying id: must refuse. ----
 
             Task<EntityUid?> dupeTask = null!;
-            await server.WaitPost(() => dupeTask = shipStorage.TryRetrieveShip(shipId, ownerId));
+            await server.WaitPost(() => dupeTask = shipStorage.TryRetrieveShip(shipId, ownerId, station));
             var dupeGrid = await dupeTask;
 
             server.RunTicks(2);
@@ -130,7 +137,7 @@ namespace Content.IntegrationTests.Tests._Hyperion.ShipStorage
                     "Grid A should be gone after QueueDel settles."));
 
             Task<EntityUid?> reTask = null!;
-            await server.WaitPost(() => reTask = shipStorage.TryRetrieveShip(shipId, ownerId));
+            await server.WaitPost(() => reTask = shipStorage.TryRetrieveShip(shipId, ownerId, station));
             var reGrid = await reTask;
 
             server.RunTicks(2);
@@ -171,7 +178,7 @@ namespace Content.IntegrationTests.Tests._Hyperion.ShipStorage
             await server.WaitIdleAsync();
 
             Task<EntityUid?> finalTask = null!;
-            await server.WaitPost(() => finalTask = shipStorage.TryRetrieveShip(shipId, ownerId));
+            await server.WaitPost(() => finalTask = shipStorage.TryRetrieveShip(shipId, ownerId, station));
             var finalGrid = await finalTask;
 
             server.RunTicks(2);
@@ -212,6 +219,10 @@ namespace Content.IntegrationTests.Tests._Hyperion.ShipStorage
 
             mapSystem.SetTile(grid.Owner, grid.Comp, Vector2i.Zero, new Tile(1));
             entManager.RunMapInit(grid.Owner, entManager.GetComponent<MetaDataComponent>(grid.Owner));
+
+            // Retrieve treats a blob without ShuttleComponent as a load failure; every
+            // storable test grid carries one, like every real ship does.
+            entManager.EnsureComponent<ShuttleComponent>(grid.Owner);
 
             return grid.Owner;
         }

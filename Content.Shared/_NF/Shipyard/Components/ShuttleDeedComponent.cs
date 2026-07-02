@@ -40,4 +40,11 @@ public sealed partial class ShuttleDeedComponent : Component
     /// </summary>
     [DataField]
     public EntityUid? DeedHolder;
+
+    // Hyperion: persistent ship-storage identity. Minted at first store and stamped on
+    // the grid-side deed so identity rides the serialized blob: the round-scoped
+    // active-ship registry can't resolve a ship stored in a previous round, this can.
+    // See the ship-persistence RFC (identity & deed).
+    [DataField]
+    public Guid? ShipId;
 }

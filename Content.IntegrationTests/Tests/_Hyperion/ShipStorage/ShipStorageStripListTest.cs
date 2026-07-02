@@ -7,6 +7,7 @@ using System;
 using System.Numerics;
 using System.Threading.Tasks;
 using Content.Server._Hyperion.ShipStorage;
+using Content.Server.Shuttles.Components;
 using Content.Shared._Mono.ShipRepair.Components;
 using Content.Shared.CCVar;
 using Robust.Shared.Configuration;
@@ -14,6 +15,7 @@ using Robust.Shared.GameObjects;
 using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
 using Robust.Shared.Maths;
+using Robust.Shared.Prototypes;
 
 namespace Content.IntegrationTests.Tests._Hyperion.ShipStorage
 {
@@ -27,9 +29,11 @@ namespace Content.IntegrationTests.Tests._Hyperion.ShipStorage
     /// a strip it would round-trip straight back onto the reloaded grid.
     ///
     /// <para>Round-trip half — a grid carrying <see cref="ShipRepairDataComponent"/> is
-    /// stored and retrieved; the retrieved grid must NOT carry the component. (Scope is
-    /// strictly the STRIP — regenerating repair data against the loaded grid is a later
-    /// rehydration cycle, so the retrieved grid legitimately has no repair data at all.)</para>
+    /// stored and retrieved; the retrieved grid must NOT carry the stale pre-store copy
+    /// (the sentinel chunk size). Since Cycle 4, retrieve regenerates a fresh repair
+    /// baseline against the loaded grid immediately after the strip removes the stale
+    /// one (see <c>ShipStorageSystem.Retrieve.cs</c>), so the component is present again,
+    /// just not the stale copy.</para>
     ///
     /// <para>Abort-restore half — the component is re-attached to the retrieved grid, a
     /// validation abort is forced via the <see cref="ShipStorageSystem.ValidationMismatchOverride"/>
@@ -54,6 +58,7 @@ namespace Content.IntegrationTests.Tests._Hyperion.ShipStorage
             var server = pair.Server;
             var entManager = server.ResolveDependency<IEntityManager>();
             var mapManager = server.ResolveDependency<IMapManager>();
+            var protoMan = server.ResolveDependency<IPrototypeManager>();
             var mapSystem = entManager.System<SharedMapSystem>();
             var shipStorage = entManager.System<ShipStorageSystem>();
 
@@ -75,6 +80,10 @@ namespace Content.IntegrationTests.Tests._Hyperion.ShipStorage
                     Is.EqualTo(SentinelChunkSize),
                     "Sentinel chunk size did not stick on the pre-store grid.");
             });
+
+            EntityUid station = default;
+            await server.WaitPost(() =>
+                station = ShipStorageTestHelpers.CreateRequestingStation(entManager, mapManager, mapSystem, protoMan, out _));
 
             server.RunTicks(1);
             await server.WaitIdleAsync();
@@ -98,22 +107,26 @@ namespace Content.IntegrationTests.Tests._Hyperion.ShipStorage
             // ---- Retrieve and let the deserialized grid settle. ----
             EntityUid? retrievedGrid = null;
             Task<EntityUid?> retrieveTask = null!;
-            await server.WaitPost(() => retrieveTask = shipStorage.TryRetrieveShip(storeResult.ShipId!.Value, ownerId));
+            await server.WaitPost(() => retrieveTask = shipStorage.TryRetrieveShip(storeResult.ShipId!.Value, ownerId, station));
             retrievedGrid = await retrieveTask;
 
             server.RunTicks(2);
             await server.WaitIdleAsync();
 
-            // Round-trip half: this is the assertion that fails today. With no strip-list the
-            // [DataField] component serializes into the blob and comes back on the reloaded grid.
+            // Round-trip half: with no strip-list the [DataField] component would serialize
+            // into the blob and come back on the reloaded grid still carrying the stale
+            // sentinel. The strip-list must prevent that; Cycle 4's retrieve-side rehydration
+            // then regenerates a fresh baseline against the loaded grid, so the component is
+            // present again but must not be the stale pre-store copy.
             await server.WaitAssertion(() =>
             {
                 Assert.That(retrievedGrid, Is.Not.Null, "TryRetrieveShip returned no grid.");
                 Assert.That(entManager.EntityExists(retrievedGrid!.Value), Is.True,
                     "The retrieved grid should exist in the sim.");
-                Assert.That(entManager.HasComponent<ShipRepairDataComponent>(retrievedGrid!.Value), Is.False,
-                    "The strip-list must remove ShipRepairDataComponent before serialize, so the "
-                    + "retrieved grid must not carry a stale copy.");
+                Assert.That(entManager.TryGetComponent<ShipRepairDataComponent>(retrievedGrid!.Value, out var repair), Is.True,
+                    "Retrieve regenerates the repair baseline (Cycle 4) after the strip removes the stale one.");
+                Assert.That(repair!.ChunkSize, Is.Not.EqualTo(SentinelChunkSize),
+                    "The regenerated baseline must not be the stale pre-store sentinel value.");
             });
 
             // ---- Abort-restore half: a stripped component must be restored on abort. ----
@@ -171,7 +184,13 @@ namespace Content.IntegrationTests.Tests._Hyperion.ShipStorage
             mapSystem.SetTile(grid.Owner, grid.Comp, Vector2i.Zero, new Tile(1));
             entManager.RunMapInit(grid.Owner, entManager.GetComponent<MetaDataComponent>(grid.Owner));
 
-            entManager.SpawnEntity(StackProto, new EntityCoordinates(grid.Owner, Vector2.Zero));
+            // Retrieve treats a blob without ShuttleComponent as a load failure; every
+            // storable test grid carries one, like every real ship does.
+            entManager.EnsureComponent<ShuttleComponent>(grid.Owner);
+
+            // Tile center, not the (0,0) corner: a boundary spawn can get ejected to the
+            // map by grid traversal when retrieve FTL-moves the grid (see RoundTripTest).
+            entManager.SpawnEntity(StackProto, new EntityCoordinates(grid.Owner, new Vector2(0.5f, 0.5f)));
 
             return grid.Owner;
         }
