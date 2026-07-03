@@ -106,3 +106,7 @@ shipyard-console-store-failed = Ship storage failed. Contact your drydock operat
 shipyard-console-store-success = Ship stored in drydock.
 shipyard-console-retrieve-failed = Ship retrieval failed. It may already be active or not registered to your account.
 shipyard-console-retrieve-success = Ship retrieved from drydock. Inbound to your station.
+shipyard-console-tab-purchase = Shipyard
+shipyard-console-tab-drydock = Drydock
+shipyard-console-store-button = Store Docked Ship
+shipyard-console-retrieve-button = Retrieve
