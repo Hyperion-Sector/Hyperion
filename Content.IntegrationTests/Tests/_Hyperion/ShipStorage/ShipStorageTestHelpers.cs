@@ -4,8 +4,11 @@
 #nullable enable
 
 using System.Numerics;
+using Content.Server._NF.Shipyard.Systems;
 using Content.Server.Shuttles.Components;
 using Content.Server.Station.Systems;
+using Content.Shared._NF.Shipyard.Components;
+using Content.Shared.Containers.ItemSlots;
 using Content.Shared.Maps;
 using Robust.Shared.Containers;
 using Robust.Shared.GameObjects;
@@ -56,6 +59,31 @@ namespace Content.IntegrationTests.Tests._Hyperion.ShipStorage
             entManager.System<SharedContainerSystem>().EnsureContainer<Container>(box, "test-container");
             var item = entManager.SpawnEntity(null, coords);
             return (box, item);
+        }
+
+        /// <summary>
+        /// A bare shipyard console with a deed card in its target slot, pointing at
+        /// <paramref name="shuttleUid"/>. SharedShipyardSystem.OnComponentInit
+        /// registers TargetIdSlot when the component lands, so the helper only
+        /// inserts. The card deed is minted through the system
+        /// (ShuttleDeedComponent is Access-locked to the shipyard family, so tests
+        /// can't write its fields directly).
+        /// </summary>
+        public static (EntityUid Console, ShipyardConsoleComponent Comp, EntityUid Card) CreateDrydockConsoleWithDeedCard(
+            IEntityManager entManager, ItemSlotsSystem itemSlots, ShipyardSystem shipyard,
+            EntityUid shuttleUid, EntityUid player, MapId mapId)
+        {
+            // (10, 10): well clear of the storable grid's single tile at the map
+            // origin. An entity dropped at (0,0) lands ON the grid and parents to it —
+            // a session-bearing operator there trips the organics gate, and the card
+            // would despawn with the stored ship.
+            var console = entManager.SpawnEntity(null, new MapCoordinates(new Vector2(10f, 10f), mapId));
+            var comp = entManager.EnsureComponent<ShipyardConsoleComponent>(console);
+
+            var card = entManager.SpawnEntity(null, new MapCoordinates(new Vector2(10f, 10f), mapId));
+            shipyard.MintCardDeed(card, shuttleUid, player);
+            itemSlots.TryInsert(console, comp.TargetIdSlot, card, user: null);
+            return (console, comp, card);
         }
 
         public static EntityUid CreateRequestingStation(IEntityManager entManager, IMapManager mapManager,

@@ -97,3 +97,12 @@ shipyard-console-engine-Bananium = Bananium
 # Mono start
 shipyard-console-engine-NFR = NFR
 # Mono end
+
+# Hyperion: drydock tab (ship storage)
+shipyard-console-store-not-owner = This ship is not registered to your account.
+shipyard-console-store-organics = All crew must disembark before storage.
+shipyard-console-store-hazard = Active hazards detected aboard; storage refused.
+shipyard-console-store-failed = Ship storage failed. Contact your drydock operator.
+shipyard-console-store-success = Ship stored in drydock.
+shipyard-console-retrieve-failed = Ship retrieval failed. It may already be active or not registered to your account.
+shipyard-console-retrieve-success = Ship retrieved from drydock. Inbound to your station.

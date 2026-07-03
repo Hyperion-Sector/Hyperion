@@ -609,6 +609,17 @@ public sealed partial class ShipyardSystem : SharedShipyardSystem
         if (args.Actor is not { Valid: true } player)
             return;
 
+        RefreshConsoleUiState(uid, component, player, (ShipyardConsoleUiKey)args.UiKey);
+
+        // Hyperion: drydock tab — fill the stored-ship cache (async DB read) and
+        // re-push the state once it's warm.
+        _ = RefreshDrydockState(uid, component, player, (ShipyardConsoleUiKey)args.UiKey);
+    }
+
+    // Hyperion: body of the old OnConsoleUIOpened, extracted so the async drydock
+    // cache refresh can re-push the same state without a BoundUIOpenedEvent in hand.
+    private void RefreshConsoleUiState(EntityUid uid, ShipyardConsoleComponent component, EntityUid player, ShipyardConsoleUiKey uiKey)
+    {
         //      mayhaps re-enable this later for HoS/SA
         //        var station = _station.GetOwningStation(uid);
 
@@ -645,7 +656,7 @@ public sealed partial class ShipyardSystem : SharedShipyardSystem
             // For now we'll just let them see the cooldown message when they try to use it
         }
 
-        RefreshState(uid, bank.Balance, true, fullName, sellValue, targetId, (ShipyardConsoleUiKey)args.UiKey, voucherUsed);
+        RefreshState(uid, bank.Balance, true, fullName, sellValue, targetId, uiKey, voucherUsed); // Hyperion: uiKey from param
     }
 
     private void ConsolePopup(EntityUid uid, string text)
@@ -929,7 +940,8 @@ public sealed partial class ShipyardSystem : SharedShipyardSystem
             GetAvailableShuttles(uid, uiKey, targetId: targetId),
             uiKey.ToString(),
             freeListings,
-            CalculateSellRate(uid));
+            CalculateSellRate(uid),
+            CompOrNull<ShipyardConsoleComponent>(uid)?.CachedStoredShips ?? new()); // Hyperion: drydock tab
 
         _ui.SetUiState(uid, uiKey, newState);
     }
