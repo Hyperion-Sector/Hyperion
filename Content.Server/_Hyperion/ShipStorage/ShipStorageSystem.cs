@@ -43,8 +43,9 @@ namespace Content.Server._Hyperion.ShipStorage;
 /// ship (see the ship-persistence design RFC).
 /// The pipeline is fully in-memory: serialize → yaml text → checksum → zstd → DB,
 /// and the mirror on retrieve. No filesystem involvement.
-/// TODO(hyperion): the "store-in-progress" flag is deferred to a later cycle per
-/// the RFC. The organics gate (no mind-bearing mob aboard) is live as of Cycle 2a;
+/// The store-in-progress flag (insertion block + commit-time organics re-check)
+/// is live as of Cycle 5.
+/// The organics gate (no mind-bearing mob aboard) is live as of Cycle 2a;
 /// the hazard gate (armed nuke / active countdown / singularity aboard) is live as
 /// of Cycle 2b; the save-time round-trip validation backstop, the active-ship
 /// registry, and the store strip-list are all live as of Cycle 3; the grid-side
@@ -279,6 +280,13 @@ public sealed partial class ShipStorageSystem : EntitySystem
         var strippedComponents = StripListedComponents(gridUid);
         var sidecarsConsumed = false;
 
+        // Store-in-progress flag (RFC store flow, Cycle 5): serialize below is
+        // synchronous, so the tear window is the async DB-commit await — the grid is
+        // still live and docked while the blob files. Block container insertion onto
+        // it for the whole span (ShipStorageInProgressSystem) and re-check organics
+        // before despawn; the finally drops the marker on every exit.
+        EnsureComp<ShipStorageInProgressComponent>(gridUid);
+
         // TODO(hyperion): store currently runs five world-wide AllEntityQuery scans
         // (three hazard classes + both sidecar injections; damage is the pricey one —
         // every wall has a DamageableComponent). Store is a rare quiesced operation,
@@ -351,6 +359,18 @@ public sealed partial class ShipStorageSystem : EntitySystem
             var keepRevisions = _cfg.GetCVar(HyperionCVars.ShipStorageKeepRevisions);
             await _db.SaveShipRevision(record, blob, keepRevisions);
 
+            // Re-check organics at commit (RFC store flow): the DB await above yielded,
+            // so a player could have BOARDED the still-live docked ship (the in-progress
+            // marker blocks container insertion, not walking aboard). Refuse rather than
+            // despawn them with the grid: the early return leaves sidecarsConsumed
+            // false, so the finally restores sidecars + strip exactly like any other
+            // abort. The already-filed revision is a harmless snapshot of a real past
+            // state — the registry entry stays live, so it can't be retrieved into a
+            // dupe this round, and the next successful store lands a new revision on
+            // the same row.
+            if (_shipyard.FoundOrganics(gridUid, mobQuery, xformQuery) is not null)
+                return (ShipStorageResult.OrganicsAboard, null);
+
             // serialize -> commit -> despawn: the grid is only removed after the blob is
             // filed. A concurrent double-store of the same ship cannot dupe: the composite
             // PK on (ship_guid, revision) makes the second transaction fail loudly.
@@ -364,6 +384,11 @@ public sealed partial class ShipStorageSystem : EntitySystem
         }
         finally
         {
+            // Drop the store-in-progress marker on every exit. On success the grid is
+            // already queued for deletion, so this is a harmless no-op there; on any
+            // abort it re-opens container insertion on the still-live ship.
+            RemCompDeferred<ShipStorageInProgressComponent>(gridUid);
+
             // Cleanup-on-failure: on ANY non-success exit after injection (serialize
             // failure, DB throw), strip the sidecars back off the still-live grid.
             // On success the grid despawns anyway (harmless either way), but a
