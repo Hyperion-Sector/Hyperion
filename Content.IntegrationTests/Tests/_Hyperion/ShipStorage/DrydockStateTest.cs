@@ -11,6 +11,7 @@ using Content.Server._Hyperion.ShipStorage;
 using Content.Server._NF.Shipyard.Systems;
 using Content.Shared._NF.Shipyard;
 using Content.Shared._NF.Shipyard.Components;
+using Content.Shared.Containers.ItemSlots;
 using Robust.Server.Player;
 using Robust.Shared.GameObjects;
 using Robust.Shared.Map;
@@ -76,6 +77,13 @@ namespace Content.IntegrationTests.Tests._Hyperion.ShipStorage
 
                 console = entManager.SpawnEntity(null, new MapCoordinates(new Vector2(2f, 0f), mapId));
                 consoleComp = entManager.EnsureComponent<ShipyardConsoleComponent>(console);
+
+                // The drydock list only populates with a card inserted (account-scoped,
+                // but the card is the interaction gate — spec). A blank card suffices;
+                // the list keys off the operator's session, not the card's deed.
+                var itemSlots = entManager.System<ItemSlotsSystem>();
+                var card = entManager.SpawnEntity(null, new MapCoordinates(new Vector2(2f, 0f), mapId));
+                itemSlots.TryInsert(console, consoleComp.TargetIdSlot, card, user: null);
             });
 
             Task refreshTask = null!;
@@ -85,9 +93,14 @@ namespace Content.IntegrationTests.Tests._Hyperion.ShipStorage
             server.RunTicks(1);
             await server.WaitIdleAsync();
 
+            // Superset, not exact-set: the integration DB is not reset on pool recycle,
+            // so rows written under the shared dummy session's UserId by an earlier
+            // Connected test can persist. Assert our two ships are listed rather than
+            // demanding the list contain ONLY them (that property is covered by the
+            // wrong-owner retrieve test). This is the fix for the earlier 1/22 flake.
             Assert.That(consoleComp.CachedStoredShips.Select(s => s.ShipId),
-                Is.EquivalentTo(new[] { idA!.Value, idB!.Value }),
-                "The drydock cache must list exactly the operator account's stored ships.");
+                Is.SupersetOf(new[] { idA!.Value, idB!.Value }),
+                "The drydock cache must list the operator account's freshly stored ships.");
 
             await pair.CleanReturnAsync();
         }

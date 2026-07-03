@@ -609,6 +609,10 @@ public sealed partial class ShipyardSystem : SharedShipyardSystem
         if (args.Actor is not { Valid: true } player)
             return;
 
+        // Hyperion: clear any prior operator's cached drydock list before the first
+        // synchronous push, so it never flashes another account's ships while the async
+        // refill below is in flight.
+        component.CachedStoredShips = new();
         RefreshConsoleUiState(uid, component, player, (ShipyardConsoleUiKey)args.UiKey);
 
         // Hyperion: drydock tab — fill the stored-ship cache (async DB read) and

@@ -73,6 +73,20 @@ public sealed partial class ShipStorageSystem : EntitySystem
     internal Func<EntityUid, bool>? ValidationMismatchOverride;
 
     /// <summary>
+    /// Test seam for the commit-time organics re-check (the abort-AFTER-DB-commit
+    /// path). When assigned, forces that re-check's verdict for the grid the delegate
+    /// returns true for, so the post-commit abort can be exercised deterministically:
+    /// the real race (a mind boarding DURING the DB await) can't be interleaved in the
+    /// synchronous integration harness. Null (production default) means "check organics
+    /// for real". Pairs with the sync-gate registry reservation to prove the abort
+    /// leaves no dupe (a live registered grid, not a retrievable orphan).
+    /// </summary>
+    internal Func<EntityUid, bool>? StoreCommitOrganicsOverride;
+
+    /// <summary>Test/console read: is this ship currently live this round (in the active registry)?</summary>
+    public bool IsShipActive(Guid shipId) => _activeShips.ContainsKey(shipId);
+
+    /// <summary>
     /// Test seam: wipes the round-scoped active-ship registry, simulating a round
     /// boundary so cross-round identity paths (the deed leg) can be exercised without
     /// raising a full RoundRestartCleanupEvent through every subscriber in the server.
@@ -246,6 +260,20 @@ public sealed partial class ShipStorageSystem : EntitySystem
         // early, and the next successful store resolves it via the deed leg.
         _shipyard.EnsureShipStorageDeed(gridUid, shipId);
 
+        // Reserve the ship in the active registry NOW, at the synchronous gate before
+        // the first await, mirroring TryRetrieveShip's reservation. Without this, an
+        // abort AFTER the DB commit (the commit-time organics re-check below) leaves a
+        // committed blob revision plus a still-live, UNregistered grid — and since the
+        // registry is the only thing gating retrieve, that ship could be retrieved into
+        // a second grid: a dupe. A never-retrieved (freshly-purchased) ship is not in
+        // the registry otherwise, so this is the ship class that window opened for.
+        // On success the reservation is released just before despawn (see below); on
+        // any abort the grid stays live AND registered, so retrieve refuses it. The
+        // grid's own EntityTerminatingEvent also clears the entry if it dies by any
+        // other path. Re-store of an already-registered grid re-writes the same
+        // shipId->gridUid pair (idempotent).
+        _activeShips[shipId] = gridUid;
+
         var shipName = Comp<MetaDataComponent>(gridUid).EntityName;
         var sizeClass = _shipSize.GetSizeClass((gridUid, Comp<MapGridComponent>(gridUid)));
 
@@ -365,10 +393,13 @@ public sealed partial class ShipStorageSystem : EntitySystem
             // despawn them with the grid: the early return leaves sidecarsConsumed
             // false, so the finally restores sidecars + strip exactly like any other
             // abort. The already-filed revision is a harmless snapshot of a real past
-            // state — the registry entry stays live, so it can't be retrieved into a
-            // dupe this round, and the next successful store lands a new revision on
-            // the same row.
-            if (_shipyard.FoundOrganics(gridUid, mobQuery, xformQuery) is not null)
+            // state and CANNOT be retrieved into a dupe, because the sync-gate
+            // reservation above keeps this grid registered while it stays live; the
+            // next successful store lands a new revision on the same row.
+            var organicsAtCommit = _shipyard.FoundOrganics(gridUid, mobQuery, xformQuery) is not null;
+            if (StoreCommitOrganicsOverride != null)
+                organicsAtCommit = StoreCommitOrganicsOverride(gridUid);
+            if (organicsAtCommit)
                 return (ShipStorageResult.OrganicsAboard, null);
 
             // serialize -> commit -> despawn: the grid is only removed after the blob is

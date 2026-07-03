@@ -108,6 +108,82 @@ namespace Content.IntegrationTests.Tests._Hyperion.ShipStorage
         }
 
         [Test]
+        public async Task RetrieveWithDeededCard_Refused_ExistingDeedIntact()
+        {
+            await using var pair = await PoolManager.GetServerClient(new PoolSettings { Connected = true });
+            var server = pair.Server;
+            var entManager = server.ResolveDependency<IEntityManager>();
+            var mapManager = server.ResolveDependency<IMapManager>();
+            var playerManager = server.ResolveDependency<IPlayerManager>();
+            var protoMan = server.ResolveDependency<IPrototypeManager>();
+            var mapSystem = entManager.System<SharedMapSystem>();
+            var shipStorage = entManager.System<ShipStorageSystem>();
+            var shipyard = entManager.System<ShipyardSystem>();
+            var itemSlots = entManager.System<ItemSlotsSystem>();
+
+            var session = playerManager.Sessions.First();
+            var ownerAccount = session.UserId.UserId;
+
+            EntityUid gridUid = default;
+            EntityUid otherGrid = default;
+            EntityUid station = default;
+            EntityUid dockGrid = default;
+
+            await server.WaitPost(() =>
+            {
+                gridUid = ShipStorageTestHelpers.CreateStorableGrid(entManager, mapManager, mapSystem, out _);
+                // A second live grid whose deed we'll put on the card, so the card is
+                // already-deeded when we attempt the retrieve.
+                otherGrid = ShipStorageTestHelpers.CreateStorableGrid(entManager, mapManager, mapSystem, out _);
+                station = ShipStorageTestHelpers.CreateRequestingStation(entManager, mapManager, mapSystem, protoMan, out dockGrid);
+            });
+
+            Task<(ShipStorageResult Result, Guid? ShipId)> storeTask = null!;
+            await server.WaitPost(() => storeTask = shipStorage.TryStoreShip(gridUid, ownerAccount));
+            var (storeResult, shipId) = await storeTask;
+            Assert.That(storeResult, Is.EqualTo(ShipStorageResult.Success));
+
+            server.RunTicks(1);
+            await server.WaitIdleAsync();
+
+            EntityUid console = default;
+            EntityUid card = default;
+            EntityUid playerEnt = default;
+            ShipyardConsoleComponent consoleComp = default!;
+
+            await server.WaitPost(() =>
+            {
+                var xform = entManager.GetComponent<TransformComponent>(dockGrid);
+                playerEnt = entManager.SpawnEntity(null, new MapCoordinates(new Vector2(15f, 15f), xform.MapID));
+                playerManager.SetAttachedEntity(session, playerEnt);
+
+                console = entManager.SpawnEntity(null, new EntityCoordinates(dockGrid, new Vector2(0.5f, 0.5f)));
+                consoleComp = entManager.EnsureComponent<ShipyardConsoleComponent>(console);
+                card = entManager.SpawnEntity(null, new EntityCoordinates(dockGrid, new Vector2(0.5f, 0.5f)));
+                // The card already carries a deed (for otherGrid) before the retrieve.
+                shipyard.MintCardDeed(card, otherGrid, playerEnt);
+                itemSlots.TryInsert(console, consoleComp.TargetIdSlot, card, user: null);
+            });
+
+            Task<EntityUid?> retrieveTask = null!;
+            await server.WaitPost(() => retrieveTask = shipyard.TryDrydockRetrieve(console, consoleComp, playerEnt, shipId!.Value, ShipyardConsoleUiKey.Shipyard));
+            var retrieved = await retrieveTask;
+
+            server.RunTicks(1);
+            await server.WaitIdleAsync();
+
+            Assert.Multiple(() =>
+            {
+                Assert.That(retrieved, Is.Null, "Retrieve onto an already-deeded card must be refused.");
+                Assert.That(entManager.TryGetComponent<ShuttleDeedComponent>(card, out var deed), Is.True,
+                    "The card's existing deed must be untouched.");
+                Assert.That(deed!.ShuttleUid, Is.EqualTo(otherGrid), "The existing deed must still point at its original ship.");
+            });
+
+            await pair.CleanReturnAsync();
+        }
+
+        [Test]
         public async Task WrongOwnerRetrieve_RefusedNoDeed()
         {
             await using var pair = await PoolManager.GetServerClient(new PoolSettings { Connected = true });

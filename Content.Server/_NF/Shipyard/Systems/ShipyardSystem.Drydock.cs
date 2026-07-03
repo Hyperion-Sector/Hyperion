@@ -36,7 +36,9 @@ public sealed partial class ShipyardSystem
     {
         component.CachedStoredShips = new();
 
-        if (!TryComp<ActorComponent>(player, out var actor))
+        // Empty when no card is inserted (spec) and when the operator has no session.
+        if (component.TargetIdSlot.ContainerSlot?.ContainedEntity is not { Valid: true }
+            || !TryComp<ActorComponent>(player, out var actor))
             return;
 
         var rows = await _shipStorage.GetStoredShips(actor.PlayerSession.UserId.UserId);
@@ -46,6 +48,11 @@ public sealed partial class ShipyardSystem
             return;
 
         component.CachedStoredShips = rows
+            // Hide ships that are already live this round (retrieved, or mid-store):
+            // the DB row survives a retrieve, but the active-registry gate would refuse
+            // a second retrieve, so listing them would only offer a phantom row that
+            // fails on click.
+            .Where(r => !_shipStorage.IsShipActive(r.ShipGuid))
             .Select(r => new StoredShipInfo(r.ShipGuid, r.ShipName, r.SizeClass))
             .ToList();
 
@@ -90,6 +97,13 @@ public sealed partial class ShipyardSystem
         }
 
         var result = await _shipStorage.TryStoreShip(shuttleUid, ownership.OwnerUserId.UserId);
+
+        // The DB await yielded: the console/card/operator may be gone. Bail before
+        // touching any of them (async void handler — a throw here is unhandled). The
+        // store itself already completed or refused; only the UI epilogue is skipped.
+        if (TerminatingOrDeleted(uid) || TerminatingOrDeleted(player))
+            return result;
+
         if (result.Result != ShipStorageResult.Success)
         {
             ConsolePopup(player, Loc.GetString(StoreRefusalLoc(result.Result)));
@@ -99,7 +113,9 @@ public sealed partial class ShipyardSystem
 
         // The grid is gone (pipeline despawns after commit); strip the now-dangling
         // card-side deed, as sell does. The persistent identity lives in the DB row.
-        RemComp<ShuttleDeedComponent>(targetId);
+        // Guard the card too: it could have been pulled from the slot during the await.
+        if (!TerminatingOrDeleted(targetId))
+            RemComp<ShuttleDeedComponent>(targetId);
         ConsolePopup(player, Loc.GetString("shipyard-console-store-success"));
         PlayConfirmSound(player, uid, component);
 
@@ -154,10 +170,21 @@ public sealed partial class ShipyardSystem
         var grid = await _shipStorage.TryRetrieveShip(shipId, actor.PlayerSession.UserId.UserId, station);
         if (grid is null)
         {
-            ConsolePopup(player, Loc.GetString("shipyard-console-retrieve-failed"));
-            PlayDenySound(player, uid, component);
+            // Guard the popup: the operator may have disconnected during the await.
+            if (!TerminatingOrDeleted(player))
+            {
+                ConsolePopup(player, Loc.GetString("shipyard-console-retrieve-failed"));
+                PlayDenySound(player, uid, component);
+            }
             return null;
         }
+
+        // The DB await yielded: the card/operator may be gone. The ship is already
+        // docked and registered; skip the card mint rather than throw in async void
+        // (recoverable — the owner re-retrieves next round from the blob). Card gone =
+        // nothing to mint onto.
+        if (TerminatingOrDeleted(targetId) || TerminatingOrDeleted(player))
+            return grid;
 
         MintCardDeed(targetId, grid.Value, player);
         ConsolePopup(player, Loc.GetString("shipyard-console-retrieve-success"));

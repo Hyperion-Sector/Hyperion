@@ -88,6 +88,69 @@ namespace Content.IntegrationTests.Tests._Hyperion.ShipStorage
         }
 
         [Test]
+        public async Task OwnerStore_OrganicsAboard_RefusedGridAndDeedIntact()
+        {
+            await using var pair = await PoolManager.GetServerClient(new PoolSettings { Connected = true });
+            var server = pair.Server;
+            var entManager = server.ResolveDependency<IEntityManager>();
+            var mapManager = server.ResolveDependency<IMapManager>();
+            var playerManager = server.ResolveDependency<IPlayerManager>();
+            var mapSystem = entManager.System<SharedMapSystem>();
+            var mindSystem = entManager.System<Content.Server.Mind.MindSystem>();
+            var shipyard = entManager.System<ShipyardSystem>();
+            var itemSlots = entManager.System<ItemSlotsSystem>();
+
+            var session = playerManager.Sessions.First();
+
+            EntityUid gridUid = default;
+            EntityUid console = default;
+            EntityUid card = default;
+            EntityUid playerEnt = default;
+            ShipyardConsoleComponent consoleComp = default!;
+
+            await server.WaitPost(() =>
+            {
+                gridUid = ShipStorageTestHelpers.CreateStorableGrid(entManager, mapManager, mapSystem, out var mapId);
+
+                var ownership = entManager.EnsureComponent<ShipOwnershipComponent>(gridUid);
+                ownership.OwnerUserId = session.UserId;
+
+                // A mind-bearing mob aboard trips the organics gate inside TryStoreShip.
+                var mob = entManager.SpawnEntity("MobHuman", new EntityCoordinates(gridUid, new Vector2(0.5f, 0.5f)));
+                var mindId = mindSystem.CreateMind(null);
+                mindSystem.TransferTo(mindId, mob);
+
+                playerEnt = entManager.SpawnEntity(null, new MapCoordinates(new Vector2(10f, 10f), mapId));
+                playerManager.SetAttachedEntity(session, playerEnt);
+
+                (console, consoleComp, card) = ShipStorageTestHelpers.CreateDrydockConsoleWithDeedCard(
+                    entManager, itemSlots, shipyard, gridUid, playerEnt, mapId);
+            });
+
+            server.RunTicks(1);
+            await server.WaitIdleAsync();
+
+            Task<(ShipStorageResult Result, Guid? ShipId)?> storeTask = null!;
+            await server.WaitPost(() => storeTask = shipyard.TryDrydockStore(console, consoleComp, playerEnt, ShipyardConsoleUiKey.Shipyard));
+            var storeResult = await storeTask;
+
+            server.RunTicks(1);
+            await server.WaitIdleAsync();
+
+            Assert.Multiple(() =>
+            {
+                Assert.That(storeResult, Is.Not.Null, "The owner-operated store should reach the pipeline gate.");
+                Assert.That(storeResult!.Value.Result, Is.EqualTo(ShipStorageResult.OrganicsAboard),
+                    "A crewed ship must be refused with OrganicsAboard at the console layer.");
+                Assert.That(entManager.Deleted(gridUid), Is.False, "A refused store must leave the grid alive.");
+                Assert.That(entManager.HasComponent<ShuttleDeedComponent>(card), Is.True,
+                    "A refused store must leave the card-side deed in place.");
+            });
+
+            await pair.CleanReturnAsync();
+        }
+
+        [Test]
         public async Task NonOwnerStore_Refused_GridIntact()
         {
             // Connected pair: these tests resolve the operator's account from a real
