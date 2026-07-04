@@ -67639,13 +67639,6 @@ entities:
     - type: Transform
       pos: -10.709464,36.37964
       parent: 1
-- proto: LeashBasic
-  entities:
-  - uid: 10440
-    components:
-    - type: Transform
-      pos: 11.294521,4.5042152
-      parent: 1
 - proto: LedLightTube
   entities:
   - uid: 10442
