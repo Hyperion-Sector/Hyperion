@@ -21,6 +21,9 @@ public sealed partial class ShipyardConsoleMenu : FancyWindow
     public event Action<ButtonEventArgs>? OnOrderApproved;
     public event Action<ButtonEventArgs>? OnUnassignDeed;
     public event Action<string>? OnRenameShip;
+    // Hyperion: drydock tab (store/retrieve persisted ships)
+    public event Action? OnStore;
+    public event Action<Guid>? OnRetrieve;
     private readonly ShipyardConsoleBoundUserInterface _menu;
     private readonly List<VesselSize> _categoryStrings = new();
     private readonly List<VesselClass> _classStrings = new();
@@ -47,6 +50,11 @@ public sealed partial class ShipyardConsoleMenu : FancyWindow
         SellShipButton.OnPressed += (args) => { OnSellShip?.Invoke(args); };
         UnassignDeedButton.OnPressed += (args) => { OnUnassignDeed?.Invoke(args); };
         RenameButton.OnPressed += OnRenameButtonPressed;
+
+        // Hyperion: drydock tab (store/retrieve persisted ships)
+        Tabs.SetTabTitle(0, Loc.GetString("shipyard-console-tab-purchase"));
+        Tabs.SetTabTitle(1, Loc.GetString("shipyard-console-tab-drydock"));
+        StoreButton.OnPressed += _ => OnStore?.Invoke();
     }
 
 
@@ -330,5 +338,23 @@ public sealed partial class ShipyardConsoleMenu : FancyWindow
         _freeListings = state.FreeListings;
         _validId = state.IsTargetIdPresent;
         PopulateProducts(_lastAvailableProtos, _lastUnavailableProtos, _freeListings, _validId);
+
+        // Hyperion: drydock tab (store/retrieve persisted ships)
+        PopulateStoredShips(state.StoredShips);
+    }
+
+    /// <summary>
+    /// Hyperion: drydock tab. Rebuilds the retrieve list from the server-provided stored-ship index.
+    /// </summary>
+    public void PopulateStoredShips(List<StoredShipInfo> ships)
+    {
+        StoredShips.RemoveAllChildren();
+
+        foreach (var ship in ships)
+        {
+            var row = new DrydockShipRow(ship);
+            row.RetrieveButton.OnPressed += _ => OnRetrieve?.Invoke(row.ShipId);
+            StoredShips.AddChild(row);
+        }
     }
 }

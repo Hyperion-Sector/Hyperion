@@ -67,4 +67,13 @@ public sealed partial class ShipyardConsoleComponent : Component
     /// </summary>
     [DataField]
     public bool IgnoreBaseSaleRate;
+
+    /// <summary>
+    /// Hyperion: drydock tab. The operator's stored-ship list, filled asynchronously
+    /// (DB query) by RefreshDrydockState and read by the synchronous RefreshState when
+    /// it builds the interface state. Round-scoped UI cache: not a datafield, not
+    /// networked (the state carries it to the client).
+    /// </summary>
+    [ViewVariables]
+    public List<BUI.StoredShipInfo> CachedStoredShips = new();
 }

@@ -7,6 +7,8 @@ using System.Text;
 using System.Threading.Tasks;
 using Content.Server._NF.SectorServices;
 using Content.Server._NF.ShuttleRecords;
+using Content.Server.Gravity;
+using Content.Server.Power.EntitySystems;
 using Content.Server._NF.Station.Components;
 using Content.Server.Shuttles.Components;
 using Content.Server.Shuttles.Systems;
@@ -14,6 +16,7 @@ using Content.Server.Station.Systems;
 using Content.Shared._Hyperion.CCVar;
 using Content.Shared._Mono.ShipRepair;
 using Content.Shared._NF.Shipyard.Components;
+using Content.Shared.Shuttles.Components;
 using Content.Shared._NF.ShuttleRecords;
 using Content.Shared.Damage;
 using Content.Shared.FixedPoint;
@@ -164,9 +167,49 @@ public sealed partial class ShipStorageSystem
                     {
                         // Rehydration pass (RFC retrieve flow): sidecar-carried state that
                         // the map serializer can't reach gets reapplied once the grid has
-                        // fully materialized. Damage, then the repair baseline, then the
-                        // ownership touch-up, then deed/lock rebind, station recreate and
-                        // records — in this order, all before the dock presentation.
+                        // fully materialized. Fidelity state first (the general net —
+                        // vending stock, market inventory, …, re-applied from each entity's
+                        // ShipCapturedStateComponent), then damage, then the repair baseline,
+                        // then the ownership touch-up, then deed/lock rebind, station recreate
+                        // and records — in this order, all before the dock presentation.
+                        _fidelity.RestoreCaptured(grid.Value);
+
+                        // Transient FTL scrub: blobs stored before the store-side FTL strip
+                        // (and belt-and-suspenders for any that slip through) can carry a stale
+                        // FTLComponent that leaves the reborn ship stuck mid-FTL-lifecycle with
+                        // the shuttle system erroring every tick. Drop it before the FTL-dock.
+                        if (HasComp<FTLComponent>(grid.Value))
+                            RemComp<FTLComponent>(grid.Value);
+
+                        // Store-in-progress scrub: blobs written before the marker became
+                        // [UnsavedComponent] carry it (it is stamped before serialize by design),
+                        // and a ship still wearing it has ALL container insertion blocked aboard —
+                        // hands included, so nothing on the ship can be picked up.
+                        if (HasComp<ShipStorageInProgressComponent>(grid.Value))
+                            RemComp<ShipStorageInProgressComponent>(grid.Value);
+
+                        // Re-fire charged-machine activation (derived state): a gravity generator
+                        // pushes gravity onto the grid's GravityComponent only on the charge
+                        // activation EDGE (ChargedMachineActivatedEvent). On load its charge/Active
+                        // DataFields come back already-full, so the charge loop sees no edge and
+                        // never re-pushes; meanwhile the generator's own GravityActive flag is
+                        // NON-serialized (so it reads false) and the grid's ComponentInit refresh
+                        // has already cleared GravityComponent.Enabled. Net: live generator, no
+                        // gravity. Re-raise the activation per generator so its normal handler
+                        // re-applies gravity; a genuinely-unpowered generator self-corrects on its
+                        // next discharge (ChargedMachineDeactivatedEvent). GravityGeneratorComponent
+                        // is [Access]-locked to its own system, so re-raising the event is the
+                        // correct seam — we don't touch its state directly.
+                        var genQuery = AllEntityQuery<GravityGeneratorComponent, TransformComponent>();
+                        while (genQuery.MoveNext(out var genUid, out _, out var genXform))
+                        {
+                            if (genXform.GridUid != grid.Value)
+                                continue;
+
+                            var activated = new ChargedMachineActivatedEvent();
+                            RaiseLocalEvent(genUid, ref activated);
+                        }
+
                         RehydrateDamage(grid.Value);
 
                         // Repair baseline: derived state, stripped at store (Cycle 3);
