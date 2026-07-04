@@ -9,12 +9,14 @@ using System.Threading.Tasks;
 using Content.Server._NF.Shipyard.Systems;
 using Content.Server._NF.Station.Components;
 using Content.Server.Database;
+using Content.Server.Shuttles.Systems;
 using Content.Server.NodeContainer.Nodes;
 using Content.Server.Nuke;
 using Content.Shared._Hyperion.CCVar;
 using Content.Shared._Hyperion.ShipSize;
 using Content.Shared._Mono.ShipRepair.Components;
 using Content.Shared._NF.Shipyard.Components;
+using Content.Shared.Shuttles.Components;
 using Content.Shared.Damage;
 using Content.Shared.Explosion.Components;
 using Content.Shared.FixedPoint;
@@ -61,6 +63,8 @@ public sealed partial class ShipStorageSystem : EntitySystem
     [Dependency] private readonly ShipyardSystem _shipyard = default!;
     [Dependency] private readonly DamageableSystem _damageable = default!;
     [Dependency] private readonly ISerializationManager _serialization = default!;
+    [Dependency] private readonly ShipStateFidelitySystem _fidelity = default!;
+    [Dependency] private readonly DockingSystem _docking = default!;
 
     /// <summary>
     /// Test seam for the save-time validation backstop. When assigned, the backstop
@@ -122,10 +126,16 @@ public sealed partial class ShipStorageSystem : EntitySystem
     /// session-scoped derived state, regenerated against the loaded grid in a later
     /// rehydration cycle — this cycle's scope is strictly the strip. The (future)
     /// validation whitelist is maintained together with this list per the RFC.
+    /// <para><see cref="StationMemberComponent"/>: the station is round-scoped and
+    /// RECREATED on retrieve (RFC station model), so its ref must not ride the blob —
+    /// the self-contained save writes it as Invalid and the deserializer then logs an
+    /// invalid-uid error on every reload (validation scratch-load included). The vessel
+    /// proto the store needs from the station is read before this strip cuts it.</para>
     /// </summary>
     private static readonly Type[] StoreStripList =
     {
         typeof(ShipRepairDataComponent),
+        typeof(StationMemberComponent),
     };
 
     public override void Initialize()
@@ -297,6 +307,18 @@ public sealed partial class ShipStorageSystem : EntitySystem
         // path as the gas sidecars (see the finally block below).
         var injectedDamageSidecars = InjectDamageSidecars(gridUid);
 
+        // Vessel prototype capture (spec section 1): the grid alone doesn't know its
+        // vessel, but its station's latejoin info does. Read BEFORE the strip below cuts
+        // StationMemberComponent off the grid. Empty for stationless grids and
+        // pre-Cycle-4 blobs; retrieve tolerates empty (no station recreate).
+        var vesselProto = string.Empty;
+        if (TryComp<StationMemberComponent>(gridUid, out var stationMember)
+            && TryComp<ExtraShuttleInformationComponent>(stationMember.Station, out var vesselInfo)
+            && vesselInfo.Vessel is { } vessel)
+        {
+            vesselProto = vessel.Id;
+        }
+
         // Store strip-list (RFC "Implementation surface"): remove derived /
         // session-scoped components — see StoreStripList — from the live grid before
         // TrySaveGrid, so they never enter the blob. Held as deep copies (not the
@@ -306,6 +328,43 @@ public sealed partial class ShipStorageSystem : EntitySystem
         // diffs) and BEFORE serialize, per the RFC PREP ordering. Rides the SAME
         // sidecarsConsumed failure-cleanup discipline as the sidecars.
         var strippedComponents = StripListedComponents(gridUid);
+
+        // Fidelity capture (RFC Fidelity mechanism 2, the general net): the gas/damage
+        // sidecars above catch two KNOWN readOnly/unreachable fields; this catches the
+        // open-ended class the engine serializer simply CAN'T WRITE (unserializable
+        // populated [DataField]s — vending stock, market inventory, the lathe queue, …).
+        // For each it either captures the state onto a ShipCapturedStateComponent sidecar
+        // (the reviewed keep-list) or strips it (transient/round-scoped), then CLEARS the
+        // live field so TrySaveGrid doesn't choke. Runs LAST in PREP (after the specific
+        // sidecars and the strip-list) so it sees the final live component set; the
+        // returned ledger drives the abort restore in the finally. Content-agnostic and
+        // drop-in: the tool adapts to the content, not the other way round.
+        var fidelityCapture = _fidelity.CaptureAndStrip(gridUid);
+
+        // Station AI sanitization (PREP, content-specific — see ShipStorageSystem.StationAi.cs):
+        // empty any AI core aboard so its off-grid eye/brain apparatus doesn't dangle in the
+        // serialized grid. Not abort-restorable by design (the intended end state is an empty
+        // core), so it runs AFTER the restorable steps; a vacant core is all it ever touches.
+        SanitizeStationAiCores(gridUid);
+
+        // Undock (PREP): a stored ship must be fully DETACHED — the self-contained blob leaves
+        // its docking partner (the station's port) out, so a serialized DockedWith would reload
+        // as Invalid and crash DockingSystem.OnStartup's MetaData(partner) deref (both in the
+        // validation scratch-reload and the real retrieve). Undocking here clears DockedWith and
+        // tears down the weld joint, so the blob is clean; the ship re-docks at its destination
+        // via TryFTLDock on retrieve. Like the AI step this isn't abort-restorable (a rare
+        // post-serialize abort leaves the ship floating undocked but intact), so it runs after
+        // the restorable steps.
+        _docking.UndockDocks(gridUid);
+
+        // Transient FTL state (PREP): a ship stored during its FTL cooldown still carries an
+        // FTLComponent (added for a jump, torn down when the lifecycle finishes). A stored ship
+        // is at rest, so this must not ride the blob — a reborn ship carrying it comes back
+        // mid-FTL-lifecycle and the shuttle system errors on it every tick (invalid "Available"
+        // state), leaving it stuck. Drop it here; like undock it's transient, so no abort-restore.
+        if (HasComp<FTLComponent>(gridUid))
+            RemComp<FTLComponent>(gridUid);
+
         var sidecarsConsumed = false;
 
         // Store-in-progress flag (RFC store flow, Cycle 5): serialize below is
@@ -328,10 +387,21 @@ public sealed partial class ShipStorageSystem : EntitySystem
             // tail takes exactly this yaml string in a later cycle. (Also: a suspending
             // await inside a WaitPost-driven integration test never resumes — the test
             // loop doesn't pump the sync context — so only DB awaits belong here.)
+            // Self-contained ship blob: IGNORE external/null-space references rather than the
+            // engine default (IncludeNullspace), which auto-drags any referenced null-space
+            // entity INTO the save. A ship that is its own station references that station
+            // entity, so the default pulls the whole station in — and its StationRecords hold a
+            // Dictionary<Type,...> the serializer can't write, aborting the store. The station
+            // is round-scoped and rebuilt on retrieve (RecreateStation), and minds are already
+            // gated/sanitized, so nothing external belongs in the blob: Ignore turns those refs
+            // into Invalid (rebound on retrieve) instead of serializing entities we don't own.
+            // TransformComponent.ParentUid is exempt from this, so grid-child parenting is safe.
+            var saveOptions = new SerializationOptions { MissingEntityBehaviour = MissingEntityBehaviour.Ignore };
+
             string yaml;
             using (var writer = new StringWriter())
             {
-                if (!_mapLoader.TrySaveGrid(gridUid, writer))
+                if (!_mapLoader.TrySaveGrid(gridUid, writer, saveOptions))
                     return (ShipStorageResult.SerializeFailed, null);
 
                 yaml = writer.ToString();
@@ -359,17 +429,6 @@ public sealed partial class ShipStorageSystem : EntitySystem
             var checksum = SHA256.HashData(yamlBytes);
 
             var (fingerprint, formatVer) = ReadDriftMetadata(yaml);
-
-            // Vessel prototype capture (spec section 1): the grid alone doesn't know its
-            // vessel, but its station's latejoin info does. Empty for stationless grids
-            // and pre-Cycle-4 blobs; retrieve tolerates empty (no station recreate).
-            var vesselProto = string.Empty;
-            if (TryComp<StationMemberComponent>(gridUid, out var stationMember)
-                && TryComp<ExtraShuttleInformationComponent>(stationMember.Station, out var vesselInfo)
-                && vesselInfo.Vessel is { } vessel)
-            {
-                vesselProto = vessel.Id;
-            }
 
             var record = new ShipStorageRecord
             {
@@ -441,6 +500,25 @@ public sealed partial class ShipStorageSystem : EntitySystem
                 // aborts must leave the live ship exactly as usable as it was before
                 // PREP touched it, ShipRepairDataComponent included.
                 RestoreStrippedComponents(gridUid, strippedComponents);
+
+                // Station re-book: stripping StationMemberComponent fired StationSystem's
+                // ComponentShutdown handler, which removed this grid from its station's
+                // Grids set — the component restore above brings the membership ref back,
+                // but not the set entry. AddGridToStation is the proper re-add (Grids is
+                // [Access]-locked to StationSystem); its StationGridAddedEvent handlers
+                // (NavMap refresh, tracker re-point) are idempotent re-asserts, correct
+                // for an abort that leaves the ship exactly as it was.
+                if (TryComp<StationMemberComponent>(gridUid, out var restoredMember)
+                    && HasComp<StationDataComponent>(restoredMember.Station))
+                {
+                    _station.AddGridToStation(restoredMember.Station, gridUid);
+                }
+
+                // Fidelity restore (RFC "abort" clause): the capture CLEARED live fields
+                // (vending stock, market inventory, …) to let the serializer through, so
+                // an abort must put those exact values back and strip the sidecars it
+                // added — same "leave the ship as usable as before PREP" contract.
+                _fidelity.RestoreSnapshot(fidelityCapture);
             }
         }
     }
