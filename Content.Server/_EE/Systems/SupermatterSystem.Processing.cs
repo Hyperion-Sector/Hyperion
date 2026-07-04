@@ -372,6 +372,14 @@ public sealed partial class SupermatterSystem
             if (sm.Status == SupermatterStatusType.Inactive)
                 return;
 
+            // Hyperion: port of EE #1901 ("SM no longer starts on round start"). The status check
+            // above reads last tick's status and returns Error (not Inactive) for an off-grid
+            // crystal, so it can miss. HasBeenPowered is explicit and monotonic: a crystal that has
+            // never been activated takes no damage from vacuum, so a mapped-in SM cannot
+            // self-delaminate before anyone touches it.
+            if (!sm.HasBeenPowered)
+                return;
+
             sm.Damage += Math.Max(sm.Power / 1000 * sm.DamageIncreaseMultiplier, 0.1f);
             return;
         }
