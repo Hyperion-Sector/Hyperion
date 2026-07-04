@@ -96,35 +96,6 @@
   - type: NavMapBeacon
     defaultText: station-beacon-vending-machines
 
-# --- Job spawn markers ---------------------------------------------------------
-# Hyperion: PlantManager/PlantTechnician jobs are NOT defined in Hyperion. SpawnPoint.Job is
-# a non-validated ProtoId so these load fine; job/department/access wiring is a follow-up.
-- type: entity
-  id: SpawnPointPlantManager
-  parent: SpawnPointJobBase
-  name: plant manager
-  components:
-  - type: SpawnPoint
-    job_id: PlantManager
-  - type: Sprite
-    sprite: _NF/Markers/jobs.rsi
-    layers:
-      - state: green
-      - state: plantmanager
-
-- type: entity
-  id: SpawnPointPlantTechnician
-  parent: SpawnPointJobBase
-  name: plant technician
-  components:
-  - type: SpawnPoint
-    job_id: PlantTechnician
-  - type: Sprite
-    sprite: _NF/Markers/jobs.rsi
-    layers:
-      - state: green
-      - state: planttechnician
-
 # --- Furniture -----------------------------------------------------------------
 - type: entity
   id: BaseSinkUnfinished
@@ -213,31 +184,6 @@
     maxChargeRate: 50000
     supplyRampTolerance: 50000
     supplyRampRate: 10000
-
-- type: entity
-  id: PortableSMESMachineCircuitboard
-  parent: BaseMachineCircuitboard
-  name: portable SMES machine board
-  description: A machine printed circuit board for a portable SMES.
-  components:
-    - type: Sprite
-      state: engineering
-    - type: MachineBoard
-      prototype: PortableSMESEmpty
-      requirements:
-        Capacitor: 1
-      stackRequirements:
-        Glass: 2
-
-# Hyperion: dropped upstream `BindToStation` component (absent in Hyperion).
-- type: entity
-  id: GaslockFrameMachineCircuitboard
-  parent: BaseMachineCircuitboard
-  name: gaslock frame machine board
-  description: A machine printed circuit board for a gaslock frame.
-  components:
-    - type: MachineBoard
-      prototype: GaslockFrame
 
 # --- Consumables ---------------------------------------------------------------
 - type: entity

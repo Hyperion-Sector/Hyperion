@@ -44000,7 +44000,7 @@ entities:
       parent: 1
     - type: Docking
       name: Dock 2
-- proto: GaslockFrameMachineCircuitboard
+- proto: GaslockFrameFlatpack
   entities:
   - uid: 7095
     components:
@@ -73607,7 +73607,7 @@ entities:
     - type: Transform
       pos: -2.5,17.5
       parent: 1
-- proto: PortableSMESMachineCircuitboard
+- proto: SMESMachineCircuitboard
   entities:
   - uid: 11043
     components:
@@ -79575,15 +79575,11 @@ entities:
     - type: Transform
       pos: 6.5,27.5
       parent: 1
-- proto: SpawnPointPlantManager
-  entities:
   - uid: 12087
     components:
     - type: Transform
       pos: -7.5,35.5
       parent: 1
-- proto: SpawnPointPlantTechnician
-  entities:
   - uid: 12088
     components:
     - type: Transform
