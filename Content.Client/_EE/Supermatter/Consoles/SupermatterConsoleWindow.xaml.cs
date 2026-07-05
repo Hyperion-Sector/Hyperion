@@ -53,11 +53,11 @@ public sealed partial class SupermatterConsoleWindow : FancyWindow
         if (!_entManager.TryGetComponent<SupermatterConsoleComponent>(_owner.Value, out var console))
             return;
 
+        // Hyperion: don't render focus data for an entity we're no longer tracking. The focus change is
+        // pushed by the entry's focus button (below); resending it here every state spammed the server
+        // once per tick whenever it couldn't satisfy the focus (dead/unanchored/off-grid crystal).
         if (_trackedEntity != focusData?.NetEntity)
-        {
-            SendFocusChangeMessageAction?.Invoke(_trackedEntity);
             focusData = null;
-        }
 
         // Retain supermatter data for use inbetween updates
         _supermatters = supermatters;

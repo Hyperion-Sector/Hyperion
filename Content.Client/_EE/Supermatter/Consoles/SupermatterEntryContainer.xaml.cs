@@ -330,7 +330,7 @@ public sealed partial class SupermatterEntryContainer : BoxContainer
         }
     }
 
-    private static void UpdateEngineBar(ProgressBar bar, PanelContainer border, float value, float leftSize, float rightSize, Color leftColor, Color middleColor, Color rightColor)
+    private void UpdateEngineBar(ProgressBar bar, PanelContainer border, float value, float leftSize, float rightSize, Color leftColor, Color middleColor, Color rightColor)
     {
         var clamped = Math.Clamp(value, bar.MinValue, bar.MaxValue);
 
@@ -338,6 +338,39 @@ public sealed partial class SupermatterEntryContainer : BoxContainer
         var leftHsv = Color.ToHsv(leftColor);
         var middleHsv = Color.ToHsv(middleColor);
         var rightHsv = Color.ToHsv(rightColor);
+
+        // Ensure leftSize and rightSize add up to 1.0 or the transition won't be smooth
+        var minColor = new Vector4(0, 0, 0, 0);
+        var maxColor = new Vector4(1, 1, 1, 1);
+        Color finalColor;
+
+        if (normalized <= leftSize)
+        {
+            normalized /= leftSize; // Adjust range to 0.0 to 1.0
+            var calcColor = Vector4.Lerp(leftHsv, middleHsv, normalized);
+            var clampedColor = Vector4.Clamp(calcColor, minColor, maxColor);
+            finalColor = Color.FromHsv(clampedColor);
+        }
+
+        else
+        {
+            normalized = (normalized - leftSize) / rightSize; // Adjust range to 0.0 to 1.0
+            var calcColor = Vector4.Lerp(middleHsv, rightHsv, normalized);
+            var clampedColor = Vector4.Clamp(calcColor, minColor, maxColor);
+            finalColor = Color.FromHsv(clampedColor);
+        }
+
+        // Check if null first to avoid repeatedly creating this.
+        bar.ForegroundStyleBoxOverride ??= new StyleBoxFlat();
+        border.PanelOverride ??= new StyleBoxFlat();
+
+        var barOverride = (StyleBoxFlat)bar.ForegroundStyleBoxOverride;
+        barOverride.BackgroundColor = finalColor;
+
+        var panelOverride = (StyleBoxFlat)border.PanelOverride;
+        panelOverride.BackgroundColor = finalColor;
+
+        bar.Value = clamped;
     }
 
     private Color GetDetailColor(float value, bool invert = false)

@@ -101,7 +101,7 @@ public sealed partial class ECCVars
     ///     Supermatter begins taking damage above this temperature.
     /// </summary>
     public static readonly CVarDef<float> SupermatterHeatPenaltyThreshold =
-        CVarDef.Create("supermatter.heat_penalty_threshold", 40f, CVar.SERVER);
+        CVarDef.Create("supermatter.heat_penalty_threshold", 40f, CVar.SERVER | CVar.REPLICATED); // Hyperion: replicated so the console's client-side base figures match server config overrides
 
     /// <summary>
     ///     The percentage of the supermatter's matter power that is converted into power each atmos tick.
@@ -157,7 +157,7 @@ public sealed partial class ECCVars
     ///     Base amount of radiation that the supermatter emits.
     /// </summary>
     public static readonly CVarDef<float> SupermatterRadsBase =
-        CVarDef.Create("supermatter.rads_base", 2f, CVar.SERVER); //Frontier: 3<2. Still potentially too high. Rads can reach 60+.
+        CVarDef.Create("supermatter.rads_base", 2f, CVar.SERVER | CVar.REPLICATED); //Frontier: 3<2. Still potentially too high. Rads can reach 60+. // Hyperion: replicated so the console's client-side base radiation matches server config overrides
 
     /// <summary>
     ///     Directly multiplies the amount of rads put out by the supermatter. Be SUPER careful with this.
