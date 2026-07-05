@@ -100,7 +100,9 @@ public sealed partial class SupermatterGasBarContainer : BoxContainer
         borderOverride.BackgroundColor = color;
 
         // Set labels
-        var gasData = SupermatterGasData.GasData[gas];
+        // Hyperion: this fork's Gas enum carries gases (BZ..Pluoxium) that GasData deliberately omits;
+        // use GetValueOrDefault to mirror the server's CalculateGasMixModifier instead of throwing.
+        var gasData = SupermatterGasData.GasData.GetValueOrDefault(gas);
 
         GasLabel.Text = Loc.GetString(gasProto.Name) + ":";
 
@@ -138,7 +140,9 @@ public sealed partial class SupermatterGasBarContainer : BoxContainer
 
     public void UpdateEntry(Gas gas, SupermatterFocusData focusData)
     {
-        var value = focusData.GasStorage.GetMoles(gas) / focusData.GasStorage.TotalMoles * 100;
+        // Hyperion: guard against an empty mixture (inactive crystal / SpaceGas fallback) so we don't render NaN%
+        var totalMoles = focusData.GasStorage.TotalMoles;
+        var value = totalMoles > 0f ? focusData.GasStorage.GetMoles(gas) / totalMoles * 100 : 0f;
 
         GasBar.Value = value;
         GasBarLabel.Text = Loc.GetString("supermatter-console-window-label-gas-bar", ("gas", value.ToString("0.00")));
