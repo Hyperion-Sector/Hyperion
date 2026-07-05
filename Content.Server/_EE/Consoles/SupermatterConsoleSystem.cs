@@ -21,6 +21,13 @@ public sealed class SupermatterConsoleSystem : SharedSupermatterConsoleSystem
     [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
     [Dependency] private readonly IConfigurationManager _config = default!;
 
+    // Hyperion: gate the console refresh to 1 Hz. Upstream EE ran this Update() every
+    // server tick, pushing a full BUI state (supermatter list + a whole GasMixture) to
+    // every open client per tick, which thrashes the client and reads as a grid flicker.
+    // The atmos monitoring console this was cloned from throttles the same way.
+    private const float UpdateTime = 1.0f;
+    private float _updateTimer;
+
     public override void Initialize()
     {
         base.Initialize();
@@ -79,6 +86,13 @@ public sealed class SupermatterConsoleSystem : SharedSupermatterConsoleSystem
     public override void Update(float frameTime)
     {
         base.Update(frameTime);
+
+        // Hyperion: refresh at 1 Hz instead of every tick (see field comment above).
+        _updateTimer += frameTime;
+        if (_updateTimer < UpdateTime)
+            return;
+
+        _updateTimer -= UpdateTime;
 
         // Keep a list of UI entries for each gridUid, in case multiple consoles stand on the same grid
         var supermatterEntriesForEachGrid = new Dictionary<EntityUid, SupermatterConsoleEntry[]>();
