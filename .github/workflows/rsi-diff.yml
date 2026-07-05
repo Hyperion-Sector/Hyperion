@@ -5,6 +5,13 @@ on:
     paths:
       - '**.rsi/**.png'
 
+# Hyperion: grant PR-comment write so RSIDiffBot can post its diff. Trigger is
+# pull_request_target (base-repo context, no PR-head checkout below, so no untrusted
+# code runs under the token) and the org default workflow permission is read-only,
+# which is why the comment step failed with "Resource not accessible by integration".
+permissions:
+  pull-requests: write
+
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
