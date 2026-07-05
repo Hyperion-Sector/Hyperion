@@ -32,8 +32,12 @@ because Hyperion expects to want them once it self-hosts and/or grows a maintain
 | File | Purpose | To reactivate |
 |------|---------|---------------|
 | `publish-testing.yml` | Same, to a testing channel | Set `PUBLISH_TOKEN`; pick our testing fork id |
-| `publish-changelog.yml` | Daily changelog digest -> Discord (currently an all-comments husk) | Uncomment, set `CHANGELOG_DISCORD_WEBHOOK` |
 | `benchmarks.yml` | Perf suite -> SQL, run on a dedicated box | Point host + key at our runner, change the `git clone` from `space-wizards/space-station-14` to `Hyperion-Sector/Hyperion`, set benchmark SQL secrets |
+
+> **`publish-changelog.yml` is now LIVE** (left `parked/`, uncommented, invokes
+> `Tools/actions_changelogs_since_last_run.py` daily at 10:00 UTC). Posts a digest of
+> new `Resources/Changelog/Monolith.yml` entries to Discord. Gated on repo secret
+> `CHANGELOG_DISCORD_WEBHOOK`; the script no-ops cleanly while that secret is unset.
 
 ### Governance / labeling (want with a maintainer team)
 
@@ -56,9 +60,12 @@ because Hyperion expects to want them once it self-hosts and/or grows a maintain
 These stay in `.github/workflows/` and run today, but carry inherited rough edges worth a
 later pass:
 
-- **`changelog.yml`** rewire: needs `BOT_TOKEN` + `vars.CHANGELOG_USER`/`CHANGELOG_EMAIL`,
-  and its target `Resources/Changelog/Monolith.yml` should move to a Hyperion file (which
-  also means updating the in-game changelog reader config, so it is not a pure rename).
+- **`changelog.yml`** rewire: DONE. Now uses the built-in `secrets.GITHUB_TOKEN` (no
+  `BOT_TOKEN` provisioned) and the repo variables `CHANGELOG_USER`/`CHANGELOG_EMAIL` are set.
+  Optional follow-up: rename its target `Resources/Changelog/Monolith.yml` to a Hyperion
+  file. The in-game reader globs every `.yml` under `/Changelog/` (`ChangelogManager.cs`),
+  so a rename needs no reader change, only updating `CHANGELOG_DIR` here and `CHANGELOG_FILE`
+  in `Tools/actions_changelogs_since_last_run.py`.
 - **`nf-mapchecker.yml`** path coverage: its trigger watches `_NF`, `Nyanotrasen`, and `_DV`
   entity dirs but not `_Mono` or `_Hyperion`, so it will not fire on our own content.
 - **`validate-rgas.yml`** cleanup: leftover `github.actor` exclusions for `PJBot` and
