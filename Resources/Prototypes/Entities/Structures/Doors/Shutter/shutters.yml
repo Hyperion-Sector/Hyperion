@@ -105,6 +105,10 @@
     interactSuccessSound:
       collection: FenceRattle
   - type: BlockWeather
+  # Hyperion - lets the shutter be interacted with even when a window/grille shares its tile (matches BaseFirelock). Ported from Triad #116.
+  - type: WallMount
+    arc: 360
+  # End Hyperion
   # Mono
   - type: ShipRepairable
     repairTime: 3
@@ -222,6 +226,10 @@
     containers:
     - board
   - type: InteractionOutline
+  # Hyperion - lets the frame be interacted with (cable step, etc.) even when a window/grille shares its tile
+  - type: WallMount
+    arc: 360
+  # End Hyperion
   - type: Damageable
     damageContainer: StructuralInorganic
     damageModifierSet: Metallic
@@ -233,8 +241,11 @@
       behaviors:
       - !type:DoActsBehavior
         acts: ["Destruction"]
+  # Hyperion - Static (matches BlastDoorFrame): the construction graph anchors the frame on spawn,
+  # which would flip Dynamic -> Static and fail PrototypeSaveTest. Declaring Static here keeps
+  # prototype/runtime in sync and also prevents the unanchored body from being shoved by physics.
   - type: Physics
-    bodyType: Dynamic
+    bodyType: Static # Hyperion - see above comment
   - type: Fixtures
     fixtures:
       fix1:
@@ -248,4 +259,4 @@
         layer:
         - HighImpassable
   - type: Transform
-    noRot: true
+    # noRot: true # Hyperion - removed so shutter frames keep their placement rotation
