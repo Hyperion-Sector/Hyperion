@@ -60,8 +60,12 @@ because Hyperion expects to want them once it self-hosts and/or grows a maintain
 These stay in `.github/workflows/` and run today, but carry inherited rough edges worth a
 later pass:
 
-- **`changelog.yml`** rewire: DONE. Now uses the built-in `secrets.GITHUB_TOKEN` (no
-  `BOT_TOKEN` provisioned) and the repo variables `CHANGELOG_USER`/`CHANGELOG_EMAIL` are set.
+- **`changelog.yml`** rewire: DONE. Uses `secrets.BOT_TOKEN` (a fine-grained PAT from an
+  account that bypasses the `main` ruleset) plus the repo variables `CHANGELOG_USER`/
+  `CHANGELOG_EMAIL`. The built-in `GITHUB_TOKEN` cannot push here: `main` is ruleset-protected
+  (PR + status checks required) and the `github-actions[bot]` integration is not accepted as
+  a bypass actor, so the automated changelog commit needs a bypassing identity. Note the PAT
+  expires and must be re-issued when it does.
   Optional follow-up: rename its target `Resources/Changelog/Monolith.yml` to a Hyperion
   file. The in-game reader globs every `.yml` under `/Changelog/` (`ChangelogManager.cs`),
   so a rename needs no reader change, only updating `CHANGELOG_DIR` here and `CHANGELOG_FILE`
