@@ -119,7 +119,6 @@
     <GuideEntityEmbed Entity="WaterVaporCanister" Caption=""/>
     <GuideEntityEmbed Entity="AmmoniaCanister" Caption=""/>
     <GuideEntityEmbed Entity="NitrousOxideCanister" Caption=""/>
-    <GuideEntityEmbed Entity="HeliumCanister" Caption=""/>
   </Box>
 
   Carbon dioxide is excellent at amplifying the supermatter's internal energy, while nitrous oxide can improve the supermatter's heat tolerance. Try out different gas mixes and see what happens!
