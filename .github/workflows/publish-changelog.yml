@@ -1,0 +1,40 @@
+# SPDX-FileCopyrightText: 2023 Debug
+# SPDX-FileCopyrightText: 2025 Redrover1760
+#
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+# Hyperion: reactivated from parked/. Posts a digest of new changelog entries to
+# Discord once a day, diffing Resources/Changelog/Monolith.yml against the last
+# successful run of this workflow. Gated on the CHANGELOG_DISCORD_WEBHOOK secret;
+# the script no-ops cleanly when it is unset.
+name: Publish Changelog
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 10 * * *'
+
+jobs:
+  publish_changelog:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          ref: main
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+
+      - name: Install Dependencies
+        run: pip install requests pyyaml
+
+      - name: Publish changelog
+        run: python3 Tools/actions_changelogs_since_last_run.py
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          DISCORD_WEBHOOK_URL: ${{ secrets.CHANGELOG_DISCORD_WEBHOOK }}
+        continue-on-error: true
