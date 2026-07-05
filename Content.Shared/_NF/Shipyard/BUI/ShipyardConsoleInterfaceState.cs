@@ -16,6 +16,7 @@ public sealed class ShipyardConsoleInterfaceState : BoundUserInterfaceState
     public readonly string ShipyardName;
     public readonly bool FreeListings;
     public readonly float SellRate;
+    public readonly List<StoredShipInfo> StoredShips; // Hyperion: drydock tab
 
     public ShipyardConsoleInterfaceState(
         int balance,
@@ -27,7 +28,8 @@ public sealed class ShipyardConsoleInterfaceState : BoundUserInterfaceState
         (List<string> available, List<string> unavailable) shipyardPrototypes,
         string shipyardName,
         bool freeListings,
-        float sellRate)
+        float sellRate,
+        List<StoredShipInfo> storedShips) // Hyperion: drydock tab
     {
         Balance = balance;
         AccessGranted = accessGranted;
@@ -39,5 +41,6 @@ public sealed class ShipyardConsoleInterfaceState : BoundUserInterfaceState
         ShipyardName = shipyardName;
         FreeListings = freeListings;
         SellRate = sellRate;
+        StoredShips = storedShips; // Hyperion: drydock tab
     }
 }

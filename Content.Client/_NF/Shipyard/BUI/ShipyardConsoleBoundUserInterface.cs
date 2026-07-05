@@ -40,6 +40,9 @@ public sealed class ShipyardConsoleBoundUserInterface : BoundUserInterface
         _menu.OnUnassignDeed += UnassignDeed;
         _menu.OnRenameShip += RenameShip;
         _menu.TargetIdButton.OnPressed += _ => SendMessage(new ItemSlotButtonPressedEvent("ShipyardConsole-targetId"));
+        // Hyperion: drydock tab (store/retrieve persisted ships)
+        _menu.OnStore += () => SendMessage(new ShipyardConsoleStoreMessage());
+        _menu.OnRetrieve += id => SendMessage(new ShipyardConsoleRetrieveMessage(id));
     }
 
     private void Populate(List<string> availablePrototypes, List<string> unavailablePrototypes, bool freeListings, bool validId)

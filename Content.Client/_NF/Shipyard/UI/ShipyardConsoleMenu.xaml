@@ -11,6 +11,8 @@
             <PanelContainer.PanelOverride>
                 <gfx:StyleBoxFlat BorderThickness="2" BorderColor="#333333" BackgroundColor="#181818"/>
             </PanelContainer.PanelOverride>
+    <!-- Hyperion: wrap the purchase UI + new drydock tab in a TabContainer -->
+    <TabContainer Name="Tabs" VerticalExpand="True" HorizontalExpand="True">
     <BoxContainer Orientation="Vertical" Margin="5 0 5 0">
         <PanelContainer VerticalExpand="False" HorizontalExpand="True" Margin="0 8 0 2">
             <PanelContainer.PanelOverride>
@@ -138,6 +140,19 @@
             </BoxContainer>
         </BoxContainer>
     </BoxContainer>
+    <!-- Hyperion: drydock tab (store/retrieve persisted ships) -->
+    <BoxContainer Name="DrydockTab" Orientation="Vertical" Margin="5 0 5 0">
+        <Button Name="StoreButton" Text="{Loc 'shipyard-console-store-button'}" />
+        <ScrollContainer HorizontalExpand="True" VerticalExpand="True">
+            <BoxContainer Name="StoredShips"
+                          Orientation="Vertical"
+                          HorizontalExpand="True"
+                          VerticalExpand="True">
+                <!-- Stored ships get added here by code -->
+            </BoxContainer>
+        </ScrollContainer>
+    </BoxContainer>
+    </TabContainer>
         </PanelContainer>
     </PanelContainer>
 </controls:FancyWindow>
