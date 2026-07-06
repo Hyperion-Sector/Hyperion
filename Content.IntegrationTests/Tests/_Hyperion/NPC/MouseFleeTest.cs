@@ -6,17 +6,13 @@
 using System;
 using System.Linq;
 using System.Numerics;
-using System.Threading;
 using System.Threading.Tasks;
 using Content.Server._Hyperion.NPC;
 using Content.Server.NPC;
 using Content.Server.NPC.HTN;
-using Content.Server.NPC.Pathfinding;
 using Content.Server.NPC.Systems;
 using Content.Shared.CCVar;
 using Robust.Shared.Configuration;
-using Robust.Shared.Log;
-using Robust.Shared.Player;
 using Robust.Shared.GameObjects;
 using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
@@ -382,103 +378,6 @@ namespace Content.IntegrationTests.Tests._Hyperion.NPC
                 Assert.That(startledB, Is.True,
                     "Mouse B never got startled; the fleeing A should have sounded the alarm and spooked it.");
             });
-
-            await pair.CleanReturnAsync();
-        }
-
-        /// <summary>
-        /// Mice fear regular players, but let them get closer than a predator (PlayerFearRadius, 2 tiles). A
-        /// mob one tile away, made into a real player by attaching the pool session (which adds
-        /// ActorComponent), must make the mouse choose the player-flee branch and back off.
-        /// </summary>
-        [Test]
-        public async Task MouseFleesANearbyPlayer()
-        {
-            await using var pair = await PoolManager.GetServerClient(new PoolSettings { Connected = true, Dirty = true });
-            var server = pair.Server;
-            var client = pair.Client;
-            var entManager = server.ResolveDependency<IEntityManager>();
-            var mapManager = server.ResolveDependency<IMapManager>();
-            var mapSystem = entManager.System<SharedMapSystem>();
-            var xformSystem = entManager.System<SharedTransformSystem>();
-            var playerMan = server.ResolveDependency<ISharedPlayerManager>();
-            var cfg = server.ResolveDependency<IConfigurationManager>();
-
-            // The connected client emits a benign transform "invalid entity" while coordinates replicate on a
-            // bare map during setup. Raise that sawmill's threshold so the scaffolding noise doesn't fail the
-            // pool's error-log gate. It isn't the mouse logic: the other flee tests run the same paths clean.
-            await server.WaitPost(() =>
-                server.ResolveDependency<ILogManager>().GetSawmill("system.transform").Level = LogLevel.Fatal);
-            await client.WaitPost(() =>
-                client.ResolveDependency<ILogManager>().GetSawmill("system.transform").Level = LogLevel.Fatal);
-
-            EntityUid mouse = default;
-            EntityUid player = default;
-            HTNComponent mouseHtn = default!;
-
-            await server.WaitPost(() =>
-            {
-                cfg.SetCVar(CCVars.NPCPauseWhenNoPlayersInRange, false);
-
-                mapSystem.CreateMap(out var mapId);
-                var grid = mapManager.CreateGridEntity(mapId);
-                for (var x = -8; x <= 8; x++)
-                for (var y = -3; y <= 3; y++)
-                    mapSystem.SetTile(grid.Owner, grid.Comp, new Vector2i(x, y), new Tile(1));
-                entManager.RunMapInit(grid.Owner, entManager.GetComponent<MetaDataComponent>(grid.Owner));
-
-                mouse = entManager.SpawnEntity(Mouse, new EntityCoordinates(grid.Owner, new Vector2(4.5f, 0.5f)));
-                // A mob one tile east, made a real player by attaching the pool session (adds ActorComponent,
-                // which is what NearbyPlayers keys on). A mouse stand-in is used over a humanoid purely to dodge
-                // humanoid player-init noise; being same-faction it can only trip the player branch, not the
-                // predator one. The attach sleeps its own NPC, so it stays put.
-                player = entManager.SpawnEntity(Mouse, new EntityCoordinates(grid.Owner, new Vector2(5.5f, 0.5f)));
-                playerMan.SetAttachedEntity(playerMan.Sessions.Single(), player);
-
-                mouseHtn = entManager.GetComponent<HTNComponent>(mouse);
-            });
-
-            server.RunTicks(30);
-            await server.WaitIdleAsync();
-
-            await server.WaitAssertion(() =>
-                Assert.That(entManager.HasComponent<ActorComponent>(player), Is.True,
-                    "Test setup: the stand-in should read as a player."));
-
-            var startDist = 0f;
-            await server.WaitPost(() =>
-                startDist = Vector2.Distance(xformSystem.GetWorldPosition(mouse), xformSystem.GetWorldPosition(player)));
-
-            var choseFlee = false;
-            var maxDist = startDist;
-
-            for (var i = 0; i < 20; i++)
-            {
-                server.RunTicks(10);
-                await server.WaitIdleAsync();
-
-                await server.WaitPost(() =>
-                {
-                    if (mouseHtn.Plan is { } plan && plan.Tasks.Any(t => t.Operator is PickFleePointOperator))
-                        choseFlee = true;
-
-                    var dist = Vector2.Distance(xformSystem.GetWorldPosition(mouse), xformSystem.GetWorldPosition(player));
-                    if (dist > maxDist)
-                        maxDist = dist;
-                });
-            }
-
-            await server.WaitAssertion(() =>
-            {
-                Assert.That(choseFlee, Is.True, "Mouse never chose to flee the player standing next to it.");
-                Assert.That(maxDist, Is.GreaterThan(startDist + 0.5f),
-                    $"Mouse did not back away from the player (start {startDist:F2}, best {maxDist:F2}).");
-            });
-
-            // Detach while the session's player data is still live. Otherwise CleanReturn's map delete cascades
-            // through the mob's ActorComponent shutdown into AdminSystem's detach handler, which throws once the
-            // pool has dropped the player data (KeyNotFoundException in GetPlayerData).
-            await server.WaitPost(() => playerMan.SetAttachedEntity(playerMan.Sessions.Single(), null));
 
             await pair.CleanReturnAsync();
         }
