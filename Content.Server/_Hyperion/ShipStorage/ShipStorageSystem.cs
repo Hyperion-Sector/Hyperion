@@ -244,14 +244,11 @@ public sealed partial class ShipStorageSystem : EntitySystem
     /// </summary>
     public async Task<(ShipStorageResult Result, Guid? ShipId)> TryStoreShip(EntityUid gridUid, Guid ownerUserId)
     {
-        // Organics gate (RFC store flow): reuse the NF FoundOrganics predicate as-is
-        // rather than duplicating it. It trips only on player sessions / live minds,
-        // so mindless pets pass and persist. Runs before any serialize/DB work so a
-        // refusal leaves the world untouched.
+        // mobQuery/xformQuery feed the commit-time organics re-check further down (the FoundOrganics
+        // race guard that catches a mind BOARDING during the DB await); the up-front occupant
+        // handling below has its own mind walk.
         var mobQuery = GetEntityQuery<MobStateComponent>();
         var xformQuery = GetEntityQuery<TransformComponent>();
-        if (_shipyard.FoundOrganics(gridUid, mobQuery, xformQuery) is not null)
-            return (ShipStorageResult.OrganicsAboard, null);
 
         // Hazard gate (RFC store flow): "no aboard hazard (armed nuke/active
         // countdown/singularity)?" — runtime countdowns are [DataField]s that would
@@ -259,8 +256,21 @@ public sealed partial class ShipStorageSystem : EntitySystem
         // an armed ship. World-wide queries (not a grid-child walk) since hazards
         // are rare; Transform.GridUid follows the parent chain through container
         // nesting, so a hazard stashed inside a crate on the ship still trips this.
+        // Checked before the occupant eject below (no mutation) so we don't move anyone
+        // for a store we're about to refuse for a hazard.
         if (HasHazardAboard(gridUid))
             return (ShipStorageResult.HazardAboard, null);
+
+        // Loose-occupant handling (RFC store flow, revised — see ShipStorageSystem.Occupants.cs):
+        // loose living mobs (players, driven ghost-role critters, animals, corpses) are set down on
+        // the docked station instead of riding the blob — a mind must NEVER be serialized, and a
+        // living mob doesn't round-trip the serializer cleanly. Caged/contained mobs are left as
+        // cargo. Returns false — refuse, nothing moved — when a live mind can't be relocated: aboard
+        // an undocked ship, or confined in a container / occupied AI core. Runs BEFORE the undock and
+        // the sidecar/strip PREP (ejectees must not collect sidecars, and the dock must still be live
+        // to find the station).
+        if (!TryEjectLooseOccupants(gridUid))
+            return (ShipStorageResult.OrganicsAboard, null);
 
         var shipId = ResolveOrMintShipId(gridUid);
 

@@ -8,6 +8,9 @@ using System.Threading.Tasks;
 using Content.Server._NF.SectorServices;
 using Content.Server._NF.ShuttleRecords;
 using Content.Server.Gravity;
+using Content.Server.NPC;
+using Content.Server.NPC.HTN;
+using Content.Server.NPC.Systems;
 using Content.Server.Power.EntitySystems;
 using Content.Server._NF.Station.Components;
 using Content.Server.Shuttles.Components;
@@ -21,9 +24,11 @@ using Content.Shared._NF.ShuttleRecords;
 using Content.Shared.Damage;
 using Content.Shared.FixedPoint;
 using Content.Shared.Maps;
+using Content.Shared.Mind.Components;
 using Content.Shared.Station.Components;
 using Robust.Server.Player;
 using Robust.Shared.GameObjects;
+using Robust.Shared.Map;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 
@@ -45,6 +50,7 @@ public sealed partial class ShipStorageSystem
     [Dependency] private readonly IPrototypeManager _protoMan = default!;
     [Dependency] private readonly ShuttleRecordsSystem _shuttleRecords = default!;
     [Dependency] private readonly SectorServiceSystem _sectorService = default!;
+    [Dependency] private readonly NPCSystem _npc = default!;
 
     /// <summary>
     /// Retrieves the ship identified by <paramref name="shipId"/> for
@@ -210,6 +216,14 @@ public sealed partial class ShipStorageSystem
                             RaiseLocalEvent(genUid, ref activated);
                         }
 
+                        // Re-wake HTN NPCs (derived MapInit-gated state, same class as the
+                        // gravity re-fire above): autopilot is an HTNComponent on the shuttle
+                        // console, and ship turrets/drones are HTN too. Their ActiveNPCComponent +
+                        // blackboard Owner are installed only by OnNPCMapInit (MapInitEvent), which
+                        // retrieve deliberately never fires — so a reborn ship's autopilot never
+                        // plans or steers. Re-run the per-NPC wake here.
+                        RewakeNpcs(grid.Value);
+
                         RehydrateDamage(grid.Value);
 
                         // Repair baseline: derived state, stripped at store (Cycle 3);
@@ -292,6 +306,39 @@ public sealed partial class ShipStorageSystem
             var damage = new DamageSpecifier { DamageDict = new Dictionary<string, FixedPoint2>(sidecar.DamageDict) };
             _damageable.SetDamage(uid, damageable, damage);
             RemComp<DamageSidecarComponent>(uid);
+        }
+    }
+
+    /// <summary>
+    /// Re-activates HTN NPCs on a freshly loaded grid, mirroring
+    /// <c>NPCSystem.OnNPCMapInit</c> (re-seed the blackboard <c>Owner</c> to the reloaded
+    /// uid, then <c>WakeNPC</c> so <c>ActiveNPCComponent</c> is re-established). Retrieve
+    /// loads onto the already-initialized shipyard map and never raises
+    /// <see cref="MapInitEvent"/>, so that hook — the sole installer of the wake + Owner —
+    /// never fires and the shuttle console's autopilot (an <see cref="HTNComponent"/>)
+    /// stays dead. Ship-mounted turrets/drones are HTN too and rehydrate the same way.
+    /// The player's pre-store autopilot destination is dropped: a stored ship is at rest
+    /// and must not resume flying to a now-stale point on retrieve.
+    /// </summary>
+    private void RewakeNpcs(EntityUid gridUid)
+    {
+        var query = AllEntityQuery<HTNComponent, TransformComponent>();
+        while (query.MoveNext(out var uid, out var htn, out var xform))
+        {
+            if (xform.GridUid != gridUid)
+                continue;
+
+            // A minded HTN (player-piloted mob) shouldn't survive the store organics gate, but
+            // guard anyway — OnPlayerNPCDetach refuses to wake minded NPCs, so we match that.
+            if (TryComp<MindContainerComponent>(uid, out var mind) && mind.HasMind)
+                continue;
+
+            htn.Blackboard.SetValue(NPCBlackboard.Owner, uid);
+
+            if (TryComp<ShuttleConsoleComponent>(uid, out var console))
+                htn.Blackboard.Remove<EntityCoordinates>(console.AutopilotTargetKey);
+
+            _npc.WakeNPC(uid, htn);
         }
     }
 

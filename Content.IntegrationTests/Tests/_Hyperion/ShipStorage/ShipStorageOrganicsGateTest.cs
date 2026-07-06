@@ -18,9 +18,10 @@ namespace Content.IntegrationTests.Tests._Hyperion.ShipStorage
     /// Cycle 2a of ship persistence: pins the ORGANICS store gate. A grid carrying a
     /// mind-bearing, living mob must be REFUSED with <see cref="ShipStorageResult.OrganicsAboard"/>.
     /// The refusal has to leave the world untouched: the live grid stays alive and no
-    /// blob revision is filed in the DB. FoundOrganics (reused from the NF shipyard) trips
-    /// on live minds even without a player session, so a MindSystem-created mind transferred
-    /// onto a spawned mob is enough to exercise the gate.
+    /// blob revision is filed in the DB. Live minds are normally EJECTED to the docked station
+    /// rather than refused, but this grid is undocked — there is nowhere to set the mob down — so
+    /// TryEjectMindedOccupants refuses instead (never shipping a mind in the blob). A MindSystem-
+    /// created mind transferred onto a spawned mob is enough to exercise that path without a session.
     /// </summary>
     [TestFixture]
     public sealed class ShipStorageOrganicsGateTest
