@@ -1,0 +1,237 @@
+# Hyperion: overengineered mouse brain. A mouse is prey, so fear preempts everything.
+# Priority order (HTN takes the first branch whose preconditions pass):
+#   1. FleeCompound          - a living, visible predator inside FearRadius -> bolt to cover, sound alarm.
+#   2. FleePlayerCompound    - a living, visible player inside the (shorter) PlayerFearRadius -> same, but
+#                              mice tolerate people closer than predators before bolting.
+#   3. AlarmedScurryCompound - startled by a neighbour's panic -> scurry even without seeing a threat.
+#   4. MouseForageCompound   - peckish/thirsty -> go eat/drink (opportunistic, not just when starving).
+#   5. ReturnHomeCompound    - calm and far from the nest -> drift back toward the home tile.
+#   6. IdleCompound          - skittish wander (tuned via the mouse's blackboard: short hops, brief pauses).
+
+- type: htnCompound
+  id: MouseBrainCompound
+  branches:
+    - tasks:
+        - !type:HTNCompoundTask
+          task: FleeCompound
+    - tasks:
+        - !type:HTNCompoundTask
+          task: FleePlayerCompound
+    - tasks:
+        - !type:HTNCompoundTask
+          task: AlarmedScurryCompound
+    - tasks:
+        - !type:HTNCompoundTask
+          task: MouseForageCompound
+    - tasks:
+        - !type:HTNCompoundTask
+          task: ReturnHomeCompound
+    - tasks:
+        - !type:HTNCompoundTask
+          task: IdleCompound
+
+# See the scariest nearby threat; if it is close enough to scare us, sprint to a point away from it that
+# it can't easily follow onto, and sound the alarm so the rest of the nest bolts too.
+- type: htnCompound
+  id: FleeCompound
+  branches:
+    - tasks:
+        # Closest living, visible hostile -> Target.
+        - !type:HTNPrimitiveTask
+          operator: !type:UtilityOperator
+            proto: NearbyThreats
+
+        # Only flee if the threat is inside our panic distance, then pick a flee point the predator can't
+        # reach (under a table, past a door a mouse fits through but a cat can't) and that hugs cover.
+        - !type:HTNPrimitiveTask
+          preconditions:
+            - !type:TargetInRangePrecondition
+              targetKey: Target
+              rangeKey: FearRadius
+          operator: !type:PickFleePointOperator
+            threatKey: Target
+            rangeKey: FleeRange
+            coverWeight: 2
+            wallHugWeight: 0.5
+
+        # A predator this close -> alarm the nest.
+        - !type:HTNPrimitiveTask
+          operator: !type:RaiseAlarmOperator
+
+        # Bolt to the chosen flee point. Re-uses the path PickFleePointOperator already found.
+        - !type:HTNPrimitiveTask
+          operator: !type:MoveToOperator
+            pathfindInPlanning: false
+            removeKeyOnFinish: true
+            targetKey: TargetCoordinates
+
+# Same as fleeing a predator, but for players and at a shorter trigger distance: a mouse lets a person get
+# closer (PlayerFearRadius) than a cat before it bolts.
+- type: htnCompound
+  id: FleePlayerCompound
+  branches:
+    - tasks:
+        - !type:HTNPrimitiveTask
+          operator: !type:UtilityOperator
+            proto: NearbyPlayers
+
+        - !type:HTNPrimitiveTask
+          preconditions:
+            - !type:TargetInRangePrecondition
+              targetKey: Target
+              rangeKey: PlayerFearRadius
+          operator: !type:PickFleePointOperator
+            threatKey: Target
+            rangeKey: FleeRange
+            coverWeight: 2
+            wallHugWeight: 0.5
+
+        - !type:HTNPrimitiveTask
+          operator: !type:RaiseAlarmOperator
+
+        - !type:HTNPrimitiveTask
+          operator: !type:MoveToOperator
+            pathfindInPlanning: false
+            removeKeyOnFinish: true
+            targetKey: TargetCoordinates
+
+# Startled by a fleeing neighbour: scurry to a random far spot and keep the alarm spreading, even with no
+# threat of our own in sight. This is what makes a whole nest burst outward when one mouse sees a cat.
+- type: htnCompound
+  id: AlarmedScurryCompound
+  branches:
+    - preconditions:
+        - !type:StartledPrecondition
+        - !type:BuckledPrecondition
+          isBuckled: false
+        - !type:PulledPrecondition
+          isPulled: false
+      tasks:
+        - !type:HTNPrimitiveTask
+          operator: !type:RaiseAlarmOperator
+
+        - !type:HTNPrimitiveTask
+          operator: !type:PickAccessibleOperator
+            rangeKey: FleeRange
+
+        - !type:HTNPrimitiveTask
+          operator: !type:MoveToOperator
+            pathfindInPlanning: false
+            removeKeyOnFinish: true
+            targetKey: TargetCoordinates
+
+# Opportunistic foraging: identical to upstream FoodCompound but triggers while merely Peckish/Thirsty, so
+# mice are always nosing around for crumbs rather than waiting until they starve.
+- type: htnCompound
+  id: MouseForageCompound
+  branches:
+    - tasks:
+        - !type:HTNPrimitiveTask
+          preconditions:
+            - !type:HungryPrecondition
+              minHungerState: Peckish
+          operator: !type:UtilityOperator
+            proto: NearbyFood
+
+        - !type:HTNPrimitiveTask
+          operator: !type:MoveToOperator
+            pathfindInPlanning: true
+            removeKeyOnFinish: false
+            targetKey: TargetCoordinates
+            pathfindKey: TargetPathfind
+            rangeKey: MeleeRange
+
+        - !type:HTNPrimitiveTask
+          preconditions:
+            - !type:KeyExistsPrecondition
+              key: Target
+          operator: !type:AltInteractOperator
+
+        - !type:HTNPrimitiveTask
+          preconditions:
+            - !type:KeyExistsPrecondition
+              key: IdleTime
+          operator: !type:WaitOperator
+            key: IdleTime
+
+    - tasks:
+        - !type:HTNPrimitiveTask
+          preconditions:
+            - !type:ThirstyPrecondition
+              minThirstState: Thirsty
+          operator: !type:UtilityOperator
+            proto: NearbyDrink
+
+        - !type:HTNPrimitiveTask
+          operator: !type:MoveToOperator
+            pathfindInPlanning: true
+            removeKeyOnFinish: false
+            targetKey: TargetCoordinates
+            pathfindKey: TargetPathfind
+            rangeKey: MeleeRange
+
+        - !type:HTNPrimitiveTask
+          preconditions:
+            - !type:KeyExistsPrecondition
+              key: Target
+          operator: !type:AltInteractOperator
+
+        - !type:HTNPrimitiveTask
+          preconditions:
+            - !type:KeyExistsPrecondition
+              key: IdleTime
+          operator: !type:WaitOperator
+            key: IdleTime
+
+# Territory: when there's nothing pressing and we've strayed past HomeRange from the nest, head back. The
+# home tile is stamped into the blackboard at spawn by MouseNestSystem.
+- type: htnCompound
+  id: ReturnHomeCompound
+  branches:
+    - preconditions:
+        - !type:CoordinatesNotInRangePrecondition
+          targetKey: HomeCoordinates
+          rangeKey: HomeRange
+        - !type:BuckledPrecondition
+          isBuckled: false
+        - !type:PulledPrecondition
+          isPulled: false
+      tasks:
+        - !type:HTNPrimitiveTask
+          operator: !type:MoveToOperator
+            pathfindInPlanning: true
+            removeKeyOnFinish: false
+            targetKey: HomeCoordinates
+            rangeKey: HomeRange
+
+# Closest living hostile the mouse can actually see. Faction hostility already flags cats (PetsNT),
+# space hostiles (AllHostile), and wizards as enemies of the Mouse faction.
+- type: utilityQuery
+  id: NearbyThreats
+  query:
+    - !type:NearbyHostilesQuery
+  considerations:
+    - !type:TargetIsAliveCon
+      curve: !type:BoolCurve
+    - !type:TargetDistanceCon
+      curve: !type:PresetCurve
+        preset: TargetDistance
+    - !type:TargetInLOSOrCurrentCon
+      curve: !type:BoolCurve
+
+# Closest living, visible player the mouse can see. ActorComponent ("Actor") marks a client-controlled
+# entity; TargetIsAliveCon drops ghosts and corpses so only living people spook the mouse.
+- type: utilityQuery
+  id: NearbyPlayers
+  query:
+    - !type:ComponentQuery
+      components:
+        - type: Actor
+  considerations:
+    - !type:TargetIsAliveCon
+      curve: !type:BoolCurve
+    - !type:TargetDistanceCon
+      curve: !type:PresetCurve
+        preset: TargetDistance
+    - !type:TargetInLOSOrCurrentCon
+      curve: !type:BoolCurve
