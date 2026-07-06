@@ -1805,9 +1805,33 @@
     factions:
     - Mouse
   - type: HTN
-    constantlyReplan: false
+    # Hyperion: replan promptly so fear preempts foraging/idling the instant a threat appears.
+    constantlyReplan: true
     rootTask:
-      task: MouseCompound
+      task: MouseBrainCompound
+    blackboard:
+      # Hyperion: prey-behaviour knobs. FearRadius = how close a threat gets before we bolt;
+      # FleeRange = how far we look for a place to bolt to. Idle values keep the wander short and jumpy.
+      FearRadius: !type:Single
+        6
+      # Mice tolerate people closer than predators: they only bolt from a player within 2 tiles.
+      PlayerFearRadius: !type:Single
+        2
+      FleeRange: !type:Single
+        8
+      IdleRange: !type:Single
+        3
+      MinimumIdleTime: !type:Single
+        0.5
+      MaximumIdleTime: !type:Single
+        2
+      # How far the mouse will stray from its nest before drifting back.
+      HomeRange: !type:Single
+        4
+  # Hyperion: prey group-panic. One mouse fleeing startles the rest of the nest into scurrying.
+  - type: Skittish
+  # Hyperion: keeps a home tile, stamped at spawn, so the mouse holds a territory instead of drifting.
+  - type: MouseNest
   - type: Physics
   - type: FaxableObject
     insertingState: inserting_mouse
