@@ -475,6 +475,11 @@ namespace Content.IntegrationTests.Tests._Hyperion.NPC
                     $"Mouse did not back away from the player (start {startDist:F2}, best {maxDist:F2}).");
             });
 
+            // Detach while the session's player data is still live. Otherwise CleanReturn's map delete cascades
+            // through the mob's ActorComponent shutdown into AdminSystem's detach handler, which throws once the
+            // pool has dropped the player data (KeyNotFoundException in GetPlayerData).
+            await server.WaitPost(() => playerMan.SetAttachedEntity(playerMan.Sessions.Single(), null));
+
             await pair.CleanReturnAsync();
         }
     }
