@@ -100,7 +100,8 @@ shipyard-console-engine-NFR = NFR
 
 # Hyperion: drydock tab (ship storage)
 shipyard-console-store-not-owner = This ship is not registered to your account.
-shipyard-console-store-organics = All crew must disembark before storage.
+shipyard-console-store-organics = Could not clear everyone to the dock. Dock the ship, and remove any active AI aboard.
+ship-storage-ejected-occupant = You were moved to the dock as the ship was placed in storage.
 shipyard-console-store-hazard = Active hazards detected aboard; storage refused.
 shipyard-console-store-failed = Ship storage failed. Contact your drydock operator.
 shipyard-console-store-success = Ship stored in drydock.
