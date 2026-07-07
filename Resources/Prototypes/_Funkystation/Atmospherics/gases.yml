@@ -34,7 +34,7 @@
   molarMass: 8
   color: b76f0e
   reagent: Nitrium
-  pricePerMole: 45 #Mono 3<45 this looks fucked but you can make 9x the frezon with the same trit and profit harder
+  pricePerMole: 20 # Hyperion: 45<20 first-pass nitrium nerf (Mono's 45 ran ~9x frezon/trit); ~4x remains, full fix pends the burn-constant math
 
 - type: gas
   id: 12
