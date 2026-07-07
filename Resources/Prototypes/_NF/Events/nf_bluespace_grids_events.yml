@@ -20,8 +20,12 @@
       grid: !type:GridSpawnGroup
         nameLoc:
         - station-event-bluespace-name-SyndicateWeaponsCache
-        minimumDistance: 1500
-        maximumDistance: 5000 # Mono
+        # Hyperion: bluespace Layer 0 (worldgen-v1 Part 4). Deep loot (vaults +
+        # weapons cache) routes to the Wall's intake edge (Gap 1 + intake face),
+        # guard-the-loot. Kept off the dense core so FTL's clear-space search
+        # still lands; near the hub side so it's reachable pre-fissure.
+        minimumDistance: 9000
+        maximumDistance: 12000
         addComponents:
         - type: Gravity
           enabled: true
@@ -62,8 +66,12 @@
       grid: !type:GridSpawnGroup
         nameLoc:
         - station-event-bluespace-name-SecureNTVault
-        minimumDistance: 1500
-        maximumDistance: 5000 # Mono
+        # Hyperion: bluespace Layer 0 (worldgen-v1 Part 4). Deep loot (vaults +
+        # weapons cache) routes to the Wall's intake edge (Gap 1 + intake face),
+        # guard-the-loot. Kept off the dense core so FTL's clear-space search
+        # still lands; near the hub side so it's reachable pre-fissure.
+        minimumDistance: 9000
+        maximumDistance: 12000
         addComponents:
         - type: Gravity
           enabled: true
@@ -103,8 +111,12 @@
       grid: !type:GridSpawnGroup
         nameLoc:
         - station-event-bluespace-name-SecureNTVault
-        minimumDistance: 1500
-        maximumDistance: 5000 # Mono
+        # Hyperion: bluespace Layer 0 (worldgen-v1 Part 4). Deep loot (vaults +
+        # weapons cache) routes to the Wall's intake edge (Gap 1 + intake face),
+        # guard-the-loot. Kept off the dense core so FTL's clear-space search
+        # still lands; near the hub side so it's reachable pre-fissure.
+        minimumDistance: 9000
+        maximumDistance: 12000
         addComponents:
         - type: Gravity
           enabled: true

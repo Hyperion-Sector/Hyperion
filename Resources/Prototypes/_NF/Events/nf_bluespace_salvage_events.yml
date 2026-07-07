@@ -21,8 +21,10 @@
         nameDatasetType: Nanotrasen # they're shuttles
         minCount: 2
         maxCount: 3
-        minimumDistance: 1000
-        maximumDistance: 2000
+        # Hyperion: bluespace Layer 0 (worldgen-v1 Part 4). Scrap salvage is mid-tier,
+        # out into the reef but inner of the Wall so it stays reachable pre-fissure.
+        minimumDistance: 3000
+        maximumDistance: 9000
         addComponents:
         - type: IFF
           color: "#AAAAAA"
