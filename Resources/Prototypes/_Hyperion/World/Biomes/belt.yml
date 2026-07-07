@@ -10,6 +10,8 @@
 # Nothing spawns past 40k (the Fringe is the terminal band; beyond is void).
 
 # region Inner apron (0-3k): sparse, open, small rock. The Shallows.
+# Deliberately clean: this is the safe starter approach to the hub, density
+# only picks up at the reef (3k+). Tune via randomCancelChance if still busy.
 - type: spaceBiome
   id: HyperionBeltApron
   parent: NFBiomeBase
@@ -17,8 +19,8 @@
   distanceRange: 0, 3000
   chunkComponents:
   - type: DebrisFeaturePlacerController
-    densityNoiseChannel: DensityRare
-    randomCancelChance: 0.4
+    densityNoiseChannel: DensityVeryRare
+    randomCancelChance: 0.85
     safetyZoneRadius: 24
   - type: SimpleDebrisSelector
     debrisTable:
@@ -83,7 +85,7 @@
   chunkComponents:
   - type: DebrisFeaturePlacerController
     densityNoiseChannel: DensityGap
-    randomCancelChance: 0.3
+    randomCancelChance: 0.65 # the sampler floors at 1 rock/chunk; cancel is what makes this a lane
     safetyZoneRadius: 24
   - type: SimpleDebrisSelector
     debrisTable:
@@ -97,7 +99,9 @@
       orGroup: wreck
 
 # region The Wall (9.5k-19.5k): the dense maze + salvage mill.
-# Massive/Gigantic rock near-touching; fissures (code, later) cut crossings.
+# Fissures (code, later) cut crossings. Table is a full size ladder: small
+# fillers for texture, Massive+ bulk, Titanic/Colossal anchors (Hyperion
+# protos) so the maze has genuinely huge rock in it.
 - type: spaceBiome
   id: HyperionBeltWall
   parent: NFBiomeBase
@@ -110,23 +114,44 @@
     safetyZoneRadius: 14
   - type: SimpleDebrisSelector
     debrisTable:
+    # Fillers (rubble around the big ones)
+    - id: NFAsteroidDebrisLarge
+      prob: 0.8
+      orGroup: debris
+    - id: NFAsteroidDebrisExtraLarge
+      prob: 0.8
+      orGroup: debris
+    - id: NFAsteroidDebrisHuge
+      prob: 0.6
+      orGroup: debris
+    - id: NFAsteroidDebrisExtraHuge
+      prob: 0.5
+      orGroup: debris
     - id: NFAsteroidDebrisEnormous
       prob: 0.5
       orGroup: debris
     - id: NFAsteroidDebrisExtraEnormous
-      prob: 0.8
+      prob: 0.5
       orGroup: debris
+    # Bulk
     - id: NFAsteroidDebrisMassive
-      prob: 1.5
+      prob: 1.2
       orGroup: debris
     - id: NFAsteroidDebrisExtraMassive
-      prob: 1.5
+      prob: 1.2
       orGroup: debris
     - id: NFAsteroidDebrisGigantic
       prob: 1.0
       orGroup: debris
     - id: NFAsteroidDebrisExtraGigantic
+      prob: 0.8
+      orGroup: debris
+    # Anchors
+    - id: HyperionAsteroidDebrisTitanic
       prob: 0.5
+      orGroup: debris
+    - id: HyperionAsteroidDebrisColossal
+      prob: 0.3
       orGroup: debris
   - type: NoiseDrivenDebrisSelector
     debrisTable:
@@ -149,7 +174,7 @@
   chunkComponents:
   - type: DebrisFeaturePlacerController
     densityNoiseChannel: DensityGap
-    randomCancelChance: 0.3
+    randomCancelChance: 0.55 # slightly busier than the Low Lane: this is the debris eddy
     safetyZoneRadius: 24
   - type: SimpleDebrisSelector
     debrisTable:
@@ -233,7 +258,7 @@
       prob: 1
       orGroup: wreck
 
-# region Fringe taper (37k-40k): the Fade. Terminal band; void past 40k.
+# region Fringe taper (37k-40k): the Fade. The last band with rock in it.
 - type: spaceBiome
   id: HyperionBeltFringe
   parent: NFBiomeBase
@@ -242,11 +267,34 @@
   chunkComponents:
   - type: DebrisFeaturePlacerController
     densityNoiseChannel: DensityFringe
-    randomCancelChance: 0.5
+    randomCancelChance: 0.75 # the fade: ~1 rock per 4 chunks
     safetyZoneRadius: 24
   - type: SimpleDebrisSelector
     debrisTable:
     - id: NFAsteroidIceDebrisSmall
+      prob: 1
+      orGroup: debris
+  - type: NoiseDrivenDebrisSelector # required table (NFBiomeBase provides no default)
+    debrisTable:
+    - id: NFWreckDebrisSmall
+      prob: 1
+      orGroup: wreck
+
+# region Terminal void (40k+): nothing spawns out here.
+# Without this, chunks past the last band log "Biome selection ran out of
+# biomes" per chunk. DensityZero aborts debris placement before it starts;
+# the selector tables are dead weight required by the NFBiomeBase parent.
+- type: spaceBiome
+  id: HyperionBeltVoid
+  parent: NFBiomeBase
+  priority: 92
+  distanceRange: 40000, 9999999
+  chunkComponents:
+  - type: DebrisFeaturePlacerController
+    densityNoiseChannel: DensityZero
+  - type: SimpleDebrisSelector
+    debrisTable:
+    - id: NFAsteroidDebrisSmall
       prob: 1
       orGroup: debris
   - type: NoiseDrivenDebrisSelector # required table (NFBiomeBase provides no default)

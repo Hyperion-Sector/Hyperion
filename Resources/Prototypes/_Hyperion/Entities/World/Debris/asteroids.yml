@@ -1,0 +1,60 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+# Hyperion mega asteroid sizes for the worldgen-v1 Wall (design repo,
+# worldgen-v1-belt-economy.md Part 1). BlobFloorPlanBuilder's radius is only a
+# sprawl cap; actual bulk comes from floorPlacements (~2x placements in tiles
+# with blobDrawProb 0.5). Stock NF tops out at 324 placements (~600 tiles,
+# ship-sized); these two go well past that so the Wall reads as terrain.
+
+# region Hyperion Sizes
+- type: entity
+  id: HyperionBaseAsteroidTitanic
+  name: asteroid debris titanic
+  categories: [ HideSpawnMenu ]
+  abstract: true
+  components:
+    - type: BlobFloorPlanBuilder
+      floorPlacements: 520
+      radius: 34
+    - type: RandomMetadata
+      nameSeparator: ""
+      nameSegments:
+      - DroneHex
+      - DroneHex
+      - DroneHex
+      - DroneHex
+      - AsteroidDiscoverer
+      - " "
+      - AsteroidDiscovererMajor
+
+- type: entity
+  id: HyperionBaseAsteroidColossal
+  name: asteroid debris colossal
+  categories: [ HideSpawnMenu ]
+  abstract: true
+  components:
+    - type: BlobFloorPlanBuilder
+      floorPlacements: 850
+      radius: 44
+    - type: RandomMetadata
+      nameSeparator: ""
+      nameSegments:
+      - DroneHex
+      - DroneHex
+      - DroneHex
+      - DroneHex
+      - AsteroidDiscoverer
+      - " "
+      - AsteroidDiscovererMajor
+# endregion Hyperion Sizes
+
+# region Hyperion Rock Entities
+- type: entity
+  id: HyperionAsteroidDebrisTitanic
+  parent: [NFBaseAsteroidDebris, NFBaseAsteroidGas, HyperionBaseAsteroidTitanic]
+  categories: [ HideSpawnMenu ]
+
+- type: entity
+  id: HyperionAsteroidDebrisColossal
+  parent: [NFBaseAsteroidDebris, NFBaseAsteroidGas, HyperionBaseAsteroidColossal]
+  categories: [ HideSpawnMenu ]
+# endregion Hyperion Rock Entities

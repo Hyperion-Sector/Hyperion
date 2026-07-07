@@ -1,64 +1,68 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 # Hyperion worldgen-v1 belt density channels.
 #
-# DebrisFeaturePlacerSystem feeds a channel's OUTPUT to the Poisson sampler as
-# the minimum spacing between rock centers (world units, smaller = denser).
-# NoiseChannelPrototype.Evaluate clips the remapped noise BEFORE the output
-# multiplier, so (like the stock Density channel) we clip the common noise
-# middle to a small constant = the dense-pocket spacing, and let the rare tails
-# multiply up into the large-spacing void between clumps. inputMultiplier sets
-# clump size; wider clip band = more of the zone is dense.
-# Numbers are starting points; final density is a visual-tuning target in-game.
+# Mechanics (verified against DebrisFeaturePlacerSystem + PoissonDiskSampler):
+# - Channel output = Poisson MIN SPACING between rock centers, in tiles,
+#   sampled over a 112x112 box per 128-tile chunk. Smaller output = denser.
+# - The sampler ALWAYS emits at least one point per chunk. The only ways below
+#   1 rock/chunk are randomCancelChance, or channel output of exactly 0
+#   (density == 0 aborts the whole chunk).
+# - Evaluate: perlin -> remap [0,1] -> (clip) -> *outputMultiplier + minimum.
+#   No clipping here, so spacing = [minimum, minimum + outputMultiplier],
+#   with FBm values clustering near 0.5.
+# - Noise input is CHUNK coords and FastNoiseLite's base frequency is 0.01,
+#   so base feature size ~= 100 / inputMultiplier chunks; the finest FBm
+#   octave ~= 23 / inputMultiplier chunks. inputMultiplier is the feature-size
+#   knob: bigger = smaller pockets/walls.
 
-# The Wall (9.5k-19.5k): densest zone. clippedValue 10 (< stock 15.258) and a
-# wider clip band so most of the Wall is near-touching Massive/Gigantic rock.
+# The Wall (9.5k-19.5k): maze of big rock. Spacing 15-135, typical ~65-75.
+# Low-noise pockets pack near the collision floor (rock extent +
+# safetyZoneRadius); high-noise thins to the 1/chunk background. Features
+# ~500-2800 tiles: pocket-and-wall structure a capital ship has to thread.
 - type: noiseChannel
   id: DensityPeak
   noiseType: Perlin
   fractalLacunarityByPi: 0.666666666
   remapTo0Through1: true
-  clippingRanges:
-  - 0.35, 0.65
-  clippedValue: 10
-  inputMultiplier: 3
-  outputMultiplier: 5000.0
-  minimum: 0.25
+  inputMultiplier: 6
+  outputMultiplier: 120.0
+  minimum: 15
 
-# Inner reef (3k-9k): clumped boulder fields, ~stock density.
+# Inner reef (3k-9k): busy small/medium boulder fields. Spacing 14-74,
+# typical ~4-10 rocks per chunk. Smaller features than the Wall.
 - type: noiseChannel
   id: DensityReef
   noiseType: Perlin
   fractalLacunarityByPi: 0.666666666
   remapTo0Through1: true
-  clippingRanges:
-  - 0.4, 0.6
-  clippedValue: 15
-  inputMultiplier: 3
-  outputMultiplier: 5000.0
-  minimum: 0.25
+  inputMultiplier: 8
+  outputMultiplier: 60.0
+  minimum: 14
 
-# Gap lanes (ring roads): narrow clip band = rare sparse pockets, mostly void.
+# Gap lanes (ring roads): spacing always > chunk box, so this rides the
+# 1/chunk floor; the band's randomCancelChance does the real thinning.
 - type: noiseChannel
   id: DensityGap
   noiseType: Perlin
   fractalLacunarityByPi: 0.666666666
   remapTo0Through1: true
-  clippingRanges:
-  - 0.47, 0.53
-  clippedValue: 28
-  inputMultiplier: 3
-  outputMultiplier: 5000.0
-  minimum: 0.25
+  inputMultiplier: 1.0
+  outputMultiplier: 100.0
+  minimum: 150
 
-# Fringe taper (37k-40k): the fade. Very narrow clip = almost all void.
+# Fringe taper (37k-40k): same floor-riding trick, thinned harder by cancel.
 - type: noiseChannel
   id: DensityFringe
   noiseType: Perlin
   fractalLacunarityByPi: 0.666666666
   remapTo0Through1: true
-  clippingRanges:
-  - 0.49, 0.51
-  clippedValue: 40
-  inputMultiplier: 3
-  outputMultiplier: 7500.0
-  minimum: 0.25
+  inputMultiplier: 1.0
+  outputMultiplier: 300.0
+  minimum: 200
+
+# Constant zero: density == 0 aborts the chunk entirely. Terminal void band
+# past 40k uses this so out-of-belt chunks spawn nothing.
+- type: noiseChannel
+  id: DensityZero
+  noiseType: Perlin
+  outputMultiplier: 0.0
