@@ -211,7 +211,7 @@ public sealed partial class WorldControllerSystem : EntitySystem
         }
 
         // Hyperion: baseline instrumentation
-        WorldgenMetrics.ResidentChunks.Set(CountComponents<LoadedChunkComponent>());
+        WorldgenMetrics.ResidentChunks.Set(EntityManager.Count<LoadedChunkComponent>());
 
         if (count > 0)
         {
@@ -221,16 +221,6 @@ public sealed partial class WorldControllerSystem : EntitySystem
             if (_debugMetrics) // Hyperion: baseline instrumentation
                 _sawmill.Info($"[baseline] loaded {count} chunks in {timeSpan.TotalMilliseconds:N2}ms; resident={WorldgenMetrics.ResidentChunks.Value}");
         }
-    }
-
-    // Hyperion: baseline instrumentation — cheap 1 Hz component count.
-    private int CountComponents<T>() where T : IComponent
-    {
-        var n = 0;
-        var query = EntityQueryEnumerator<T>();
-        while (query.MoveNext(out _))
-            n++;
-        return n;
     }
 
     /// <summary>
