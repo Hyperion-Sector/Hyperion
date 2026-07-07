@@ -1,0 +1,63 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+# Hyperion worldgen-v1 M-type metal jackpot (design repo, worldgen-v1-belt-
+# economy.md Part 3). Rare pure-metal asteroids (iron-nickel bodies), radar-loud,
+# that make carrying a mining scanner worth it: a metal-rich ore roll (no bare
+# rock, no junk), a distinct bright IFF, and 3x the stock radar detection range
+# so they read as a loud contact from far out. Reuses existing rock sprites and
+# ore walls; no new art.
+
+# region M-type metal roll
+# Iron-dominant (iron-nickel body) + precious + a little uranium; no filler.
+- type: entityTable
+  id: HyperionMTypeMineral
+  table: !type:GroupSelector
+    children:
+    - id: WallRockIron
+      weight: 0.55
+    - id: WallRockGold
+      weight: 0.15
+    - id: WallRockSilver
+      weight: 0.15
+    - id: WallRockUranium
+      weight: 0.1
+    - id: WallRockPlasma
+      weight: 0.05
+
+- type: entity
+  id: HyperionMTypeMineralSoft
+  parent: MarkerBase
+  name: m-type mineral spawner
+  suffix: M-Type
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    layers:
+    - sprite: Structures/Walls/rock.rsi
+      state: rock
+    - state: green
+    - sprite: Objects/Weapons/Melee/pickaxe.rsi
+      state: pickaxe
+  - type: EntityTableSpawner
+    offset: 0
+    table: !type:NestedSelector
+      tableId: HyperionMTypeMineral
+# endregion M-type metal roll
+
+# region M-type asteroid
+- type: entity
+  id: HyperionAsteroidMType
+  parent: [NFBaseAsteroidDebris, NFBaseAsteroidMassive]
+  categories: [ HideSpawnMenu ]
+  components:
+  # Override the generic rock populator with the metal-rich roll.
+  - type: SimpleFloorPlanPopulator
+    entries:
+      FloorAsteroidSand:
+      - id: HyperionMTypeMineralSoft
+        orGroup: rock
+        prob: 1.0
+  - type: IFF
+    color: "#ffd24d" # bright gold: stands out from the material rocks on radar
+  - type: DetectedAtRangeMultiplier
+    visualBias: 3072 # 3x stock (1024); reads as a loud contact from far out
+# endregion M-type asteroid

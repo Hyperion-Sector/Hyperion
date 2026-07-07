@@ -73,6 +73,10 @@
     - id: NFAsteroidSandDebrisLarge
       prob: 0.6
       orGroup: debris
+    # Hyperion: M-type metal jackpot (Part 3) - rarer out here than the Wall.
+    - id: HyperionAsteroidMType
+      prob: 0.03
+      orGroup: debris
   - type: NoiseDrivenDebrisSelector
     debrisTable:
     - id: NFWreckDebrisSmall
@@ -171,6 +175,11 @@
       orGroup: debris
     - id: HyperionAsteroidBasaltDebrisColossal
       prob: 0.3
+      orGroup: debris
+    # Hyperion: M-type metal jackpot (Part 3) - rare radar-loud pure-metal rock,
+    # the payoff that makes a mining scanner worth carrying. Densest at the Wall.
+    - id: HyperionAsteroidMType
+      prob: 0.05
       orGroup: debris
   - type: NoiseDrivenDebrisSelector
     debrisTable:
