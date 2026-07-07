@@ -9,6 +9,11 @@ using Robust.Server.GameObjects;
 using Robust.Shared.Map;
 using Robust.Shared.Physics.Systems;
 using Robust.Shared.Timing;
+// Hyperion: phase-0 baseline instrumentation
+using Content.Server._Hyperion.Worldgen;
+using Content.Shared.CCVar;
+using Prometheus;
+using Robust.Shared.Configuration;
 
 // Mono maint note - this system no longer exists upstream and // Mono comments are not a requirement for that reason
 namespace Content.Server.Worldgen.Systems;
@@ -23,6 +28,7 @@ public sealed partial class WorldControllerSystem : EntitySystem
     [Dependency] private ILogManager _logManager = default!;
     [Dependency] private MetaDataSystem _metaData = default!;
     [Dependency] private SharedPhysicsSystem _physics = default!;
+    [Dependency] private readonly IConfigurationManager _cfg = default!; // Hyperion: baseline instrumentation
 
     // <Mono>
     private const int PlayerLoadRadius = 2;
@@ -33,6 +39,9 @@ public sealed partial class WorldControllerSystem : EntitySystem
 
     private ISawmill _sawmill = default!;
 
+    // Hyperion: baseline instrumentation toggle
+    private bool _debugMetrics;
+
     /// <inheritdoc />
     public override void Initialize()
     {
@@ -40,6 +49,9 @@ public sealed partial class WorldControllerSystem : EntitySystem
         SubscribeLocalEvent<LoadedChunkComponent, ComponentStartup>(OnChunkLoadedCore);
         SubscribeLocalEvent<LoadedChunkComponent, ComponentShutdown>(OnChunkUnloadedCore);
         SubscribeLocalEvent<WorldChunkComponent, ComponentShutdown>(OnChunkShutdown);
+
+        // Hyperion: baseline instrumentation
+        Subs.CVar(_cfg, CCVars.WorldgenDebugMetrics, v => _debugMetrics = v, true);
     }
 
     /// <summary>
@@ -177,29 +189,48 @@ public sealed partial class WorldControllerSystem : EntitySystem
         var count = 0;
         var loadedQuery = GetEntityQuery<LoadedChunkComponent>();
         var controllerQuery = GetEntityQuery<WorldControllerComponent>();
-        foreach (var (map, chunks) in _chunksToLoad)
+        using (WorldgenMetrics.ChunkLoadBatch.NewTimer()) // Hyperion: baseline instrumentation
         {
-            var controller = controllerQuery.GetComponent(map);
-            foreach (var (chunk, loaders) in chunks)
+            foreach (var (map, chunks) in _chunksToLoad)
             {
-                var ent = GetOrCreateChunk(chunk, map, controller); // Ensure everything loads.
-                LoadedChunkComponent? c = null;
-                if (ent is not null && !loadedQuery.TryGetComponent(ent.Value, out c))
+                var controller = controllerQuery.GetComponent(map);
+                foreach (var (chunk, loaders) in chunks)
                 {
-                    c = AddComp<LoadedChunkComponent>(ent.Value);
-                    count += 1;
-                }
+                    var ent = GetOrCreateChunk(chunk, map, controller); // Ensure everything loads.
+                    LoadedChunkComponent? c = null;
+                    if (ent is not null && !loadedQuery.TryGetComponent(ent.Value, out c))
+                    {
+                        c = AddComp<LoadedChunkComponent>(ent.Value);
+                        count += 1;
+                    }
 
-                if (c is not null)
-                    c.Loaders = loaders;
+                    if (c is not null)
+                        c.Loaders = loaders;
+                }
             }
         }
 
+        // Hyperion: baseline instrumentation
+        WorldgenMetrics.ResidentChunks.Set(CountComponents<LoadedChunkComponent>());
+
         if (count > 0)
         {
+            WorldgenMetrics.ChunksLoaded.Inc(count); // Hyperion: baseline instrumentation
             var timeSpan = _gameTiming.RealTime - startTime;
             _sawmill.Debug($"Loaded {count} chunks in {timeSpan.TotalMilliseconds:N2}ms.");
+            if (_debugMetrics) // Hyperion: baseline instrumentation
+                _sawmill.Info($"[baseline] loaded {count} chunks in {timeSpan.TotalMilliseconds:N2}ms; resident={WorldgenMetrics.ResidentChunks.Value}");
         }
+    }
+
+    // Hyperion: baseline instrumentation — cheap 1 Hz component count.
+    private int CountComponents<T>() where T : IComponent
+    {
+        var n = 0;
+        var query = EntityQueryEnumerator<T>();
+        while (query.MoveNext(out _))
+            n++;
+        return n;
     }
 
     /// <summary>
