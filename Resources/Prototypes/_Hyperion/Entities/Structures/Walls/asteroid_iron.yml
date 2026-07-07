@@ -1,0 +1,30 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+# Hyperion worldgen-v1 iron backbone (design repo, worldgen-v1-belt-economy.md
+# Part 5b). The NF mineral tables omit iron entirely, yet OreSteel is the game's
+# top-weight ore (RandomOreDistributionStandard, weight 10) - the belt just never
+# taps it. These add iron-bearing rock to the generic + basalt bulk, reusing the
+# inherited rock/basalt sprites and the existing NFOreSteel ore (no new art), so
+# steel, the #1 build material, finally has a belt source. Iron asteroids read as
+# plain grey rock, which is realistic; the mining scanner still flags them.
+
+# region Hyperion Iron Ore Walls
+- type: entity
+  id: WallRockIron
+  parent: NFWallRockOre
+  suffix: Iron
+  description: An ore vein streaked with iron.
+  components:
+  - type: OreVein
+    oreChance: 1.0
+    currentOre: NFOreSteel
+
+- type: entity
+  id: WallRockBasaltIron
+  parent: NFWallRockBasaltOre
+  suffix: Iron
+  description: An ore vein streaked with iron.
+  components:
+  - type: OreVein
+    oreChance: 1.0
+    currentOre: NFOreSteel
+# endregion Hyperion Iron Ore Walls

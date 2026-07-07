@@ -4,8 +4,13 @@
   id: NFRockMineralSoft
   table: !type:GroupSelector
     children:
+    # Hyperion: iron backbone (Part 5b). Iron is the belt's commodity backbone
+    # (OreSteel is the game's top-weight ore); bare rock yielded nothing. Most of
+    # the generic bulk now yields iron; bare rock trimmed 0.4 -> 0.1 for texture.
+    - id: WallRockIron
+      weight: 0.35
     - id: WallRock
-      weight: 0.4
+      weight: 0.1
     - id: WallRockCoal
       weight: 0.1
     - id: WallRockTin
@@ -432,8 +437,12 @@
   id: NFBasaltMineralSoft
   table: !type:GroupSelector
     children:
+    # Hyperion: iron backbone (Part 5b). Basalt is iron + fuels (plasma/uranium/
+    # bananium below); bare rock trimmed 0.55 -> 0.15 so the Wall bulk yields iron.
+    - id: WallRockBasaltIron
+      weight: 0.35
     - id: WallRockBasalt
-      weight: 0.55
+      weight: 0.15
     - id: WallRockBasaltCoal
       weight: 0.02
     - id: WallRockBasaltTin
