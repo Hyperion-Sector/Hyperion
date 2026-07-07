@@ -23,16 +23,18 @@
       weight: 0.01
     - id: WallRockSilver
       weight: 0.04
+    # Hyperion: identity re-zone (Part 5b). Generic rock is a commodity
+    # (iron/coal/quartz/tin); the fuels are Wall-only now, trace here.
     - id: WallRockPlasma
-      weight: 0.07
+      weight: 0.005
     - id: WallRockUranium
-      weight: 0.04
+      weight: 0.005
     - id: WallRockLithium # Mono
-      weight: 0.04
+      weight: 0.005
     - id: WallRockCopper # Mono
-      weight: 0.06
-    - id: WallRockBananium
       weight: 0.01
+    - id: WallRockBananium
+      weight: 0.003
     - id: WallRockArtifactFragment
       weight: 0.01
     - id: WallRockDiamond
@@ -151,8 +153,9 @@
     children:
     - id: WallRockSnow
       weight: 0.5
+    # Hyperion: identity re-zone (Part 5b). Ice is a coal + water commodity zone.
     - id: WallRockSnowCoal
-      weight: 0.02
+      weight: 0.08
     - id: WallRockSnowTin
       weight: 0.04
     - id: WallRockSnowQuartz
@@ -163,16 +166,17 @@
       weight: 0.02
     - id: WallRockSnowSilver
       weight: 0.02
+    # Hyperion: identity re-zone (Part 5b). Copper is andesite's, fuels the Wall's.
     - id: WallRockSnowLithium # Mono
-      weight: 0.02
-    - id: WallRockSnowCopper # Mono
-      weight: 0.05
-    - id: WallRockSnowPlasma
-      weight: 0.05
-    - id: WallRockSnowUranium
-      weight: 0.01
-    - id: WallRockSnowBananium
       weight: 0.005
+    - id: WallRockSnowCopper # Mono
+      weight: 0.005
+    - id: WallRockSnowPlasma
+      weight: 0.005
+    - id: WallRockSnowUranium
+      weight: 0.003
+    - id: WallRockSnowBananium
+      weight: 0.002
     - id: WallRockSnowArtifactFragment
       weight: 0.04
     - id: WallRockSnowDiamond
@@ -303,20 +307,22 @@
       weight: 0.05
     - id: WallRockAndesiteSalt
       weight: 0.01
+    # Hyperion: identity re-zone (Part 5b). Andesite is porphyry copper:
+    # Cu/Au/Ag headline; lithium is chromite's and fuels are the Wall's, trace here.
     - id: WallRockAndesiteGold
-      weight: 0.01
-    - id: WallRockAndesiteSilver
-      weight: 0.01
-    - id: WallRockAndesiteLithium # Mono
       weight: 0.06
-    - id: WallRockAndesiteCopper # Mono
-      weight: 0.02
-    - id: WallRockAndesitePlasma
-      weight: 0.01
-    - id: WallRockAndesiteUranium
-      weight: 0.01
-    - id: WallRockAndesiteBananium
+    - id: WallRockAndesiteSilver
+      weight: 0.06
+    - id: WallRockAndesiteLithium # Mono
       weight: 0.005
+    - id: WallRockAndesiteCopper # Mono
+      weight: 0.14
+    - id: WallRockAndesitePlasma
+      weight: 0.003
+    - id: WallRockAndesiteUranium
+      weight: 0.003
+    - id: WallRockAndesiteBananium
+      weight: 0.002
     - id: WallRockAndesiteArtifactFragment
       weight: 0.01
     - id: WallRockAndesiteDiamond
@@ -455,16 +461,18 @@
       weight: 0.01
     - id: WallRockBasaltSilver
       weight: 0.03
+    # Hyperion: identity re-zone (Part 5b). Basalt is the fuel rock: plasma/uranium
+    # kept, bananium bumped to farmable-in-Wall; lithium/copper are others', trace.
     - id: WallRockBasaltLithium # Mono
-      weight: 0.01
+      weight: 0.005
     - id: WallRockBasaltCopper # Mono
-      weight: 0.03
+      weight: 0.005
     - id: WallRockBasaltPlasma
       weight: 0.1
     - id: WallRockBasaltUranium
       weight: 0.05
     - id: WallRockBasaltBananium
-      weight: 0.005
+      weight: 0.04
     - id: WallRockBasaltArtifactFragment
       weight: 0.01
     - id: WallRockBasaltDiamond
@@ -595,20 +603,22 @@
       weight: 0.12
     - id: WallRockSandSalt
       weight: 0.01
+    # Hyperion: identity re-zone (Part 5b). Sand is a placer deposit (Quartz/Au/Ag,
+    # kept); copper is andesite's and the fuels are the Wall's, trace here.
     - id: WallRockSandSilver
       weight: 0.08
     - id: WallRockSandGold
       weight: 0.07
     - id: WallRockSandLithium # Mono
-      weight: 0.02
+      weight: 0.005
     - id: WallRockSandCopper # Mono
-      weight: 0.08
+      weight: 0.01
     - id: WallRockSandPlasma
-      weight: 0.01
+      weight: 0.003
     - id: WallRockSandUranium
-      weight: 0.01
+      weight: 0.003
     - id: WallRockSandBananium
-      weight: 0.01
+      weight: 0.002
     - id: WallRockSandArtifactFragment
       weight: 0.01
     - id: WallRockSandDiamond
@@ -741,18 +751,20 @@
       weight: 0.04
     - id: WallRockChromiteGold
       weight: 0.01
+    # Hyperion: identity re-zone (Part 5b). Chromite is rare metals: silver boosted,
+    # lithium/uranium kept; plasma is basalt's and bananium the Wall-fuel's, trace.
     - id: WallRockChromiteSilver
-      weight: 0.01
+      weight: 0.08
     - id: WallRockChromiteLithium # Mono
       weight: 0.09
     - id: WallRockChromiteCopper # Mono
       weight: 0.01
     - id: WallRockChromitePlasma
-      weight: 0.04
+      weight: 0.005
     - id: WallRockChromiteUranium
       weight: 0.09
     - id: WallRockChromiteBananium
-      weight: 0.015
+      weight: 0.005
     - id: WallRockChromiteArtifactFragment
       weight: 0.01
     - id: WallRockChromiteDiamond
