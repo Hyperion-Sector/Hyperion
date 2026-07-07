@@ -4,10 +4,20 @@
     - type: WorldController
     - type: BiomeSelection
       biomes:
-        - NFAsteroidsNear
-        - NFAsteroidsMid
-        - NFAsteroidsFar
-        - MonoWorldgenVeryFarT1 # Mono
-        - MonoWorldgenVeryFarT2Inner # Mono
-        - MonoWorldgenVeryFarT2Middle # Mono
-        - MonoWorldgenVeryFarT2Far # Mono
+        # Hyperion: worldgen-v1 belt bands (0-40k) replace the NF/Mono rings;
+        # see _Hyperion/World/Biomes/belt.yml and the design repo worldgen-v1 doc.
+        # - NFAsteroidsNear # Hyperion: removed, superseded by belt bands
+        # - NFAsteroidsMid # Hyperion: removed, superseded by belt bands
+        # - NFAsteroidsFar # Hyperion: removed, superseded by belt bands
+        # - MonoWorldgenVeryFarT1 # Mono # Hyperion: removed, superseded by belt bands
+        # - MonoWorldgenVeryFarT2Inner # Mono # Hyperion: removed, superseded by belt bands
+        # - MonoWorldgenVeryFarT2Middle # Mono # Hyperion: removed, superseded by belt bands
+        # - MonoWorldgenVeryFarT2Far # Mono # Hyperion: removed, superseded by belt bands
+        - HyperionBeltApron # Hyperion
+        - HyperionBeltReef # Hyperion
+        - HyperionBeltGapInner # Hyperion
+        - HyperionBeltWall # Hyperion
+        - HyperionBeltGapOuter # Hyperion
+        - HyperionBeltIceRamp # Hyperion
+        - HyperionBeltDrift # Hyperion
+        - HyperionBeltFringe # Hyperion

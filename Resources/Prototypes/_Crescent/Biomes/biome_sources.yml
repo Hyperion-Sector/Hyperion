@@ -5,6 +5,10 @@
 # 5000-9500: middle ring
 # 9500-18000: outer ring
 # 18000+: uncharted space (fallback)
+# Hyperion: sources retuned to the worldgen-v1 belt bands (0-40k); ring name
+# protos live in _Hyperion/World/Biomes/space_biome_names.yml. Shells:
+# Shallows 3k / Reefs 9.5k / Wrecking Face 12k / Grinder 17k / Tailings 22k /
+# Snowline 33k / Drifts 40k / Uncharted Space past the edge (fallback).
 # THESE MUST HAVE GLOBAL PVS OR THE CLIENT WON'T SEE THEM!!!!!!!!!!!!
 
 - type: entity
@@ -45,9 +49,9 @@
   name: far reaches IV biome source
   components:
   - type: SpaceBiomeSource
-    id: BiomeFarReachesIV
-    swapDistance: 50000 # fallback
-    priority: 125
+    id: BiomeHyperionDrifts # Hyperion: BiomeFarReachesIV -> drift + fringe to the 40k edge
+    swapDistance: 40000 # Hyperion: 50000 -> 40000 (Uncharted Space fallback past here)
+    priority: 1400 # Hyperion: 125 -> 1400
 
 - type: entity
   id: BiomeSourceFarReachesIII
@@ -55,9 +59,9 @@
   name: far reaches III biome source
   components:
   - type: SpaceBiomeSource
-    id: BiomeFarReachesIII
-    swapDistance: 30000
-    priority: 250
+    id: BiomeHyperionSnowline # Hyperion: BiomeFarReachesIII -> ice ramp
+    swapDistance: 33000 # Hyperion: 30000 -> 33000
+    priority: 1500 # Hyperion: 250 -> 1500
 
 - type: entity
   id: BiomeSourceFarReachesII
@@ -65,9 +69,9 @@
   name: far reaches II biome source
   components:
   - type: SpaceBiomeSource
-    id: BiomeFarReachesII
-    swapDistance: 25000
-    priority: 500
+    id: BiomeHyperionTailings # Hyperion: BiomeFarReachesII -> exhaust + scrap basin
+    swapDistance: 22000 # Hyperion: 25000 -> 22000
+    priority: 1600 # Hyperion: 500 -> 1600
 
 - type: entity
   id: BiomeSourceFarReachesI
@@ -75,9 +79,9 @@
   name: far reaches I biome source
   components:
   - type: SpaceBiomeSource
-    id: BiomeFarReachesI
-    swapDistance: 22000
-    priority: 750
+    id: BiomeHyperionGrinder # Hyperion: BiomeFarReachesI -> Wall core
+    swapDistance: 17000 # Hyperion: 22000 -> 17000
+    priority: 1700 # Hyperion: 750 -> 1700
 
 - type: entity
   id: BiomeSourceOuterRing
@@ -85,9 +89,9 @@
   name: outer ring biome source
   components:
   - type: SpaceBiomeSource
-    id: BiomeOuterRing
-    swapDistance: 18000
-    priority: 1000
+    id: BiomeHyperionWreckingFace # Hyperion: BiomeOuterRing -> Wall intake
+    swapDistance: 12000 # Hyperion: 18000 -> 12000
+    priority: 1800 # Hyperion: 1000 -> 1800
 
 - type: entity
   id: BiomeSourceMiddleRing
@@ -95,9 +99,9 @@
   name: middle ring biome source
   components:
   - type: SpaceBiomeSource
-    id: BiomeMiddleRing
-    swapDistance: 10000
-    priority: 1500
+    id: BiomeHyperionReefs # Hyperion: BiomeMiddleRing -> Reefs (Low Lane rides this shell)
+    swapDistance: 9500 # Hyperion: 10000 -> 9500
+    priority: 1900 # Hyperion: 1500 -> 1900 (strict descent outward)
 
 - type: entity
   id: BiomeSourceInnerRing
@@ -105,6 +109,6 @@
   name: inner ring biome source
   components:
   - type: SpaceBiomeSource
-    id: BiomeInnerRing
-    swapDistance: 5000
+    id: BiomeHyperionShallows # Hyperion: BiomeInnerRing -> Shallows
+    swapDistance: 3000 # Hyperion: 5000 -> 3000
     priority: 2000

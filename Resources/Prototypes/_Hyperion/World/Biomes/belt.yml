@@ -1,0 +1,256 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+# Hyperion worldgen-v1 belt bands (0-40k, core-heavy).
+# Design: Hyperion-Sector/design proposals/worldgen-v1-belt-economy.md, Part 1.
+#
+# Nine radial bands replace the NF Near/Mid/Far + Mono VeryFar step function.
+# Each band parents NFBiomeBase (ambient carver + wreck selector plumbing) and
+# re-adds DebrisFeaturePlacerController to set its density channel, cancel
+# jitter, and safety radius. Debris tables are a lean first cut reusing the
+# NF asteroid ladder; the ore/gas re-zone pass rewrites them per material.
+# Nothing spawns past 40k (the Fringe is the terminal band; beyond is void).
+
+# region Inner apron (0-3k): sparse, open, small rock. The Shallows.
+- type: spaceBiome
+  id: HyperionBeltApron
+  parent: NFBiomeBase
+  priority: 100
+  distanceRange: 0, 3000
+  chunkComponents:
+  - type: DebrisFeaturePlacerController
+    densityNoiseChannel: DensityRare
+    randomCancelChance: 0.4
+    safetyZoneRadius: 24
+  - type: SimpleDebrisSelector
+    debrisTable:
+    - id: NFAsteroidDebrisSmall
+      prob: 1.5
+      orGroup: debris
+    - id: NFAsteroidDebrisMedium
+      prob: 1.0
+      orGroup: debris
+    - id: NFAsteroidScrapDebrisSmall
+      prob: 0.5
+      orGroup: debris
+  - type: NoiseDrivenDebrisSelector # required table (NFBiomeBase provides no default)
+    debrisTable:
+    - id: NFWreckDebrisSmall
+      prob: 1
+      orGroup: wreck
+
+# region Inner reef (3k-9k): clumped boulder fields, cave mouths. The Reefs.
+- type: spaceBiome
+  id: HyperionBeltReef
+  parent: NFBiomeBase
+  priority: 99
+  distanceRange: 3000, 9000
+  chunkComponents:
+  - type: DebrisFeaturePlacerController
+    densityNoiseChannel: DensityReef
+    randomCancelChance: 0.2
+    safetyZoneRadius: 24
+  - type: SimpleDebrisSelector
+    debrisTable:
+    - id: NFAsteroidDebrisSmall
+      prob: 1.0
+      orGroup: debris
+    - id: NFAsteroidDebrisMedium
+      prob: 1.5
+      orGroup: debris
+    - id: NFAsteroidDebrisLarge
+      prob: 1.5
+      orGroup: debris
+    - id: NFAsteroidDebrisExtraLarge
+      prob: 0.8
+      orGroup: debris
+    - id: NFAsteroidDebrisHuge
+      prob: 0.4
+      orGroup: debris
+  - type: NoiseDrivenDebrisSelector
+    debrisTable:
+    - id: NFWreckDebrisSmall
+      prob: 1
+      orGroup: wreck
+    - id: NFWreckDebrisMedium
+      prob: 0.3
+      orGroup: wreck
+
+# region Gap 1 (9k-9.5k): the Low Lane. Near-void ring road.
+- type: spaceBiome
+  id: HyperionBeltGapInner
+  parent: NFBiomeBase
+  priority: 98
+  distanceRange: 9000, 9500
+  chunkComponents:
+  - type: DebrisFeaturePlacerController
+    densityNoiseChannel: DensityGap
+    randomCancelChance: 0.3
+    safetyZoneRadius: 24
+  - type: SimpleDebrisSelector
+    debrisTable:
+    - id: NFAsteroidDebrisSmall
+      prob: 1
+      orGroup: debris
+  - type: NoiseDrivenDebrisSelector # required table (NFBiomeBase provides no default)
+    debrisTable:
+    - id: NFWreckDebrisSmall
+      prob: 1
+      orGroup: wreck
+
+# region The Wall (9.5k-19.5k): the dense maze + salvage mill.
+# Massive/Gigantic rock near-touching; fissures (code, later) cut crossings.
+- type: spaceBiome
+  id: HyperionBeltWall
+  parent: NFBiomeBase
+  priority: 97
+  distanceRange: 9500, 19500
+  chunkComponents:
+  - type: DebrisFeaturePlacerController
+    densityNoiseChannel: DensityPeak
+    randomCancelChance: 0.1
+    safetyZoneRadius: 14
+  - type: SimpleDebrisSelector
+    debrisTable:
+    - id: NFAsteroidDebrisEnormous
+      prob: 0.5
+      orGroup: debris
+    - id: NFAsteroidDebrisExtraEnormous
+      prob: 0.8
+      orGroup: debris
+    - id: NFAsteroidDebrisMassive
+      prob: 1.5
+      orGroup: debris
+    - id: NFAsteroidDebrisExtraMassive
+      prob: 1.5
+      orGroup: debris
+    - id: NFAsteroidDebrisGigantic
+      prob: 1.0
+      orGroup: debris
+    - id: NFAsteroidDebrisExtraGigantic
+      prob: 0.5
+      orGroup: debris
+  - type: NoiseDrivenDebrisSelector
+    debrisTable:
+    - id: NFWreckDebrisLarge
+      prob: 1
+      orGroup: wreck
+    - id: NFWreckDebrisExtraLarge
+      prob: 0.6
+      orGroup: wreck
+    - id: NFWreckDebrisHuge
+      prob: 0.3
+      orGroup: wreck
+
+# region Gap 2 / scrap basin (19.5k-22k): the Tailings. Ring road + debris eddy.
+- type: spaceBiome
+  id: HyperionBeltGapOuter
+  parent: NFBiomeBase
+  priority: 96
+  distanceRange: 19500, 22000
+  chunkComponents:
+  - type: DebrisFeaturePlacerController
+    densityNoiseChannel: DensityGap
+    randomCancelChance: 0.3
+    safetyZoneRadius: 24
+  - type: SimpleDebrisSelector
+    debrisTable:
+    - id: NFAsteroidScrapDebrisSmall
+      prob: 1.5
+      orGroup: debris
+    - id: NFAsteroidScrapDebrisMedium
+      prob: 1.0
+      orGroup: debris
+    - id: NFAsteroidDebrisSmall
+      prob: 0.5
+      orGroup: debris
+  - type: NoiseDrivenDebrisSelector # the Tailings: debris eddy behind the Wall
+    debrisTable:
+    - id: NFWreckDebrisSmall
+      prob: 1
+      orGroup: wreck
+    - id: NFWreckDebrisMedium
+      prob: 0.5
+      orGroup: wreck
+
+# region Outer ice ramp (22k-33k): the Snowline.
+- type: spaceBiome
+  id: HyperionBeltIceRamp
+  parent: NFBiomeBase
+  priority: 95
+  distanceRange: 22000, 33000
+  chunkComponents:
+  - type: DebrisFeaturePlacerController
+    densityNoiseChannel: DensityRare
+    randomCancelChance: 0.4
+    safetyZoneRadius: 24
+  - type: SimpleDebrisSelector
+    debrisTable:
+    - id: NFAsteroidIceDebrisMassive
+      prob: 1.0
+      orGroup: debris
+    - id: NFAsteroidIceDebrisExtraMassive
+      prob: 1.0
+      orGroup: debris
+    - id: NFAsteroidIceDebrisGigantic
+      prob: 0.6
+      orGroup: debris
+    - id: NFAsteroidDebrisLarge
+      prob: 0.5
+      orGroup: debris
+    - id: NFAsteroidDebrisExtraLarge
+      prob: 0.3
+      orGroup: debris
+  - type: NoiseDrivenDebrisSelector
+    debrisTable:
+    - id: NFWreckDebrisSmall
+      prob: 1
+      orGroup: wreck
+    - id: NFWreckDebrisMedium
+      prob: 0.5
+      orGroup: wreck
+
+# region Deep drift (33k-37k): the Drifts. Lone boulders, long hauls.
+- type: spaceBiome
+  id: HyperionBeltDrift
+  parent: NFBiomeBase
+  priority: 94
+  distanceRange: 33000, 37000
+  chunkComponents:
+  - type: DebrisFeaturePlacerController
+    densityNoiseChannel: DensityVeryRare
+    randomCancelChance: 0.5
+    safetyZoneRadius: 24
+  - type: SimpleDebrisSelector
+    debrisTable:
+    - id: NFAsteroidIceDebrisExtraEnormous
+      prob: 1.0
+      orGroup: debris
+    - id: NFAsteroidIceDebrisMassive
+      prob: 0.8
+      orGroup: debris
+  - type: NoiseDrivenDebrisSelector # required table (NFBiomeBase provides no default)
+    debrisTable:
+    - id: NFWreckDebrisSmall
+      prob: 1
+      orGroup: wreck
+
+# region Fringe taper (37k-40k): the Fade. Terminal band; void past 40k.
+- type: spaceBiome
+  id: HyperionBeltFringe
+  parent: NFBiomeBase
+  priority: 93
+  distanceRange: 37000, 40000
+  chunkComponents:
+  - type: DebrisFeaturePlacerController
+    densityNoiseChannel: DensityFringe
+    randomCancelChance: 0.5
+    safetyZoneRadius: 24
+  - type: SimpleDebrisSelector
+    debrisTable:
+    - id: NFAsteroidIceDebrisSmall
+      prob: 1
+      orGroup: debris
+  - type: NoiseDrivenDebrisSelector # required table (NFBiomeBase provides no default)
+    debrisTable:
+    - id: NFWreckDebrisSmall
+      prob: 1
+      orGroup: wreck

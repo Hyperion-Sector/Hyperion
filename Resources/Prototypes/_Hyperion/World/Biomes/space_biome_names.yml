@@ -1,0 +1,40 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+# Hyperion worldgen-v1 ring names for the _Crescent space-biome overlay.
+# Sources (SwapDistance/Priority) are retuned in _Crescent/Biomes/biome_sources.yml.
+# 7 placed source slots: Low Lane rides the Reefs shell, the Spill rides the
+# Tailings, and past the Drifts (40k) the Uncharted Space fallback is the edge.
+
+- type: ambientSpaceBiome
+  id: BiomeHyperionShallows
+  name: The Shallows
+  description: "Thick with traffic and thin on danger. Learn here."
+
+- type: ambientSpaceBiome
+  id: BiomeHyperionReefs
+  name: The Reefs
+  description: "Clusters and cave mouths. Copper, gold, and the first taste of trouble."
+
+- type: ambientSpaceBiome
+  id: BiomeHyperionWreckingFace
+  name: The Wrecking Face
+  description: "Ships pile against the density like flotsam on a breakwater. Some still hold air."
+
+- type: ambientSpaceBiome
+  id: BiomeHyperionGrinder
+  name: The Grinder
+  description: "The Wall chews. Bring shielding, bring an exit plan."
+
+- type: ambientSpaceBiome
+  id: BiomeHyperionTailings
+  name: The Tailings
+  description: "Everything the Wall chews, it spits out here."
+
+- type: ambientSpaceBiome
+  id: BiomeHyperionSnowline
+  name: The Snowline
+  description: "Ice from here on out. Top your tanks."
+
+- type: ambientSpaceBiome
+  id: BiomeHyperionDrifts
+  name: The Drifts
+  description: "Long hauls, lone lights, nobody on the radio."
