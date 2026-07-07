@@ -43,19 +43,22 @@
           orGroup: deposit
         - id: GasDepositCarbonDioxide
           orGroup: deposit
+          # Hyperion: worldgen-v1 gas re-zone (Part 5). Plasma localized to basalt;
+          # Mono injected the plasma ladder into every material gas table, flattening
+          # the gas economy (plasma is the whole tree's root). Commented, not deleted.
           # Mono Changes Start
-        - id: GasDepositPlasmaVerySmall
-          orGroup: deposit
-        - id: GasDepositPlasmaSmall
-          orGroup: deposit
-        - id: GasDepositPlasma
-          orGroup: deposit
-        - id: GasDepositPlasmaLarge
-          orGroup: deposit
-        - id: GasDepositPlasmaVeryLarge
-          orGroup: deposit
-        - id: GasDepositMuddlePlasma
-          orGroup: deposit
+        # - id: GasDepositPlasmaVerySmall
+        #   orGroup: deposit
+        # - id: GasDepositPlasmaSmall
+        #   orGroup: deposit
+        # - id: GasDepositPlasma
+        #   orGroup: deposit
+        # - id: GasDepositPlasmaLarge
+        #   orGroup: deposit
+        # - id: GasDepositPlasmaVeryLarge
+        #   orGroup: deposit
+        # - id: GasDepositMuddlePlasma
+        #   orGroup: deposit
           # Mono Changes End
         - id: GasDepositAir
           orGroup: deposit
@@ -118,19 +121,20 @@
           orGroup: deposit
         - id: GasDepositWaterVaporLarge
           orGroup: deposit
+          # Hyperion: gas re-zone (Part 5) - ice is breathing + water, never plasma. Mono injection commented out.
           # Mono Changes Start
-        - id: GasDepositPlasmaVerySmall
-          orGroup: deposit
-        - id: GasDepositPlasmaSmall
-          orGroup: deposit
-        - id: GasDepositPlasma
-          orGroup: deposit
-        - id: GasDepositPlasmaLarge
-          orGroup: deposit
-        - id: GasDepositPlasmaVeryLarge
-          orGroup: deposit
-        - id: GasDepositMuddlePlasma
-          orGroup: deposit
+        # - id: GasDepositPlasmaVerySmall
+        #   orGroup: deposit
+        # - id: GasDepositPlasmaSmall
+        #   orGroup: deposit
+        # - id: GasDepositPlasma
+        #   orGroup: deposit
+        # - id: GasDepositPlasmaLarge
+        #   orGroup: deposit
+        # - id: GasDepositPlasmaVeryLarge
+        #   orGroup: deposit
+        # - id: GasDepositMuddlePlasma
+        #   orGroup: deposit
           # Mono Changes End
 # endregion Snow Table
 
@@ -177,19 +181,20 @@
           orGroup: deposit
         - id: GasDepositAmmonia
           orGroup: deposit
+          # Hyperion: gas re-zone (Part 5) - andesite is exotics (nitrous/ammonia), not plasma. Mono injection commented out.
           # Mono Changes Start
-        - id: GasDepositPlasmaVerySmall
-          orGroup: deposit
-        - id: GasDepositPlasmaSmall
-          orGroup: deposit
-        - id: GasDepositPlasma
-          orGroup: deposit
-        - id: GasDepositPlasmaLarge
-          orGroup: deposit
-        - id: GasDepositPlasmaVeryLarge
-          orGroup: deposit
-        - id: GasDepositMuddlePlasma
-          orGroup: deposit
+        # - id: GasDepositPlasmaVerySmall
+        #   orGroup: deposit
+        # - id: GasDepositPlasmaSmall
+        #   orGroup: deposit
+        # - id: GasDepositPlasma
+        #   orGroup: deposit
+        # - id: GasDepositPlasmaLarge
+        #   orGroup: deposit
+        # - id: GasDepositPlasmaVeryLarge
+        #   orGroup: deposit
+        # - id: GasDepositMuddlePlasma
+        #   orGroup: deposit
           # Mono Changes End
 # endregion Andesite Table
 
@@ -289,19 +294,20 @@
           orGroup: deposit
         - id: GasDepositNitrogenLarge
           orGroup: deposit
+          # Hyperion: gas re-zone (Part 5) - plasma localized to basalt. Mono injection commented out.
           # Mono Changes Start
-        - id: GasDepositPlasmaVerySmall
-          orGroup: deposit
-        - id: GasDepositPlasmaSmall
-          orGroup: deposit
-        - id: GasDepositPlasma
-          orGroup: deposit
-        - id: GasDepositPlasmaLarge
-          orGroup: deposit
-        - id: GasDepositPlasmaVeryLarge
-          orGroup: deposit
-        - id: GasDepositMuddlePlasma
-          orGroup: deposit
+        # - id: GasDepositPlasmaVerySmall
+        #   orGroup: deposit
+        # - id: GasDepositPlasmaSmall
+        #   orGroup: deposit
+        # - id: GasDepositPlasma
+        #   orGroup: deposit
+        # - id: GasDepositPlasmaLarge
+        #   orGroup: deposit
+        # - id: GasDepositPlasmaVeryLarge
+        #   orGroup: deposit
+        # - id: GasDepositMuddlePlasma
+        #   orGroup: deposit
           # Mono Changes End
 # endregion Sand Table
 
@@ -350,19 +356,20 @@
           orGroup: deposit
         - id: GasDepositAirVeryLarge
           orGroup: deposit
+          # Hyperion: gas re-zone (Part 5) - chromite is rare metals (Ag/Li/U), not plasma gas. Mono injection commented out.
           # Mono Changes Start
-        - id: GasDepositPlasmaVerySmall
-          orGroup: deposit
-        - id: GasDepositPlasmaSmall
-          orGroup: deposit
-        - id: GasDepositPlasma
-          orGroup: deposit
-        - id: GasDepositPlasmaLarge
-          orGroup: deposit
-        - id: GasDepositPlasmaVeryLarge
-          orGroup: deposit
-        - id: GasDepositMuddlePlasma
-          orGroup: deposit
+        # - id: GasDepositPlasmaVerySmall
+        #   orGroup: deposit
+        # - id: GasDepositPlasmaSmall
+        #   orGroup: deposit
+        # - id: GasDepositPlasma
+        #   orGroup: deposit
+        # - id: GasDepositPlasmaLarge
+        #   orGroup: deposit
+        # - id: GasDepositPlasmaVeryLarge
+        #   orGroup: deposit
+        # - id: GasDepositMuddlePlasma
+        #   orGroup: deposit
           # Mono Changes End
 # endregion Chromite Table
 
@@ -411,19 +418,20 @@
           orGroup: deposit
         - id: GasDepositAirSmall
           orGroup: deposit
+          # Hyperion: gas re-zone (Part 5) - generic rock, plasma localized to basalt. Mono injection commented out.
           # Mono Changes Start
-        - id: GasDepositPlasmaVerySmall
-          orGroup: deposit
-        - id: GasDepositPlasmaSmall
-          orGroup: deposit
-        - id: GasDepositPlasma
-          orGroup: deposit
-        - id: GasDepositPlasmaLarge
-          orGroup: deposit
-        - id: GasDepositPlasmaVeryLarge
-          orGroup: deposit
-        - id: GasDepositMuddlePlasma
-          orGroup: deposit
+        # - id: GasDepositPlasmaVerySmall
+        #   orGroup: deposit
+        # - id: GasDepositPlasmaSmall
+        #   orGroup: deposit
+        # - id: GasDepositPlasma
+        #   orGroup: deposit
+        # - id: GasDepositPlasmaLarge
+        #   orGroup: deposit
+        # - id: GasDepositPlasmaVeryLarge
+        #   orGroup: deposit
+        # - id: GasDepositMuddlePlasma
+        #   orGroup: deposit
           # Mono Changes End
 # endregion AsteroidRock Table
 

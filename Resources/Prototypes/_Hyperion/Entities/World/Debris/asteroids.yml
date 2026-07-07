@@ -58,3 +58,18 @@
   parent: [NFBaseAsteroidDebris, NFBaseAsteroidGas, HyperionBaseAsteroidColossal]
   categories: [ HideSpawnMenu ]
 # endregion Hyperion Rock Entities
+
+# region Hyperion Basalt Entities
+# Basalt-material giants for the Wall: same mega sizes as above, but parented to
+# the basalt rock + basalt gas bases so the biggest Wall rocks carry the plasma
+# gas the gas economy roots on (worldgen-v1 Part 5, plasma localized to basalt).
+- type: entity
+  id: HyperionAsteroidBasaltDebrisTitanic
+  parent: [NFBaseAsteroidBasaltDebris, NFBaseAsteroidBasaltGas, HyperionBaseAsteroidTitanic]
+  categories: [ HideSpawnMenu ]
+
+- type: entity
+  id: HyperionAsteroidBasaltDebrisColossal
+  parent: [NFBaseAsteroidBasaltDebris, NFBaseAsteroidBasaltGas, HyperionBaseAsteroidColossal]
+  categories: [ HideSpawnMenu ]
+# endregion Hyperion Basalt Entities
