@@ -2,7 +2,7 @@
 # Hyperion mega asteroid sizes for the worldgen-v1 Wall (design repo,
 # worldgen-v1-belt-economy.md Part 1). BlobFloorPlanBuilder's radius is only a
 # sprawl cap; actual bulk comes from floorPlacements (~2x placements in tiles
-# with blobDrawProb 0.5). Stock NF tops out at 324 placements (~600 tiles,
+# with blobDrawProb 0.5). Stock NF tops out at 324 placements (~650 tiles,
 # ship-sized); these two go well past that so the Wall reads as terrain.
 
 # region Hyperion Sizes
@@ -73,3 +73,110 @@
   parent: [NFBaseAsteroidBasaltDebris, NFBaseAsteroidBasaltGas, HyperionBaseAsteroidColossal]
   categories: [ HideSpawnMenu ]
 # endregion Hyperion Basalt Entities
+
+# region Hyperion Plain Rock Ladder
+# worldgen-v1 topology redo. Own size ladder, plain rock only: parents
+# NFBaseAsteroidDebris (generic rock + soft/hard mineral floor), blob shape, NO
+# gas / ore zonation / material variants. This is what the belt gradient bands
+# (belt.yml) place; the material/mega entities above are now unreferenced by the
+# belt and pending cleanup.
+#
+# floorPlacements follow the tapered formula (each tier = previous + Small).
+# Small = ~half a Pluto mkII (~510 tiles). tiles ~= 2.0 * floorPlacements
+# (measured by an exact-port sim of BlobFloorPlanBuilder at blobDrawProb 0.5);
+# radius keeps a ~0.26 fill ratio so blobs read lumpy, not solid disks.
+#   Tier  placements  ~tiles  ~xPluto  radius
+#   T1       255        510     0.5     25
+#   T2       510       1020     1.0     35
+#   T3       765       1530     1.5     43
+#   T4      1020       2040     2.0     50
+#   T5      1275       2550     2.5     56
+#   T6      1530       3060     3.0     61
+#   T7      1785       3570     3.5     66
+#   T8      2040       4080     4.0     71
+- type: entity
+  id: HyperionAsteroidRockBase
+  parent: NFBaseAsteroidDebris
+  abstract: true
+  components:
+    - type: RandomMetadata
+      nameSeparator: ""
+      nameSegments:
+      - DroneHex
+      - DroneHex
+      - DroneHex
+      - DroneHex
+      - AsteroidDiscoverer
+
+- type: entity
+  id: HyperionAsteroidRockT1
+  parent: HyperionAsteroidRockBase
+  categories: [ HideSpawnMenu ]
+  components:
+    - type: BlobFloorPlanBuilder
+      floorPlacements: 255
+      radius: 25
+
+- type: entity
+  id: HyperionAsteroidRockT2
+  parent: HyperionAsteroidRockBase
+  categories: [ HideSpawnMenu ]
+  components:
+    - type: BlobFloorPlanBuilder
+      floorPlacements: 510
+      radius: 35
+
+- type: entity
+  id: HyperionAsteroidRockT3
+  parent: HyperionAsteroidRockBase
+  categories: [ HideSpawnMenu ]
+  components:
+    - type: BlobFloorPlanBuilder
+      floorPlacements: 765
+      radius: 43
+
+- type: entity
+  id: HyperionAsteroidRockT4
+  parent: HyperionAsteroidRockBase
+  categories: [ HideSpawnMenu ]
+  components:
+    - type: BlobFloorPlanBuilder
+      floorPlacements: 1020
+      radius: 50
+
+- type: entity
+  id: HyperionAsteroidRockT5
+  parent: HyperionAsteroidRockBase
+  categories: [ HideSpawnMenu ]
+  components:
+    - type: BlobFloorPlanBuilder
+      floorPlacements: 1275
+      radius: 56
+
+- type: entity
+  id: HyperionAsteroidRockT6
+  parent: HyperionAsteroidRockBase
+  categories: [ HideSpawnMenu ]
+  components:
+    - type: BlobFloorPlanBuilder
+      floorPlacements: 1530
+      radius: 61
+
+- type: entity
+  id: HyperionAsteroidRockT7
+  parent: HyperionAsteroidRockBase
+  categories: [ HideSpawnMenu ]
+  components:
+    - type: BlobFloorPlanBuilder
+      floorPlacements: 1785
+      radius: 66
+
+- type: entity
+  id: HyperionAsteroidRockT8
+  parent: HyperionAsteroidRockBase
+  categories: [ HideSpawnMenu ]
+  components:
+    - type: BlobFloorPlanBuilder
+      floorPlacements: 2040
+      radius: 71
+# endregion Hyperion Plain Rock Ladder

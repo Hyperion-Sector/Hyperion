@@ -2,18 +2,20 @@
   id: NFDefault
   components:
     - type: WorldController
+    # Hyperion: worldgen-v1 topology redo. Fissure/Trojan/FringeRadiation disabled for now
+    # (plain-rock gradient first cut). Code stays in the tree; re-enable by uncommenting.
     # Hyperion: worldgen-v1 fissure crossings (Part 1). Rolls the round's inner-to-outer
     # lanes through the Wall; the belt bands carry FissureCarver to read them. See
     # _Hyperion/Worldgen and the design repo worldgen-v1 doc.
-    - type: FissureField
+    # - type: FissureField # Hyperion: disabled for topology redo
     # Hyperion: worldgen-v1 outer-belt radiation taper (Part 1c). Sourceless per-second dose
     # past ~37k that ramps to the 40k edge; the turn-back tax on the empty drift. See
     # _Hyperion/Worldgen/Systems/FringeRadiationSystem and the design repo worldgen-v1 doc.
-    - type: FringeRadiation
+    # - type: FringeRadiation # Hyperion: disabled for topology redo
     # Hyperion: worldgen-v1 trojan loot pockets (Part 3). Rolls a few fixed jackpot pockets in
     # the Wall; HyperionBeltWall carries TrojanCarver to read them. See
     # _Hyperion/Worldgen/Systems/TrojanSystem and the design repo worldgen-v1 doc.
-    - type: TrojanField
+    # - type: TrojanField # Hyperion: disabled for topology redo
     - type: BiomeSelection
       biomes:
         # Hyperion: worldgen-v1 belt bands (0-40k) replace the NF/Mono rings;
@@ -25,12 +27,13 @@
         # - MonoWorldgenVeryFarT2Inner # Mono # Hyperion: removed, superseded by belt bands
         # - MonoWorldgenVeryFarT2Middle # Mono # Hyperion: removed, superseded by belt bands
         # - MonoWorldgenVeryFarT2Far # Mono # Hyperion: removed, superseded by belt bands
-        - HyperionBeltApron # Hyperion
-        - HyperionBeltReef # Hyperion
-        - HyperionBeltGapInner # Hyperion
-        - HyperionBeltWall # Hyperion
-        - HyperionBeltGapOuter # Hyperion
-        - HyperionBeltIceRamp # Hyperion
-        - HyperionBeltDrift # Hyperion
-        - HyperionBeltFringe # Hyperion
+        # Hyperion: worldgen-v1 topology redo - plain-rock gradient bands (belt.yml)
+        - HyperionBeltCore # Hyperion: 0-7k, T1
+        - HyperionBeltGrad2 # Hyperion: 7-12k, T2
+        - HyperionBeltGrad3 # Hyperion: 12-17k, T3
+        - HyperionBeltGrad4 # Hyperion: 17-22k, T4
+        - HyperionBeltGrad5 # Hyperion: 22-27k, T5
+        - HyperionBeltGrad6 # Hyperion: 27-32k, T6
+        - HyperionBeltGrad7 # Hyperion: 32-37k, T7
+        - HyperionBeltGrad8 # Hyperion: 37-40k, T8
         - HyperionBeltVoid # Hyperion: terminal band, nothing past 40k

@@ -1,324 +1,200 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-# Hyperion worldgen-v1 belt bands (0-40k, core-heavy).
+# Hyperion worldgen-v1 belt bands (0-40k) - topology redo.
 # Design: Hyperion-Sector/design proposals/worldgen-v1-belt-economy.md, Part 1.
 #
-# Nine radial bands replace the NF Near/Mid/Far + Mono VeryFar step function.
-# Each band parents NFBiomeBase (ambient carver + wreck selector plumbing) and
-# re-adds DebrisFeaturePlacerController to set its density channel, cancel
-# jitter, and safety radius. Debris tables are a lean first cut reusing the
-# NF asteroid ladder; the ore/gas re-zone pass rewrites them per material.
-# Nothing spawns past 40k (the Fringe is the terminal band; beyond is void).
+# First cut of the plain-rock gradient. Every band places ONE plain-rock size
+# tier (HyperionAsteroidRockT1..T8, see Debris/asteroids.yml); nothing else.
+# No material zonation, no gas, no M-type, no fissure/trojan carving - those
+# stay in the tree but are disabled at the worldgenConfig (worldgen_default.yml)
+# and dropped from the band tables for now.
+#
+# Size gradient: 0-7k is uniform T1 (the smallest, ~half a Pluto). Past 7k the
+# tier steps up every 5k, so rock gets bigger the further out you travel. All
+# bands share the DensityBelt channel; the per-band safetyZoneRadius (~= that
+# tier's rock radius) is what spaces rocks and stops big tiers from stacking.
+# Because a T8 rock is wider than a chunk, the outer bands are necessarily
+# fewer-but-bigger; count-per-screen drops outward, by physics not by choice.
+# Nothing spawns past 40k (terminal void).
 
-# region Inner apron (0-3k): sparse, open, small rock. The Shallows.
-# Deliberately clean: this is the safe starter approach to the hub, density
-# only picks up at the reef (3k+). Tune via randomCancelChance if still busy.
+# region Core (0-7k): uniform smallest rock. T1 (~0.5 Pluto).
 - type: spaceBiome
-  id: HyperionBeltApron
+  id: HyperionBeltCore
   parent: NFBiomeBase
   priority: 100
-  distanceRange: 0, 3000
+  distanceRange: 0, 7000
   chunkComponents:
   - type: DebrisFeaturePlacerController
-    densityNoiseChannel: DensityVeryRare
-    randomCancelChance: 0.85
-    safetyZoneRadius: 24
+    densityNoiseChannel: DensityBelt
+    randomCancelChance: 0.1 # light thin only; DensityBelt + safetyZoneRadius do the real spacing (default is 0.85, way too sparse)
+    safetyZoneRadius: 33
   - type: SimpleDebrisSelector
     debrisTable:
-    - id: NFAsteroidDebrisSmall
-      prob: 1.5
+    - id: HyperionAsteroidRockT1
+      prob: 1
       orGroup: debris
-    - id: NFAsteroidDebrisMedium
-      prob: 1.0
-      orGroup: debris
-    - id: NFAsteroidScrapDebrisSmall
-      prob: 0.5
-      orGroup: debris
-  - type: NoiseDrivenDebrisSelector # required table (NFBiomeBase provides no default)
+  - type: NoiseDrivenDebrisSelector # required table (NFBiomeBase provides no default); wrecks untouched this pass
     debrisTable:
     - id: NFWreckDebrisSmall
       prob: 1
       orGroup: wreck
 
-# region Inner reef (3k-9k): clumped boulder fields, cave mouths. The Reefs.
+# region Gradient 2 (7k-12k): T2 (~1 Pluto).
 - type: spaceBiome
-  id: HyperionBeltReef
+  id: HyperionBeltGrad2
   parent: NFBiomeBase
   priority: 99
-  distanceRange: 3000, 9000
+  distanceRange: 7000, 12000
   chunkComponents:
   - type: DebrisFeaturePlacerController
-    densityNoiseChannel: DensityReef
-    randomCancelChance: 0.2
-    safetyZoneRadius: 24
-  - type: FissureCarver # Hyperion: crossings enter the belt here (Part 1)
+    densityNoiseChannel: DensityBelt
+    randomCancelChance: 0.1 # light thin only; DensityBelt + safetyZoneRadius do the real spacing (default is 0.85, way too sparse)
+    safetyZoneRadius: 43
   - type: SimpleDebrisSelector
-    # Hyperion: worldgen-v1 material zonation (Part 6). The Reefs are andesite
-    # (porphyry copper: Cu/Au/Ag) with a sand placer secondary (Au/Ag). Andesite
-    # gas is exotics (nitrous/ammonia), no plasma. Was generic rock.
     debrisTable:
-    - id: NFAsteroidAndesiteDebrisSmall
-      prob: 1.0
-      orGroup: debris
-    - id: NFAsteroidAndesiteDebrisMedium
-      prob: 1.5
-      orGroup: debris
-    - id: NFAsteroidAndesiteDebrisLarge
-      prob: 1.2
-      orGroup: debris
-    - id: NFAsteroidAndesiteDebrisExtraLarge
-      prob: 0.6
-      orGroup: debris
-    - id: NFAsteroidSandDebrisMedium
-      prob: 0.8
-      orGroup: debris
-    - id: NFAsteroidSandDebrisLarge
-      prob: 0.6
-      orGroup: debris
-    # Hyperion: M-type metal jackpot (Part 3) - rarer out here than the Wall.
-    - id: HyperionAsteroidMType
-      prob: 0.03
+    - id: HyperionAsteroidRockT2
+      prob: 1
       orGroup: debris
   - type: NoiseDrivenDebrisSelector
     debrisTable:
     - id: NFWreckDebrisSmall
       prob: 1
       orGroup: wreck
-    - id: NFWreckDebrisMedium
-      prob: 0.3
-      orGroup: wreck
 
-# region Gap 1 (9k-9.5k): the Low Lane. Near-void ring road.
+# region Gradient 3 (12k-17k): T3 (~1.5 Pluto).
 - type: spaceBiome
-  id: HyperionBeltGapInner
+  id: HyperionBeltGrad3
   parent: NFBiomeBase
   priority: 98
-  distanceRange: 9000, 9500
+  distanceRange: 12000, 17000
   chunkComponents:
   - type: DebrisFeaturePlacerController
-    densityNoiseChannel: DensityGap
-    randomCancelChance: 0.65 # the sampler floors at 1 rock/chunk; cancel is what makes this a lane
-    safetyZoneRadius: 24
-  - type: FissureCarver # Hyperion: crossings run through the ring road (Part 1)
+    densityNoiseChannel: DensityBelt
+    randomCancelChance: 0.1 # light thin only; DensityBelt + safetyZoneRadius do the real spacing (default is 0.85, way too sparse)
+    safetyZoneRadius: 51
   - type: SimpleDebrisSelector
     debrisTable:
-    - id: NFAsteroidDebrisSmall
+    - id: HyperionAsteroidRockT3
       prob: 1
       orGroup: debris
-  - type: NoiseDrivenDebrisSelector # required table (NFBiomeBase provides no default)
+  - type: NoiseDrivenDebrisSelector
     debrisTable:
     - id: NFWreckDebrisSmall
       prob: 1
       orGroup: wreck
 
-# region The Wall (9.5k-19.5k): the dense maze + salvage mill.
-# Fissures (code, later) cut crossings. Table is a full size ladder: small
-# fillers for texture, Massive+ bulk, Titanic/Colossal anchors (Hyperion
-# protos) so the maze has genuinely huge rock in it.
+# region Gradient 4 (17k-22k): T4 (~2 Pluto).
 - type: spaceBiome
-  id: HyperionBeltWall
+  id: HyperionBeltGrad4
   parent: NFBiomeBase
   priority: 97
-  distanceRange: 9500, 19500
+  distanceRange: 17000, 22000
   chunkComponents:
   - type: DebrisFeaturePlacerController
-    densityNoiseChannel: DensityPeak
-    randomCancelChance: 0.1
-    safetyZoneRadius: 14
-  - type: FissureCarver # Hyperion: the crossings that make the Wall passable (Part 1)
-  - type: TrojanCarver # Hyperion: reads the round's trojan loot pockets (Part 3)
+    densityNoiseChannel: DensityBelt
+    randomCancelChance: 0.1 # light thin only; DensityBelt + safetyZoneRadius do the real spacing (default is 0.85, way too sparse)
+    safetyZoneRadius: 58
   - type: SimpleDebrisSelector
-    # Hyperion: worldgen-v1 material zonation (Part 6). The Wall is basalt (the
-    # plasma/uranium/bananium fuel rock) with a chromite rare-metal secondary.
-    # Big rocks (Enormous+) carry basalt gas, so plasma now lives only here.
     debrisTable:
-    # Fillers (rubble around the big ones; Large-Huge are ore-only, no gas)
-    - id: NFAsteroidBasaltDebrisLarge
-      prob: 0.8
-      orGroup: debris
-    - id: NFAsteroidBasaltDebrisExtraLarge
-      prob: 0.8
-      orGroup: debris
-    - id: NFAsteroidBasaltDebrisHuge
-      prob: 0.6
-      orGroup: debris
-    - id: NFAsteroidBasaltDebrisExtraHuge
-      prob: 0.5
-      orGroup: debris
-    - id: NFAsteroidBasaltDebrisEnormous
-      prob: 0.5
-      orGroup: debris
-    - id: NFAsteroidBasaltDebrisExtraEnormous
-      prob: 0.5
-      orGroup: debris
-    # Bulk (Enormous+ carry basalt gas = plasma)
-    - id: NFAsteroidBasaltDebrisMassive
-      prob: 1.0
-      orGroup: debris
-    - id: NFAsteroidBasaltDebrisExtraMassive
-      prob: 1.0
-      orGroup: debris
-    - id: NFAsteroidBasaltDebrisGigantic
-      prob: 0.8
-      orGroup: debris
-    - id: NFAsteroidBasaltDebrisExtraGigantic
-      prob: 0.6
-      orGroup: debris
-    # Chromite rare-metal secondary (silver / lithium / uranium)
-    - id: NFAsteroidChromiteDebrisHuge
-      prob: 0.3
-      orGroup: debris
-    - id: NFAsteroidChromiteDebrisMassive
-      prob: 0.5
-      orGroup: debris
-    - id: NFAsteroidChromiteDebrisGigantic
-      prob: 0.4
-      orGroup: debris
-    # Anchors (plasma giants; basalt-material Hyperion mega sizes)
-    - id: HyperionAsteroidBasaltDebrisTitanic
-      prob: 0.5
-      orGroup: debris
-    - id: HyperionAsteroidBasaltDebrisColossal
-      prob: 0.3
-      orGroup: debris
-    # Hyperion: M-type metal jackpot (Part 3) - rare radar-loud pure-metal rock,
-    # the payoff that makes a mining scanner worth carrying. Densest at the Wall.
-    - id: HyperionAsteroidMType
-      prob: 0.05
+    - id: HyperionAsteroidRockT4
+      prob: 1
       orGroup: debris
   - type: NoiseDrivenDebrisSelector
     debrisTable:
-    - id: NFWreckDebrisLarge
+    - id: NFWreckDebrisSmall
       prob: 1
       orGroup: wreck
-    - id: NFWreckDebrisExtraLarge
-      prob: 0.6
-      orGroup: wreck
-    - id: NFWreckDebrisHuge
-      prob: 0.3
-      orGroup: wreck
 
-# region Gap 2 / scrap basin (19.5k-22k): the Tailings. Ring road + debris eddy.
+# region Gradient 5 (22k-27k): T5 (~2.5 Pluto).
 - type: spaceBiome
-  id: HyperionBeltGapOuter
+  id: HyperionBeltGrad5
   parent: NFBiomeBase
   priority: 96
-  distanceRange: 19500, 22000
+  distanceRange: 22000, 27000
   chunkComponents:
   - type: DebrisFeaturePlacerController
-    densityNoiseChannel: DensityGap
-    randomCancelChance: 0.55 # slightly busier than the Low Lane: this is the debris eddy
-    safetyZoneRadius: 24
-  - type: FissureCarver # Hyperion: crossings exit the Wall through the basin (Part 1)
+    densityNoiseChannel: DensityBelt
+    randomCancelChance: 0.1 # light thin only; DensityBelt + safetyZoneRadius do the real spacing (default is 0.85, way too sparse)
+    safetyZoneRadius: 64
   - type: SimpleDebrisSelector
     debrisTable:
-    - id: NFAsteroidScrapDebrisSmall
-      prob: 1.5
-      orGroup: debris
-    - id: NFAsteroidScrapDebrisMedium
-      prob: 1.0
-      orGroup: debris
-    - id: NFAsteroidDebrisSmall
-      prob: 0.5
-      orGroup: debris
-  - type: NoiseDrivenDebrisSelector # the Tailings: debris eddy behind the Wall
-    debrisTable:
-    - id: NFWreckDebrisSmall
+    - id: HyperionAsteroidRockT5
       prob: 1
-      orGroup: wreck
-    - id: NFWreckDebrisMedium
-      prob: 0.5
-      orGroup: wreck
-
-# region Outer ice ramp (22k-33k): the Snowline.
-- type: spaceBiome
-  id: HyperionBeltIceRamp
-  parent: NFBiomeBase
-  priority: 95
-  distanceRange: 22000, 33000
-  chunkComponents:
-  - type: DebrisFeaturePlacerController
-    densityNoiseChannel: DensityRare
-    randomCancelChance: 0.4
-    safetyZoneRadius: 24
-  - type: FissureCarver # Hyperion: crossings continue out through the snowline (Part 1)
-  - type: SimpleDebrisSelector
-    debrisTable:
-    - id: NFAsteroidIceDebrisMassive
-      prob: 1.0
-      orGroup: debris
-    - id: NFAsteroidIceDebrisExtraMassive
-      prob: 1.0
-      orGroup: debris
-    - id: NFAsteroidIceDebrisGigantic
-      prob: 0.6
-      orGroup: debris
-    - id: NFAsteroidDebrisLarge
-      prob: 0.5
-      orGroup: debris
-    - id: NFAsteroidDebrisExtraLarge
-      prob: 0.3
       orGroup: debris
   - type: NoiseDrivenDebrisSelector
     debrisTable:
     - id: NFWreckDebrisSmall
       prob: 1
       orGroup: wreck
-    - id: NFWreckDebrisMedium
-      prob: 0.5
-      orGroup: wreck
 
-# region Deep drift (33k-37k): the Drifts. Lone boulders, long hauls.
+# region Gradient 6 (27k-32k): T6 (~3 Pluto).
 - type: spaceBiome
-  id: HyperionBeltDrift
+  id: HyperionBeltGrad6
   parent: NFBiomeBase
-  priority: 94
-  distanceRange: 33000, 37000
+  priority: 95
+  distanceRange: 27000, 32000
   chunkComponents:
   - type: DebrisFeaturePlacerController
-    densityNoiseChannel: DensityVeryRare
-    randomCancelChance: 0.5
-    safetyZoneRadius: 24
-  - type: FissureCarver # Hyperion: crossings fade out with the drift (Part 1)
+    densityNoiseChannel: DensityBelt
+    randomCancelChance: 0.1 # light thin only; DensityBelt + safetyZoneRadius do the real spacing (default is 0.85, way too sparse)
+    safetyZoneRadius: 69
   - type: SimpleDebrisSelector
     debrisTable:
-    - id: NFAsteroidIceDebrisExtraEnormous
-      prob: 1.0
+    - id: HyperionAsteroidRockT6
+      prob: 1
       orGroup: debris
-    - id: NFAsteroidIceDebrisMassive
-      prob: 0.8
-      orGroup: debris
-  - type: NoiseDrivenDebrisSelector # required table (NFBiomeBase provides no default)
+  - type: NoiseDrivenDebrisSelector
     debrisTable:
     - id: NFWreckDebrisSmall
       prob: 1
       orGroup: wreck
 
-# region Fringe taper (37k-40k): the Fade. The last band with rock in it.
+# region Gradient 7 (32k-37k): T7 (~3.5 Pluto).
 - type: spaceBiome
-  id: HyperionBeltFringe
+  id: HyperionBeltGrad7
+  parent: NFBiomeBase
+  priority: 94
+  distanceRange: 32000, 37000
+  chunkComponents:
+  - type: DebrisFeaturePlacerController
+    densityNoiseChannel: DensityBelt
+    randomCancelChance: 0.1 # light thin only; DensityBelt + safetyZoneRadius do the real spacing (default is 0.85, way too sparse)
+    safetyZoneRadius: 74
+  - type: SimpleDebrisSelector
+    debrisTable:
+    - id: HyperionAsteroidRockT7
+      prob: 1
+      orGroup: debris
+  - type: NoiseDrivenDebrisSelector
+    debrisTable:
+    - id: NFWreckDebrisSmall
+      prob: 1
+      orGroup: wreck
+
+# region Gradient 8 (37k-40k): T8 (~4 Pluto). The outer wall of giants.
+- type: spaceBiome
+  id: HyperionBeltGrad8
   parent: NFBiomeBase
   priority: 93
   distanceRange: 37000, 40000
   chunkComponents:
   - type: DebrisFeaturePlacerController
-    densityNoiseChannel: DensityFringe
-    randomCancelChance: 0.75 # the fade: ~1 rock per 4 chunks
-    safetyZoneRadius: 24
+    densityNoiseChannel: DensityBelt
+    randomCancelChance: 0.1 # light thin only; DensityBelt + safetyZoneRadius do the real spacing (default is 0.85, way too sparse)
+    safetyZoneRadius: 79
   - type: SimpleDebrisSelector
     debrisTable:
-    - id: NFAsteroidIceDebrisSmall
+    - id: HyperionAsteroidRockT8
       prob: 1
       orGroup: debris
-  - type: NoiseDrivenDebrisSelector # required table (NFBiomeBase provides no default)
+  - type: NoiseDrivenDebrisSelector
     debrisTable:
     - id: NFWreckDebrisSmall
       prob: 1
       orGroup: wreck
 
 # region Terminal void (40k+): nothing spawns out here.
-# Without this, chunks past the last band log "Biome selection ran out of
-# biomes" per chunk. DensityZero aborts debris placement before it starts;
-# the selector tables are dead weight required by the NFBiomeBase parent.
+# DensityZero aborts debris placement before it starts; the selector tables are
+# dead weight required by the NFBiomeBase parent.
 - type: spaceBiome
   id: HyperionBeltVoid
   parent: NFBiomeBase
@@ -329,10 +205,10 @@
     densityNoiseChannel: DensityZero
   - type: SimpleDebrisSelector
     debrisTable:
-    - id: NFAsteroidDebrisSmall
+    - id: HyperionAsteroidRockT1
       prob: 1
       orGroup: debris
-  - type: NoiseDrivenDebrisSelector # required table (NFBiomeBase provides no default)
+  - type: NoiseDrivenDebrisSelector
     debrisTable:
     - id: NFWreckDebrisSmall
       prob: 1

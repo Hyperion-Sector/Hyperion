@@ -60,6 +60,20 @@
   outputMultiplier: 300.0
   minimum: 200
 
+# Uniform belt density (worldgen-v1 topology redo). One channel for every
+# gradient band; the per-band safetyZoneRadius (~= that tier's rock radius) is
+# what actually spaces rocks and keeps big tiers from stacking. This channel
+# just oversamples candidate points cheaply and lets the collision cull settle
+# them to the per-tier floor. Spacing 55-120, typical ~85 (before the cull).
+- type: noiseChannel
+  id: DensityBelt
+  noiseType: Perlin
+  fractalLacunarityByPi: 0.666666666
+  remapTo0Through1: true
+  inputMultiplier: 6
+  outputMultiplier: 65.0
+  minimum: 55
+
 # Constant zero: density == 0 aborts the chunk entirely. Terminal void band
 # past 40k uses this so out-of-belt chunks spawn nothing.
 - type: noiseChannel
