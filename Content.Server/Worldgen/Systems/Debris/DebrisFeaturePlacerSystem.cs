@@ -198,12 +198,26 @@ public sealed partial class DebrisFeaturePlacerSystem : BaseWorldSystem
                 continue;
             }
 
-            var pointDensity = _noiseIndex.Evaluate(uid, densityChannel, WorldGen.WorldToChunkCoords(point));
-            if (pointDensity == 0 && component.DensityClip || _random.Prob(component.RandomCancellationChance))
+            // Hyperion: worldgen-v1 Part 7a reject-ladder reorder. Rejections run cheapest-first so
+            // a rejected point never pays for work a later gate would throw away: cancel roll (a
+            // bare RNG roll; rejects 85% of points at the inherited default) -> density clip (one
+            // noise eval, now skipped entirely when the clip is off) -> carvers (noise + geometry)
+            // -> broadphase collision query (the expensive one, moved below the carver events).
+            // Upstream order was density -> cancel -> collision -> carvers. Acceptance odds per
+            // point are unchanged (the gates are independent); only the evaluation order moves.
+            // var pointDensity = _noiseIndex.Evaluate(uid, densityChannel, WorldGen.WorldToChunkCoords(point));
+            // if (pointDensity == 0 && component.DensityClip || _random.Prob(component.RandomCancellationChance))
+            //     continue;
+            //
+            // if (HasCollisions(mapId, safetyBounds.Translated(point)))
+            //     continue;
+            if (_random.Prob(component.RandomCancellationChance))
                 continue;
 
-            if (HasCollisions(mapId, safetyBounds.Translated(point)))
+            if (component.DensityClip
+                && _noiseIndex.Evaluate(uid, densityChannel, WorldGen.WorldToChunkCoords(point)) == 0)
                 continue;
+            // End Hyperion
 
             var coords = new EntityCoordinates(chunkMap, point);
 
@@ -213,6 +227,10 @@ public sealed partial class DebrisFeaturePlacerSystem : BaseWorldSystem
                 RaiseLocalEvent(args.Chunk, ref preEv);
 
             if (preEv.Handled)
+                continue;
+
+            // Hyperion: Part 7a, broadphase runs last; carved and cancelled points skip it.
+            if (HasCollisions(mapId, safetyBounds.Translated(point)))
                 continue;
 
             var debrisFeatureEv = new TryGetPlaceableDebrisFeatureEvent(coords, args.Chunk);
