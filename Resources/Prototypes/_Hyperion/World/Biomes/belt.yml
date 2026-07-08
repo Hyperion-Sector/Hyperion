@@ -50,6 +50,7 @@
     densityNoiseChannel: DensityReef
     randomCancelChance: 0.2
     safetyZoneRadius: 24
+  - type: FissureCarver # Hyperion: crossings enter the belt here (Part 1)
   - type: SimpleDebrisSelector
     # Hyperion: worldgen-v1 material zonation (Part 6). The Reefs are andesite
     # (porphyry copper: Cu/Au/Ag) with a sand placer secondary (Au/Ag). Andesite
@@ -97,6 +98,7 @@
     densityNoiseChannel: DensityGap
     randomCancelChance: 0.65 # the sampler floors at 1 rock/chunk; cancel is what makes this a lane
     safetyZoneRadius: 24
+  - type: FissureCarver # Hyperion: crossings run through the ring road (Part 1)
   - type: SimpleDebrisSelector
     debrisTable:
     - id: NFAsteroidDebrisSmall
@@ -122,6 +124,7 @@
     densityNoiseChannel: DensityPeak
     randomCancelChance: 0.1
     safetyZoneRadius: 14
+  - type: FissureCarver # Hyperion: the crossings that make the Wall passable (Part 1)
   - type: SimpleDebrisSelector
     # Hyperion: worldgen-v1 material zonation (Part 6). The Wall is basalt (the
     # plasma/uranium/bananium fuel rock) with a chromite rare-metal secondary.
@@ -204,6 +207,7 @@
     densityNoiseChannel: DensityGap
     randomCancelChance: 0.55 # slightly busier than the Low Lane: this is the debris eddy
     safetyZoneRadius: 24
+  - type: FissureCarver # Hyperion: crossings exit the Wall through the basin (Part 1)
   - type: SimpleDebrisSelector
     debrisTable:
     - id: NFAsteroidScrapDebrisSmall
@@ -235,6 +239,7 @@
     densityNoiseChannel: DensityRare
     randomCancelChance: 0.4
     safetyZoneRadius: 24
+  - type: FissureCarver # Hyperion: crossings continue out through the snowline (Part 1)
   - type: SimpleDebrisSelector
     debrisTable:
     - id: NFAsteroidIceDebrisMassive
@@ -272,6 +277,7 @@
     densityNoiseChannel: DensityVeryRare
     randomCancelChance: 0.5
     safetyZoneRadius: 24
+  - type: FissureCarver # Hyperion: crossings fade out with the drift (Part 1)
   - type: SimpleDebrisSelector
     debrisTable:
     - id: NFAsteroidIceDebrisExtraEnormous

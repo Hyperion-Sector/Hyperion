@@ -2,6 +2,10 @@
   id: NFDefault
   components:
     - type: WorldController
+    # Hyperion: worldgen-v1 fissure crossings (Part 1). Rolls the round's inner-to-outer
+    # lanes through the Wall; the belt bands carry FissureCarver to read them. See
+    # _Hyperion/Worldgen and the design repo worldgen-v1 doc.
+    - type: FissureField
     - type: BiomeSelection
       biomes:
         # Hyperion: worldgen-v1 belt bands (0-40k) replace the NF/Mono rings;
