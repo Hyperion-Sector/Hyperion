@@ -10,6 +10,10 @@
     # past ~37k that ramps to the 40k edge; the turn-back tax on the empty drift. See
     # _Hyperion/Worldgen/Systems/FringeRadiationSystem and the design repo worldgen-v1 doc.
     - type: FringeRadiation
+    # Hyperion: worldgen-v1 trojan loot pockets (Part 3). Rolls a few fixed jackpot pockets in
+    # the Wall; HyperionBeltWall carries TrojanCarver to read them. See
+    # _Hyperion/Worldgen/Systems/TrojanSystem and the design repo worldgen-v1 doc.
+    - type: TrojanField
     - type: BiomeSelection
       biomes:
         # Hyperion: worldgen-v1 belt bands (0-40k) replace the NF/Mono rings;

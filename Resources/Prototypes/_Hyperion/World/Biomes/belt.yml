@@ -125,6 +125,7 @@
     randomCancelChance: 0.1
     safetyZoneRadius: 14
   - type: FissureCarver # Hyperion: the crossings that make the Wall passable (Part 1)
+  - type: TrojanCarver # Hyperion: reads the round's trojan loot pockets (Part 3)
   - type: SimpleDebrisSelector
     # Hyperion: worldgen-v1 material zonation (Part 6). The Wall is basalt (the
     # plasma/uranium/bananium fuel rock) with a chromite rare-metal secondary.
