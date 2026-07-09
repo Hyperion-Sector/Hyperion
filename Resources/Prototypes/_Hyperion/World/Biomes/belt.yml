@@ -15,6 +15,78 @@
 # Because a T8 rock is wider than a chunk, the outer bands are necessarily
 # fewer-but-bigger; count-per-screen drops outward, by physics not by choice.
 # Nothing spawns past 40k (terminal void).
+#
+# CURRENTLY PARKED: the eight gradient bands below are not referenced by
+# worldgen_default.yml. The flattened test belt (HyperionBeltTest, next region)
+# is selected instead while we tune lane visibility for the gravitational-rivers
+# proposal. Restore by swapping the biome list back; nothing here changed.
+
+# region Flattened test belt (0-40k): uniform T4, lane-visibility rig.
+# Design: Hyperion-Sector/design proposals/worldgen-gravitational-rivers.md,
+# decision 11 (flatten the gradient, tune until lanes read on radar).
+#
+# One medium rock (T4, ~2 Pluto) all the way out, near-uniform spacing, and no
+# random cancel: the only structure in the field is what the carver removes, so
+# a carved lane has nothing to hide behind. randomCancelChance is 0 on purpose -
+# random holes read as fake lanes and would poison the tuning signal.
+#
+# Neither the channel nor safetyZoneRadius sets the coverage ceiling: the rock's
+# fill ratio does. BeltRenderTest measured 14% areal coverage no matter how the
+# two dials moved, because the old rocks were 74% hole. The ladder is now solid
+# (fill ~0.55, see Debris/asteroids.yml) and all eight tiers roll with equal
+# probability, so small rock settles into the gaps big rock leaves.
+#
+# safetyZoneRadius is now the MARGIN between rock bodies, not the whole exclusion
+# box: DebrisFeaturePlacerSystem adds the rolled rock's own blob radius on top.
+# The channel must still oversample below the resulting spacing so the broadphase
+# cull has candidates to settle. Calibration table lives next to the channel in
+# _Hyperion/World/noise_channels.yml.
+#
+# The gradient (bands by radius) returns once the lane tech works. Lane widths
+# likely want defining relative to local rock scale rather than absolute tiles,
+# which is exactly what a homogeneous belt cannot tell us; that comes after.
+- type: spaceBiome
+  id: HyperionBeltTest
+  parent: NFBiomeBase
+  priority: 100
+  distanceRange: 0, 40000
+  chunkComponents:
+  - type: DebrisFeaturePlacerController
+    densityNoiseChannel: DensityBeltTest
+    randomCancelChance: 0 # no random holes; they read as fake lanes
+    safetyZoneRadius: 8 # margin between rock bodies; the rock's radius is added on top
+  - type: FissureCarver # reads the map's FissureField; rejects rock in-lane
+  - type: SimpleDebrisSelector
+    debrisTable:
+    - id: HyperionAsteroidRockT1
+      prob: 1
+      orGroup: debris
+    - id: HyperionAsteroidRockT2
+      prob: 1
+      orGroup: debris
+    - id: HyperionAsteroidRockT3
+      prob: 1
+      orGroup: debris
+    - id: HyperionAsteroidRockT4
+      prob: 1
+      orGroup: debris
+    - id: HyperionAsteroidRockT5
+      prob: 1
+      orGroup: debris
+    - id: HyperionAsteroidRockT6
+      prob: 1
+      orGroup: debris
+    - id: HyperionAsteroidRockT7
+      prob: 1
+      orGroup: debris
+    - id: HyperionAsteroidRockT8
+      prob: 1
+      orGroup: debris
+  - type: NoiseDrivenDebrisSelector # required table (NFBiomeBase provides no default)
+    debrisTable:
+    - id: NFWreckDebrisSmall
+      prob: 1
+      orGroup: wreck
 
 # region Core (0-7k): uniform smallest rock. T1 (~0.5 Pluto).
 - type: spaceBiome

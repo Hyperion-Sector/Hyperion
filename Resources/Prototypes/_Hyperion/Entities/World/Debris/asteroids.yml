@@ -81,19 +81,29 @@
 # (belt.yml) place; the material/mega entities above are now unreferenced by the
 # belt and pending cleanup.
 #
-# floorPlacements follow the tapered formula (each tier = previous + Small).
-# Small = ~half a Pluto mkII (~510 tiles). tiles ~= 2.0 * floorPlacements
-# (measured by an exact-port sim of BlobFloorPlanBuilder at blobDrawProb 0.5);
-# radius keeps a ~0.26 fill ratio so blobs read lumpy, not solid disks.
-#   Tier  placements  ~tiles  ~xPluto  radius
-#   T1       255        510     0.5     25
-#   T2       510       1020     1.0     35
-#   T3       765       1530     1.5     43
-#   T4      1020       2040     2.0     50
-#   T5      1275       2550     2.5     56
-#   T6      1530       3060     3.0     61
-#   T7      1785       3570     3.5     66
-#   T8      2040       4080     4.0     71
+# Resized 2026-07-09 for lane visibility. The old ladder held floorPlacements
+# linear and let radius float, which pinned every tier at a ~0.26 fill ratio: a
+# rock was 74% hole, so even a shoulder-to-shoulder belt topped out near 20%
+# areal coverage and a carved lane could not read against it (measured at 14% by
+# BeltRenderTest). Now radius steps linearly from 32 and floorPlacements is set
+# from it to hold fill ~= 0.55, so every tier is a solid lump at every size.
+#
+# tiles ~= 2.0 * floorPlacements (measured by an exact-port sim of
+# BlobFloorPlanBuilder at blobDrawProb 0.5); fill = tiles / (pi * radius^2).
+#   Tier  radius  placements  ~tiles  fill
+#   T1      32        885      1770   0.55
+#   T2      37       1183      2366   0.55
+#   T3      42       1524      3048   0.55
+#   T4      47       1908      3816   0.55
+#   T5      52       2336      4672   0.55
+#   T6      57       2807      5614   0.55
+#   T7      62       3321      6642   0.55
+#   T8      67       3878      7756   0.55
+#
+# The bands roll these with equal probability. Giants self-rarefy: the placer
+# sizes its exclusion box from the rock's own radius, so a T8 needs far more
+# clear room to land than a T1 and loses most of its rolls to the broadphase.
+# Small rock then settles into the gaps the giants leave.
 - type: entity
   id: HyperionAsteroidRockBase
   parent: NFBaseAsteroidDebris
@@ -114,8 +124,8 @@
   categories: [ HideSpawnMenu ]
   components:
     - type: BlobFloorPlanBuilder
-      floorPlacements: 255
-      radius: 25
+      floorPlacements: 885
+      radius: 32
 
 - type: entity
   id: HyperionAsteroidRockT2
@@ -123,8 +133,8 @@
   categories: [ HideSpawnMenu ]
   components:
     - type: BlobFloorPlanBuilder
-      floorPlacements: 510
-      radius: 35
+      floorPlacements: 1183
+      radius: 37
 
 - type: entity
   id: HyperionAsteroidRockT3
@@ -132,8 +142,8 @@
   categories: [ HideSpawnMenu ]
   components:
     - type: BlobFloorPlanBuilder
-      floorPlacements: 765
-      radius: 43
+      floorPlacements: 1524
+      radius: 42
 
 - type: entity
   id: HyperionAsteroidRockT4
@@ -141,8 +151,8 @@
   categories: [ HideSpawnMenu ]
   components:
     - type: BlobFloorPlanBuilder
-      floorPlacements: 1020
-      radius: 50
+      floorPlacements: 1908
+      radius: 47
 
 - type: entity
   id: HyperionAsteroidRockT5
@@ -150,8 +160,8 @@
   categories: [ HideSpawnMenu ]
   components:
     - type: BlobFloorPlanBuilder
-      floorPlacements: 1275
-      radius: 56
+      floorPlacements: 2336
+      radius: 52
 
 - type: entity
   id: HyperionAsteroidRockT6
@@ -159,8 +169,8 @@
   categories: [ HideSpawnMenu ]
   components:
     - type: BlobFloorPlanBuilder
-      floorPlacements: 1530
-      radius: 61
+      floorPlacements: 2807
+      radius: 57
 
 - type: entity
   id: HyperionAsteroidRockT7
@@ -168,8 +178,8 @@
   categories: [ HideSpawnMenu ]
   components:
     - type: BlobFloorPlanBuilder
-      floorPlacements: 1785
-      radius: 66
+      floorPlacements: 3321
+      radius: 62
 
 - type: entity
   id: HyperionAsteroidRockT8
@@ -177,6 +187,6 @@
   categories: [ HideSpawnMenu ]
   components:
     - type: BlobFloorPlanBuilder
-      floorPlacements: 2040
-      radius: 71
+      floorPlacements: 3878
+      radius: 67
 # endregion Hyperion Plain Rock Ladder

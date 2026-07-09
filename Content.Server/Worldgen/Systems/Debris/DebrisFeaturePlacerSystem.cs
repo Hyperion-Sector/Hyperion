@@ -8,6 +8,7 @@ using JetBrains.Annotations;
 using Robust.Server.GameObjects;
 using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
+using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Utility;
 using Content.Server._NF.Worldgen.Components.Debris; // Frontier
@@ -26,10 +27,18 @@ public sealed partial class DebrisFeaturePlacerSystem : BaseWorldSystem
     [Dependency] private ILogManager _logManager = default!;
     [Dependency] private IMapManager _mapManager = default!;
     [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private IPrototypeManager _protoMan = default!; // Hyperion: per-proto safety bounds
+    [Dependency] private IComponentFactory _compFactory = default!; // Hyperion: per-proto safety bounds
 
     private ISawmill _sawmill = default!;
 
     private List<Entity<MapGridComponent>> _mapGrids = new();
+
+    /// <summary>
+    ///     Hyperion: blob radius per debris prototype. Prototypes are immutable at runtime, so this
+    ///     never needs invalidating; it just keeps the per-point lookup off the index.
+    /// </summary>
+    private readonly Dictionary<string, float> _debrisRadiusCache = new();
 
     /// <inheritdoc />
     public override void Initialize()
@@ -188,7 +197,8 @@ public sealed partial class DebrisFeaturePlacerSystem : BaseWorldSystem
 
         var mapId = map.MapId;
 
-        var safetyBounds = Box2.UnitCentered.Enlarged(component.SafetyZoneRadius);
+        // Hyperion: the exclusion box is now built per point, once the selector has chosen the rock.
+        // var safetyBounds = Box2.UnitCentered.Enlarged(component.SafetyZoneRadius);
         var failures = 0; // Avoid severe log spam.
         foreach (var point in points)
         {
@@ -229,10 +239,11 @@ public sealed partial class DebrisFeaturePlacerSystem : BaseWorldSystem
             if (preEv.Handled)
                 continue;
 
-            // Hyperion: Part 7a, broadphase runs last; carved and cancelled points skip it.
-            if (HasCollisions(mapId, safetyBounds.Translated(point)))
-                continue;
-
+            // Hyperion: the selector now runs BEFORE the broadphase so the exclusion box can be
+            // sized to the rock that is actually about to spawn. Upstream built one box per chunk
+            // from SafetyZoneRadius, so a pebble reserved as much space as a giant and small rock
+            // could never fill the gaps between large rock. The selector is a cheap RNG table roll;
+            // broadphase stays the last and most expensive gate (Part 7a).
             var debrisFeatureEv = new TryGetPlaceableDebrisFeatureEvent(coords, args.Chunk);
             RaiseLocalEvent(uid, ref debrisFeatureEv);
 
@@ -250,6 +261,10 @@ public sealed partial class DebrisFeaturePlacerSystem : BaseWorldSystem
                 }
             }
 
+            // Hyperion: Part 7a, broadphase runs last; carved and cancelled points skip it.
+            if (HasCollisions(mapId, SafetyBoundsFor(debrisFeatureEv.DebrisProto, component).Translated(point)))
+                continue;
+
             var ent = Spawn(debrisFeatureEv.DebrisProto, coords);
             component.OwnedDebris.Add(point, ent);
 
@@ -262,6 +277,32 @@ public sealed partial class DebrisFeaturePlacerSystem : BaseWorldSystem
 
         if (failures > 0)
             _sawmill.Error($"Failed to place {failures} debris at chunk {args.Chunk}");
+    }
+
+    /// <summary>
+    ///     Hyperion: the exclusion box for a candidate point, sized to the debris about to spawn.
+    ///     <c>SafetyZoneRadius</c> is now the margin left between rock bodies; the rock's own blob
+    ///     radius is added on top. Debris with no blob builder (wrecks) falls back to the bare margin.
+    ///     This is what lets a mixed-size debris table drop small rock into gaps that would reject a
+    ///     giant, instead of every rock reserving a giant's worth of room.
+    /// </summary>
+    private Box2 SafetyBoundsFor(string proto, DebrisFeaturePlacerControllerComponent component)
+    {
+        if (!_debrisRadiusCache.TryGetValue(proto, out var blobRadius))
+        {
+            blobRadius = 0f;
+#pragma warning disable CS0618 // EntityPrototype has no non-obsolete typed component lookup.
+            if (_protoMan.TryIndex<EntityPrototype>(proto, out var entProto)
+                && entProto.TryGetComponent<BlobFloorPlanBuilderComponent>(out var blob, _compFactory))
+#pragma warning restore CS0618
+            {
+                blobRadius = blob.Radius;
+            }
+
+            _debrisRadiusCache[proto] = blobRadius;
+        }
+
+        return Box2.UnitCentered.Enlarged(component.SafetyZoneRadius + blobRadius);
     }
 
     /// <summary>
