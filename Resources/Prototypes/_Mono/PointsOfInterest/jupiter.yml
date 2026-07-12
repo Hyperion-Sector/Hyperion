@@ -14,7 +14,9 @@
   name: 'PDV Jupiter Class Carrier'
   minimumDistance: 17000
   maximumDistance: 19000
-  spawnGamePreset: [ HyperionStandard, NFAdventure, NFPirate, MonoStandard, MonoRogueTSF, MonoRogueUSSP, MonoADS, MonoChimera, MonoMixed, MonoAllAtOnce ]
+  # Hyperion: parked. PDV is a Monolith faction Hyperion has not adopted, and 17-19k is frostline
+  # under the sector-topology model, where nothing anchors. Reserved for the raid-location system.
+  spawnGamePreset: [ NFAdventure, NFPirate, MonoStandard, MonoRogueTSF, MonoRogueUSSP, MonoADS, MonoChimera, MonoMixed, MonoAllAtOnce ]
   spawnGroup: Required
   gridPath: /Maps/_Mono/POI/jupiter.yml
   addComponents:

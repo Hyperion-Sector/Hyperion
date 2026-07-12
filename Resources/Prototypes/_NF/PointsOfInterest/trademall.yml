@@ -12,8 +12,8 @@
   id: TradeMall
   parent: [BasePOI, BaseRepairablePOI]
   name: Trade Mall
-  minimumDistance: 3500
-  maximumDistance: 6500
+  minimumDistance: 4600
+  maximumDistance: 5400
   spawnGroup: MarketStation
   gridPath: /Maps/_NF/POI/trademall.yml
   addComponents:

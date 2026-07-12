@@ -12,8 +12,8 @@
   id: Tinnia
   parent: [BasePOI, BaseRepairablePOI]
   name: "Tinnia's Rest"
-  minimumDistance: 3400
-  maximumDistance: 5800
+  minimumDistance: 4600
+  maximumDistance: 5400
   spawnGroup: RestStop
   gridPath: /Maps/_NF/POI/tinnia.yml
   addComponents:

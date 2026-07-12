@@ -13,8 +13,8 @@
   id: McHobo
   parent: BasePOI
   name: Derelict McCargo
-  minimumDistance: 6250
-  maximumDistance: 7600
+  minimumDistance: 8100
+  maximumDistance: 8900
   spawnGroup: Scrapyard
   gridPath: /Maps/_NF/POI/mchobo.yml
 

@@ -12,8 +12,8 @@
   id: CargoDepot
   parent: [BasePOI, BaseRepairablePOI]
   name: Cargo Depot
-  minimumDistance: 8000
-  maximumDistance: 10000
+  minimumDistance: 8100
+  maximumDistance: 8900
   spawnGroup: CargoDepot
   gridPath: /Maps/_NF/POI/cargodepot.yml
   addComponents: &cargoComponents
@@ -36,8 +36,8 @@
   id: CargoDepotAlt
   parent: [BasePOI, BaseRepairablePOI]
   name: Cargo Depot
-  minimumDistance: 8000
-  maximumDistance: 10000
+  minimumDistance: 8100
+  maximumDistance: 8900
   spawnGroup: CargoDepot
   gridPath: /Maps/_NF/POI/cargodepotalt.yml
   addComponents: *cargoComponents

@@ -12,8 +12,8 @@
   id: Grifty
   parent: [BasePOI, BaseRepairablePOI]
   name: "Grifty's Gas n Grub"
-  minimumDistance: 6250
-  maximumDistance: 8600
+  minimumDistance: 8100
+  maximumDistance: 8900
   spawnGroup: Scrapyard
   gridPath: /Maps/_NF/POI/grifty.yml
   addComponents:

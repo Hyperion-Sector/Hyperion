@@ -12,8 +12,8 @@
   id: ThePit
   parent: [BasePOI, BaseRepairablePOI]
   name: "The Pit"
-  minimumDistance: 5200
-  maximumDistance: 6200
+  minimumDistance: 4600
+  maximumDistance: 5400
   spawnGroup: Arena
   gridPath: /Maps/_NF/POI/arena.yml
   addComponents:

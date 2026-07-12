@@ -11,8 +11,8 @@
   id: Mining
   parent: [BasePOI, BaseRepairablePOI]
   name: 'Derelict Drillsite'
-  minimumDistance: 5500
-  maximumDistance: 9500
+  minimumDistance: 8100
+  maximumDistance: 8900
   spawnGroup: Required
   gridPath: /Maps/_Mono/POI/derelictdrillsite.yml
   addComponents:
