@@ -11,9 +11,12 @@
   id: Polaris
   parent: BasePOI
   name: 'Polaris Bioresearch Center'
-  minimumDistance: 10000
-  maximumDistance: 15000
-  spawnGroup: Optional
+  minimumDistance: 10300
+  maximumDistance: 11200
+  # Hyperion: hidden class. Moved out of the Optional pool into Ruins (one ruin per round) so a
+  # derelict never occupies a charted slot. Sited in the divide between Divisions III and IV.
+  spawnGroup: Ruins
+  hideWarp: true
   gridPath: /Maps/_Mono/POI/Dungeons/polaris.yml
   addComponents:
   - type: IFF

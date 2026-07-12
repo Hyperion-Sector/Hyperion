@@ -13,6 +13,9 @@
   name: 'ADS Zenith CK-395'
   minimumDistance: 10000
   maximumDistance: 15000
+  # Hyperion: parked. ADS is a Monolith faction Hyperion has not adopted; this grid is reserved
+  # for the raid-location system. Overrides BaseMobilePOI's list to drop HyperionStandard only.
+  spawnGamePreset: [ NFAdventure, NFPirate, MonoStandard, MonoRogueTSF, MonoRogueUSSP, MonoTSFUSSP, MonoADS, MonoChimera, MonoMixed, MonoAllAtOnce ]
   spawnGroup: Optional
   gridPath: /Maps/_Mono/POI/Dungeons/zenith_poi.yml
   addComponents:

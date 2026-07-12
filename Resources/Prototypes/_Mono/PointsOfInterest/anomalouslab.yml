@@ -12,9 +12,12 @@
   id: AnomalousLab
   parent: BasePOI
   name: 'Anomalous Lab'
-  minimumDistance: 7000
-  maximumDistance: 10800
+  minimumDistance: 10300
+  maximumDistance: 11200
+  # Hyperion: hidden class. Sited in the divide between Divisions III and IV; becomes
+  # creek-reached and throws no branch once sector topology lands.
   spawnGroup: ScienceLab
+  hideWarp: true
   gridPath: /Maps/_Mono/POI/anomalouslab.yml
   addComponents:
   - type: SolarPoweredGrid

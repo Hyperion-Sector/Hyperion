@@ -12,8 +12,8 @@
   id: Bahama
   parent: [BasePOI, BaseRepairablePOI]
   name: "Bahama Mama's"
-  minimumDistance: 3400
-  maximumDistance: 5800
+  minimumDistance: 4600
+  maximumDistance: 5400
   spawnGroup: RestStop
   gridPath: /Maps/_NF/POI/bahama.yml
   addComponents:

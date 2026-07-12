@@ -11,8 +11,8 @@
   id: Zvezda
   parent: BasePOI
   name: 'Zvezda Orbital Habitation'
-  minimumDistance: 10000
-  maximumDistance: 15000
+  minimumDistance: 12500
+  maximumDistance: 13500
   spawnGroup: Optional
   gridPath: /Maps/_Mono/POI/Dungeons/zvezda.yml
   addComponents:

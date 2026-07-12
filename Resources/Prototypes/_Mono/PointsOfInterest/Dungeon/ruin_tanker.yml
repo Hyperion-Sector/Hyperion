@@ -11,9 +11,12 @@
   id: AutomatedTanker
   parent: BaseMobilePOI
   name: 'Automated Inter Sector Tanker'
-  minimumDistance: 10000
-  maximumDistance: 15000
-  spawnGroup: Optional
+  minimumDistance: 15000
+  maximumDistance: 16500
+  # Hyperion: hidden class. Moved out of the Optional pool into Ruins (one ruin per round). Sited
+  # in the deep divide beyond Division IV, out toward the frostline.
+  spawnGroup: Ruins
+  hideWarp: true
   gridPath: /Maps/_Mono/POI/Dungeons/ruin_tanker.yml
   addComponents:
   - type: IFF

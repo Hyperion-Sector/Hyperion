@@ -79,14 +79,20 @@ public sealed class NFCCVars
     /// <summary>
     /// The number of Cargo Depots to spawn in every round
     /// </summary>
+    // Hyperion: 4 -> 2. Under sector topology every POI is a gravity anchor that throws a branch,
+    // and every branch lowers the sector's max distance-to-lane, which is the number that decides
+    // how deep a divide can get. POI count is a topology knob now, not just a content one.
     public static readonly CVarDef<int> CargoDepots =
-        CVarDef.Create("nf14.worldgen.cargo_depots", 4, CVar.SERVERONLY);
+        CVarDef.Create("nf14.worldgen.cargo_depots", 2, CVar.SERVERONLY);
 
     /// <summary>
     /// The number of Optional Points Of Interest to spawn in every round
     /// </summary>
+    // Hyperion: 6 -> 3. Same reason as CargoDepots. The Optional pool is also now four entries
+    // (Casey's, Omnichurch, Lancelot, Zvezda) rather than seven, since the derelicts moved to the
+    // Ruins group and the faction grids are parked.
     public static readonly CVarDef<int> OptionalStations =
-        CVarDef.Create("nf14.worldgen.optional_stations", 6, CVar.SERVERONLY);
+        CVarDef.Create("nf14.worldgen.optional_stations", 3, CVar.SERVERONLY);
 
     /// <summary>
     /// The multiplier to add to distance spawning calculations for a smidge of server setting variance

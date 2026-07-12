@@ -11,9 +11,13 @@
   id: Sevastopol
   parent: BasePOI
   name: 'Sevastopol Data Storage Center'
-  minimumDistance: 3500
-  maximumDistance: 7500
-  spawnGroup: Required
+  minimumDistance: 6400
+  maximumDistance: 7100
+  # Hyperion: hidden class. A data vault has no business on a charted highway. Demoted from
+  # Required to its own group (one per round) and sited in the divide between Divisions II and
+  # III. Becomes creek-reached and throws no branch once sector topology lands.
+  spawnGroup: DataVault
+  hideWarp: true
   gridPath: /Maps/_Mono/POI/sevastopol.yml
   addComponents:
   - type: IFF

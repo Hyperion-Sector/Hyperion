@@ -14,7 +14,9 @@
   name: 'TSFMC Secondary Outpost'
   minimumDistance: 11000
   maximumDistance: 14000
-  spawnGamePreset: [ HyperionStandard, NFAdventure, NFPirate, MonoStandard, MonoRogueTSF, MonoTSFUSSP, MonoADS, MonoChimera, MonoMixed, MonoAllAtOnce ]
+  # Hyperion: parked. TSFMC is a Monolith faction Hyperion has not adopted; this grid is reserved
+  # for the raid-location system. Dropped from HyperionStandard only, so Mono presets are untouched.
+  spawnGamePreset: [ NFAdventure, NFPirate, MonoStandard, MonoRogueTSF, MonoTSFUSSP, MonoADS, MonoChimera, MonoMixed, MonoAllAtOnce ]
   spawnGroup: Required
   gridPath: /Maps/_Mono/POI/tsfmcoutpost.yml
   addComponents:
